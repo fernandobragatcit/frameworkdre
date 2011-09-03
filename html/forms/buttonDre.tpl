@@ -1,0 +1,1 @@
+<button id="{$ID_COMP}" name="{$NAME_COMP}" {$CONFIRME_COMP}{$TYPE_COMP_BTN} {$GOTO_COMP} {$ACTION_COMP} class="{$CLASS_COMP}">{$VALUE_COMP}</button>

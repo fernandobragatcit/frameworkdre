@@ -1,0 +1,9 @@
+<input type="{$TYPE_COMP}" name="{$NOME_COMP}" {$SIZE_COMP} id="{$ID_COMP}" {$STYLE_COMP} class="{$CLASS_COMP}"
+title="{$TITLE_COMP}" {$DIR_COMP} {$LANG_COMP} {$TABINDEX_COMP}  value="{$VALUE_COMP}" />
+{if $VALUE_CALENDAR == "TRUE"}
+<script>
+preencheCalendario('{$ID_COMP}', '{$DIA_COMP}', '{$MES_COMP}', '{$ANO_COMP}','{$ESTILO_CALENDARIO}','{$FILE_PATH_CALENDAR}');
+</script>
+{else}
+<script>impCalendario('{$ID_COMP}','{$ESTILO_CALENDARIO}','{$FILE_PATH_CALENDAR}');</script>
+{/if}

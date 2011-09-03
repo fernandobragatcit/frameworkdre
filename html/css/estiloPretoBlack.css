@@ -1,0 +1,497 @@
+@CHARSET "UTF-8";
+
+/**
+ * CSS Área administrativa do The Shot
+ *
+ * @author André Coura
+ * @since 1.0 - 21/03/2008
+ */
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Trebuchet MS";
+	color: #999;
+	font-size: 10px;
+}
+
+/*CORPO*/
+body {
+	background-color: black;
+}
+
+#divPrincipal {
+	width: 770px;
+	height: 400px;
+	text-align: left;
+	margin: 0 auto;
+}
+
+/*HOME*/
+#cabecalho {
+	width: 100%;
+	height: 100px;
+}
+
+#corpo {
+	width: 100%;
+	/*height: 200px;*/
+}
+
+#rodape {
+	width: 100%;
+	height: 15px;
+	left: 20px; bottom : 0pt;
+	position: fixed;
+	bottom: 0pt;
+	clear: both;
+	background-color: #000;
+}
+
+/*LOGIN*/
+#contLogin {
+	width: 310px;
+	height: 200px;
+	position: relative;
+	left: 50%;
+	margin-left: -155px;
+	top: 50%;
+	/*margin-top: -100px;*/
+}
+
+#mensErros {
+	height: 20px;
+	width: 450px;
+	text-align: left;
+	margin-left: 20%;
+	color: red;
+}
+
+.formLogin fieldset {
+	border: none;
+	padding: 20px;
+}
+
+.labelLogin {
+	width: 100px;
+	display: block;
+	float: left;
+}
+
+.inputLogin {
+	float: left;
+	width: 160px;
+	border: 1px solid #888;
+	background-color: black;
+}
+
+.btnLogin {
+	margin-left: 200px;
+	margin-top: 25px;
+	border: 1px solid #888;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: black;
+}
+
+/*---------------------FORMULARIOS--------------------------*/
+
+form {
+	margin-top: 30px;
+
+}
+p,h1,button {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.spacer {
+	clear: both;
+	height: 1px;
+}
+
+.myform {
+	margin: 0 auto;
+	width: 400px;
+	padding: 14px;
+	background-color: #0A0A0A;
+	clear: both;
+	margin-bottom: 50px;
+}
+
+#dreForm {
+	border: solid 1px #3A3A3A;
+}
+
+#dreForm h1 {
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 8px;
+}
+
+#dreForm p {
+	font-size: 11px;
+	color: #666666;
+	margin-bottom: 20px;
+	border-bottom: solid 1px #dedede;
+	padding-bottom: 10px;
+}
+
+#dreForm label {
+	display: block;
+	font-weight: bold;
+	text-align: right;
+	width: 140px;
+	float: left;
+}
+
+#dreForm .small {
+	color: #AA0000;
+	display: block;
+	font-size: 11px;
+	font-weight: normal;
+	text-align: right;
+	width: 140px;
+}
+
+#dreForm input {
+	float: left;
+	width: 200px;
+	margin: 2px 0 30px 10px;
+	border: 1px solid #4A4A4A;
+	background: black;
+	font-size: 12px;
+}
+
+#dreForm textarea {
+	float: left;
+	width: 200px;
+	margin: 2px 0 30px 10px;
+	border: 1px solid #4A4A4A;
+	background: black;
+	font-size: 12px;
+}
+
+#dreForm table{
+	margin-left: 80px;
+}
+
+#dreForm select {
+	float: left;
+	width: 200px;
+	margin: 2px 0 30px 10px;
+	border: 1px solid #4A4A4A;
+	background: black;
+	font-size: 12px;
+}
+
+#btnsForm{
+	width: 250px;
+	margin-left: 90px;
+}
+
+#dreForm button {
+	clear: both;
+	margin-left: 30px;
+	background: #888888;
+	color: #FFFFFF;
+	border: solid 1px #666666;
+	font-size: 11px;
+	font-weight: bold;
+	padding: 4px 6px;
+}
+
+.campoObrigatorio{
+	color:red;
+}
+
+.erroField{
+	background:"#222";
+	border:"1px #770000 solid";
+}
+
+
+#cachePos{
+	width: 310px;
+	position: relative;
+	left: 50%;
+	margin-left: -155px;
+	top: 50%;
+	margin-top: 30px;
+}
+#cachePos h1{
+	font-size: 16px;
+	margin-bottom: 10px;
+	text-decoration: underline;
+}
+#cachePos h2{
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+#cachePos ul{
+
+	margin-bottom: 40px;
+}
+
+#cachePos button{
+	margin-left: 100px;
+}
+
+.multiUploads{
+	widht:300px;
+	margin-top:100px;
+}
+.multiUploads span{
+	display: block;
+	float: left;
+}
+.multiUploads select{
+	float:left;
+}
+
+/**
+ * Menu
+ */
+
+div#container {
+	width: 100%;
+	background: #222;
+	border-top: 1px solid #444;
+	border-bottom: 1px solid #444;
+}
+
+p {
+	margin: 0;
+	padding: 1.2em;
+}
+
+p a:link,p a:visited,p a:hover,p a:active {
+	font-weight: bold;
+	color: #b9121b;
+}
+
+ul#navigation-1 {
+	margin: 0;
+	padding: 1px 0;
+	list-style: none;
+	width: 100%;
+	height: 21px;
+	font: normal 8pt arial;
+}
+
+ul#navigation-1 li {
+	margin: 0;
+	padding: 0;
+	display: block;
+	float: left;
+	position: relative;
+	width: 148px;
+}
+
+ul#navigation-1 li a:link,ul#navigation-1 li a:visited {
+	padding: 4px 0;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: #fff;
+	width: 148px;
+	height: 13px;
+}
+
+ul#navigation-1 li:hover a,ul#navigation-1 li a:hover,ul#navigation-1 li a:active
+	{
+	padding: 4px 0;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	background: #333;
+	color: #fff;
+	width: 146px;
+	height: 13px;
+	border-left: 1px solid #555;
+	border-right: 1px solid #555;
+}
+
+ul#navigation-1 li ul.navigation-2 {
+	margin: 0;
+	padding: 1px 1px 0;
+	list-style: none;
+	display: none;
+	background: #555;
+	width: 146px;
+	position: absolute;
+	top: 21px;
+	left: -1px;
+	border-top: none;
+}
+
+ul#navigation-1 li:hover ul.navigation-2 {
+	display: block;
+}
+
+ul#navigation-1 li ul.navigation-2 li {
+	width: 146px;
+	clear: left;
+	width: 146px;
+}
+
+ul#navigation-1 li ul.navigation-2 li a:link,ul#navigation-1 li ul.navigation-2 li a:visited
+	{
+	clear: left;
+	padding: 4px 0;
+	width: 146px;
+	border: none;
+	border-bottom: 1px solid #555;
+	position: relative;
+	z-index: 1000;
+}
+
+ul#navigation-1 li ul.navigation-2 li:hover a,ul#navigation-1 li ul.navigation-2 li a:active,ul#navigation-1 li ul.navigation-2 li a:hover
+	{
+	clear: left;
+	background: #444;
+	padding: 4px 0;
+	width: 146px;
+	border: none;
+	border-bottom: 1px solid #555;
+	position: relative;
+	z-index: 1000;
+}
+
+ul#navigation-1 li ul.navigation-2 li ul.navigation-3 {
+	display: none;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: absolute;
+	left: 145px;
+	top: -2px;
+	padding: 1px 1px 0 1px;
+	background: #555;
+	z-index: 900;
+}
+
+ul#navigation-1 li ul.navigation-2 li:hover ul.navigation-3 {
+	display: block;
+}
+
+ul#navigation-1 li ul.navigation-2 li ul.navigation-3 li a:link,ul#navigation-1 li ul.navigation-2 li ul.navigation-3 li a:visited
+	{
+	background: #333;
+}
+
+ul#navigation-1 li ul.navigation-2 li ul.navigation-3 li:hover a,ul#navigation-1 li ul.navigation-2 li ul.navigation-3 li a:hover,ul#navigation-1 li ul.navigation-2 li ul.navigation-3 li a:active
+	{
+	background: #444;
+}
+
+ul#navigation-1 li ul.navigation-2 li a span {
+	position: absolute;
+	top: 0;
+	left: 132px;
+	font-size: 12pt;
+	color: #fe676f;
+}
+
+ul#navigation-1 li ul.navigation-2 li:hover a span,ul#navigation-1 li ul.navigation-2 li a:hover span
+	{
+	position: absolute;
+	top: 0;
+	left: 132px;
+	font-size: 12pt;
+	color: #fff;
+}
+
+/**
+ * Grid
+ */
+ #gridDre{
+
+}
+
+#tituloGrid{
+	text-align: center;
+	margin: 30px;
+}
+
+#tituloGrid h1{
+	font-size: 20px;
+}
+
+.invisible{
+	display: none;
+}
+
+#tableGrid{
+	width: 60%;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	border-collapse: collapse;
+}
+
+#headGrid{
+	background-color: #777;
+}
+
+#headGrid th{
+	color: black;
+	text-align: center;
+	height: 20px;
+}
+
+#headGrid th a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.0em;
+    background-repeat: no-repeat;
+    background-position: center right;
+    padding-right: 15px;
+}
+
+#headGrid th.over {
+    background-color: #746B6B;
+    cursor: pointer;
+}
+.gridLin1{
+	background-color:none;
+}
+.gridLin1 td{
+	text-align: center;
+	height: 20px;
+}
+
+.gridLin2{
+	background-color: #1A1A1A;
+}
+
+.gridLin2 td{
+	text-align: center;
+	height: 20px;
+}
+
+#paginaGrid{
+	width: 60%;
+	text-align: left;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+.btnGrid{
+	margin-left: 30px;
+	border: 1px #333 solid;
+	background-color: #CCC;
+	color: #000;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#buttonsGrid{
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+

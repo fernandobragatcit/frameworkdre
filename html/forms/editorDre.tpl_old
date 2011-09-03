@@ -1,0 +1,18 @@
+<br />
+<textarea name="{$NOME_COMP}" id="{$ID_COMP}" {$ROWS_COMP} {$COLS_COMP} {$WRAP_COMP} {$STYLE_COMP} class="{$CLASS_COMP}"
+{$STYLE_COMP} {$LANG_COMP} {$TABINDEX}>{$EDIT_VALUE}</textarea>
+{literal}
+<script>
+jQuery(function(){
+	{/literal}
+	var idComponente = '{$NOME_COMP}';
+	//jQuery.fck.path = 'file:///{$CAMINHO_FWK}fckeditor/';
+	//jQuery.fck.path = '../../../../framework/html/js/fckeditor/';
+	jQuery.fck.path = '{$PATH_SERVIDOR}' + 'framework/html/js/fckeditor/';
+	//jQuery.fck.path = '{$SERVIDOR_FISICO}' + 'framework/html/js/fckeditor/';
+	{literal}
+	jQuery('textarea#'+idComponente).fck({toolbar: 'Default',{/literal} height: {$ALTURA_EDITOR}, width: {$LARGURA_EDITOR} {literal}});
+});
+</script>
+{/literal}
+<br />
