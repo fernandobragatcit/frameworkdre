@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dre_log numTotalAcessos="">
+	<mes valor="">
+		<dia valor="">
+			<usuario ip="" timestamp="">
+				<browsers>
+					<browser></browser>
+				</browsers>
+				<pageViews>
+					<pag timestamp=""></pag>
+				</pageViews>
+			</usuario>
+		</dia>
+	</mes>
+</dre_log>
