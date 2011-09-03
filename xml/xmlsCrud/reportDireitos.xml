@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report titulo="Direitos" classe="CrudDireitos">
+	<header>
+		<titulo type="STRING" encoding="UFT8">Direito</titulo>
+		<titulo type="STRING">Menu</titulo>
+		<titulo type="STRING">Sub-Menu</titulo>
+		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			di.nome_direito, me.nome_menu, im.nome_item_menu,di.id_direitos
+		</campos>
+		<from>
+			fwk_direitos di
+			LEFT JOIN fwk_menu me
+			ON di.id_menu = me.id_menu
+			LEFT JOIN fwk_item_menu im
+			ON di.id_item_menu = im.id_item_menu
+		</from>
+		<where/>
+		<orderBy>di.nome_direito</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Direito">nome_direito</campo>
+		<campo alias="Menu">nome_menu</campo>
+		<campo alias="Sub-Menu">nome_item_menu</campo>
+	</filtro>
+</report>

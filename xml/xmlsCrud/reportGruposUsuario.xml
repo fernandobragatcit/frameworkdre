@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report titulo="Grupos por Usuário" classe="CrudGruposUsuario">
+	<header>
+		<titulo type="STRING">Usuário</titulo>
+		<titulo type="STRING">E-mail Usuário</titulo>
+		<titulo type="STRING">Qtde de Grupos para o Usuário</titulo>
+		<titulo type="none" actionEdit="a=formAlt">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			us.nome_usuario, us.email_usuario, count(gr.id_grupo), us.id_usuario
+		</campos>
+		<from>
+			fwk_usuario us LEFT JOIN fwk_grupo_usuario gu
+			ON us.id_usuario = gu.id_usuario
+			LEFT JOIN fwk_grupo gr
+			ON gu.id_grupo = gr.id_grupo
+		</from>
+		<orderBy>us.nome_usuario</orderBy>
+		<groupBy>us.nome_usuario</groupBy>
+	</query>
+	<buttons>
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Usuário">us.nome_usuario</campo>
+		<campo alias="Email">us.email_usuario</campo>
+		<campo alias="Grupo">gr.nome_grupo</campo>
+	</filtro>
+</report>

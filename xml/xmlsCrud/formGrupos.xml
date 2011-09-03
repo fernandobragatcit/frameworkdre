@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Grupo" classe="CrudGrupos"
+	css="formatForm" tipo="FWK" tpl="formGrupos.tpl">
+
+	<campos type="text" name="nome_grupo" id="nome_grupo"
+		label="Nome Grupo" title="Nome Grupo" obrigatorio="true"
+		maxlength="100" class="small" />
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>

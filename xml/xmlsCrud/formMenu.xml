@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Menu" classe="CrudMenu"
+	css="formatForm" tipo="FWK" tpl="formMenu.tpl">
+
+	<campos type="text" name="nome_menu" id="nome_menu"
+		label="Nome do Menu" title="Nome do Menu" obrigatorio="true"
+		maxlength="100" class="small" />
+
+	<campos type="text" name="link_menu" id="link_menu"
+		label="Link para o Menu" title="Link para o Menu" obrigatorio="true"
+		maxlength="100" class="small" />
+
+	<campos type="text" name="ordem_menu" id="ordem_menu"
+		label="Ordem do Menu" title="Ordem do Menu" obrigatorio="true"
+		maxlength="5" class="small" />
+
+	<campos type="select" name="funcionalidade" id="funcionalidade"
+		label="Adicionar em " title="Adicionar em " >
+		<array>
+			<option>
+				<value>1</value>
+				<text>Direitos Grupo</text>
+			</option>
+			<option>
+				<value>2</value>
+				<text>Direitos Usuario</text>
+			</option>
+		</array>
+	</campos>
+
+	<buttons>
+
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
+
+	</buttons>
+
+</form>

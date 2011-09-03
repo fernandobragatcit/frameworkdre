@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report titulo="Estilos do Sistema" classe="CrudCssPasta">
+	<header>
+		<titulo type="STRING">Nome CSS</titulo>
+		<titulo type="STRING">Status</titulo>
+		<titulo type="none" actionEdit="a=formAlt"
+			actionStatus="a=status" actionDelete="a=deleta">
+			Ações
+		</titulo>
+	</header>
+	<query>
+		<campos>
+			nome_estilo_css, if(status='S','Ativo','Inativo'),id_estilo_css
+		</campos>
+		<from>fwk_estilo_css</from>
+		<orderBy>nome_estilo_css</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Grupo">nome_estilo_css</campo>
+	</filtro>
+</report>

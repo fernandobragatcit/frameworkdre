@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Direitos por Grupo de Usuários" classe="CrudDireitoGrupo"
+	css="formatForm" tipo="FWK" tpl="formDireitoGrupo.tpl">
+
+	<campos type="listBox" name="direitosGrupo" id="direitosGrupo" title="Categorias" label="Categorias"
+		querySource="SELECT id_direitos, nome_direito FROM fwk_direitos"
+		queryAlt="SELECT id_direitos FROM fwk_direitos_grupo WHERE id_grupo"
+		values="id_direitos" texts="nome_direito"
+		orderby="nome_direito" class="listBoxCompDre"/>
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=home" mens="Deseja realmente sair do formulario?" />
+	</buttons>
+
+</form>

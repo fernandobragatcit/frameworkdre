@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid titulo="Categorias Banners" classe="CrudCategoriaBanners">
+	<header>
+		<titulo type="STRING" encoding="UFT8">Categoria Banners</titulo>
+		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			desc_tipo_basico, id_tipo_basico
+		</campos>
+		<from>
+			fwk_tipo_basico
+		</from>
+		<where>id_tipo_documento = 999</where>
+		<orderBy>desc_tipo_basico</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Categoria">desc_tipo_basico</campo>
+	</filtro>
+</grid>

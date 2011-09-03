@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid titulo="Banners" classe="CrudBanners">
+	<header>
+		<titulo type="STRING">Nome Banner</titulo>
+		<titulo type="STRING">Title Banner</titulo>
+		<titulo type="STRING">Categoria</titulo>
+		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			ba.nome_imagem, ba.title_banner, tb.desc_tipo_basico, ba.id_banner
+		</campos>
+		<from>
+			fwk_banner ba
+			LEFT JOIN fwk_tipo_basico tb
+			ON ba.id_categoria_banner = tb.id_tipo_basico
+		</from>
+		<orderBy>ba.nome_imagem, tb.desc_tipo_basico</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Nome Banner">ba.nome_imagem</campo>
+		<campo alias="Categoria Banner">tb.desc_tipo_basico</campo>
+	</filtro>
+</grid>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid titulo="Usuários" classe="CrudUsuario">
+	<header>
+		<titulo type="STRING">Nome</titulo>
+		<titulo type="STRING">Login</titulo>
+		<titulo type="STRING">Email</titulo>
+		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			DISTINCT us.nome_usuario,us.login_usuario, us.email_usuario, us.id_usuario
+		</campos>
+		<from>
+			fwk_usuario us INNER JOIN fwk_direitos_grupo dg
+		</from>
+		<where>
+			us.id_usuario != 1 AND id_grupo = 1
+		</where>
+		<orderBy>nome_usuario</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="#Nome Usuário">nome_usuario</campo>
+	</filtro>
+</grid>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid titulo="Imagens do Portal" classe="CrudImagensConteudo">
+	<header>
+		<titulo type="STRING">Nome Imagem</titulo>
+		<titulo type="STRING">Tipo da Imagem</titulo>
+		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			nome_imagem, tipo_imagem, id_imagem
+		</campos>
+		<from>
+			fwk_imagens
+		</from>
+		<orderBy>nome_imagem</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Grupo">nome_imagem</campo>
+	</filtro>
+</grid>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Título Área" css="formatForm"
+	tipo="FWK_VIEW" tpl="formTituloArea.tpl">
+
+	<campos type="text" name="titulo_area" id="titulo_area"
+		label="Título da Área" title="Título da Área" obrigatorio="true"
+		maxlength="100" class="medium" />
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="?" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>

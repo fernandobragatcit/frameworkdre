@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Ficheiros" classe="CrudFicheiros" css="formatForm"
+	tipo="FWK" tpl="formFicheiros.tpl">
+
+	<campos type="text" name="titulo_ficheiro" id="titulo_ficheiro"
+		label="Título" title="Título" obrigatorio="true" maxlength="100"
+		class="medium" />
+
+	<campos type="text" name="bigode_ficheiro" id="bigode_ficheiro"
+		label="Bigode" title="Bigode" obrigatorio="false" maxlength="150"
+		class="medium" />
+
+	<campos type="text" name="identificador_ficheiro" id="identificador_ficheiro"
+		label="Identificador Tag" title="Identificador Tag" obrigatorio="false"
+		maxlength="200" class="medium" />
+		
+	<campos type="text" name="nome_area_ficheiro" id="nome_area_ficheiro"
+		label="Caminho para Area" title="Caminho para Area" obrigatorio="false"
+		maxlength="200" class="medium" />
+
+	<campos type="file" name="nome_arquivo" id="nome_arquivo" title="Imagem"
+		label="Imagem" class="larguraFormMeia" obrigatorio="true" />
+		
+	<campos type="EditorHtml" name="texto_ficheiro" id="texto_ficheiro"
+		wrap="false" label="Texto" title="Texto" class="larguraFormFull"
+		largura="400" altura="300" />
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=lista" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report titulo="Ítens de Menu da Área Administrativa" classe="CrudItemMenu">
+	<header>
+		<titulo type="STRING">Ítem Menu</titulo>
+		<titulo type="STRING">Menu Pai</titulo>
+		<titulo type="STRING">Link</titulo>
+		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			im.nome_item_menu, if(me.nome_menu is null,im2.nome_item_menu,me.nome_menu),
+			im.link_item_menu, im.id_item_menu
+		</campos>
+		<from>
+			fwk_item_menu im LEFT JOIN fwk_menu me
+			on me.id_menu = im.id_menu_pai
+			LEFT JOIN fwk_item_menu im2
+			on im.id_item_menu_pai = im2.id_item_menu
+		</from>
+		<where/>
+		<orderBy>nome_item_menu</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Menu">nome_menu</campo>
+		<campo alias="Lilnk">link_menu</campo>
+	</filtro>
+</report>

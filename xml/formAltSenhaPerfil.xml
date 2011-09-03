@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Alterar senha" classe="ViewPerfil" css=""
+	tipo="FWK_VIEW" tpl="perfilUsuario_formAltSenha.tpl">
+
+	<campos type="password_confirme" name="password_usuario_old_conf"
+		id="password_usuario_old_conf" comparaCom="password_usuario_old"
+		label="Senha atual" title="Senha atual" obrigatorio="true"
+		minlength="6" maxlenght="10" mensErro="As senhas nao conferem"
+		class="width marginBottom15" />
+
+	<campos type="password" name="password_usuario"
+		id="password_usuario" label="Nova senha" title="Nova senha" obrigatorio="true"
+		minlength="6" maxlenght="10" class="width" />
+
+	<campos type="password_confirme" name="password_usuario_conf"
+		id="password_usuario_conf" comparaCom="password_usuario"
+		label="Confirmar Senha" title="Confirnar Senha" obrigatorio="true"
+		minlength="6" maxlenght="10" mensErro="As senhas nao conferem"
+		class="width marginBottom15" />
+
+</form>

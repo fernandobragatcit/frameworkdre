@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report titulo="Menu da Área Administrativa" classe="CrudMenu">
+	<header>
+		<titulo type="STRING">Menu</titulo>
+		<titulo type="STRING">Link</titulo>
+		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			nome_menu, link_menu, id_menu
+		</campos>
+		<from>
+			fwk_menu
+		</from>
+		<where/>
+		<orderBy>ordem_menu</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Menu">nome_menu</campo>
+		<campo alias="Lilnk">link_menu</campo>
+	</filtro>
+</report>

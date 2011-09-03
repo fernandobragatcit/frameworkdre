@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report titulo="Direitos por Grupos de Usuários" classe="CrudDireitoGrupo">
+	<header>
+		<titulo type="STRING">Nome Grupo</titulo>
+		<titulo type="STRING" encoding="UFT8">Qtde de funcionalidades</titulo>
+		<titulo type="none" actionEdit="a=formAlt">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			gr.nome_grupo, COUNT(dg.id_direitos), gr.id_grupo
+		</campos>
+		<from>
+			fwk_direitos_grupo dg
+			RIGHT JOIN fwk_grupo gr
+			ON dg.id_grupo = gr.id_grupo
+		</from>
+		<groupBy>gr.nome_grupo</groupBy>
+		<orderBy>gr.nome_grupo</orderBy>
+
+	</query>
+	<buttons>
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Nome Grupo">nome_grupo</campo>
+	</filtro>
+</report>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Imagens do Conteúdo" classe="CrudImagensConteudo"
+	css="formatForm" tipo="FWK" tpl="formImagensConteudo.tpl">
+
+	<campos type="file" name="nome_imagem" id="nome_imagem"
+		label="Imagem" title="Imagem" class="inputFile" obrigatorio="false" />
+
+	<campos type="file" name="nome_imagem_zip" id="nome_imagem_zip"
+		label="Arquivo Zip" title="Arquivo Zip" class="inputFile" obrigatorio="false" />
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>

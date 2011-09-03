@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Direitos" classe="CrudDireitos"
+	css="formatForm" tipo="FWK" tpl="formDireitos.tpl">
+
+	<campos type="text" name="nome_direito" id="nome_direito"
+		label="Nome Direito" title="Nome Direito" obrigatorio="true"
+		maxlength="100" class="small" />
+
+	<campos type="select" name="id_menu" id="id_menu"
+		label="Menu" title="Menu" onchange="javascript:verCampoPreenchido('id_menu','id_item_menu')">
+		<query>
+			select id_menu, nome_menu from fwk_menu order by nome_menu
+		</query>
+		<value>id_menu</value>
+		<text>nome_menu</text>
+	</campos>
+
+	<campos type="select" name="id_item_menu" id="id_item_menu"
+		label="Sub-Menu" title="Sub-Menu" onchange="javascript:verCampoPreenchido('id_item_menu','id_menu')">
+		<query>
+			select id_item_menu, nome_item_menu from fwk_item_menu order by nome_item_menu
+		</query>
+		<value>id_item_menu</value>
+		<text>nome_item_menu</text>
+	</campos>
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>

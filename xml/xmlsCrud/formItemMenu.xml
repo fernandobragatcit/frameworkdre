@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Ítens de Menu" classe="CrudItemMenu"
+	css="formatForm" tipo="FWK" tpl="formItemMenu.tpl">
+
+	<campos type="text" name="nome_item_menu" id="nome_item_menu"
+		label="Ítem de Menu" title="Ítem de Menu" obrigatorio="true"
+		maxlength="100" class="small"/>
+
+	<campos type="text" name="link_item_menu" id="link_item_menu"
+		label="Link Ítem Menu" title="Link Ítem Menu" obrigatorio="true"
+		maxlength="100" class="small" />
+
+	<campos type="text" name="ordem_item_menu" id="ordem_item_menu"
+		label="Ordem do Ítem" title="Ordem do Ítem" obrigatorio="true"
+		maxlength="5" class="small" />
+
+
+	<campos type="select" name="id_menu_pai" id="id_menu_pai"
+		label="Filho de " title="Filho de "
+		onchange="javascript:verCampoPreenchido('id_menu_pai','id_item_menu_pai')">
+		<query>
+			SELECT id_menu, nome_menu FROM fwk_menu ORDER BY nome_menu
+		</query>
+		<value>id_menu</value>
+		<text>nome_menu</text>
+	</campos>
+
+	<campos type="select" name="id_item_menu_pai" id="id_item_menu_pai"
+		label="Sub-Filho de " title="Sub-Filho de "
+		onchange="javascript:verCampoPreenchido('id_item_menu_pai','id_menu_pai')">
+		<query>
+			SELECT id_item_menu, nome_item_menu FROM fwk_item_menu ORDER BY
+			nome_item_menu
+		</query>
+		<value>id_menu</value>
+		<text>nome_menu</text>
+	</campos>
+
+	<campos type="select" name="funcionalidade" id="funcionalidade"
+		label="Adicionar em " title="Adicionar em " obrigatorio="false" >
+		<array>
+			<option>
+				<value>1</value>
+				<text>Direitos Grupo</text>
+			</option>
+			<option>
+				<value>2</value>
+				<text>Direitos Usuario</text>
+			</option>
+		</array>
+	</campos>
+
+	<campos type="select" name="tipo_item_menu" id="tipo_item_menu"
+		label="Tipo de Ítem " title="Tipo de Item " obrigatorio="true">
+		<array>
+			<option>
+				<value>m</value>
+				<text>Módulo</text>
+			</option>
+			<option>
+				<value>c</value>
+				<text>Framework</text>
+			</option>
+		</array>
+	</campos>
+
+	<buttons>
+
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
+
+	</buttons>
+
+</form>

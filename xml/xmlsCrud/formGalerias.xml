@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Galerias" classe="CrudGalerias" css="formatForm"
+	tipo="FWK" tpl="formGalerias.tpl">
+
+	<campos type="text" name="titulo_galeria" id="titulo_galeria"
+		label="Título" title="Título" obrigatorio="true" maxlength="100"
+		class="medium" />
+
+	<campos type="text" name="bigode_galeria" id="bigode_galeria"
+		label="Bigode" title="Bigode" obrigatorio="false" maxlength="150"
+		class="medium" />
+
+	<campos type="text" name="identificador_galeria" id="identificador_galeria"
+		label="Identificador Tag" title="Identificador Tag" obrigatorio="false"
+		maxlength="200" class="medium" />
+
+	<campos type="addBlocoCampos" name="fotos_galeria" id="fotos_galeria" label="Fotos" 
+	classe="GaleriasDAO" metodo="buscaFotosGaleria" caminho="FWK_DAO"
+	title="Fotos" width="520px" linhas="2" inicio="1">
+		<campo>
+			<linha>1</linha>
+			<label>Título Foto</label>
+			<tipo>text</tipo>
+			<id>titulo_foto</id>
+			<obrigatorio>true</obrigatorio>
+			<maxlenght>100</maxlenght>
+		</campo>
+		<campo>
+			<linha>1</linha>
+			<label>Legenda Foto</label>
+			<tipo>text</tipo>
+			<id>legenda_foto</id>
+			<obrigatorio>true</obrigatorio>
+			<maxlenght>100</maxlenght>
+		</campo>
+		<campo>
+			<linha>2</linha>
+			<label>Arquivo Foto</label>
+			<tipo>file</tipo>
+			<id>nome_arquivo</id>
+			<obrigatorio>true</obrigatorio>
+			<maxlenght>100</maxlenght>
+			<class>inputFile</class>
+		</campo>
+	</campos>
+	
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=lista" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>

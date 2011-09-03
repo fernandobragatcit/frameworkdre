@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Banners" classe="CrudBanners"
+	css="formatForm" tipo="FWK" tpl="formBanners.tpl">
+
+	<campos type="text" name="nome_imagem" id="nome_imagem"
+		label="Nome Banner" title="Nome Banner" obrigatorio="true"
+		maxlength="100" class="small" />
+		
+	<campos type="text" name="title_banner" id="title_banner"
+		label="Title" title="Title" obrigatorio="false"
+		maxlength="100" class="small" />
+		
+	<campos type="text" name="link_banner" id="link_banner"
+		label="Link" title="Link" obrigatorio="false"
+		maxlength="200" class="small" />
+	
+	<campos type="select" name="id_categoria_banner" id="id_categoria_banner"
+		label="Categoria" title="Categoria" >
+		<query>
+			SELECT id_tipo_basico, desc_tipo_basico 
+			FROM fwk_tipo_basico WHERE id_tipo_documento = 999
+		</query>
+		<value>id_tipo_basico</value>
+		<text>desc_tipo_basico</text>
+	</campos>
+		
+	<campos type="file" name="nome_arquivo" id="nome_arquivo" title="Imagem"
+		label="Imagem" class="larguraFormMeia" obrigatorio="true"/>
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=lista" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>

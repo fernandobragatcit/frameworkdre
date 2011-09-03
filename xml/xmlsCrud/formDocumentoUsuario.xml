@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Documentos de Usuários" classe="CrudDocumentoUsuario"
+	css="formatForm" tipo="FWK" tpl="formDocumentoUsuario.tpl">
+
+	<campos type="listBox" name="documentoUsuario" id="documentoUsuario" title="Categorias" label="Categorias"
+		querySource=" SELECT id_documento, nome_documento FROM (
+					(SELECT  id_documento, nome_fantasia_serv_equip AS nome_documento FROM inv_serv_equip ise JOIN fwk_documento fd ON ise.id_serv_equip = fd.id_documento WHERE nome_fantasia_serv_equip IS NOT NULL )UNION
+					(SELECT  id_documento, nome_popular AS nome_documento FROM inv_atrativo ia JOIN fwk_documento fd ON ia.id_atrativo = fd.id_documento WHERE nome_popular IS NOT NULL ) UNION
+					(SELECT  id_documento, titulo_foto AS nome_documento FROM fwk_fotos ff JOIN fwk_documento fd ON ff.id_foto = fd.id_documento WHERE titulo_foto IS NOT NULL ) UNION
+					(SELECT  id_documento, titulo_dica AS nome_documento FROM cip_dicas cd JOIN fwk_documento fd ON cd.id_dica = fd.id_documento WHERE titulo_dica IS NOT NULL ) UNION
+					(SELECT  id_documento, titulo_noticia AS nome_documento FROM fwk_noticias fn JOIN fwk_documento fd ON fn.id_noticia = fd.id_documento WHERE titulo_noticia IS NOT NULL ) UNION
+					(SELECT  id_documento, nome_municipio AS nome_documento FROM inv_municipio im JOIN fwk_documento fd ON im.id_municipio = fd.id_documento WHERE nome_municipio IS NOT NULL ) UNION
+					(SELECT  id_documento, nome_regiao_turistica AS nome_documento FROM inv_regiao_turistica irt JOIN fwk_documento fd ON irt.id_regiao_turistica = fd.id_documento WHERE nome_regiao_turistica IS NOT NULL ) UNION
+					(SELECT  id_documento, titulo_aserra AS nome_documento FROM cip_aserra ca JOIN fwk_documento fd ON ca.id_aserra = fd.id_documento WHERE titulo_aserra IS NOT NULL) ) AS POWERDOCUMENTO "
+		queryAlt="SELECT id_documento FROM fwk_documento_usuario WHERE id_usuario"
+		values="id_documento" texts="nome_documento"
+		orderby="nome_documento" class="listBoxCompDre"/>
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=home" mens="Deseja realmente sair do formulario?" />
+	</buttons>
+
+</form>

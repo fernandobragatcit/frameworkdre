@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Pastas" classe="CrudPastas"
+	css="formatForm" tipo="FWK" tpl="formPastas.tpl">
+
+	<campos type="text" name="nome_pasta" id="nome_pasta"
+		label="Nome da Pasta" title="Nome da Pasta" obrigatorio="true"
+		maxlength="100" class="small" />
+
+	<campos type="select" name="visib_pasta" id="visib_pasta"
+		label="Visibilidade " title="Visibilidade " >
+		<array>
+			<option>
+				<value>1</value>
+				<text>Pasta Pública</text>
+			</option>
+			<option>
+				<value>2</value>
+				<text>Pasta Privada</text>
+			</option>
+		</array>
+	</campos>
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>

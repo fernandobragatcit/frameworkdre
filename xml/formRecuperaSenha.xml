@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="lOGIN" classe="Login" css="formatForm"
+	tipo="FWK_VIEW" tpl="formRecuperaSenha.tpl" >
+
+	<campos type="file" name="email" id="email"
+		label="Email" title="Email" class="inputFile"
+		obrigatorio="true" />
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+	</buttons>
+
+</form>

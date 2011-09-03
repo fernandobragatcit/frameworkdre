@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Dados Pessoais" classe="ViewPerfil" css=""
+	tipo="FWK_VIEW" tpl="perfilUsuario_formEditUsr.tpl">
+
+	<campos type="text" name="nome_usuario" id="nome_usuario"
+		label="Nome: " title="Nome" obrigatorio="true" maxlength="100"
+		class="width90p" />
+
+	<campos type="text" name="rua_avenida_usuario" id="rua_avenida_usuario"
+		label="Rua/Avenida" title="Rua/Avenida"  maxlength="50"
+		class="width90p" />
+
+	<campos type="text" name="numero_usuario" id="numero_usuario"
+		label="Número" title="Número"  maxlength="10"
+		class="width90p" />
+
+	<campos type="text" name="bairro_usuario" id="bairro_usuario"
+		label="Bairro" title="Bairro"  maxlength="50"
+		class="width90p" />
+
+	<campos type="text" name="complemento_usuario" id="complemento_usuario"
+		label="Complemento" title="Complemento"  maxlength="10"
+		class="width90p" />
+
+	<campos type="text" name="cep_usuario" id="cep_usuario"
+		label="CEP" title="CEP"  maxlength="10"
+		class="width90p" />
+
+	<campos type="text" name="ddd_usuario" id="ddd_usuario"
+		label="DDD" title="DDD"  maxlength="2"
+		class="width35p" />
+
+	<campos type="select" name="id_estado_usuario" obrigatorio="true"
+		id="sigla" label="Estado" title="Estado" class="width60p">
+		<query>
+			SELECT id_estado, sigla FROM
+			fwk_estados
+		</query>
+		<value>id_estado</value>
+		<text>sigla</text>
+	</campos>
+
+	<campos type="text" name="telefone_usuario" id="telefone_usuario"
+		label="Telefone" title="Telefone"  maxlength="9"
+		class="width30p" />
+
+	<campos type="email" name="email_usuario" id="email_usuario"
+		title="Email" label="Email" obrigatorio="true" maxlength="150"
+		mensErro="Email invalido" class="width90p" />
+
+	<campos type="text" name="cidade_usuario" id="cidade_usuario"
+		title="Cidade" label="Cidade" maxlength="150" class="width90p" />
+
+	<campos type="text" name="pais_usuario" id="pais_usuario"
+		title="País" label="País" maxlength="100" class="width90p" />
+
+	<campos type="text" name="profissao_usuario" id="profissao_usuario"
+		title="Profissão" label="Profissão" maxlength="100" class="width90p" />
+
+	<campos type="data" name="nascimento_usuario"
+		id="nascimento_usuario" title="Data Nascimento"
+		label="Data Nascimento" maxlength="12" class="width60p" />
+
+	<campos type="file" name="foto_usr" id="foto_usr"
+		title="Foto" label="Foto" />
+
+	<campos type="select" name="idioma_usuario" obrigatorio="true"
+		id="idioma_usuario" label="Idioma" title="Idioma" class="width60p">
+		<query>
+			SELECT sigla_idioma, nome_idioma FROM
+			fwk_idioma
+		</query>
+		<value>sigla_idioma</value>
+		<text>nome_idioma</text>
+	</campos>
+
+</form>

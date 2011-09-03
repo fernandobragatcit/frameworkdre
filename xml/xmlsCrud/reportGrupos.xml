@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report titulo="Grupos" classe="CrudGrupos">
+	<header>
+		<titulo type="STRING">Nome Grupo</titulo>
+		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			nome_grupo, id_grupo
+		</campos>
+		<from>
+			fwk_grupo
+		</from>
+		<orderBy>nome_grupo</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Grupo">nome_grupo</campo>
+	</filtro>
+</report>

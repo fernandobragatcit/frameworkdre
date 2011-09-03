@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Cadastro de Usuários" classe="ViewCadUsuarios"
+	css="formatForm" tipo="FWK_VIEW" tpl="formCadUsuarios.tpl">
+
+	<campos type="text" name="nome_usuario" id="nome_usuario"
+		label="Nome:" title="Nome:" obrigatorio="true" maxlength="100"
+		class="medium" />
+
+	<campos type="email" name="email_usuario" id="email_usuario"
+		title="Email" label="Email" obrigatorio="true" maxlength="150"
+		mensErro="Email invalido" class="medium" />
+
+	<campos type="email_confirme" name="email_usuario_conf"
+		id="email_usuario_conf" title="Confirmar Email"
+		label="Confirmar Email" comparaCom="email_usuario"
+		obrigatorio="true" maxlength="150" mensErro="Email não confere"
+		class="medium" />
+
+	<campos type="password" name="password_usuario"
+		id="password_usuario" label="Senha" title="Senha" obrigatorio="true"
+		maxlength="50" minlength="6" class="medium" />
+
+	<campos type="password_confirme" name="password_usuario_conf"
+		id="password_usuario_conf" comparaCom="password_usuario"
+		label="Confirmar Senha" title="Confirnar Senha" obrigatorio="true"
+		maxlength="50" minlength="6" mensErro="As senhas nao conferem"
+		class="medium" />
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="?" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>

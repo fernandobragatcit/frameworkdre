@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report titulo="Direitos por Usuário" classe="CrudDireitosUsuario">
+	<header>
+		<titulo type="STRING">Nome Usuário</titulo>
+		<titulo type="STRING">Qtde de funcionalidades</titulo>
+		<titulo type="none" actionEdit="a=formAlt">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			us.nome_usuario, COUNT(du.id_direitos), us.id_usuario
+		</campos>
+		<from>
+			fwk_direitos_usuario du
+			RIGHT JOIN fwk_usuario us
+			ON du.id_usuario = us.id_usuario
+		</from>
+		<groupBy>us.nome_usuario</groupBy>
+		<orderBy>us.nome_usuario</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Nome Usuário">us.nome_usuario</campo>
+	</filtro>
+</report>

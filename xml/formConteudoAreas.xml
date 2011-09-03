@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Conteúdo Cabeçalho" css="formatForm"
+	tipo="FWK_VIEW" tpl="formConteudoAreas.tpl">
+
+	<campos type="select" name="idioma" id="idioma" class="medium"
+		label="Idioma: " title="Idioma"
+		onchange="javascript:alteraIdiomaPag(this.value)">
+		<query>SELECT sigla_idioma,nome_idioma FROM fwk_idioma</query>
+		<value>sigla_idioma</value>
+		<text>nome_idioma</text>
+	</campos>
+
+	<campos type="textarea"
+		name="conteudo_area" id="conteudo_area" title="Conteúdo"
+		label="Conteúdo" />
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="?" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>

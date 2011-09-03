@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid titulo="Documentos de Usuários" classe="CrudDocumentoUsuario">
+	<header>
+		<titulo type="STRING">Nome Usuario</titulo>
+		<titulo type="STRING" encoding="UFT8">Qtde de Direitos</titulo>
+		<titulo type="none" actionEdit="a=formAlt">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			fu.nome_usuario, COUNT(fdu.id_documento), fu.id_usuario
+		</campos>
+		<from>
+			fwk_documento_usuario fdu
+			RIGHT JOIN fwk_usuario fu
+			ON fdu.id_usuario = fu.id_usuario
+		</from>
+		<groupBy>fu.nome_usuario</groupBy>
+		<orderBy>fu.nome_usuario</orderBy>
+
+	</query>
+	<buttons>
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Nome Grupo">nome_usuario</campo>
+	</filtro>
+</grid>
