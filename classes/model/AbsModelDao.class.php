@@ -122,8 +122,13 @@ class AbsModelDao extends ADOdb_Active_Record{
 						  "campo" => $this->_id,
 						  "valor" => $id);
 
+//		if (self::ErrorMsg()) {
+//				die("<br/><br /><h1>".self::ErrorMsg()."</h1>");
+//			}
+
 		if(!ControlDb::delRowTable($arrDados))
-		throw new DaoException("Imppossível deletar o dado da tabela ".$this->_table." id = ".$id);
+//		throw new DaoException("Imppossível deletar o dado da tabela ".$this->_table." id = ".$id);
+		throw new DaoException(self::ErrorMsg());
 	}
 
 	/**
