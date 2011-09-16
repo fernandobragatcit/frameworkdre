@@ -1,6 +1,6 @@
 {section name=da loop=$DADOS}
 	{assign var=id value=$smarty.section.da.index}
-	<div {if $CLASS != ""}class="{$CLASS}"{else}style="width: 100%; padding:10px; margin-top:10px; display:block;"{/if}>
+	<div {if $CLASS != ""}class="{$CLASS}"{else}style="width: 100%; padding:10px; margin-top:10px; display:block; float:left;"{/if}>
 		<span {if $CSSAREA != ""} class="{$CSSAREA}" {else} style="float:left; width:80%; padding:0px 10px 10px 10px; border:1px solid #ccc;" {/if}>
 			<span title="Remover" class="right removerBloco" onClick="removeBlocoCampo('{$IDCOMPONENTE}', jQuery(this).parent());" 
 				style="text-align: center; cursor: pointer; position:relative; top:-8px; float:right; margin-bottom:-40px; margin-right:-8px;">
@@ -24,7 +24,7 @@
 										<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$file]}">
 									
 									{elseif $ARR_LINHAS[per].tipo == 'text'}
-										<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="large"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+										<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="large"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 
 									{elseif $ARR_LINHAS[per].tipo == 'data'}
 										<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
@@ -56,7 +56,7 @@
 											<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$file]}">
 											
 										{elseif $ARR_LINHAS[per].tipo == 'text'}
-											<input {if $ARR_LINHAS[per].class != ""}class="medium {$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+											<input {if $ARR_LINHAS[per].class != ""}class="medium {$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 										
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}small{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
@@ -85,7 +85,7 @@
 											<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$file]}">
 											
 										{elseif $ARR_LINHAS[per].tipo == 'text'}
-											<input {if $ARR_LINHAS[per].class != ""}class="medium {$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+											<input {if $ARR_LINHAS[per].class != ""}class="medium {$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 										
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
@@ -140,7 +140,7 @@
 										<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 										
 									{elseif $ARR_LINHAS[per].tipo == 'text'}
-										<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="large"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+										<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="large"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 									
 									{elseif $ARR_LINHAS[per].tipo == 'data'}
 										<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
@@ -172,7 +172,7 @@
 											<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 											
 										{elseif $ARR_LINHAS[per].tipo == 'text'}
-											<input {if $ARR_LINHAS[per].class != ""}class="small {$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+											<input {if $ARR_LINHAS[per].class != ""}class="small {$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 										
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}small{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
@@ -201,7 +201,7 @@
 											<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 											
 										{elseif $ARR_LINHAS[per].tipo == 'text'}
-											<input {if $ARR_LINHAS[per].class != ""}class="small {$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+											<input {if $ARR_LINHAS[per].class != ""}class="small {$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 										
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}small{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
@@ -262,7 +262,7 @@
 										<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 										
 									{elseif $ARR_LINHAS[per].tipo == 'text'}
-										<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="large"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+										<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="large"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 									
 									{elseif $ARR_LINHAS[per].tipo == 'data'}
 										<input class="dataCamponumber {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
@@ -294,7 +294,7 @@
 											<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 											
 										{elseif $ARR_LINHAS[per].tipo == 'text'}
-											<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+											<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 										
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCamponumber {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}small{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
@@ -323,8 +323,8 @@
 											<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 											
 										{elseif $ARR_LINHAS[per].tipo == 'text'}
-											<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
-										
+											<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCamponumber {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}small{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 											<script>jQuery('.dataCamponumber').mask("99/99/9999");</script>

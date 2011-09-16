@@ -1,7 +1,9 @@
 <?php
+require_once(FWK_DAO."LinkEncurtadoDAO.class.php");
+require_once(FWK_UTIL."Cryptografia.class.php");
 
 class FormataLink {
-
+	
      public static function definiTipoLink($strTipo){
      	switch($strTipo){
 			case "MODULO":
@@ -70,5 +72,26 @@ class FormataLink {
 		
 		return $strBase;
 	}
+	
+	/*
+	 * Converte uma url em mini url.
+	 * 
+	 * Exemplo:
+	 * $urlLong = "http://www.tcit.com.br/?m=KAJSD983123LKJADASLKJDAS891230983432KL4JASDLKJSOADSIUASDOIUASDLKU123098="
+	 * 
+	 * $urlShort = "http://www.tcit.com.br/?s=KA3D="
+	 * 
+	 * @param = string $urlLong -> Url parametros.
+	 * @return = string $urlShort -> Mini-Url para ser enviada.
+	 * 
+	 */
+	public static function getMiniUrl($urlLong) {
+		$urlShort = null;
+		$objLink = new LinkEncurtadoDAO();
+		$idUrlShort = $objLink->cadastrar($urlLong);
+		$objCrypt = new Cryptografia();
+		return $urlShort = RET_SERVIDOR."?s=".$objCrypt->cryptData($idUrlShort);
+	}
+	
 }
 ?>

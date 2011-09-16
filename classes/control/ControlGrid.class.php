@@ -414,7 +414,9 @@ class ControlGrid {
 		$tipo = "c";
 		$categoria = "";
 		$strParam = "";
+		$strParam2 = "";
 		$strValParam = "";
+		$strValParam2 = "";
 		if(isset(self::getObjXml()->attributes()->tipo) && self::getObjXml()->attributes()->tipo!=""){
 			$tipo = FormataLink::definiTipoLink((string)self::getObjXml()->attributes()->tipo);
 		}
@@ -423,8 +425,13 @@ class ControlGrid {
 		}
 		if(isset(self::getObjXml()->attributes()->param1) && self::getObjXml()->attributes()->param1 != "")
 		$strParam = self::getObjXml()->attributes()->param1;
+		if(isset(self::getObjXml()->attributes()->param2) && self::getObjXml()->attributes()->param2 != "")
+			$strParam2 = self::getObjXml()->attributes()->param2;
 		if(self::getVariavelWhere1() !="")
 		$strValParam = self::getVariavelWhere1();
+		if(self::getVariavelWhere2() !="")
+			$strValParam2 = self::getVariavelWhere2();
+
 		if (self::getObjXml()->header || self::getObjXml()->header != "") {
 			if (self::getObjXml()->header->titulo && self::getObjXml()->header->titulo != "") {
 				foreach (self::getObjXml()->header->titulo as $actions) {
@@ -432,28 +439,33 @@ class ControlGrid {
 						switch ((string) $attributes) {
 							case "actionEdit" :
 								if ($index == $cont) {
-									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "Editar",$tipo,$categoria,$strParam,$strValParam);
+									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "Editar",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionDelete" :
 								if ($index == $cont) {
-									$newData .= " " . $objForAction->gridConfirm($data, $value, self::getClassGrid(), "Deletar", "Tem certeza que gostaria de deletar este registro?",$tipo,$categoria,$strParam,$strValParam);
+									$newData .= " " . $objForAction->gridConfirm($data, $value, self::getClassGrid(), "Deletar", "Tem certeza que gostaria de deletar este registro?",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionStatus":
 								if ($index == $cont) {
-									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "Status",$tipo,$categoria,$strParam,$strValParam);
+									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "Status",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionSelect":
 
 								if ($index == $cont) {
-									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "Selecionar",$tipo,$categoria,$strParam,$strValParam);
+									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "Selecionar",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionReport":
 								if ($index == $cont) {
-									$newData .= " " . $objForAction->gridImprime($data, $value, self::getClassGrid(), "Imprimir",$tipo,$categoria,$strParam,$strValParam);
+									$newData .= " " . $objForAction->gridImprime($data, $value, self::getClassGrid(), "Imprimir",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
+								}
+								break;
+							case "actionPdf":
+								if ($index == $cont) {
+									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='Download PDF' src='".URL_DEP_IMGS."adobe_pdf.png'>",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							default :
@@ -482,7 +494,8 @@ class ControlGrid {
 		$strQuery .= self::getTablesQuery();
 		if (trim((string)self::getObjXml()->query->where) != "") {
 			$strQuery .= " WHERE ";
-			$strQuery .= trim((string)self::getObjXml()->query->where);
+			$string = trim((string)self::getObjXml()->query->where);
+			$strQuery .= str_replace("#idReferencia#", self::getIdReferencia(),$string);
 			if(self::getVariavelWhere1() != "")
 				$strQuery .= " ".self::getVariavelWhere1()." ";
 		}
@@ -776,6 +789,7 @@ class ControlGrid {
 		foreach (self::getObjXml()->buttons->campos as $botoes) {
 			$objFactoryComps->setClasseAtual(self::getObjXml()->attributes()->classe);
 			$objFactoryComps->setParamWhere1(self::getVariavelWhere1());
+			$objFactoryComps->setParamWhere2(self::getVariavelWhere2());
 			$objFactoryComps->setTipo(self::getObjXml()->attributes()->tipo);
 			$objFactoryComps->setCategoria(self::getObjXml()->attributes()->categoria);
 			$objFactoryComps->buildComp($botoes);
@@ -794,6 +808,15 @@ class ControlGrid {
 		return self::getObjUsrSessao()->getIdUsuario();
 	}
 	
+	public function setIdReferencia($intIdRef){
+		$this->idReferencia = $intIdRef;
+	}
+
+	public function getIdReferencia(){
+		return $this->idReferencia;
+	}
+
+		
 	public function debuga(){
 		$arrDados = func_get_args();
 		print("<pre>");

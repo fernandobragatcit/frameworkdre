@@ -1,7 +1,7 @@
 <?php
 require_once (FWK_COMP."AbsCompHtml.class.php");
 
-class Textarea extends AbsCompHtml {
+class TextArea extends AbsCompHtml {
 
     public function getComponente($value = ""){
 		self::regTags();

@@ -162,8 +162,11 @@ abstract class AbsCruds {
 		if(isset($arrDados["id_foto"]) || $arrDados["id_foto"] !=""){
 			self::getObjSmarty()->assign("ID_FOTO",$arrDados["id_foto"]);
 		}
+		if(!isset($arrDados["status"])){
+			$arrDados["status"] = "S";
+		}
 		self::getClassModel()->setTipoForm(self::getTipoForm());
-		self::getClassModel()->preencheForm(self::getXmlForm(),$id, self::getStringClass());
+		self::getClassModel()->preencheFormComDados(self::getXmlForm(),$id, self::getStringClass(), $arrDados);
 	}
 
 	protected function postAltera($id,$post,$file){
@@ -199,7 +202,7 @@ abstract class AbsCruds {
 			self::vaiPara(self::getStringClass()."&msg=".$e->getMensagem());
 			return;
 		}
-		self::vaiPara(self::getStringClass()."&msg=Ítem deletado com sucesso!");
+		self::vaiPara(self::getStringClass()."&msg=�?tem deletado com sucesso!");
 	}
 
 	protected function deleta($id){
@@ -209,7 +212,7 @@ abstract class AbsCruds {
 			self::vaiPara(self::getStringClass()."&msg=".$e->getMensagem());
 			return;
 		}
-		self::vaiPara(self::getStringClass()."&msg=Ítem deletado com sucesso!");
+		self::vaiPara(self::getStringClass()."&msg=Ã�tem deletado com sucesso!");
 	}
 	
 	protected function status($id){

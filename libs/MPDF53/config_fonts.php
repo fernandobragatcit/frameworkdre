@@ -195,6 +195,11 @@ $this->fontdata = array(
 		'B' => "XB Zar Bd.ttf",
 		'I' => "XB Zar It.ttf",
 		'BI' => "XB Zar BdIt.ttf",
+		),	
+		
+/* Fonte IBS-FGV */
+	"zurichregular" => array(
+		'R' => "zurich_condensed_bt-webfont.ttf",
 		),
 
 

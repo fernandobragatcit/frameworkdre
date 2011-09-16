@@ -96,6 +96,12 @@ class ControlDB{
     	return self::getBanco()->GetAll($strQuery,array($arrDados["valor"]));
     }
 
+    public static function selectAllRows($arrDados,$fetchMode = 0){
+    	$strQuery = "SELECT * FROM ".$arrDados["table"];
+    	self::getBanco()->SetFetchMode(($fetchMode==0?ADODB_FETCH_ASSOC:ADODB_FETCH_NUM));
+    	return self::getBanco()->GetAll($strQuery);
+    }
+
     public static function getRow($strQuery,$fetchMode = 1){
     	self::getBanco()->SetFetchMode($fetchMode==0?2:$fetchMode);
 		return self::getBanco()->GetRow(utf8_decode($strQuery));

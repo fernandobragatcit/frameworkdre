@@ -43,7 +43,7 @@ class ControlLogin {
     public function verificaUsuarioAtivo($emailUsuario){
 		$dadosUsuario = self::getObjUsuario()->getDadosUsuariosByEmail($emailUsuario, 0);
 		
-		if($dadosUsuario["id_tipo_usuario"]==USUARIO_PROVISORIO)
+		if($dadosUsuario["id_tipo_usuario"]==TIPO_USUARIO_PROV)
 			return false;
 		else
 			return true;

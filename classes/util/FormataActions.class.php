@@ -27,11 +27,13 @@ class FormataActions {
      * @param String $strCategoria: caso seja de alguma categoria, é setado aqui
      * @return String $strLink: o html do link criado
      */
-	public function gridAction($data,$value,$classe,$label,$tipo = "c",$strCategoria = "",$param1="",$valParam1=""){
+	public function gridAction($data,$value,$classe,$label,$tipo = "c",$strCategoria = "",$param1="",$valParam1="",$param2="",$valParam2=""){
 		$strParam = "";
 		if($param1 !="" && $valParam1!="")
 			$strParam = "&".$param1."=".$valParam1;
-		$link = self::getObjCrypt()->cryptData(($strCategoria!=""?$strCategoria."&f=":"").$classe."&".$value."&id=".$data.$strParam);
+		if($param2 !="" && $valParam2!="")
+			$strParam2 = "&".$param2."=".$valParam2;
+		$link = self::getObjCrypt()->cryptData(($strCategoria!=""?$strCategoria."&f=":"").$classe."&".$value."&id=".$data.$strParam.$strParam2);
 		$strLink = "<a href=\"javascript:void(vaiPara('?".$tipo."=".$link."'))\">".$label."</a>";
 		return $strLink;
     }
@@ -49,11 +51,14 @@ class FormataActions {
      * @param String $strCategoria: caso seja de alguma categoria, é setado aqui
      * @return String $strLink: o html do link criado
      */
-	public function gridConfirm($data,$value,$classe,$label,$mensConfirm,$tipo = "c",$strCategoria = "",$param1="",$valParam1=""){
+	public function gridConfirm($data,$value,$classe,$label,$mensConfirm,$tipo = "c",$strCategoria = "",$param1="",$valParam1="",$param2="",$valParam2=""){
 		$strParam = "";
 		if($param1 !="" && $valParam1!="")
 			$strParam = "&".$param1."=".$valParam1;
-		$link = self::getObjCrypt()->cryptData(($strCategoria!=""?$strCategoria."&f=":"").$classe."&".$value."&id=".$data.$strParam);
+		if($param2 !="" && $valParam2!="")
+			$strParam2 = "&".$param2."=".$valParam2;
+
+		$link = self::getObjCrypt()->cryptData(($strCategoria!=""?$strCategoria."&f=":"").$classe."&".$value."&id=".$data.$strParam.$strParam2);
 		$strLink = "<a href=\"javascript:void(confirmIr('?".$tipo."=".$link."','".$mensConfirm."'))\">".$label."</a>";
 		return $strLink;
     }

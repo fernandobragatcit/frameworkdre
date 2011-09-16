@@ -1,5 +1,3 @@
-<a class="thumb" href="{$LINKFOTO}" title="{$TITLE}" alt="{$TITLE}">
-	<span>{$POSICAO}</span>
-	<p class="desc"> {$DESCRICAO} </p>
-	<div class="arrow"></div>
+<a href="{$LINKFOTO}" title="{$TITLE}" alt="{$TITLE}">
+	{FOTO metodo="getThumbImg" idObj="$IDFOTO" largura="$LARGURA" altura="$ALTURA" param3="false"}
 </a>

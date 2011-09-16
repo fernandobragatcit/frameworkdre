@@ -5,6 +5,7 @@ class Button extends AbsCompHtml {
 
 	protected $strLabelBtn;
 	protected $strParam1;
+	protected $strParam2;
 
    public function getComponente($label = ""){
 		self::setLabel($label);
@@ -20,6 +21,13 @@ class Button extends AbsCompHtml {
 
     public function getParam1(){
 		return $this->strParam1;
+    }
+    public function setParam2($param2 = null){
+		$this->strParam2 =$param2;
+    }
+
+    public function getParam2(){
+		return $this->strParam2;
     }
 
     private function setLabel($label){
@@ -81,9 +89,12 @@ class Button extends AbsCompHtml {
 
 			if(isset($this->objXmlComp->param1) && $this->objXmlComp->param1 != ""){
 				$strParam1 = "&".$this->objXmlComp->param1. "=".self::getParam1();
-
 			}
-			$strLink = $this->objCrypt->cryptData((self::getCategoria()!=""?self::getCategoria()."&f=":"").parent::getClass()."&".(string)$this->objXmlComp->goto."".$strParam1);
+//			die(self::getParam2());
+			if(isset($this->objXmlComp->param2) && $this->objXmlComp->param2 != ""){
+				$strParam2 = "&".$this->objXmlComp->param2. "=".self::getParam2();
+			}
+			$strLink = $this->objCrypt->cryptData((self::getCategoria()!=""?self::getCategoria()."&f=":"").parent::getClass()."&".(string)$this->objXmlComp->goto."".$strParam1.$strParam2);
 			return "onClick=\"return vaiPara('?".FormataLink::definiTipoLink(self::getTipo())."=".$strLink."')\";";
 		}
     }

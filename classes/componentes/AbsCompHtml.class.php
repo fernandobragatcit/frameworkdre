@@ -34,8 +34,10 @@ abstract class AbsCompHtml{
 	protected $strNomeCampo = "";
 
 	private $param1;
+	private $param2;
 
 	private $idReferencia;
+	private $idReferencia2;
 
 	public function __construct($objXMLComp) {
 		$this->objXmlComp = null;
@@ -52,6 +54,13 @@ abstract class AbsCompHtml{
 
 	public function getIdReferencia(){
 		return $this->idReferencia;
+	}
+    public function setIdReferencia2($intIdRef){
+		$this->idReferencia2 = $intIdRef;
+	}
+
+	public function getIdReferencia2(){
+		return $this->idReferencia2;
 	}
 
     abstract public function getComponente($value = "");
@@ -335,6 +344,13 @@ abstract class AbsCompHtml{
 
     public function getParam1(){
 		return $this->param1;
+    }
+    public function setParam2($param2){
+		$this->param2 = $param2;
+    }
+
+    public function getParam2(){
+		return $this->param2;
     }
 
  }

@@ -26,6 +26,9 @@ class Select extends AbsCompHtml {
 			if(strpos($strQuery, "#idReferencia#") > 0){
 				$strQuery = str_replace("#idReferencia#", parent::getIdReferencia(), $strQuery);
 			}
+			if(strpos($strQuery, "#idReferencia2#") > 0){
+				$strQuery = str_replace("#idReferencia2#", parent::getIdReferencia2(), $strQuery);
+			}
 			self::getBanco()->SetFetchMode(ADODB_FETCH_NUM);
 			$arrQueryComp = self::getBanco()->GetAll($strQuery);
 			//if(self::getValue() != ""){
@@ -33,9 +36,15 @@ class Select extends AbsCompHtml {
 			//}
 
 			for($i=0;$i<count($arrQueryComp);$i++){
+				if((string)$this->objXmlCompChilds->valueCrypt){
+					$arrQueryComp[$i][0] =Cryptografia::cryptData($arrQueryComp[$i][0]);
+				}
 				$arrQueryComp[$i][0] = utf8_encode($arrQueryComp[$i][0]);
 				$arrQueryComp[$i][1] = utf8_encode($arrQueryComp[$i][1]);
 			}
+
+
+
 			$this->objSmarty->assign("ARR_OPTIONS",$arrQueryComp);
 		}else if(isset($this->objXmlCompChilds->array)){
 			if(isset($this->objXmlCompChilds->array->option)){

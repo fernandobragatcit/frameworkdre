@@ -1,11 +1,11 @@
 jQuery.noConflict();
 /**
- * ValidaÃ§Ã£o dos formulÃ¡rios dinï¿½micos
+ * Validação dos formulários din�micos
  *
- * @author AndrÃ© Coura
+ * @author André Coura
  * @since 3.0 - 27/09/2009
  */
-//campos obrigtaÃ³rios
+//campos obrigtaórios
 var arrIdFieldsObrig = new Array();
 var arrTxtFields = new Array();
 var arrTxtErroFields = new Array();
@@ -43,7 +43,7 @@ function validaForms(form){
 		erro = validaCamposComparaveis(erro);
 		erro = validaTamanhoCampos(erro);
 		/**
-		 * Mode o scroll da tela ate o primeiro campo obrigatÃ³rio com erro
+		 * Mode o scroll da tela ate o primeiro campo obrigatório com erro
 		 */
 	  	if(this.arrIdErroFields != null && this.arrIdErroFields.length > 0){
 			var targetOffset = jQuery("#"+this.arrIdErroFields[0]).offset().top;
@@ -179,7 +179,7 @@ function verificaCampoSeVazio(id){
 }
 
 /**
- * DefiniÃ§Ã£o da String de erros
+ * Definição da String de erros
  */
 function setErroField(id,txt, texto){
 	jQuery('#'+id+'_erro').hide();
@@ -213,7 +213,7 @@ function setDefaultFields(){
 }
 
 /**
- * FunÃ§Ã£o de redirecionamento de pï¿½gina
+ * Função de redirecionamento de p�gina
  */
 function vaiPara(strPag){
 	location.replace(strPag);
@@ -221,7 +221,7 @@ function vaiPara(strPag){
 }
 
 /**
- * FunÃ§Ã£o de redirecionamento com confirmaï¿½ï¿½o
+ * Função de redirecionamento com confirma��o
  */
 function confirmIr(strPag,strMens){
 	if(confirm(strMens))
@@ -230,9 +230,9 @@ function confirmIr(strPag,strMens){
 }
 
 /**
- * MÃ©todo de preenchimento simples do valor de um campo no formulÃ¡rio
+ * Método de preenchimento simples do valor de um campo no formulário
  *
- * @autor AndrÃ© Coura
+ * @autor André Coura
  * @since 1.0 - 10/08/08
  */
 function preencheCampo(strId, strValor){
@@ -263,7 +263,7 @@ function execmascara(){
 }
 
 function soNumeros(v){
-	//condiÃ§Ã£o para aceitar apenas nÃºmeros e os caracteres especiais
+	//condição para aceitar apenas números e os caracteres especiais
 	v=v.replace(/[^NAEI0-9]/g,"");
 	//v=v.replace(/^(\A|E|I|NN|NAN|NEN|NIN|NAA|NEE|NII|NAE|NAI|NEA|NEI|NIA|NIE)/,"");
 	v=v.replace(/^(\A|E|I|NN)/,"");
@@ -274,7 +274,7 @@ function soNumeros(v){
 }
 
 function telefone(v){
-	//condiÃ§Ã£o para aceitar apenas nÃºmeros e os caracteres especiais
+	//condição para aceitar apenas números e os caracteres especiais
 	v=v.replace(/[^NAEI0-9]/g,"");
 	v=v.replace(/^(\A|E|I|NN)/,"");
 	v=v.replace(/^(\D)(\d)/,"$1");
@@ -287,7 +287,7 @@ function telefone(v){
 }
 
 function cpf(v){
-	//condiÃ§Ã£o para aceitar apenas nÃºmeros e os caracteres especiais
+	//condição para aceitar apenas números e os caracteres especiais
 	v=v.replace(/[^NAEI0-9]/g,"");
 	//v=v.replace(/^(\A|E|I|NN|NAN|NEN|NIN|NAA|NEE|NII|NAE|NAI|NEA|NEI|NIA|NIE)/,"");
 	v=v.replace(/^(\A|E|I|NN)/,"");
@@ -302,21 +302,21 @@ function cpf(v){
 }
 
 function cep(v){
-	//condiÃ§Ã£o para aceitar apenas nÃºmeros e os caracteres especiais
+	//condição para aceitar apenas números e os caracteres especiais
 	v=v.replace(/[^NAEI0-9]/g,"");
 	//v=v.replace(/^(\A|E|I|NN|NAN|NEN|NIN|NAA|NEE|NII|NAE|NAI|NEA|NEI|NIA|NIE)/,"");
 	v=v.replace(/^(\A|E|I|NN)/,"");
 	v=v.replace(/^(\D)(\d)/,"$1");
 	v=v.replace(/^(\D{2})(\d)/,"$1");
 	v=v.replace(/^(\D{2})(\D)/,"$1");
-	//aceita a formataÃ§Ã£o do cep
+	//aceita a formatação do cep
 	v=v.replace(/^(\d{5})(\d)/,"$1-$2");
 
 	return v;
 }
 
 function email(v){
-	//condiÃ§Ã£o para aceitar apenas nÃºmeros e os caracteres especiais
+	//condição para aceitar apenas números e os caracteres especiais
 	v=v.replace(/[^NAEI0-9a-z@\.]/g,"");
 	v=v.replace(/^[\.@]/,"");
 	v=v.replace(/(\.\.)/,"\.");
@@ -326,7 +326,7 @@ function email(v){
 }
 
 function cnpj(v){
-	//condiÃ§Ã£o para aceitar apenas nÃºmeros e os caracteres especiais
+	//condição para aceitar apenas números e os caracteres especiais
 	v=v.replace(/[^NAEI0-9]/g,"");
 	//v=v.replace(/^(\A|E|I|NN|NAN|NEN|NIN|NAA|NEE|NII|NAE|NAI|NEA|NEI|NIA|NIE)/,"");
 	v=v.replace(/^(\A|E|I|NN)/,"");
@@ -366,8 +366,8 @@ function site(v){
 /**
  *
  * @param v - TEXTO A SER "MARCARADO"
- * @param u - UNIDADES DA MÃ�SCARA.EX: 123,45 - uuu.dd
- * @param d - DECIMAIS DA MÃ�SCARA. EX: 123,45 - uuu.dd
+ * @param u - UNIDADES DA M�?SCARA.EX: 123,45 - uuu.dd
+ * @param d - DECIMAIS DA M�?SCARA. EX: 123,45 - uuu.dd
  * @returns string formatada
  */
 function double(v, u, d){
@@ -377,8 +377,8 @@ function double(v, u, d){
 	v=v.replace(/^(\D{2})(\d)/,"$1");
 	v=v.replace(/^(\D{2})(\D)/,"$1");
 
-	v=v.replace(/^\./g,"");//para nunca comeÃ§ar com "."(ponto)
-	v=v.replace(/(\.\.)/g,".");//para nÃ£o repetir 2 pontos seguidos(ponto)
+	v=v.replace(/^\./g,"");//para nunca começar com "."(ponto)
+	v=v.replace(/(\.\.)/g,".");//para não repetir 2 pontos seguidos(ponto)
 	v = v.replace(eval("/^(\\d{"+u+"})(\\d{"+d+"})/"),"$1.$2");
 	return v;//
 }
@@ -397,9 +397,9 @@ function hora(v){
 }
 
 function longlat(v){
-	//aceito apenas sinais "+" e "-", nÃºmeros e o "."
+	//aceito apenas sinais "+" e "-", números e o "."
 	v=v.replace(/[^NAEI\+\-0-9\.]/g,"");
-	//o primeiro dÃ­gito tem que ser o sinal
+	//o primeiro dígito tem que ser o sinal
 	v=v.replace(/^[^\+\-NAEI]/g,"");
 	v=v.replace(/^(\A|E|I|NN)/,"");
 	v=v.replace(/^(\D{2})(\d)/,"$1");
@@ -598,7 +598,7 @@ var Base64 = {
 /**
  * Adicionar novo campo de texto para cadastro multiplo de dados
  *
- * @author AndrÃ© Coura
+ * @author André Coura
  * @since 1.0 - 01/08/2010
  */
 function addCampoText(strNome,strId,strStyle,strClass,strTitle, strNomeBtn,proxBtn){

@@ -49,7 +49,7 @@ class FotosGaleriaDAO extends AbsModelDao{
     }
     
     public function getFotosGaleria($strGaleria){
-    	$strQuery = "SELECT titulo_foto, legenda_foto, ff.id_foto
+    	$strQuery = "SELECT titulo_foto, legenda_foto, ff.id_foto, ff.legenda_foto
 					FROM fwk_fotos_galeria ffg
 					INNER JOIN fwk_galeria fg ON ffg.id_galeria = fg.id_galeria
 					INNER JOIN fwk_fotos ff ON ffg.id_foto = ff.id_foto

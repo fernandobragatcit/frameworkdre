@@ -114,24 +114,18 @@ class FormataDatas {
 	  */
 	 public static function parsePeriodosDatas($dateIni,$dateFim){
 		if(strpos($dateIni, '-') === false){
-	 		$arrDateIni = explode("/",$dateIni);
-			$horaInicial = mktime (0,0,0,$arrDateIni[1],$arrDateIni[0],$arrDateIni[2]);
-		}else{
-	 		$arrDateIni = explode("-",$dateIni);
-			$horaInicial = mktime (0,0,0,$arrDateIni[1],$arrDateIni[2],$arrDateIni[0]);
+			$dateIni = self::parseDataSql($dateIni);
 		}
 		if(strpos($dateFim, '-') === false){
-	 		$arrDateFim = explode("/",$dateFim);
-			$horaFinal = mktime (0,0,0,$arrDateFim[1],$arrDateFim[0],$arrDateFim[2]);
-		}else{
-	 		$arrDateFim = explode("-",$dateFim);
-			$horaFinal = mktime (0,0,0,$arrDateFim[1],$arrDateFim[2],$arrDateFim[0]);
+	 		$dateFim = self::parseDataSql($dateFim);
 		}
-		$arrDatas = array();
-		if($horaInicial<$horaFinal){
-			while($horaInicial<=$horaFinal){
-				array_push($arrDatas,date("Y-m-d",$horaInicial));
-				$horaInicial+=86400;//numeros de segundo em um dia
+
+		$arrDatas[0] = $dateIni;
+		if($dateIni<$dateFim){
+			$i = 0;
+			while($dateIni<$dateFim){
+				$dateIni = date('Y-m-d', strtotime("+1 days",strtotime($dateIni)));
+				array_push($arrDatas,$dateIni);
 			}
 		}
 		return $arrDatas;

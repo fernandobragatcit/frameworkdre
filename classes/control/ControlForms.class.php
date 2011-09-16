@@ -16,6 +16,7 @@ class ControlForm {
 	private $strJsVal = "";
 	private $objFactoryComps;
 	private $idReferencia;
+	private $idReferencia2;
 
 	public function __construct($strXML="") {
 		if($strXML != "")
@@ -28,6 +29,14 @@ class ControlForm {
 
 	public function getIdReferencia(){
 		return $this->idReferencia;
+	}
+
+	public function setIdReferencia2($intIdRef){
+		$this->idReferencia2 = $intIdRef;
+	}
+
+	public function getIdReferencia2(){
+		return $this->idReferencia2;
 	}
 
 	public function setObjXml($strXML){
@@ -129,6 +138,7 @@ class ControlForm {
 		self::setJsForm();
 		self::getFactoryCompHtml()->setClasseAtual(self::getObjXml()->attributes()->classe);
 		self::getFactoryCompHtml()->setIdReferencia(self::getIdReferencia());
+		self::getFactoryCompHtml()->setIdReferencia2(self::getIdReferencia2());
 		foreach (self::getObjXml()->children()->campos as $data) {
 			switch ((string)$data->attributes()->type) {
 				case "listBox":
@@ -202,6 +212,7 @@ class ControlForm {
 		self::setJsForm();
 		self::getFactoryCompHtml()->setClasseAtual(self::getObjXml()->attributes()->classe);
 		self::getFactoryCompHtml()->setIdReferencia(self::getIdReferencia());
+		self::getFactoryCompHtml()->setIdReferencia2(self::getIdReferencia2());
 		foreach (self::getObjXml()->children()->campos as $data) {
 			switch ((string)$data->attributes()->type) {
 				case "password_confirme":

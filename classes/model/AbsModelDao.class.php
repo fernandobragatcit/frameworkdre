@@ -163,6 +163,11 @@ class AbsModelDao extends ADOdb_Active_Record{
 		return ControlDb::selectAllTable($arrDados,$fetchMode);
 	}
 
+	public function buscaAllRows($fetchMode = 0,$campo = null){
+		$arrDados = array("table" => $this->_table);
+		return ControlDb::selectAllRows($arrDados,$fetchMode);
+	}
+
 	public function buscaCampos2wheres($campo1, $valor1,$campo2, $valor2){
 		$query = "SELECT * FROM ".$this->_table."
 				  WHERE LOWER(".$campo1.") = '".strtolower(utf8_decode($valor1))."'

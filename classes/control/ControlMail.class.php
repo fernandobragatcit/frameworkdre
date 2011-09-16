@@ -21,39 +21,30 @@ require_once(BIB_MAILER_SMTP);
  	 * @param Strin $strBCCMail Email BCC
  	 * @param Strin $strBCCNome nome do individuo BCC
  	 */
- 	public function __construct(){
-		//$this->IsSMTP();
-		//$this->Host = MAIL_SMTP;
-		//$this->SMTPAuth = MAIL_AUT_SMTP;
-		//$this->Username = MAIL_USUARIO;
-		//$this->Password = MAIL_SENHA;
-		//$this->WordWrap = MAIL_WORDWRAP;
-		//$this->IsHTML(MAIL_HTML);
-		//$this->Port = MAIL_PORT;
-		//$this->SMTP_PORT = MAIL_PORT;
-		//$this->From = REMETENTE_MAIL;
-		//$this->FromName = REMETENTE_NOME;
-		//$this->AddReplyTo(REPLY_MAIL,REPLY_NOME);
-
-		//$this->AddAddress($strEmailDest,$strNomeDest);
-		//if($strCCMail)
-			//$this->AddCC($strCCMail,$strCCNome);
-		//if($strBCCMail)
-			//$this->AddBCC($strBCCMail,$strBCCNome);
-			
-			//$this->SetLanguage("br");
+ 	public function ControlMail($strEmailDest,$strNomeDest,$strCCMail=null,$strCCNome=null,$strBCCMail=null,$strBCCNome=null){
 		$this->IsSMTP();
-		$this->Host  = SERV_SMTP;
-		$this->SMTPAuth = true;
-		$this->CharSet  = "utf-8";
-		$this->IsHTML(true);
-		$this->From = END_MAIL;
-		$this->FromName = NOME_MAIL;
+		$this->Host = MAIL_SMTP;
+		$this->SMTPAuth = MAIL_AUT_SMTP;
+		$this->Username = MAIL_USUARIO;
+		$this->Password = MAIL_SENHA;
+		$this->WordWrap = MAIL_WORDWRAP;
+		$this->IsHTML(MAIL_HTML);
+		$this->Port = MAIL_PORT;
+		$this->SMTP_PORT = MAIL_PORT;
+		$this->From = REMETENTE_MAIL;
+		$this->FromName = REMETENTE_NOME;
+		$this->AddReplyTo(REPLY_MAIL,REPLY_NOME);
+
+		$this->AddAddress($strEmailDest,$strNomeDest);
+		if($strCCMail)
+			$this->AddCC($strCCMail,$strCCNome);
+		if($strBCCMail)
+			$this->AddBCC($strBCCMail,$strBCCNome);
  	}
  	/**
  	 * Envia o email passando o conteudo nos parametros
  	 *
- 	 * @author André Coura <andreccls@gmail.com>
+ 	 * @author Andr� Coura <andreccls@gmail.com>
  	 * @since 1.0 - 04/11/2007
  	 * @param String $strAssunto Assunto da mensagem
  	 * @param String $strBody Corpo da mensagem HTML
@@ -67,10 +58,6 @@ require_once(BIB_MAILER_SMTP);
 		if(!$this->Send())
 			return false;
 		return true;
- 	}
- 	
- 	public function mailPara($strEmailDest,$strNomeDest){
- 		$this->AddAddress($strEmailDest,$strNomeDest);
  	}
 
  	public function getErros(){

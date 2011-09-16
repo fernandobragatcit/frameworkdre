@@ -60,14 +60,23 @@ class UsuariosDAO extends AbsModelDao{
     	try{
 			$objMail = new PHPMailer();
 			$objMail->SetLanguage("br");
-			$objMail->IsMail();
+			if(SMTP_ISSMTP){
+				$objMail->IsSMTP();
+				$objMail->Host = SMTP_SERV_HOST;
+				$objMail->Port = SMTP_SERV_PORTA;
+				$objMail->SMTPAuth = SMTP_AUTH;
+				$objMail->Username = SMTP_SERV_USER;
+				$objMail->Password = SMTP_SERV_PASS; //Senha da caixa postal
+			}else{
+				$objMail->IsMail();
+			}
 			$objMail->IsHTML(true);
 			$objMail->CharSet = "UTF-8";
 			$objMail->From = parent::getCtrlConfiguracoes()->getStrEmailPortal();
 			$objMail->FromName =  parent::getCtrlConfiguracoes()->getStrTituloPortal();
 
 			$objMail->AddAddress($post["email_usuario"]);
-			$objMail->Subject = "Confirmação de Cadastro ".parent::getCtrlConfiguracoes()->getStrEmailPortal();
+			$objMail->Subject = "Confirmação de Cadastro ".parent::getCtrlConfiguracoes()->getStrTituloPortal();
 			$objMail->Body = self::pagMail($post);
 			if ($objMail->Send())
 				self::vaiPara("ViewCadUsuarios&a=concluiprov&envio=ok");
@@ -81,8 +90,8 @@ class UsuariosDAO extends AbsModelDao{
     }
 
     private function pagMail($post) {
-		parent::getObjSmarty()->assign("SUBJECT", "Confirmação de Cadastro no Portal ".parent::getCtrlConfiguracoes()->getStrEmailPortal());
-		parent::getObjSmarty()->assign("NOME_PORTAL", parent::getCtrlConfiguracoes()->getStrEmailPortal());
+		parent::getObjSmarty()->assign("SUBJECT", "Confirmação de Cadastro no Portal ".parent::getCtrlConfiguracoes()->getStrTituloPortal());
+		parent::getObjSmarty()->assign("NOME_PORTAL", parent::getCtrlConfiguracoes()->getStrTituloPortal());
 		parent::getObjSmarty()->assign("NOME_USUARIO", $post["nome_usuario"]);
 		$strPort=($_SERVER["SERVER_PORT"]==80)?"":":".$_SERVER["SERVER_PORT"];
 

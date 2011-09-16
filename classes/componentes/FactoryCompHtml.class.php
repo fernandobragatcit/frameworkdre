@@ -18,6 +18,7 @@ class FactoryCompHtml {
 	private $sufixo = "";
 
 	private $idReferencia;
+	private $idReferencia2;
 
 	public function __construct() {
 
@@ -40,7 +41,9 @@ class FactoryCompHtml {
 		require_once ($strClass . ".class.php");
 		$this->objFactored = new $strClass ($strComp);
 		$this->objFactored->setIdReferencia(self::getIdReferencia());
+		$this->objFactored->setIdReferencia2(self::getIdReferencia2());
 		$this->objFactored->setParam1(self::getParamWhere1());
+		$this->objFactored->setParam2(self::getParamWhere2());
 		if (self::getPrefixo() != "")
 			$this->objFactored->setPrefixo(self::getPrefixo());
 		if (self::getSufixo() != "")
@@ -66,6 +69,7 @@ class FactoryCompHtml {
 		$objBtn = new Button($strComp);
 		$objBtn->setTipo(self::getTipo());
 		$objBtn->setParam1(self::getParamWhere1());
+		$objBtn->setParam2(self::getParamWhere2());
 		$objBtn->setCategoria(self::getCategoria());
 		$objBtn->setClass($this->strClassAtual);
 		$objBtn->getComponente($label);
@@ -77,6 +81,13 @@ class FactoryCompHtml {
 
 	public function getIdReferencia() {
 		return $this->idReferencia;
+	}
+	public function setIdReferencia2($intIdRef) {
+		$this->idReferencia2 = $intIdRef;
+	}
+
+	public function getIdReferencia2() {
+		return $this->idReferencia2;
 	}
 
 	private function verificaComp($strComp) {
@@ -98,6 +109,14 @@ class FactoryCompHtml {
 
 	public function getParamWhere1() {
 		return $this->param1;
+	}
+	public function setParamWhere2($param2 = null) {
+		if ($param2 != null)
+			$this->param2 = $param2;
+	}
+
+	public function getParamWhere2() {
+		return $this->param2;
 	}
 
 	public function setClasseAtual($strClasse) {
