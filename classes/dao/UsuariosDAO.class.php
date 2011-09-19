@@ -215,7 +215,7 @@ class UsuariosDAO extends AbsModelDao{
     public function getDadosUsuariosByEmail($emailUsuario,$fetch){
     	$strQuery = "	SELECT id_usuario, id_tipo_usuario, nome_usuario, email_usuario, data_cadastro FROM fwk_usuario
 						WHERE email_usuario ='".$emailUsuario."'";
-		
+
 		return ControlDb::getRow($strQuery,$fetch);
     }
 

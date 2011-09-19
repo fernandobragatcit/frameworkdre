@@ -75,7 +75,7 @@ class ViewPerfil extends AbsViewClass {
 			$post["id_contato_usuario"] = self::getObjUsrContatoDAO()->getIdContato();
 
 			$arrDadosUsrtComp = self::getObjDadosComp()->getDadosCompById($id);
-			
+
 			if($arrDadosUsrtComp["id_foto"] != null){
 				if($file["nome_arquivo"]["name"] != "" || $file["nome_arquivo"]["name"] != null){
 					self::getObjFoto()->alterar($arrDadosUsrtComp["id_foto"],self::getXmlForm(),$post,$file);
@@ -91,9 +91,9 @@ class ViewPerfil extends AbsViewClass {
 					$post["id_foto"] = null;
 				}
 			}
-			
+
 			self::getObjDadosComp()->alterar($arrDadosUsrtComp["id_usuario_comp"],self::getXmlForm(),$post,$file);
-			
+
 			self::vaiPara(self::getObjCrypt()->cryptData(__CLASS__), "c");
 		}catch(CrudException $e){
 			self::vaiPara(self::getObjCrypt()->cryptData(__CLASS__."&msgErro=Erro aqui!"),"c");
@@ -155,7 +155,7 @@ class ViewPerfil extends AbsViewClass {
 		parent::getObjSmarty()->assign("PROFISSAO_USUARIO", $arrDadosUsr["profissao_usuario"]);
 		parent::getObjSmarty()->assign("SEXO_USUARIO", ($arrDadosUsr["sexo_usuario"] == "M" ? "Masculino" : "feminino"));
 		parent::getObjSmarty()->assign("NASCIMENTO_USUARIO", FormataDatas::parseDataBR($arrDadosUsr["nascimento_usuario"]));
-		
+
 		$arrDadosUsr["id_foto"] = ($arrDadosUsr["id_foto"]==null || $arrDadosUsr["id_foto"] == "")?2:$arrDadosUsr["id_foto"];
 		parent::getObjSmarty()->assign("ID_FOTO_USR", $arrDadosUsr["id_foto"]);
 
@@ -327,12 +327,14 @@ class ViewPerfil extends AbsViewClass {
 						$post["password_usuario_old_conf"] = "";
 						$post["password_usuario_conf"] = "";
 						$post["id_usuario"] = $id;
+						$post["id_tipo_usuario"] = $arrCamposUsr["id_tipo_usuario"];
     					$post["nome_usuario"] = $arrCamposUsr["nome_usuario"];
    						$post["password_usuario"] = self::getObjCrypt()->cryptMd5($post["password_usuario"]);
     					$post["email_usuario"] = $arrCamposUsr["email_usuario"];
     					$post["data_cadastro"] = $arrCamposUsr["data_cadastro"];
     					$post["idioma_usuario"] = $arrCamposUsr["idioma_usuario"];
     					$post["id_tema"] = $arrCamposUsr["id_tema"];
+
 						self::getObjUsuario()->alterar($id,self::getXmlForm(),$post,$file);
 						self::vaiPara(self::getObjCrypt()->cryptData(__CLASS__), "c");
 //						$this->envio = "ok";
@@ -390,14 +392,14 @@ class ViewPerfil extends AbsViewClass {
 		else
 			return FWK_HTML_DEFAULT."msgErroCadUsuario.tpl";
 	}
-	
+
 	private function getObjFoto(){
 		if($this->objFoto == null){
 			$this->objFoto = new FotosDAO();
 		}
 		return $this->objFoto;
 	}
-	
+
 
 
 
