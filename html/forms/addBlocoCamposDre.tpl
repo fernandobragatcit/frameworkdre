@@ -17,31 +17,33 @@
 								 </div>
 							{else}
 								<div style="width: 100%;">
-									<label> {$ARR_LINHAS[per].label}{$ARR_LINHAS[per].obrigatorio}:</label>
-
-									{if $ARR_LINHAS[per].tipo == 'file'}
-										<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="inputFile"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}]" value="{$DADOS[da][$val]}">
-										<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$file]}">
-									
-									{elseif $ARR_LINHAS[per].tipo == 'text'}
-										<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="large"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
-
-									{elseif $ARR_LINHAS[per].tipo == 'data'}
-										<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
-										<script>jQuery('.dataCampo{$id}').mask("99/99/9999");</script>
-									
-									{elseif $ARR_LINHAS[per].tipo == 'textarea'}
-										<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
-									
-									{elseif $ARR_LINHAS[per].tipo == 'select'}
-										<select {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} title="{$ARR_LINHAS[per].label}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" 
-												id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">
-											<option value="">Selecione...</option>
-											{section name=op loop=$ARR_LINHAS[per].option}
-												<option {if $DADOS[da][$val] == $ARR_LINHAS[per].option[op].value} selected {/if} value="{$ARR_LINHAS[per].option[op].value}">{$ARR_LINHAS[per].option[op].label}</option>
-											{/section}
-										</select>
-									{/if}
+									<span style="float:left; width:100%; margin-top:5px;">
+										<label> {$ARR_LINHAS[per].label}{$ARR_LINHAS[per].obrigatorio}:</label>
+	
+										{if $ARR_LINHAS[per].tipo == 'file'}
+											<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="inputFile"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}]" value="{$DADOS[da][$val]}">
+											<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$file]}">
+										
+										{elseif $ARR_LINHAS[per].tipo == 'text'}
+											<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="large"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+	
+										{elseif $ARR_LINHAS[per].tipo == 'data'}
+											<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+											<script>jQuery('.dataCampo{$id}').mask("99/99/9999");</script>
+										
+										{elseif $ARR_LINHAS[per].tipo == 'textarea'}
+											<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
+										
+										{elseif $ARR_LINHAS[per].tipo == 'select'}
+											<select {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} title="{$ARR_LINHAS[per].label}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" 
+													id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">
+												<option value="">Selecione...</option>
+												{section name=op loop=$ARR_LINHAS[per].option}
+													<option {if $DADOS[da][$val] == $ARR_LINHAS[per].option[op].value} selected {/if} value="{$ARR_LINHAS[per].option[op].value}">{$ARR_LINHAS[per].option[op].label}</option>
+												{/section}
+											</select>
+										{/if}
+									</span>
 								</div>
 							{/if}
 							{assign var=aux value=0}
@@ -133,31 +135,33 @@
 								 </div>
 							{else}
 								<div style="width: 100%;">
-									<label> {$ARR_LINHAS[per].label}{$ARR_LINHAS[per].obrigatorio}:</label>
-
-									{if $ARR_LINHAS[per].tipo == 'file'}
-										<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="inputFile"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}]" value="{$DADOS[da][$val]}">
-										<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+									<span style="float:left; width:100%; margin-top:5px;">
+										<label> {$ARR_LINHAS[per].label}{$ARR_LINHAS[per].obrigatorio}:</label>
+	
+										{if $ARR_LINHAS[per].tipo == 'file'}
+											<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="inputFile"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}]" value="{$DADOS[da][$val]}">
+											<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+											
+										{elseif $ARR_LINHAS[per].tipo == 'text'}
+											<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="large"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 										
-									{elseif $ARR_LINHAS[per].tipo == 'text'}
-										<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="large"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
-									
-									{elseif $ARR_LINHAS[per].tipo == 'data'}
-										<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
-										<script>jQuery('.dataCampo{$id}').mask("99/99/9999");</script>
-									
-									{elseif $ARR_LINHAS[per].tipo == 'textarea'}
-										<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
-									
-									{elseif $ARR_LINHAS[per].tipo == 'select'}
-										<select {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} title="{$ARR_LINHAS[per].label}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" 
-												id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">
-											<option value="">Selecione...</option>
-											{section name=op loop=$ARR_LINHAS[per].option}
-												<option {if $DADOS[da][$val] == $ARR_LINHAS[per].option[op].value} selected {/if} value="{$ARR_LINHAS[per].option[op].value}">{$ARR_LINHAS[per].option[op].label}</option>
-											{/section}
-										</select>
-									{/if}
+										{elseif $ARR_LINHAS[per].tipo == 'data'}
+											<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+											<script>jQuery('.dataCampo{$id}').mask("99/99/9999");</script>
+										
+										{elseif $ARR_LINHAS[per].tipo == 'textarea'}
+											<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
+										
+										{elseif $ARR_LINHAS[per].tipo == 'select'}
+											<select {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} title="{$ARR_LINHAS[per].label}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" 
+													id="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">
+												<option value="">Selecione...</option>
+												{section name=op loop=$ARR_LINHAS[per].option}
+													<option {if $DADOS[da][$val] == $ARR_LINHAS[per].option[op].value} selected {/if} value="{$ARR_LINHAS[per].option[op].value}">{$ARR_LINHAS[per].option[op].label}</option>
+												{/section}
+											</select>
+										{/if}
+									</span>
 								</div>
 							{/if}
 							{assign var=aux value=0}
@@ -255,31 +259,33 @@
 								 </div>
 							{else}
 								<div style="width: 100%;">
-									<label> {$ARR_LINHAS[per].label}{$ARR_LINHAS[per].obrigatorio}:</label>
-
-									{if $ARR_LINHAS[per].tipo == 'file'}
-										<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number]" value="{$DADOS[da][$val]}">
-										<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+									<span style="float:left; width:100%; margin-top:5px;">
+										<label> {$ARR_LINHAS[per].label}{$ARR_LINHAS[per].obrigatorio}:</label>
+	
+										{if $ARR_LINHAS[per].tipo == 'file'}
+											<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number]" value="{$DADOS[da][$val]}">
+											<input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+											
+										{elseif $ARR_LINHAS[per].tipo == 'text'}
+											<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="large"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 										
-									{elseif $ARR_LINHAS[per].tipo == 'text'}
-										<input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="large"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
-									
-									{elseif $ARR_LINHAS[per].tipo == 'data'}
-										<input class="dataCamponumber {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
-										<script>jQuery('.dataCamponumber').mask("99/99/9999");</script>
-									
-									{elseif $ARR_LINHAS[per].tipo == 'textarea'}
-										<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
-									
-									{elseif $ARR_LINHAS[per].tipo == 'select'}
-										<select {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} title="{$ARR_LINHAS[per].label}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" 
-												id="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]">
-											<option value="">Selecione...</option>
-											{section name=op loop=$ARR_LINHAS[per].option}
-												<option {if $DADOS[da][$val] == $ARR_LINHAS[per].option[op].value} selected {/if} value="{$ARR_LINHAS[per].option[op].value}">{$ARR_LINHAS[per].option[op].label}</option>
-											{/section}
-										</select>
-									{/if}
+										{elseif $ARR_LINHAS[per].tipo == 'data'}
+											<input class="dataCamponumber {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
+											<script>jQuery('.dataCamponumber').mask("99/99/9999");</script>
+										
+										{elseif $ARR_LINHAS[per].tipo == 'textarea'}
+											<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
+										
+										{elseif $ARR_LINHAS[per].tipo == 'select'}
+											<select {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} title="{$ARR_LINHAS[per].label}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" 
+													id="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]">
+												<option value="">Selecione...</option>
+												{section name=op loop=$ARR_LINHAS[per].option}
+													<option {if $DADOS[da][$val] == $ARR_LINHAS[per].option[op].value} selected {/if} value="{$ARR_LINHAS[per].option[op].value}">{$ARR_LINHAS[per].option[op].label}</option>
+												{/section}
+											</select>
+										{/if}
+									</span>
 								</div>
 							{/if}
 							{assign var=aux value=0}
