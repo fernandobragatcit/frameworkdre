@@ -166,7 +166,7 @@ abstract class AbsCruds {
 			$arrDados["status"] = "S";
 		}
 		self::getClassModel()->setTipoForm(self::getTipoForm());
-		self::getClassModel()->preencheFormComDados(self::getXmlForm(),$id, self::getStringClass(), $arrDados);
+		self::getClassModel()->preencheForm(self::getXmlForm(),$id, self::getStringClass());
 	}
 
 	protected function postAltera($id,$post,$file){
