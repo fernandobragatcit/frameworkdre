@@ -123,8 +123,8 @@ class Upload{
 		set_time_limit($this->limitTime);//tempo transação
 		$this->tmpFile = $_FILES[$input]['tmp_name'];
 		$this->nomeArquivoOriginal = $_FILES[$input]['name'];
-		$this->extensao = strtolower(strstr($this->nomeArquivoOriginal, '.'));
-		
+		$this->extensao = ".".strtolower(end(explode('.',$this->nomeArquivoOriginal)));
+
 		if(count($this->tiposArquivos) > 0){
 			if(!in_array($this->extensao, $this->tiposArquivos)){
 				$this->setErros(" Extensão do arquivo inválida!");
@@ -172,7 +172,7 @@ class Upload{
 		unlink($this->tmpFile);
 		return true;
 	}
-	
+
 	/**
 	 * Método de execução do upload multiplo
 	 */
@@ -181,7 +181,7 @@ class Upload{
 		$this->tmpFile = $_FILES[$input]['tmp_name'][$indice];
 		$this->nomeArquivoOriginal = $_FILES[$input]['name'][$indice];
 		$this->extensao = strtolower(strstr($this->nomeArquivoOriginal, '.'));
-		
+
 		if(count($this->tiposArquivos) > 0){
 			if(!in_array($this->extensao, $this->tiposArquivos)){
 				$this->setErros(" Extensão do arquivo inválida!");
