@@ -168,6 +168,33 @@ abstract class AbsViewClass{
 		self::getObjSmarty()->assign("PARAM2",$param2);
 		$this->param2 = $param2;
 	}
+	
+	/**
+	 * Busca as respectivas áreas, lembrando que o ultimo elemento do array 
+	 * 
+	 * @author André Coura
+	 * @since 1.0 - 15/04/2011
+	 */
+	public function getAreaUrl(){
+		$strArea = "http://". $_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
+		$arrArea1 = explode("?",$strArea);
+		$arrArea = explode("/",$arrArea1[0]);
+		$arrTratado = array();
+		foreach ($arrArea as $strArea) {
+			if(isset($strArea) && trim($strArea) != ""){
+				$arrTratado[]=$strArea;
+			}
+		}
+		return $arrTratado;
+	}
+	public function getStrUrl($url = ""){
+		if($url == "")
+			$arrArea = self::getAreaUrl();
+		else
+			$arrArea = $url;
+		array_shift($arrArea);
+		return "http://".implode("/",$arrArea);
+	}
 
 }
 ?>
