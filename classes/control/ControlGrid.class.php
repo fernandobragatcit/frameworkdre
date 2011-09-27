@@ -37,7 +37,7 @@ class ControlGrid {
 
 	private $busca = null;
 	private $arrFiltros = null;
-	
+
 	private function __construct() {
 	}
 
@@ -141,7 +141,7 @@ class ControlGrid {
 	 * @author André Coura
 	 * @since 1.0 - 13/07/2008
 	 */
-	public function showGrid($pagAtual, $buscaGrid, $arrFiltro) {
+	public function showGrid($pagAtual, $buscaGrid = null, $arrFiltro = null) {
 		self::regDadosGrid($pagAtual, $buscaGrid, $arrFiltro);
 		$strGrid = self::getObjSmarty()->fetch(self::getTplGrid());
 		self::getObjSmarty()->assign("CORPO", $strGrid);
@@ -297,7 +297,7 @@ class ControlGrid {
 				$filtros .= str_replace(" = ", ":", $this->arrFiltros[$fi]).(($fi<count($this->arrFiltros)-1)?"/":"");
 			}
 		}
-		
+
 		return  "?".$tipo."=".self::getObjCrypt()->cryptData(($categoria!=""?$categoria."&f=":"").self::getClassGrid()."&a=lista" . ($mantemBusca!=""?$mantemBusca:"") . ($filtros!=""?$filtros:""). $params);
 		//return "?c=" . self::getObjCrypt()->cryptData(self::getClassGrid() . "&a=lista" . $params);
 	}
@@ -519,7 +519,7 @@ class ControlGrid {
 			$arrBusca = explode(" ", $this->busca);
 			for($i=0; $i<count($arrBusca); $i++){
 				$strQuery .= ($i == 0)?"(":"";
-				
+
 				$strQuery .= str_replace("#BUSCA#", $arrBusca[$i], trim((string)self::getObjXml()->query->whereBusca));
 
 				$strQuery .= ($i != count($arrBusca)-1)?" OR ":"";
@@ -527,7 +527,7 @@ class ControlGrid {
 			}
 		}
 		if ($this->arrFiltros[0] != "") {
-			if (trim((string)self::getObjXml()->query->where) != "" || trim((string)self::getObjXml()->query->whereCondicao) != "" || 
+			if (trim((string)self::getObjXml()->query->where) != "" || trim((string)self::getObjXml()->query->whereCondicao) != "" ||
 				(trim((string)self::getObjXml()->query->whereBusca) != "" && $this->busca != "")) {
 				$strQuery .= " AND ";
 			}else{
@@ -548,9 +548,9 @@ class ControlGrid {
 		}
 		//die($strQuery);
 		//trata valores especiais query
-		
-		
-		
+
+
+
 		return $strQuery;
 	}
 
@@ -564,7 +564,7 @@ class ControlGrid {
 		return $this->variavelGridWhere1;
 
 	}
-	
+
 	private $variavelGridWhere2;
 
 	public function setVariavelWhere2($varGrid){
@@ -656,25 +656,25 @@ class ControlGrid {
 							}
 						}
 						$arrTitulos[] = array(
-						"select", (string)$titulo->text, (string)$titulo->valor, 
+						"select", (string)$titulo->text, (string)$titulo->valor,
 						(string)$titulo->todos,	$arrDados);
 					}
 				}
 			}
 		} else {
-			
+
 			self::getTitulosDb();
 		}
 		//if (count($arrTitulos) != count(self::getTitulosDb())){
 		//	return self::getTitulosDb();
 		//}
-		
+
 		//print("<pre>");
 		//print_r(URL_SITE);
 		//die();
 		return $arrTitulos;
 	}
-	
+
 	/**
 	 * Método para retornar a query do titulo
 	 *
@@ -716,7 +716,7 @@ class ControlGrid {
 		}
 		$this->arrFiltros = $arrWheres;
 	}
-	
+
 	/**
 	 * Busca o método de ordenação adequado para o campo em questão
 	 *
@@ -803,11 +803,11 @@ class ControlGrid {
 		$this->objCtrlConfiguracoes = new ControlConfiguracoes();
 		return $this->objCtrlConfiguracoes;
 	}
-	
+
 	private function getIdUsrSessao(){
 		return self::getObjUsrSessao()->getIdUsuario();
 	}
-	
+
 	public function setIdReferencia($intIdRef){
 		$this->idReferencia = $intIdRef;
 	}
@@ -816,7 +816,7 @@ class ControlGrid {
 		return $this->idReferencia;
 	}
 
-		
+
 	public function debuga(){
 		$arrDados = func_get_args();
 		print("<pre>");
