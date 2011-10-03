@@ -66,6 +66,9 @@ class FotosDAO extends AbsModelDao {
 	public function getIdFoto(){
 		return $this->id_foto;
 	}
+	public function setNomeCampo($nomeCampo){
+		$this->strNomeCampo = $nomeCampo;
+	}
 
 	/**
 	 * Método para alterar somente os campos que realmente foram alterados não mexendo com os outros
