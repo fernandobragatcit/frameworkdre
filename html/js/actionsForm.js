@@ -39,6 +39,7 @@ function validaForms(form){
 		var erro = true;
 		this.fistFiled = true;
 		erro = validaCamposObrigatorios(erro);
+	alert(erro);
 //		erro = validaCamposEspeciais(erro);
 		erro = validaCamposComparaveis(erro);
 		erro = validaTamanhoCampos(erro);
@@ -141,6 +142,11 @@ function setCampoObrigatorio(id,txt, erro){
 	this.arrIdFieldsObrig.push(id);
 	this.arrTxtFields.push(txt);
 	this.arrTxtErroFields.push(erro);
+}
+function unsetCampoObrigatorio(id,txt, erro){
+	this.arrIdFieldsObrig.pop(id);
+	this.arrTxtFields.pop(txt);
+	this.arrTxtErroFields.pop(erro);
 }
 
 function setCampoEspecial(id,txt,tipo,erro){
@@ -389,7 +395,7 @@ function hora(v){
 	v=v.replace(/^(\D)(\d)/,"$1");
 	v=v.replace(/^(\D{2})(\d)/,"$1");
 	v=v.replace(/^(\D{2})(\D)/,"$1");
-	
+
 	v=v.replace(/^\:/g,"");//para nunca comeÃ§ar com "."(ponto)
 	v=v.replace(/(\:\:)/g,":");//para nÃ£o repetir 2 pontos seguidos(ponto)
 	v = v.replace(eval("/^(\\d{2})(\\d{2})/"),"$1:$2");

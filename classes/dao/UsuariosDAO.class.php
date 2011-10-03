@@ -159,12 +159,25 @@ class UsuariosDAO extends AbsModelDao{
     public function alterar($id,$xml,$post,$file){
 		try{
 			$this->id_usuario = $id;
+			if($id){
+				$arrCampos = self::buscaCampos($this->id_usuario);
+				$post["data_cadastro"] = $arrCampos["data_cadastro"];
+				$post["id_tipo_usuario"] = $arrCampos["id_tipo_usuario"];
+			}
+
 			self::validaForm($xml,$post);
 			self::alteraPostAutoUtf8($post,$id);
 			self::replace();
 
+			if(self::ErrorMsg()){
+				print("<pre>");
+				print_r($post);
+				die("<br/><br /><h1>".self::ErrorMsg()."</h1>");
+			}
+
+			if(!$id)
+				$arrCampos = self::buscaCampos($this->id_usuario);
 			//atualiza-se a sessão logada com os dados modificados
-			$arrCampos = self::buscaCampos($this->id_usuario);
 			$objCtrlSessao = new ControlSessao();
 			$objCtrlSessao->defineSessao($arrCampos);
 			$objCtrlSessao->setSessaoUsuario(SESSAO_FWK_DRE);

@@ -52,11 +52,12 @@ class ViewPerfil extends AbsViewClass {
 			$id = parent::getObjSessao()->getIdUsuario();
 			$arrCamposUsr = self::getObjUsuario()->buscaCampos($id);
 			$post["password_usuario"] = $arrCamposUsr["password_usuario"];
+
 			self::getObjUsuario()->alterar($id,self::getXmlForm(),$post,$file);
 			$post["id_usuario"] = $id;
 
-
 			$arrEnd = self::getObjUsrEnderecoDAO()->verificaEndUsuario($id);
+
 			if($arrEnd[0]==null){
 				self::getObjUsrEnderecoDAO()->cadastrar(self::getXmlForm(),$post,$file);
 			}else {
