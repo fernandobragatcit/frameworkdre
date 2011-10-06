@@ -439,33 +439,32 @@ class ControlGrid {
 						switch ((string) $attributes) {
 							case "actionEdit" :
 								if ($index == $cont) {
-									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "Editar",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
+									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' class='iconEditar' title='Editar' alt='Editar' src='".URL_IMAGENS."icons/page_white_edit.png'>",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionDelete" :
 								if ($index == $cont) {
-									$newData .= " " . $objForAction->gridConfirm($data, $value, self::getClassGrid(), "Deletar", "Tem certeza que gostaria de deletar este registro?",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
+									$newData .= " " . $objForAction->gridConfirm($data, $value, self::getClassGrid(), "<img width='14' title='Deletar' alt='Deletar' src='".URL_IMAGENS."icons/page_white_delete.png'>", "Tem certeza que gostaria de deletar este registro?",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionStatus":
 								if ($index == $cont) {
-									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "Status",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
+									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='Status' alt='Status' src='".URL_IMAGENS."icons/page_white_star.png'>",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionSelect":
-
 								if ($index == $cont) {
-									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "Selecionar",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
+									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='Selecionar' alt='Selecionar' src='".URL_IMAGENS."icons/page_white_magnify.png'>",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionReport":
 								if ($index == $cont) {
-									$newData .= " " . $objForAction->gridImprime($data, $value, self::getClassGrid(), "Imprimir",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
+									$newData .= " " . $objForAction->gridImprime($data, $value, self::getClassGrid(), "<img width='14' title='Imprimir' alt='Imprimir' src='".URL_IMAGENS."icons/printer.png'>",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionPdf":
 								if ($index == $cont) {
-									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='Download PDF' src='".URL_DEP_IMGS."adobe_pdf.png'>",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
+									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='Download PDF' alt='Download PDF' src='".URL_IMAGENS."icons/page_white_acrobat.png'>",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							default :
