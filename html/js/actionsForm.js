@@ -39,7 +39,6 @@ function validaForms(form){
 		var erro = true;
 		this.fistFiled = true;
 		erro = validaCamposObrigatorios(erro);
-	alert(erro);
 //		erro = validaCamposEspeciais(erro);
 		erro = validaCamposComparaveis(erro);
 		erro = validaTamanhoCampos(erro);
