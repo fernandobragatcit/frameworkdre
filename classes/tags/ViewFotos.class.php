@@ -46,7 +46,8 @@ class ViewFotos extends AbsTags{
 		$arrLinkImg["h"] = self::getParam2();
 
 		//True or False para marca d'agua.
-		$arrLinkImg["marca"] = self::getParam3();
+		$arrLinkImg["marca"] = (self::getParam3())?self::getParam3():false;
+		
 		//Retorna o link criptografado do thumb da imagem.
 		$link = self::getObjCrypt()->cryptData(serialize($arrLinkImg));
 
@@ -62,6 +63,9 @@ class ViewFotos extends AbsTags{
 		parent::getObjSmarty()->assign("CSS_FOTO",self::getCssFoto());
 
 		parent::getObjSmarty()->assign("TITULO",$arrFoto["titulo_foto"]);
+		
+		//True or False para pre-loading.
+		parent::getObjSmarty()->assign("PRE_LOADING",(self::getParam4())?self::getParam4():"true");
 
 		$strTela = parent::getObjSmarty()->fetch(FWK_TAGS_TPL."tagFotoThumb.tpl");
 		print ($strTela);
