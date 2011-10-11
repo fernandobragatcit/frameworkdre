@@ -93,5 +93,11 @@ class FormataLink {
 		return $urlShort = RET_SERVIDOR."?s=".$objCrypt->cryptData($idUrlShort);
 	}
 	
+	public static function abreMiniUrl($idUrlShort){
+		$objLink = new LinkEncurtadoDAO();
+		$urlLong = $objLink->getUrlById($idUrlShort);
+		header("Location: ".$urlLong);
+	}
+	
 }
 ?>

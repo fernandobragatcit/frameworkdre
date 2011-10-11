@@ -56,6 +56,15 @@ class FotosGaleriaDAO extends AbsModelDao{
     				WHERE fg.identificador_galeria = '".$strGaleria."'";
     	return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery,0));
     }
+    
+    public function getFotosGaleriabyId($idGaleria){
+    	$strQuery = "SELECT titulo_foto, legenda_foto, ff.id_foto, ff.legenda_foto
+					FROM fwk_fotos_galeria ffg
+					INNER JOIN fwk_galeria fg ON ffg.id_galeria = fg.id_galeria
+					INNER JOIN fwk_fotos ff ON ffg.id_foto = ff.id_foto
+    				WHERE fg.id_galeria = '".$idGaleria."'";
+    	return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery,0));
+    }
 
 }
 ?>

@@ -146,20 +146,8 @@ class ControlFactory {
 					}
 				//identificador de ShortUrl.
 				case (isset($get) && $get["s"] != ""):
-					$strClass = ucfirst($get["f"]);
-					$strCaminho = PASTA_MODULOS.$get["m"]."/classes/view/";
-					if (is_file($strCaminho.$strClass.".class.php")){
-						require_once ($strCaminho.$strClass.".class.php");
-						$this->objClassFactory = new $strClass (self::getPagDefault());
-						//registra as configurações da pasta
-						self::getCtrlConfigs()->registraConfigs();
-						self::getCtrlConfigs()->registraConteudos(true);
-						$this->objClassFactory->executa($get, $post, $file);
-						break;
-					}else{
-						throw new FactoryException("Classe chamada não existe ou informada incorretamente: ".$strCaminho.$strClass.".class.php");
-					}
-
+					FormataLink::abreMiniUrl($get["s"]);
+					break;
 				default :
 
 

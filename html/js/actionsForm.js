@@ -371,8 +371,8 @@ function site(v){
 /**
  *
  * @param v - TEXTO A SER "MARCARADO"
- * @param u - UNIDADES DA MÃ?SCARA.EX: 123,45 - uuu.dd
- * @param d - DECIMAIS DA MÃ?SCARA. EX: 123,45 - uuu.dd
+ * @param u - UNIDADES DA Mï¿½?SCARA.EX: 123,45 - uuu.dd
+ * @param d - DECIMAIS DA Mï¿½?SCARA. EX: 123,45 - uuu.dd
  * @returns string formatada
  */
 function double(v, u, d){
@@ -676,6 +676,14 @@ function verificaCombo(objCombo, valor, idCampo){
 		jQuery("#" + idCampo ).show();
 	}else{
 		jQuery("#" + idCampo ).hide();
+	}
+}
+
+function verificaComboOposto(objCombo, valor, idCampo){
+	if(objCombo.value == valor){
+		jQuery("#" + idCampo ).hide();
+	}else{
+		jQuery("#" + idCampo ).show();
 	}
 }
 
