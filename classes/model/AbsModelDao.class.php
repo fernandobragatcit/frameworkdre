@@ -222,12 +222,12 @@ class AbsModelDao extends ADOdb_Active_Record{
 		$objCtrlForm->registraFormValues($arrDados,false,$estrutura);
 	}
 
-	public function preencheFormComDados($xml,$id,$crudClass,$arrDados){
+	public function preencheFormComDados($xml,$id,$crudClass,$arrDados, $idDocumento = null){
 		$arrDados = self::setKeyCaixaBaixa($arrDados);
 		$objCtrlForm = self::getObjCtrlForm($xml);
 		$objCtrlForm->setTipoForm(self::getTipoForm());
 		$objCtrlForm->setTplsFile(ADMIN_TPLS);
-		$objCtrlForm->setActionForm($crudClass."&a=altera&id=".$id);
+		$objCtrlForm->setActionForm($crudClass."&a=altera&id=".$id."&idServEquip=".$idDocumento);
 		$objCtrlForm->setId($id);
 		$objCtrlForm->registraFormValues($arrDados,false);
 	}
