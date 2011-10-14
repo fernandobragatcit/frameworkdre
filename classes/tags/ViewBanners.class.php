@@ -92,7 +92,11 @@ class ViewBanners extends AbsTagsFwk{
 		if(self::getNome() != null && self::getNome() != ""){
 			$arrBanner = self::getObjBanner()->getBannerAleatorio(trim(self::getNome()));
 		}else{
-			throw new TagsException("Não foi passado o NOME, categoria do Banner");
+			if(self::getIdObj() != null && self::getIdObj() != ""){
+				$arrBanner = self::getObjBanner()->getBannerAleatorioById(trim(self::getIdObj()));
+			}else{
+				throw new TagsException("Não foi passado o NOME, categoria do Banner");
+			}
 		}
 		if(self::getLargura()!=null && self::getLargura() != ""){
 			parent::getObjSmarty()->assign("LARGURA",self::getLargura());
@@ -161,6 +165,13 @@ class ViewBanners extends AbsTagsFwk{
 	}
 	public function getNome(){
 		return $this->nome;
+	}
+	
+	public function setIdObj($idObj){
+		$this->idObj = $idObj;
+	}
+	public function getIdObj(){
+		return $this->idObj;
 	}
 
 	public function setTitle($title){

@@ -131,6 +131,20 @@ class BannersDAO extends AbsModelDao{
 		return Utf8Parsers::arrayUtf8Encode($arrDados);
 	}
 
+	public function getBannerAleatorioById($idCatBanner){
+		$strQuery = "SELECT
+						id_foto, title_banner, link_banner
+					FROM 
+						fwk_banner fb
+						INNER JOIN fwk_tipo_basico ftb ON ftb.id_tipo_basico = fb.id_categoria_banner
+					WHERE
+						ftb.id_tipo_basico = '".$idCatBanner."'
+					ORDER BY 
+						RAND()";
+		$arrDados = ControlDb::getRow($strQuery,3);
+		return Utf8Parsers::arrayUtf8Encode($arrDados);
+	}
+	
 	public function getBannersByStrCateg($strCateg){
 		$strQuery = "SELECT
 						id_foto, title_banner, link_banner

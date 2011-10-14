@@ -49,6 +49,7 @@ function getBanner($params){
 	$caminho = "";
 	$descricao = "";
 	$metodo = "";
+	$idObj = "";
 	extract($params);
 	try{
 		require_once (FWK_TAGS."ViewBanners.class.php");
@@ -61,6 +62,7 @@ function getBanner($params){
 		$objBanner->setPosicao($posicao);
 		$objBanner->setCaminho($caminho);
 		$objBanner->setDescricao($descricao);
+		$objBanner->setIdObj($idObj);
 		if($metodo != "")
 			$objBanner->$metodo();
 		else
