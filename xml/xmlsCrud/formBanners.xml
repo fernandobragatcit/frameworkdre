@@ -25,7 +25,7 @@
 	</campos>
 		
 	<campos type="file" name="nome_arquivo" id="nome_arquivo" title="Imagem"
-		label="Imagem" class="larguraFormMeia" obrigatorio="true"/>
+		label="Imagem" class="inputFile" obrigatorio="true" />
 
 	<buttons>
 		<button name="Cadastrar" value="Salvar" type="submit" />

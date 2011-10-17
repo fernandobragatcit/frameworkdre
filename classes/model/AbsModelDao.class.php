@@ -145,6 +145,23 @@ class AbsModelDao extends ADOdb_Active_Record{
 		if(!ControlDb::alteraStatus($arrDados))
 		throw new DaoException("Impossível alterar o status da tabela ".$this->_table." id = ".$id);
 	}
+	
+	/**
+	 * Método para anular um campo
+	 *
+	 * @author Matheus Vieira
+	 * @since 1.0 - 17/10/2011
+	 */
+	public function anulaCampo($id, $campo){
+		$arrDados = array("table" => $this->_table,
+						  "campo" => $this->_id,
+						  "valor" => $id,
+						  "campoNull" => $campo);
+
+		if(!ControlDb::anulaCampo($arrDados))
+		throw new DaoException("Impossível anular o campo ".$campo." da tabela ".$this->_table." id = ".$id);
+	}
+	
 
 	/**
 	 * Método para buscar um determinada linha no banco de dados com o intuito de preencher o formulário para edição

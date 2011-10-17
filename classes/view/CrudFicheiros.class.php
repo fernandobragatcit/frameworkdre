@@ -34,7 +34,13 @@ class CrudFicheiros extends AbsCruds {
 		try{
 			$arrDados = self::getClassModel()->buscaCampos($id,0);
 			$post = FormataPost::mergeArrayPost($arrDados,$post);
-
+			
+			if($post["nome_arquivo_null"]){
+				self::anulaCampo($id, "id_foto");
+				$arrDados["id_foto"] = null;
+				$post["id_foto"] = null;
+				$file["nome_arquivo"]["name"] = null;
+			}
 			if($arrDados["id_foto"] != null){
 				if($file["nome_arquivo"]["name"] != "" || $file["nome_arquivo"]["name"] != null){
 					self::getObjFoto()->alterar($arrDados["id_foto"],parent::getXmlForm(),$post,$file);

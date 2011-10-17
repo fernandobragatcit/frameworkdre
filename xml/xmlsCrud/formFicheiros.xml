@@ -19,11 +19,11 @@
 		maxlength="200" class="medium" />
 
 	<campos type="file" name="nome_arquivo" id="nome_arquivo" title="Imagem"
-		label="Imagem" class="larguraFormMeia" obrigatorio="true" />
+		label="Imagem" class="inputFile" obrigatorio="true" colocaNull="true" />
 		
 	<campos type="EditorHtml" name="texto_ficheiro" id="texto_ficheiro"
 		wrap="false" label="Texto" title="Texto" class="larguraFormFull"
-		largura="400" altura="300" />
+		largura="690" altura="300" />
 
 	<buttons>
 		<button name="Cadastrar" value="Salvar" type="submit" />

@@ -178,6 +178,15 @@ abstract class AbsCruds {
 		}
 	}
 
+	protected function anulaCampo($id,$campo){
+		try{
+			self::getClassModel()->anulaCampo($id,$campo);
+			return true;
+		}catch(CrudException $e){
+			return false;
+		}
+	}
+
 	protected function listDados($pagAtual=0, $buscaGrid = null, $filtros = null){
 		$intDocsGrupo = self::getDocsGrupo();
 		if($intDocsGrupo > 0){

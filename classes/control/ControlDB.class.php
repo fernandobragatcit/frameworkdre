@@ -70,6 +70,20 @@ class ControlDB{
     	$strQuery = "UPDATE ".$arrDados["table"]." SET status = '".$novoValor."' WHERE ".$arrDados["campo"]." = ?";
     	return self::getBanco()->Execute($strQuery,array($arrDados["valor"]));
     }
+    
+	/**
+	 * Método de alteracão genérica para anular campo do banco de dados
+	 *
+	 * @author Matheus Vieira
+	 * @since 1.0 - 17/10/2011
+	 * @param Array contendo o nome da tabela, o campo de refencia, o valor do campo referenciado e o campo para se anular;
+	 * @return boolean
+	 */
+    public static function anulaCampo($arrDados){
+    	$arrDadosId = self::selectRowTable($arrDados);
+    	$strQuery = "UPDATE ".$arrDados["table"]." SET ".$arrDados["campoNull"]." = (NULL) WHERE ".$arrDados["campo"]." = ?";
+    	return self::getBanco()->Execute($strQuery,array($arrDados["valor"]));
+    }
 
     /**
 	 * Método buscar todos os dados de uma linha no dados do banco de dados genérico

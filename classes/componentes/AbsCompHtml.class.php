@@ -166,6 +166,13 @@ abstract class AbsCompHtml{
 			case "data":
 				self::getObjSmarty()->assign("FILE_PATH_CALENDAR",FWK_JS."vlaCalendar.v2.1/inc/");
 				break;
+			case "file":
+				if((string)self::getObjXmlCompDados()->colocaNull == "true")
+					self::getObjSmarty()->assign("COLOCA_NULL",true);
+					
+				if((string)self::getObjXmlCompDados()->obrigatorio == "true")
+					self::getObjSmarty()->assign("OBRIGATORIO",true);
+				break;
 			default:
 				self::getObjSmarty()->assign("ONKEYPRESS_COMP"," ");
 				break;
