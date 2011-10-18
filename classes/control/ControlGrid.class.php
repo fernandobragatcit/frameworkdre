@@ -128,6 +128,8 @@ class ControlGrid {
 					$this->strTplGrid = FWK_HTML_GRID."gridDre.tpl";
 					break;
 				default:
+					$this->strTplGrid = self::getCtrlConfiguracoes()->getCustomTplSis(null,"estruturaGrids",DEPOSITO_TPLS);
+					if(!isset($this->strTplGrid) && $this->strTplGrid == "")
 					$this->strTplGrid = FWK_HTML_GRID."gridDre.tpl";
 					break;
 			}
