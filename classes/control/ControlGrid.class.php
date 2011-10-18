@@ -112,6 +112,11 @@ class ControlGrid {
 	public function getTplGrid(){
 		if(!isset($this->strTplGrid) && $this->strTplGrid == ""){
 			switch(self::getObjXml()->attributes()->categoria){
+				case "basico":
+					$this->strTplGrid = self::getCtrlConfiguracoes()->getCustomTplSis(null,"estruturaGrids",DEPOSITO_TPLS);
+					if(!isset($this->strTplGrid) && $this->strTplGrid == "")
+					$this->strTplGrid = FWK_HTML_GRID."gridDre.tpl";
+					break;
 				case "inventario":
 					$this->strTplGrid = self::getCtrlConfiguracoes()->getCustomTplSis(null,"estruturaModuloGridsInv",DEPOSITO_TPLS);
 					if(!isset($this->strTplGrid) && $this->strTplGrid == "")
@@ -119,11 +124,6 @@ class ControlGrid {
 					break;
 				case "formularios":
 					$this->strTplGrid = self::getCtrlConfiguracoes()->getCustomTplSis(null,"estruturaModuloGrids",DEPOSITO_TPLS);
-					if(!isset($this->strTplGrid) && $this->strTplGrid == "")
-					$this->strTplGrid = FWK_HTML_GRID."gridDre.tpl";
-					break;
-				case "basico":
-					$this->strTplGrid = self::getCtrlConfiguracoes()->getCustomTplSis(null,"estruturaGrids",DEPOSITO_TPLS);
 					if(!isset($this->strTplGrid) && $this->strTplGrid == "")
 					$this->strTplGrid = FWK_HTML_GRID."gridDre.tpl";
 					break;
