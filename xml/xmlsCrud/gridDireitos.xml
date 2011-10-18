@@ -18,6 +18,9 @@
 			ON di.id_item_menu = im.id_item_menu
 		</from>
 		<where/>
+		<whereBusca>
+			(di.nome_direito LIKE '%#BUSCA#%' OR me.nome_menu LIKE '%#BUSCA#%' OR im.nome_item_menu LIKE '%#BUSCA#%') 
+		</whereBusca>
 		<orderBy>di.nome_direito</orderBy>
 	</query>
 	<buttons>

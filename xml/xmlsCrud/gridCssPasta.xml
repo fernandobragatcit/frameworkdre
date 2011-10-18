@@ -13,6 +13,9 @@
 			nome_estilo_css, if(status='S','Ativo','Inativo'),id_estilo_css
 		</campos>
 		<from>fwk_estilo_css</from>
+		<whereBusca>
+			(nome_estilo_css LIKE '%#BUSCA#%') 
+		</whereBusca>
 		<orderBy>nome_estilo_css</orderBy>
 	</query>
 	<buttons>

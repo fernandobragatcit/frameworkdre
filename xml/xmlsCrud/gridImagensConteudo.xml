@@ -12,6 +12,9 @@
 		<from>
 			fwk_imagens
 		</from>
+		<whereBusca>
+			(nome_imagem LIKE '%#BUSCA#%' OR tipo_imagem LIKE '%#BUSCA#%') 
+		</whereBusca>
 		<orderBy>nome_imagem</orderBy>
 	</query>
 	<buttons>

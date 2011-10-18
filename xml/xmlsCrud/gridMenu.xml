@@ -13,6 +13,9 @@
 			fwk_menu
 		</from>
 		<where/>
+		<whereBusca>
+			(nome_menu LIKE '%#BUSCA#% OR link_menu LIKE '%#BUSCA#%) 
+		</whereBusca>
 		<orderBy>ordem_menu</orderBy>
 	</query>
 	<buttons>

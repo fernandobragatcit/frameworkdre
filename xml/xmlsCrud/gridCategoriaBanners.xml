@@ -12,6 +12,9 @@
 			fwk_tipo_basico
 		</from>
 		<where>id_tipo_documento = 999</where>
+		<whereBusca>
+			(desc_tipo_basico LIKE '%#BUSCA#%') 
+		</whereBusca>
 		<orderBy>desc_tipo_basico</orderBy>
 	</query>
 	<buttons>

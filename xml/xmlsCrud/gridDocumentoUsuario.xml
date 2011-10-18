@@ -14,6 +14,9 @@
 			RIGHT JOIN fwk_usuario fu
 			ON fdu.id_usuario = fu.id_usuario
 		</from>
+		<whereBusca>
+			(fu.nome_usuario LIKE '%#BUSCA#%') 
+		</whereBusca>
 		<groupBy>fu.nome_usuario</groupBy>
 		<orderBy>fu.nome_usuario</orderBy>
 

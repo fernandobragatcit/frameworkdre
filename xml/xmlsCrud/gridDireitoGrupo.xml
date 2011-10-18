@@ -14,6 +14,9 @@
 			RIGHT JOIN fwk_grupo gr
 			ON dg.id_grupo = gr.id_grupo
 		</from>
+		<whereBusca>
+			(gr.nome_grupo LIKE '%#BUSCA#%') 
+		</whereBusca>
 		<groupBy>gr.nome_grupo</groupBy>
 		<orderBy>gr.nome_grupo</orderBy>
 

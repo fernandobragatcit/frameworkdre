@@ -13,6 +13,9 @@
 		<from>
 			fwk_galeria
 		</from>
+		<whereBusca>
+			(id_galeria LIKE '%#BUSCA#%' OR titulo_galeria LIKE '%#BUSCA#%' OR identificador_galeria LIKE '%#BUSCA#%') 
+		</whereBusca>
 		<orderBy>titulo_galeria</orderBy>
 	</query>
 	<buttons>

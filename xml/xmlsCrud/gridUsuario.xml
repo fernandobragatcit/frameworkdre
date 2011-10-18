@@ -16,6 +16,9 @@
 		<where>
 			us.id_usuario != 1 AND id_grupo = 1
 		</where>
+		<whereBusca>
+			(us.nome_usuario LIKE '%#BUSCA#% OR us.login_usuario LIKE '%#BUSCA#% OR us.email_usuario LIKE '%#BUSCA#%) 
+		</whereBusca>
 		<orderBy>nome_usuario</orderBy>
 	</query>
 	<buttons>

@@ -11,6 +11,9 @@
 		<from>
 			fwk_grupo
 		</from>
+		<whereBusca>
+			(nome_grupo LIKE '%#BUSCA#%') 
+		</whereBusca>
 		<orderBy>nome_grupo</orderBy>
 	</query>
 	<buttons>

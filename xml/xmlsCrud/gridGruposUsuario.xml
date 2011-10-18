@@ -16,6 +16,9 @@
 			LEFT JOIN fwk_grupo gr
 			ON gu.id_grupo = gr.id_grupo
 		</from>
+		<whereBusca>
+			(us.nome_usuario LIKE '%#BUSCA#%' OR us.email_usuario LIKE '%#BUSCA#%') 
+		</whereBusca>
 		<orderBy>us.nome_usuario</orderBy>
 		<groupBy>us.email_usuario</groupBy>
 	</query>

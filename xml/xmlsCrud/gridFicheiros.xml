@@ -13,6 +13,9 @@
 		<from>
 			fwk_ficheiro
 		</from>
+		<whereBusca>
+			(id_ficheiro LIKE '%#BUSCA#%' OR titulo_ficheiro LIKE '%#BUSCA#%' OR identificador_ficheiro LIKE '%#BUSCA#%') 
+		</whereBusca>
 		<orderBy>titulo_ficheiro</orderBy>
 	</query>
 	<buttons>
