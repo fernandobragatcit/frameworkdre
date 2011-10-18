@@ -201,9 +201,7 @@ class Form{
 						$this->tplEstruturaForm = FWK_HTML_FORMS."estruturaModuloForms.tpl";
 					break;
 				default:
-					$this->tplEstruturaForm = self::getCtrlConfiguracoes()->getCustomForms(null,"estruturaForms",DEPOSITO_TPLS);
-					if(!isset($this->tplEstruturaForm) && $this->tplEstruturaForm == "")
-						$this->tplEstruturaForm = FWK_HTML_FORMS."estruturaForm.tpl";
+					$this->tplEstruturaForm = FWK_HTML_FORMS."estruturaForm.tpl";
 					break;
 			}
 		}

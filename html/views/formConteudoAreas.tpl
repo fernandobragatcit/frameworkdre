@@ -4,15 +4,17 @@
 <script>
 	var pagAtual = '{$PAG_ATUAL}'
 </script>
-<label>{$idioma_label}<span class="campoObrigatorio">*</span>
-	<span class="small" id="idioma_erro">{$idioma_error}</span>
-</label> {$idioma_campo}
 
-<p> </p>
-<label>&nbsp;</label>
-{$conteudo_area_campo}
+<div class="formTelaFull">
+	<label>{$idioma_label}<span class="campoObrigatorio">*</span>
+		<span class="small" id="idioma_erro">{$idioma_error}</span>
+	</label> {$idioma_campo}
+</div>
 
-<div id="btnsForm">
-    {$Cadastrar_campo}
-    {$Cancelar_campo}
+<div class="formTelaFull">
+	{$conteudo_area_campo}
+</div>
+
+<div class="formTelaFull">
+	<div class="alinhaBtns">{$Cadastrar_campo} {$Cancelar_campo}</div>
 </div>
