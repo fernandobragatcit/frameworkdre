@@ -389,13 +389,13 @@ function double(v, u, d){
 }
 
 function hora(v){
-	v=v.replace(/[^NAEI0-2\.]/g,"");
+	v=v.replace(/[^NAEI0-9\.]/g,"");
 	v=v.replace(/^(\A|E|I|NN|N\.)/,"");
 	v=v.replace(/^(\D)(\d)/,"$1");
 	v=v.replace(/^(\D{2})(\d)/,"$1");
 	v=v.replace(/^(\D{2})(\D)/,"$1");
 
-	v=v.replace(/^\:/g,"");//para nunca comeÃ§ar com "."(ponto)
+	v=v.replace(/^\:/g,"");//para nunca comeÃ§ar com ":"(ponto)
 	v=v.replace(/(\:\:)/g,":");//para nÃ£o repetir 2 pontos seguidos(ponto)
 	v = v.replace(eval("/^(\\d{2})(\\d{2})/"),"$1:$2");
 	return v;//
