@@ -511,20 +511,25 @@ class ControlGrid {
 				$strQuery .= " ".self::getVariavelWhere2()." ";
 			}
 		}
-		if (trim((string)self::getObjXml()->query->whereBusca) != "" && $this->busca != "") {
+		if (trim((string)self::getObjXml()->query->whereBusca) != "") {
 			if (trim((string)self::getObjXml()->query->where) != "" || trim((string)self::getObjXml()->query->whereCondicao) != "") {
 				$strQuery .= " AND ";
 			}else{
 				$strQuery .= " WHERE ";
 			}
-			$arrBusca = explode(" ", $this->busca);
-			for($i=0; $i<count($arrBusca); $i++){
-				$strQuery .= ($i == 0)?"(":"";
-
-				$strQuery .= str_replace("#BUSCA#", $arrBusca[$i], trim((string)self::getObjXml()->query->whereBusca));
-
-				$strQuery .= ($i != count($arrBusca)-1)?" OR ":"";
-				$strQuery .= ($i == count($arrBusca)-1)?")":"";
+			
+			if($this->busca != ""){
+				$arrBusca = explode(" ", $this->busca);
+				for($i=0; $i<count($arrBusca); $i++){
+					$strQuery .= ($i == 0)?"(":"";
+	
+					$strQuery .= str_replace("#BUSCA#", strtolower($arrBusca[$i]), trim((string)self::getObjXml()->query->whereBusca));
+	
+					$strQuery .= ($i != count($arrBusca)-1)?" OR ":"";
+					$strQuery .= ($i == count($arrBusca)-1)?")":"";
+				}
+			}else{
+				$strQuery .= " 1=1 ";
 			}
 		}
 		if ($this->arrFiltros[0] != "") {
