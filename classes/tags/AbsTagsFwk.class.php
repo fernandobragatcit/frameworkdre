@@ -57,6 +57,7 @@ abstract class AbsTagsFwk {
 		print("<pre>");
 		for($i=0; $i<count($arrDados); $i++){
 			print_r($arrDados[$i]);
+			print "<br>";
 		}
 		die();
 	}
