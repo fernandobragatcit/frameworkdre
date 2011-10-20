@@ -12,7 +12,7 @@
 
 		// Theme options
 		theme_advanced_buttons1 : "bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,undo,redo,|,link,unlink,|,cleanup",
-		theme_advanced_buttons2 : "cut,copy,paste,pastetext,pasteword,link,unlink,cleanup,|,tablecontrols,|,code",
+		theme_advanced_buttons2 : "cut,copy,pastetext,link,unlink,cleanup,|,tablecontrols,|,code",
 		theme_advanced_buttons3 : "",
 		theme_advanced_toolbar_location : "bottom",
 		theme_advanced_toolbar_align : "center",
