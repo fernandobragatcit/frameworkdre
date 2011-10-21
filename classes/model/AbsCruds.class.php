@@ -64,7 +64,7 @@ abstract class AbsCruds {
 		}
 		die();
 	}
-	
+
 	protected function getObjUsrSessao(){
 		if($this->objUserSess == null){
 			$objCtrlSess = new ControlSessao();
@@ -215,15 +215,16 @@ abstract class AbsCruds {
 	}
 
 	protected function deleta($id){
+//		die(self::getStringClass());
 		try{
 			self::getClassModel()->deletar($id);
 		}catch(CrudException $e){
 			self::vaiPara(self::getStringClass()."&msg=".$e->getMensagem());
 			return;
 		}
-		self::vaiPara(self::getStringClass()."&msg=Ã�tem deletado com sucesso!");
+		self::vaiPara(self::getStringClass()."&msg=Item deletado com sucesso!");
 	}
-	
+
 	protected function status($id){
 		try{
 			self::getClassModel()->alteraStatus($id);
