@@ -434,6 +434,34 @@ abstract class AbsCruds {
 			return (int)$arrDados[0][0];
 		return 0;
 	}
+	
+	/**
+	 * Busca as respectivas Ã¡reas, lembrando que o ultimo elemento do array 
+	 * 
+	 * @author AndrÃ© Coura
+	 * @since 1.0 - 15/04/2011
+	 */
+	public function getAreaUrl(){
+		$strArea = "http://". $_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
+		$arrArea1 = explode("?",$strArea);
+		$arrArea = explode("/",$arrArea1[0]);
+		$arrTratado = array();
+		foreach ($arrArea as $strArea) {
+			if(isset($strArea) && trim($strArea) != ""){
+				$arrTratado[]=$strArea;
+			}
+		}
+		return $arrTratado;
+	}
+	
+	public function getStrUrl($url = ""){
+		if($url == "")
+			$arrArea = self::getAreaUrl();
+		else
+			$arrArea = $url;
+		array_shift($arrArea);
+		return "http://".implode("/",$arrArea);
+	}
 
 }
 ?>
