@@ -128,6 +128,7 @@ class ControlUsuario{
 		}else{
 			$objUsuario["email_usuario"] = ($arrRet["email_usuario"]);
 			$objUsuario["nome_usuario"]  = ($arrRet["nome_usuario"]);
+			$objUsuario["id_usuario"]  = ($arrRet["id_usuario"]);
 			return $objUsuario;
 		}
 	}
