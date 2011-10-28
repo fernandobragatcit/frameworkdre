@@ -835,7 +835,7 @@ Date.prototype.format = function (mask, utc) {
 	return dateFormat(this, mask, utc);
 };
 
-var ua = new navigator.userAgent.toLowerCase();
+var ua = navigator.userAgent.toLowerCase();
 if (ua.indexOf(" chrome/") >= 0 || ua.indexOf(" firefox/") >= 0 || ua.indexOf(' gecko/') >= 0) {
 	var StringMaker = function () {
 		this.str = "";
