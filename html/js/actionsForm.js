@@ -322,7 +322,7 @@ function cep(v){
 
 function email(v){
 	//condição para aceitar apenas números e os caracteres especiais
-	v=v.replace(/[^NAEI0-9a-z@\.]/g,"");
+	v=v.replace(/[^NAEI0-9a-z@\._]/g,"");
 	v=v.replace(/^[\.@]/,"");
 	v=v.replace(/(\.\.)/,"\.");
 	v=v.replace(/(@@)/,"@");
