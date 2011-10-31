@@ -61,7 +61,7 @@
 <!-- Some integration calls -->
 <a href="javascript:;" onmousedown="tinyMCE.get('{$ID_COMP}').show();">[Exibir Editor]</a>
 <a href="javascript:;" onmousedown="tinyMCE.get('{$ID_COMP}').hide();">[Ocultar HTML]</a>
-<script>jQuery(".mceLayout").attr('width','620px');</script>
+<script type="text/javascript">jQuery(".mceLayout").attr('width','620px');</script>
 
 
 <br />

@@ -2,7 +2,7 @@
 <textarea name="{$NOME_COMP}" id="{$ID_COMP}" {$ROWS_COMP} {$COLS_COMP} {$WRAP_COMP} {$STYLE_COMP} class="{$CLASS_COMP}"
 {$STYLE_COMP} {$LANG_COMP} {$TABINDEX}>{$EDIT_VALUE}</textarea>
 {literal}
-<script>
+<script type="text/javascript">
 jQuery(function(){
 	{/literal}
 	var idComponente = '{$NOME_COMP}';

@@ -1,4 +1,4 @@
-<script>var {$ID_COMP}_val = 0;</script>
+<script type="text/javascript">var {$ID_COMP}_val = 0;</script>
 <table class="listBoxDre">
 	<tr>
 		<td class="tdListBoxEsq">

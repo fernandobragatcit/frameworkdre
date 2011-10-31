@@ -29,7 +29,7 @@
 	
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}" value="{$DADOS[da][$val]}">
-											<script>jQuery("#{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
+											<script type="text/javascript">jQuery("#{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
 										
 										{elseif $ARR_LINHAS[per].tipo == 'textarea'}
 											<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
@@ -62,7 +62,7 @@
 										
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}small{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}" value="{$DADOS[da][$val]}">
-											<script>jQuery("#{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
+											<script type="text/javascript">jQuery("#{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
 									
 										{elseif $ARR_LINHAS[per].tipo == 'textarea'}
 											<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
@@ -91,7 +91,7 @@
 										
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}" value="{$DADOS[da][$val]}">
-											<script>jQuery("#{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
+											<script type="text/javascript">jQuery("#{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
 									
 										{elseif $ARR_LINHAS[per].tipo == 'textarea'}
 											<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
@@ -147,7 +147,7 @@
 										
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}" value="{$DADOS[da][$val]}">
-											<script>jQuery("#{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
+											<script type="text/javascript">jQuery("#{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
 										
 										{elseif $ARR_LINHAS[per].tipo == 'textarea'}
 											<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
@@ -180,7 +180,7 @@
 										
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}small{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}" value="{$DADOS[da][$val]}">
-											<script>jQuery("#{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
+											<script type="text/javascript">jQuery("#{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
 									
 										{elseif $ARR_LINHAS[per].tipo == 'textarea'}
 											<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
@@ -209,7 +209,7 @@
 										
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCampo{$id} {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}small{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}" value="{$DADOS[da][$val]}">
-											<script>jQuery("#{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
+											<script type="text/javascript">jQuery("#{$IDCOMPONENTE}_{$id}_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
 									
 										{elseif $ARR_LINHAS[per].tipo == 'textarea'}
 											<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
@@ -271,7 +271,7 @@
 										
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCamponumber {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}large{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}_number_{$ARR_LINHAS[per].id}" value="{$DADOS[da][$val]}">
-											<script>jQuery("#{$IDCOMPONENTE}_number_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
+											<script type="text/javascript">jQuery("#{$IDCOMPONENTE}_number_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
 										
 										{elseif $ARR_LINHAS[per].tipo == 'textarea'}
 											<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
@@ -304,7 +304,7 @@
 										
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCamponumber {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}small{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}_number_{$ARR_LINHAS[per].id}" value="{$DADOS[da][$val]}">
-											<script>jQuery("#{$IDCOMPONENTE}_number_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
+											<script type="text/javascript">jQuery("#{$IDCOMPONENTE}_number_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
 									
 										{elseif $ARR_LINHAS[per].tipo == 'textarea'}
 											<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>
@@ -333,7 +333,7 @@
 
 										{elseif $ARR_LINHAS[per].tipo == 'data'}
 											<input class="dataCamponumber {if $ARR_LINHAS[per].class != ""}{$ARR_LINHAS[per].class}"{else}small{/if}" type="text" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" id="{$IDCOMPONENTE}_number_{$ARR_LINHAS[per].id}" value="{$DADOS[da][$val]}">
-											<script>jQuery("#{$IDCOMPONENTE}_number_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
+											<script type="text/javascript">jQuery("#{$IDCOMPONENTE}_number_{$ARR_LINHAS[per].id}").mask("99/99/9999");</script>
 									
 										{elseif $ARR_LINHAS[per].tipo == 'textarea'}
 											<textarea {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}style="width: 100%;"{/if} type="{$ARR_LINHAS[per].tipo}" maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]">{$DADOS[da][$val]}</textarea>

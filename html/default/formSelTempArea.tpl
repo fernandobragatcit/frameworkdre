@@ -24,7 +24,7 @@
 			        <input type="radio" name="wireframe" id="wire3" value="wire3"/>
 			      </td>
 			      <td class="td_desc">
-			        <p>Conteúddo e rodapé</p>
+			        <p>Conteúdo e rodapé</p>
 			      </td>
 			    </tr>
 			    <tr>
@@ -199,7 +199,7 @@
 			</div>
 		</fieldset>
 	</form>
-	<script>
+	<script type="text/javascript">
 		document.getElementById("{$WIRE_AREA}").checked=true
 	</script>
 </div>

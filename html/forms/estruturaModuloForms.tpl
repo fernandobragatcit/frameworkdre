@@ -6,7 +6,7 @@
 			{$ESTRUTURA_FIELDS_FORMS}
 		</fieldset>
 	</form>
-	<script>
+	<script type="text/javascript">
 		{$VALIDACAO_FORM_JS}
 	</script>
 </div>

@@ -15,6 +15,3 @@
 		</fieldset>
 	</form>
 </div>
-<script>
-
-</script>

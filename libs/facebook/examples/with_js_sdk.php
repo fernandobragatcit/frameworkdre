@@ -34,7 +34,7 @@ if ($user) {
       <fb:login-button></fb:login-button>
     <?php } ?>
     <div id="fb-root"></div>
-    <script>
+    <script type="text/javascript">
       window.fbAsyncInit = function() {
         FB.init({
           appId: '<?php echo $facebook->getAppID() ?>',
