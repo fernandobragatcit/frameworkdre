@@ -1,3 +1,7 @@
-<a href="{$LINKFOTO}" title="{$TITLE}" alt="{$TITLE}">
+{if $LINKFOTO}
+	<a href="{$LINKFOTO}" title="{$TITLE}">
+{/if}
 	{FOTO metodo="getThumbImg" idObj="$IDFOTO" largura="$LARGURA" altura="$ALTURA" param3="false"}
-</a>
+{if $LINKFOTO}
+	</a>
+{/if}
