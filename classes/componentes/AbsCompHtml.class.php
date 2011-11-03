@@ -259,6 +259,16 @@ abstract class AbsCompHtml{
     		self::getObjSmarty()->assign("ONBLUR_COMP","onblur=\"".self::getObjXmlCompDados()->onblur."\"");
     	else
     		self::getObjSmarty()->assign("ONBLUR_COMP"," ");
+    		
+		if(self::getObjXmlCompDados()->onkeydown!= "" )
+    		self::getObjSmarty()->assign("ONKEYDOWN_COMP","onkeydown=\"".self::getObjXmlCompDados()->onkeydown."\"");
+    	else
+    		self::getObjSmarty()->assign("ONKEYDOWN_COMP"," ");
+    		
+		if(self::getObjXmlCompDados()->onkeyup!= "" )
+    		self::getObjSmarty()->assign("ONKEYUP_COMP","onkeyup=\"".self::getObjXmlCompDados()->onkeyup."\"");
+    	else
+    		self::getObjSmarty()->assign("ONKEYUP_COMP"," ");
 		
 		if(self::getValue() != "")
     		self::getObjSmarty()->assign("VALUE_COMP",utf8_encode(self::getValue()));
