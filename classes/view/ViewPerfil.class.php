@@ -10,6 +10,8 @@ require_once(FWK_CONTROL."ControlPerfil.class.php");
 require_once(CLASSES_DAO."UsrEnderecoDAO.class.php");
 require_once(CLASSES_DAO."UsrContatoDAO.class.php");
 require_once(CLASSES_DAO."FotosDAO.class.php");
+require_once(CLASSES_DAO."ServicoEquipDAO.class.php");
+require_once(FWK_MODEL."DocumentoUsuario.class.php");
 
 require_once(FWK_CONTROL."ControlSessao.class.php");
 
@@ -142,7 +144,6 @@ class ViewPerfil extends AbsViewClass {
 	private function registraTagsUsr() {
 		$arrDadosUsr = self::getObjDadosComp()->getDadosCompById(parent::getObjSessao()->getIdUsuario());
 		$arrDadosUsr = Utf8Parsers::arrayUtf8Encode($arrDadosUsr);
-
 		//$arrLinkMin["img"] = $arrDadosUsr[foto_usr];
        // $arrLinkMin["w"] = 100;
         //$arrLinkMin["h"] = 133;
@@ -184,7 +185,6 @@ class ViewPerfil extends AbsViewClass {
 	}
 
 	private function getTplHomePerfil() {
-
 		$id = parent::getObjSessao()->getIdUsuario();
 
 		$arrGruposUsuario = self::getObjGruposUsuario()->getGrupoUsuario($id);
@@ -196,13 +196,20 @@ class ViewPerfil extends AbsViewClass {
 				$admin = true;
 			}
 		}
-//		self::debuga($arrGruposUsuario);
 
 		if($admin){
 			parent::getObjSmarty()->assign("IDUSUARIO",$id);
 			$strTplPerfilHome = self::getCtrlPerfil()->getCtrlConfiguracoes()->getCustomCadUsuarios(null, "perfilAdminHome");
 
+			$arrIdDocumentos = self::getObjDocumentoUsuario()->getDocumentosUsuario($id);
 
+			for ($i = 0; $i < sizeof($arrIdDocumentos); $i++) {
+				$arrConteudoDocumentos[$i] = Utf8Parsers::arrayUtf8Encode(self::getObjServicoEquipDAO()->getConteudoServEquip($arrIdDocumentos[$i][0]));
+				$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudTelaConfirmaReserva&a=form&idUsr=".$id."&id=".$arrIdDocumentos[$i][0]);
+				array_unshift($arrConteudoDocumentos[$i], $link);
+			}
+//			self::debuga($arrConteudoDocumentos);
+			parent::getObjSmarty()->assign("ARRDOCUMENTOS", $arrConteudoDocumentos);
 			if (isset ($strTplPerfilHome) && $strTplPerfilHome != ""){
 
 				return $strTplPerfilHome;
@@ -219,7 +226,17 @@ class ViewPerfil extends AbsViewClass {
 		return FWK_HTML_DEFAULT."perfilUsuario_home.tpl";
 	}
 
+	private function getObjServicoEquipDAO(){
+		if($this->objServicoEquip == null)
+			$this->objServicoEquip = new ServicoEquipDAO();
+		return $this->objServicoEquip;
+	}
 
+	private function getObjDocumentoUsuario(){
+		if($this->objDocumentoUsuario == null)
+			$this->objDocumentoUsuario = new DocumentoUsuario();
+		return $this->objDocumentoUsuario;
+	}
 
 	private function getObjDadosComp() {
 		if ($this->objDadosComp == null)

@@ -19,6 +19,7 @@ require_once(FWK_EXCEPTION."CrudException.class.php");
 
 require_once (FWK_DAO."DocUsuario.class.php");
 require_once (FWK_DAO."DocGrupo.class.php");
+require_once (FWK_DAO."GrupoUsuarioDAO.class.php");
 
 
 
@@ -187,10 +188,18 @@ abstract class AbsCruds {
 		}
 	}
 
-	protected function listDados($pagAtual=0, $buscaGrid = null, $filtros = null){
+	protected function listDados($pagAtual=0, $buscaGrid = null, $filtros = null, $idUsuario = null){
 		$intDocsGrupo = self::getDocsGrupo();
 		if($intDocsGrupo > 0){
 			self::getObjGrid()->setVariavelWhere2($intDocsGrupo);
+		}
+
+		$arrIdGrupo = self::getObjGrupoUsuarioDAO()->getGruposUsuario($idUsuario);
+//		self::debuga($arrIdGrupo);
+		for ($i = 0; $i < sizeof($arrIdGrupo); $i++) {
+			if($arrIdGrupo[$i]["id_grupo"] != 1 && $arrIdGrupo[$i]["id_grupo"] != self::getIdGrupoUsuario())
+//			if($arrIdGrupo[$i]["id_grupo"] == 1 || $arrIdGrupo[$i]["id_grupo"] == self::getIdGrupoUsuario())
+				self::getObjGrid()->setVariavelUsuario($idUsuario);
 		}
 		self::getObjGrid()->setUtf8Decode(true);
 		self::getObjGrid()->setXmlGrid(self::getXmlGrid());
@@ -202,6 +211,16 @@ abstract class AbsCruds {
 			$this->objGrid = ControlGrid::getGrid();
 		}
 		return $this->objGrid;
+	}
+
+	private $idGrupoUsuario;
+
+	public function setIdGrupoUsuario($intIdRef){
+		$this->idGrupoUsuario = $intIdRef;
+	}
+
+	public function getIdGrupoUsuario(){
+		return $this->idGrupoUsuario;
 	}
 
 	protected function deletaFoto($id){
@@ -434,10 +453,10 @@ abstract class AbsCruds {
 			return (int)$arrDados[0][0];
 		return 0;
 	}
-	
+
 	/**
-	 * Busca as respectivas Ã¡reas, lembrando que o ultimo elemento do array 
-	 * 
+	 * Busca as respectivas Ã¡reas, lembrando que o ultimo elemento do array
+	 *
 	 * @author AndrÃ© Coura
 	 * @since 1.0 - 15/04/2011
 	 */
@@ -453,7 +472,7 @@ abstract class AbsCruds {
 		}
 		return $arrTratado;
 	}
-	
+
 	public function getStrUrl($url = ""){
 		if($url == "")
 			$arrArea = self::getAreaUrl();
@@ -463,5 +482,10 @@ abstract class AbsCruds {
 		return "http://".implode("/",$arrArea);
 	}
 
+	private function getObjGrupoUsuarioDAO() {
+		if ($this->objGrupoUsuario == null)
+			$this->objGrupoUsuario = new GrupoUsuarioDAO();
+		return $this->objGrupoUsuario;
+	}
 }
 ?>

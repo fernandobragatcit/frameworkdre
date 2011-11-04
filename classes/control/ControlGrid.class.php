@@ -13,6 +13,7 @@ require_once (FWK_COMP."Button.class.php");
 require_once (FWK_UTIL."FormataParametros.class.php");
 require_once (FWK_UTIL."FormataDatas.class.php");
 require_once(FWK_UTIL."FormataLink.class.php");
+require_once(FWK_DAO."GrupoUsuarioDAO.class.php");
 
 require_once(FWK_CONTROL."ControlUsuario.class.php");
 require_once(FWK_CONTROL."ControlSessao.class.php");
@@ -511,20 +512,30 @@ class ControlGrid {
 				$strQuery .= " ".self::getVariavelWhere2()." ";
 			}
 		}
+
+		$idUsuario = self::getVariavelUsuario();
+//			die($idUsuario);
+		if($idUsuario)
+			if (trim((string)self::getObjXml()->query->whereUsuario) != "") {
+				$strQuery .= " AND ";
+				$strQuery .= trim((string)self::getObjXml()->query->whereUsuario);
+				$strQuery .= " ".$idUsuario." ";
+			}
+
 		if (trim((string)self::getObjXml()->query->whereBusca) != "") {
 			if (trim((string)self::getObjXml()->query->where) != "" || trim((string)self::getObjXml()->query->whereCondicao) != "") {
 				$strQuery .= " AND ";
 			}else{
 				$strQuery .= " WHERE ";
 			}
-			
+
 			if($this->busca != ""){
 				$arrBusca = explode(" ", $this->busca);
 				for($i=0; $i<count($arrBusca); $i++){
 					$strQuery .= ($i == 0)?"(":"";
-	
+
 					$strQuery .= str_replace("#BUSCA#", strtolower($arrBusca[$i]), trim((string)self::getObjXml()->query->whereBusca));
-	
+
 					$strQuery .= ($i != count($arrBusca)-1)?" OR ":"";
 					$strQuery .= ($i == count($arrBusca)-1)?")":"";
 				}
@@ -556,7 +567,6 @@ class ControlGrid {
 		//trata valores especiais query
 
 
-
 		return $strQuery;
 	}
 
@@ -579,6 +589,17 @@ class ControlGrid {
 
 	public function getVariavelWhere2(){
 		return $this->variavelGridWhere2;
+
+	}
+
+	private $variavelUsuario;
+
+	public function setVariavelUsuario($varGrid){
+		$this->variavelUsuario = $varGrid;
+	}
+
+	public function getVariavelUsuario(){
+		return $this->variavelUsuario;
 
 	}
 
@@ -832,5 +853,6 @@ class ControlGrid {
 		}
 		die();
 	}
+
 }
 ?>
