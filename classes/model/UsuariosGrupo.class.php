@@ -19,15 +19,15 @@ class UsuariosGrupo extends AbsModelCruds{
 	 */
     public function cadastrar($xml,$post,$file){ }
 
-    private function salvaGruposUsuario($arrValores,$idUsuario){
+    private function salvaUsuariosGrupo($arrValores,$idGrupo){
 		$objBanco = ControlDb::getBanco();
 		foreach ($arrValores as $valor) {
 			$strQuery = "INSERT INTO ".$this->_table."
-							(id_grupo, id_usuario)
+							(id_usuario, id_grupo)
 						VALUES
-							('".$valor."','".$idUsuario."')";
+							('".$valor."','".$idGrupo."')";
 		if(!$objBanco->Execute($strQuery))
-			throw new CrudException("Erro ao cadastrar os Grupos para o Usuário!");
+			throw new CrudException("Erro ao cadastrar os Usuários para o Grupo!");
 		}
     	if(self::ErrorMsg()){
 			print("<pre>");
@@ -36,9 +36,9 @@ class UsuariosGrupo extends AbsModelCruds{
 		}
     }
 
-	private function limpaGruposUsuario($id){
+	private function limpaUsuariosGrupo($id){
     	ControlDb::delRowTable(array("table" => $this->_table,
-									 "campo" => "id_usuario",
+									 "campo" => "id_grupo",
 									 "valor" => $id));
 		if(self::ErrorMsg()){
 				print("<pre>");
@@ -55,25 +55,12 @@ class UsuariosGrupo extends AbsModelCruds{
 	 */
     public function alterar($id,$xml,$post,$file){
 		try{
-			self::limpaGruposUsuario($id);
-			self::salvaGruposUsuario(self::verificaCampos($post,"gruposUsuario"), $id);
+			self::limpaUsuariosGrupo($id);
+			self::salvaUsuariosGrupo(self::verificaCampos($post,"usuariosGrupo"), $id);
 		}catch(CrudException $e){
 			throw new CrudException($e->getMensagem());
 		}
     }
 
-    public function setUsuarioGrupo($idUsuario, $idGrupo = 3){
-		self::limpaGruposUsuario($idUsuario);
-    	self::salvaGruposUsuario(array($idGrupo),$idUsuario);
-    }
-
-    public function getGrupoUsuario($idUsuario){
-
-    	$strQuery = "SELECT id_grupo
-    				 FROM fwk_grupo_usuario
-    				 WHERE id_usuario = '".$idUsuario."'";
-
-    	return ControlDb::getAll($strQuery);
-    }
 }
 ?>

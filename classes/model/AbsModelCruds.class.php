@@ -294,5 +294,14 @@ abstract class AbsModelCruds extends ADOdb_Active_Record{
 				throw new CrudException("Formato de arquivo não aceito pelo sistema: ".$file);
 		}
     }
+    
+	public function debuga(){
+		$arrDados = func_get_args();
+		print("<pre>");
+		for($i=0; $i<count($arrDados); $i++){
+			print_r($arrDados[$i]);
+		}
+		die();
+	}
 }
 ?>

@@ -1,9 +1,9 @@
 <p></p>
 
 <div class="formTelaFull">
-	<label>{$usuariosGripo_label} :
-	    <span class="small" id="usuariosGripo_erro">{$usuariosGripo_error}</span>
-	</label> {$usuariosGripo_campo}
+	<label>{$usuariosGrupo_label} :
+	    <span class="small" id="usuariosGrupo_erro">{$usuariosGrupo_error}</span>
+	</label> {$usuariosGrupo_campo}
 </div>
 
 <div class="formTelaFull">

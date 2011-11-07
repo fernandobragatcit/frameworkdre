@@ -2,7 +2,7 @@
 <form method="post" nome="Usuários por Grupo" classe="CrudUsuariosGrupo"
 	css="formatForm" tipo="FWK" tpl="formUsuariosGrupo.tpl">
 
-	<campos type="listBox" name="usuariosGripo" id="usuariosGripo" title="Usuários" label="Usuários"
+	<campos type="listBox" name="usuariosGrupo" id="usuariosGrupo" title="Usuários" label="Usuários"
 		querySource="SELECT id_usuario, nome_usuario FROM fwk_usuario "
 		queryAlt="SELECT fgu.id_usuario 
 				FROM fwk_grupo_usuario fgu 
