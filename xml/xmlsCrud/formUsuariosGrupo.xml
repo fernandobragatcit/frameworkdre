@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Usuários por Grupo" classe="CrudUsuariosGrupo"
+	css="formatForm" tipo="FWK" tpl="formUsuariosGrupo.tpl">
+
+	<campos type="listBox" name="usuariosGripo" id="usuariosGripo" title="Usuários" label="Usuários"
+		querySource="SELECT id_usuario, nome_usuario FROM fwk_usuario "
+		queryAlt="SELECT fgu.id_usuario 
+				FROM fwk_grupo_usuario fgu 
+				WHERE fgu.id_grupo"
+		values="id_usuario" texts="nome_usuario"
+		orderby="nome_usuario" class="listBoxCompDre" />
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=home" mens="Deseja realmente sair do formulario?" />
+	</buttons>
+
+</form>

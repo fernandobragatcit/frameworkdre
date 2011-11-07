@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid titulo="Usuários por Grupo" classe="CrudUsuariosGrupo">
+	<header>
+		<titulo type="STRING">Grupo</titulo>
+		<titulo type="STRING">Qtde de Usuários para o Grupo</titulo>
+		<titulo type="none" actionEdit="a=formAlt">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			gr.nome_grupo, 
+			(SELECT COUNT(*) FROM fwk_grupo_usuario gru WHERE gru.id_grupo = gr.id_grupo), 
+			gr.id_grupo
+		</campos>
+		<from>
+			fwk_grupo gr 
+		</from>
+		<whereBusca>
+			(us.nome_grupo LIKE '%#BUSCA#%' OR (SELECT COUNT(*) FROM fwk_grupo_usuario gru WHERE gru.id_grupo = gr.id_grupo) LIKE '%#BUSCA#%') 
+		</whereBusca>
+		<orderBy>gr.nome_grupo</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campo alias="Grupo">gr.nome_grupo</campo>
+	</filtro>
+</grid>
