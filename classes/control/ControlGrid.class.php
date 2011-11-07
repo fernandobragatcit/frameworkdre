@@ -544,12 +544,8 @@ class ControlGrid {
 			}
 		}
 		if ($this->arrFiltros[0] != "") {
-			if (trim((string)self::getObjXml()->query->where) != "" || trim((string)self::getObjXml()->query->whereCondicao) != "" ||
-				(trim((string)self::getObjXml()->query->whereBusca) != "" && $this->busca != "")) {
-				$strQuery .= " AND ";
-			}else{
-				$strQuery .= " WHERE ";
-			}
+			$strQuery .= " AND ";
+			
 			for($fi=0; $fi<count($this->arrFiltros); $fi++){
 				$strQuery .= $this->arrFiltros[$fi];
 				$strQuery .= ($fi != count($this->arrFiltros)-1)?" AND ":"";
@@ -563,7 +559,7 @@ class ControlGrid {
 			$strQuery .= " ORDER BY ";
 			$strQuery .= trim((string)self::getObjXml()->query->orderBy);
 		}
-		//die($strQuery);
+		
 		//trata valores especiais query
 
 
@@ -674,7 +670,7 @@ class ControlGrid {
 						$arrTitulos[] = array (
 						self::getOrdenacao($titulo->attributes()->type), (string) $titulo);
 					}else{
-						$arrDados = self::getObjBanco()->getAll(self::getTitleQuery($titulo->query));
+						$arrDados = Utf8Parsers::matrizUtf8Encode(self::getObjBanco()->getAll(self::getTitleQuery($titulo->query)));
 						for($i=0; $i<count($arrDados); $i++){
 							$arrDados[$i][3] = self::getObjCrypt()->cryptData((string)$titulo->valor.":".$arrDados[$i][0]);
 							for($fi=0; $fi<count($this->arrFiltros); $fi++){
@@ -697,7 +693,7 @@ class ControlGrid {
 		//}
 
 		//print("<pre>");
-		//print_r(URL_SITE);
+		//print_r($arrTitulos);
 		//die();
 		return $arrTitulos;
 	}
