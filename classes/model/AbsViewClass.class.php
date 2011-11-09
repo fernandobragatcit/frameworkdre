@@ -195,6 +195,13 @@ abstract class AbsViewClass{
 		array_shift($arrArea);
 		return "http://".implode("/",$arrArea);
 	}
+	
+	protected function trataTelefonesNaoObrigatorio($campo) {
+        if ($campo == "(__) ____-____") {
+            $campo = "";
+        }
+        return $campo;
+    }
 
 }
 ?>
