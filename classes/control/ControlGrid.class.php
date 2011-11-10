@@ -13,6 +13,7 @@ require_once (FWK_COMP."Button.class.php");
 require_once (FWK_UTIL."FormataParametros.class.php");
 require_once (FWK_UTIL."FormataDatas.class.php");
 require_once(FWK_UTIL."FormataLink.class.php");
+require_once(FWK_DAO."GrupoUsuarioDAO.class.php");
 
 require_once(FWK_CONTROL."ControlUsuario.class.php");
 require_once(FWK_CONTROL."ControlSessao.class.php");
@@ -185,6 +186,7 @@ class ControlGrid {
 		self::getObjSmarty()->assign("NUM_DADOS_INI", count($arrDadosGrid) > 0 ? "TRUE" : "FALSE");
 		self::getObjSmarty()->assign("ARR_DADOS", self::verTipoDados(self::doFieldFormat($arrDadosGrid)));
 		self::getObjSmarty()->assign("LINK_BUSCAR", self::makeLinkPag(""));
+//		die(self::makeLinkPag(""));
 		self::getObjSmarty()->assign("VALOR_BUSCA", $_POST["buscaGrid"]);
 		self::getObjSmarty()->assign("URL_MOMENTO", self::makeLinkPag(""));
 	}
@@ -284,6 +286,10 @@ class ControlGrid {
 	private function makeLinkPag($params) {
 		$tipo = "c";
 		$categoria = "";
+		$objFormatParam = new FormataParametros();
+		$objFormatParam->setParametros($_GET);
+		$get = $objFormatParam->getParametros();
+//		self::debuga($get);
 		if(isset(self::getObjXml()->attributes()->tipo) && self::getObjXml()->attributes()->tipo!=""){
 			$tipo = FormataLink::definiTipoLink((string)self::getObjXml()->attributes()->tipo);
 		}
@@ -300,7 +306,7 @@ class ControlGrid {
 			}
 		}
 
-		return  "?".$tipo."=".self::getObjCrypt()->cryptData(($categoria!=""?$categoria."&f=":"").self::getClassGrid()."&a=lista" . ($mantemBusca!=""?$mantemBusca:"") . ($filtros!=""?$filtros:""). $params);
+		return  "?".$tipo."=".self::getObjCrypt()->cryptData(($categoria!=""?$categoria."&f=":"").self::getClassGrid()."&".((string)self::getObjXml()->attributes()->actionBusca?(string)self::getObjXml()->attributes()->actionBusca:"a=lista") . ($get["id"]!=""?"&id=".$get["id"]:"") . ($mantemBusca!=""?$mantemBusca:"") . ($filtros!=""?$filtros:""). $params);
 		//return "?c=" . self::getObjCrypt()->cryptData(self::getClassGrid() . "&a=lista" . $params);
 	}
 
@@ -469,47 +475,6 @@ class ControlGrid {
 									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='Download PDF' alt='Download PDF' src='".URL_IMAGENS."icons/page_white_acrobat.png'>",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
-							case "permsDel" :
-								/*
-								 * Como proceder aqui:
-								 * permissão por direito: permsDel="d:168|a=deletar";
-								 * permissão por grupo: permsDel="g:1,2|a=deletar";
-								 * 
-								 * @author Matheus Vieira
-								 * @since 1.0 - 10/11/2011
-								 * 
-								 */
-								$objCtrlSess = new ControlSessao();
-								$objUsuario = $objCtrlSess->getObjSessao(SESSAO_FWK_DRE);
-								$arrGruposUsr = $objUsuario->getGrupoUsuario();
-								$arrDireitosUsr = $objUsuario->getDireitosUsuario();
-								$permissao = false;
-
-								$parametros = explode(":", (string)$value);
-								$tipoPermissao = array_shift($parametros);
-
-								$arrGridPerms = explode("|", $parametros[0]);
-								$value = array_pop($arrGridPerms);
-								$arrGrupoPerms = explode(",", $arrGrupoPerms[0]);
-								
-								
-								if($tipoPermissao == "d"){
-									foreach ($arrDireitosUsr as $direitoUsr){
-										if(in_array($direitoUsr, $arrGridPerms))
-											$permissao = true;
-									}								
-								}elseif($tipoPermissao == "g"){
-									foreach ($arrGruposUsr as $grupoUsr){
-										if(in_array($grupoUsr, $arrGridPerms))
-											$permissao = true;
-									}								
-								}
-								
-								
-								if ($index == $cont && $permissao == true) {
-									$newData .= " " . $objForAction->gridConfirm($data, $value, self::getClassGrid(), "<img width='14' title='Deletar' alt='Deletar' src='".URL_IMAGENS."icons/page_white_delete.png'>", "Tem certeza que gostaria de deletar este registro?",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
-								}
-								break;
 							default :
 								break;
 						}
@@ -552,20 +517,25 @@ class ControlGrid {
 				$strQuery .= " ".self::getVariavelWhere2()." ";
 			}
 		}
+
+		$idUsuario = self::getVariavelUsuario();
+//			die(self::getVariavelWhere1()."dsa");
+
+
 		if (trim((string)self::getObjXml()->query->whereBusca) != "") {
 			if (trim((string)self::getObjXml()->query->where) != "" || trim((string)self::getObjXml()->query->whereCondicao) != "") {
 				$strQuery .= " AND ";
 			}else{
 				$strQuery .= " WHERE ";
 			}
-			
+
 			if($this->busca != ""){
 				$arrBusca = explode(" ", $this->busca);
 				for($i=0; $i<count($arrBusca); $i++){
 					$strQuery .= ($i == 0)?"(":"";
-	
+
 					$strQuery .= str_replace("#BUSCA#", strtolower($arrBusca[$i]), trim((string)self::getObjXml()->query->whereBusca));
-	
+
 					$strQuery .= ($i != count($arrBusca)-1)?" OR ":"";
 					$strQuery .= ($i == count($arrBusca)-1)?")":"";
 				}
@@ -573,9 +543,24 @@ class ControlGrid {
 				$strQuery .= " 1=1 ";
 			}
 		}
+
+		if($idUsuario)
+			if (trim((string)self::getObjXml()->query->whereUsuario) != "") {
+				if (trim((string)self::getObjXml()->query->where) != "" || trim((string)self::getObjXml()->query->whereCondicao) != "" || trim((string)self::getObjXml()->query->whereBusca) != "") {
+					$strQuery .= " AND ";
+				}else{
+					$strQuery .= " WHERE ";
+				}
+				$strQuery .= trim((string)self::getObjXml()->query->whereUsuario);
+				$strQuery .= " ".$idUsuario." ";
+			}
 		if ($this->arrFiltros[0] != "") {
-			$strQuery .= " AND ";
-			
+			if (trim((string)self::getObjXml()->query->where) != "" || trim((string)self::getObjXml()->query->whereCondicao) != "" ||
+				(trim((string)self::getObjXml()->query->whereBusca) != "" && $this->busca != "")) {
+				$strQuery .= " AND ";
+			}else{
+				$strQuery .= " WHERE ";
+			}
 			for($fi=0; $fi<count($this->arrFiltros); $fi++){
 				$strQuery .= $this->arrFiltros[$fi];
 				$strQuery .= ($fi != count($this->arrFiltros)-1)?" AND ":"";
@@ -589,9 +574,8 @@ class ControlGrid {
 			$strQuery .= " ORDER BY ";
 			$strQuery .= trim((string)self::getObjXml()->query->orderBy);
 		}
-		
+//		die($strQuery);
 		//trata valores especiais query
-
 
 
 		return $strQuery;
@@ -616,6 +600,17 @@ class ControlGrid {
 
 	public function getVariavelWhere2(){
 		return $this->variavelGridWhere2;
+
+	}
+
+	private $variavelUsuario;
+
+	public function setVariavelUsuario($varGrid){
+		$this->variavelUsuario = $varGrid;
+	}
+
+	public function getVariavelUsuario(){
+		return $this->variavelUsuario;
 
 	}
 
@@ -690,7 +685,7 @@ class ControlGrid {
 						$arrTitulos[] = array (
 						self::getOrdenacao($titulo->attributes()->type), (string) $titulo);
 					}else{
-						$arrDados = Utf8Parsers::matrizUtf8Encode(self::getObjBanco()->getAll(self::getTitleQuery($titulo->query)));
+						$arrDados = self::getObjBanco()->getAll(self::getTitleQuery($titulo->query));
 						for($i=0; $i<count($arrDados); $i++){
 							$arrDados[$i][3] = self::getObjCrypt()->cryptData((string)$titulo->valor.":".$arrDados[$i][0]);
 							for($fi=0; $fi<count($this->arrFiltros); $fi++){
@@ -700,7 +695,7 @@ class ControlGrid {
 						}
 						$arrTitulos[] = array(
 						"select", (string)$titulo->text, (string)$titulo->valor,
-						(string)$titulo->todos,	$arrDados, self::getObjCrypt()->cryptData((string)$titulo->valor.":vazio"));
+						(string)$titulo->todos,	$arrDados);
 					}
 				}
 			}
@@ -712,7 +707,9 @@ class ControlGrid {
 		//	return self::getTitulosDb();
 		//}
 
-//		self::debuga($arrTitulos);
+		//print("<pre>");
+		//print_r(URL_SITE);
+		//die();
 		return $arrTitulos;
 	}
 
@@ -751,8 +748,6 @@ class ControlGrid {
 		if($arrFiltros[0] != ""){
 			$filtroNovo = explode(":", $arrFiltros[0]);
 			$arrFiltro1[$filtroNovo[0]] = $filtroNovo[1];
-			if($filtroNovo[1] == "vazio")
-			unset($arrFiltro1[$filtroNovo[0]]);
 		}
 		foreach ($arrFiltro1 as $where => $valor){
 			$arrWheres[] = $where." = ".$valor;
@@ -869,5 +864,6 @@ class ControlGrid {
 		}
 		die();
 	}
+
 }
 ?>

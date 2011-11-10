@@ -194,13 +194,6 @@ abstract class AbsCruds {
 			self::getObjGrid()->setVariavelWhere2($intDocsGrupo);
 		}
 
-		$arrIdGrupo = self::getObjGrupoUsuarioDAO()->getGruposUsuario($idUsuario);
-//		self::debuga($arrIdGrupo);
-		for ($i = 0; $i < sizeof($arrIdGrupo); $i++) {
-			if($arrIdGrupo[$i]["id_grupo"] != 1 && $arrIdGrupo[$i]["id_grupo"] != self::getIdGrupoUsuario())
-//			if($arrIdGrupo[$i]["id_grupo"] == 1 || $arrIdGrupo[$i]["id_grupo"] == self::getIdGrupoUsuario())
-				self::getObjGrid()->setVariavelUsuario($idUsuario);
-		}
 		self::getObjGrid()->setUtf8Decode(true);
 		self::getObjGrid()->setXmlGrid(self::getXmlGrid());
 		self::getObjGrid()->showGrid($pagAtual, $buscaGrid, $filtros);
@@ -482,10 +475,5 @@ abstract class AbsCruds {
 		return "http://".implode("/",$arrArea);
 	}
 
-	private function getObjGrupoUsuarioDAO() {
-		if ($this->objGrupoUsuario == null)
-			$this->objGrupoUsuario = new GrupoUsuarioDAO();
-		return $this->objGrupoUsuario;
-	}
 }
 ?>

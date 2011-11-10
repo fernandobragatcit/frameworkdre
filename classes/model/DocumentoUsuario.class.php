@@ -57,6 +57,18 @@ class DocumentoUsuario extends AbsModelCruds{
 		}
     }
 
+    public function salvaDocumentoIndividual($idUsuario, $idDocumento){
+		$objBanco = ControlDb::getBanco();
+		$strQuery = "INSERT INTO ".$this->_table."
+							(id_usuario, id_documento)
+						VALUES
+							('".$idUsuario."','".$idDocumento."')";
+//		die($strQuery);
+		if(!$objBanco->Execute($strQuery))
+			throw new CrudException("Erro ao cadastrar os Direitos para o Grupo!");
+
+    }
+
     public function getDocumentosUsuario($idUsuario){
 
     	$strQuery = "SELECT id_documento FROM fwk_documento_usuario
