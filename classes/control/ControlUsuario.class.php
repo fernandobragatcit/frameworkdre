@@ -62,6 +62,7 @@ class ControlUsuario{
     	self::getObjUsuario()->setIpUsuario($_SERVER["REMOTE_ADDR"]);
     	self::getObjUsuario()->setHostUsuario($_SERVER["REMOTE_HOST"]);
     	self::getObjUsuario()->setGrupoUsuario(self::getGruposUsuario($arrDados["id_usuario"]));
+    	self::getObjUsuario()->setDireitosUsuario(self::getDireitosUsuario($arrDados["id_usuario"]));
     	self::getObjUsuario()->setDataLogin(time());
     	self::getObjUsuario()->setIdioma($arrDados["idioma_usuario"]);
 	}
@@ -109,6 +110,19 @@ class ControlUsuario{
 				$arrGurpos[] = $arrIdGrupos[0];
 			}
 		return $arrGurpos;
+	}
+
+	protected function getDireitosUsuario($idUsuario){
+		$strQuery = "(SELECT id_direitos FROM fwk_direitos_usuario WHERE id_usuario = '".$idUsuario."') UNION ";
+		$strQuery .= "(SELECT id_direitos FROM fwk_direitos_grupo fdg WHERE id_grupo IN (SELECT id_grupo FROM fwk_grupo_usuario
+											WHERE id_usuario = '".$idUsuario."')) ";
+		$arrRet =  ControlDB::getAll($strQuery);
+		$arrDireitos = array();
+		if(is_array($arrRet) && count($arrRet) > 0)
+			foreach ($arrRet as $arrIdDireito) {
+				$arrDireitos[] = $arrIdDireito[0];
+			}
+		return $arrDireitos;
 	}
 
 

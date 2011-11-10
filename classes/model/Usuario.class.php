@@ -14,6 +14,7 @@ class Usuario {
 	private $_ipUsr;
 	private $_strEmailUsr;
 	private $_arrGrupoUsr;
+	private $_arrDireitosUsr;
 	private $_strHostRemoto;
 	private $_strAreaAcesso;
 	private $_strIdioma;
@@ -83,6 +84,13 @@ class Usuario {
     }
     public function setGrupoUsuario($intGrupo){
     	$this->_arrGrupoUsr = $intGrupo;
+    }
+
+    public function getDireitosUsuario(){
+    	return $this->_arrDireitosUsr;
+    }
+    public function setDireitosUsuario($intDireitos){
+    	$this->_arrDireitosUsr = $intDireitos;
     }
 
     public function verUserVisit(){
