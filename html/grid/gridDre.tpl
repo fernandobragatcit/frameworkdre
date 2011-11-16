@@ -27,7 +27,19 @@
 	            </tr>
 	            <tr>
 	                {section name=cont loop=$ARR_TITULOS}
-					<th class="col{$smarty.section.cont.iteration}">{$ARR_TITULOS[cont][1]|truncate:30}</th>
+					<th class="col{$smarty.section.cont.iteration}  {$ARR_TITULOS[cont].class}">
+						{if $ARR_TITULOS[cont][0] == "select"}
+							<select title="{$ARR_TITULOS[cont][3]}" class="selectGrid" name="filtro_{$ARR_TITULOS[cont][2]}" 
+								id="col{$smarty.section.cont.iteration}" onchange="location.href = '{$URL_MOMENTO}&fil='+this.value;">
+							  <option value="{$ARR_TITULOS[cont][5]}">{$ARR_TITULOS[cont][3]}</option>
+							  {section name="tlt" loop="$ARR_TITULOS[cont][4]"}
+						  	  	<option {$ARR_TITULOS[cont][4][tlt][4]} title="{$ARR_TITULOS[cont][4][tlt][1]}" value="{$ARR_TITULOS[cont][4][tlt][3]}">{$ARR_TITULOS[cont][4][tlt][1]}</option>
+						  	  {/section}
+							</select>
+						{else}
+							{$ARR_TITULOS[cont][1]|truncate:30}
+						{/if}
+					</th>
 					{/section}
 	            </tr>
 	            {section name=cont1 loop=$ARR_DADOS}

@@ -650,8 +650,7 @@ class ControlGrid {
 			if (self::getObjXml()->header->titulo && self::getObjXml()->header->titulo != "") {
 				foreach (self::getObjXml()->header->titulo as $titulo) {
 					if($titulo->attributes()->type != "QUERY"){
-						$arrTitulos[] = array (
-						self::getOrdenacao($titulo->attributes()->type), (string) $titulo);
+						$arrTitulos[] = array(self::getOrdenacao($titulo->attributes()->type), (string) $titulo, 'class' => (string)$titulo->attributes()->class);
 					}else{
 						$arrDados = self::getObjBanco()->getAll(self::getTitleQuery($titulo->query));
 						for($i=0; $i<count($arrDados); $i++){
@@ -663,7 +662,7 @@ class ControlGrid {
 						}
 						$arrTitulos[] = array(
 						"select", (string)$titulo->text, (string)$titulo->valor,
-						(string)$titulo->todos,	$arrDados);
+						(string)$titulo->todos,	$arrDados, 'class' => (string)$titulo->attributes()->class);
 					}
 				}
 			}
@@ -675,9 +674,8 @@ class ControlGrid {
 		//	return self::getTitulosDb();
 		//}
 
-		//print("<pre>");
-		//print_r(URL_SITE);
-		//die();
+		//self::debuga($arrTitulos);
+		
 		return $arrTitulos;
 	}
 
