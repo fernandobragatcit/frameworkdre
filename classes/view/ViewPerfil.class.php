@@ -144,6 +144,7 @@ class ViewPerfil extends AbsViewClass {
 	private function registraTagsUsr() {
 		$arrDadosUsr = self::getObjDadosComp()->getDadosCompById(parent::getObjSessao()->getIdUsuario());
 		$arrDadosUsr = Utf8Parsers::arrayUtf8Encode($arrDadosUsr);
+
 		//$arrLinkMin["img"] = $arrDadosUsr[foto_usr];
        // $arrLinkMin["w"] = 100;
         //$arrLinkMin["h"] = 133;
@@ -185,6 +186,7 @@ class ViewPerfil extends AbsViewClass {
 	}
 
 	private function getTplHomePerfil() {
+
 		$id = parent::getObjSessao()->getIdUsuario();
 
 		$arrGruposUsuario = self::getObjGruposUsuario()->getGrupoUsuario($id);

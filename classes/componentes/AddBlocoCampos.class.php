@@ -27,6 +27,7 @@ class AddBlocoCampos extends AbsCompHtml {
 		
 		if(isset($this->objXmlCompChilds->campo)){
 			$arrOptions = array();
+			$arrHidden = array();
 			foreach ($this->objXmlCompChilds->campo as $opcao) {
 				$type = strtolower((string)$opcao->tipo);
 				$strObrig = ((boolean)$opcao->obrigatorio)?" <span class=\"campoObrigatorio\">*</span> ":"";
@@ -49,7 +50,8 @@ class AddBlocoCampos extends AbsCompHtml {
 				if($type == 'text' || $type == 'data' || $type == 'inteiro' || $type == 'double'){
 					$tipoAux = ($type == 'inteiro' || $type == 'text'|| $type == 'double')?'text':'data';
 					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => $tipoAux, 'keypress' => $keypress,
-						'id' => (string)$opcao->id,'obrigatorio' => $strObrig,'maxlenght' => (string)$opcao->maxlenght, 'class' => (string)$opcao->class);
+						'id' => (string)$opcao->id,'obrigatorio' => $strObrig,'maxlenght' => (string)$opcao->maxlenght, 'class' => (string)$opcao->class,
+						'onchange' => "onchange=\"".(string)$opcao->onchange."\"");
 				}
 				elseif($type == 'select'){
 					
@@ -78,16 +80,20 @@ class AddBlocoCampos extends AbsCompHtml {
 					}
 					
 					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => strtolower((string)$opcao->tipo),
-					'id' => (string)$opcao->id,'obrigatorio' => $strObrig, 'option' => $optionsSelect, 'query' => $query, 'keypress' => $keypress);
+					'id' => (string)$opcao->id,'obrigatorio' => $strObrig, 'option' => $optionsSelect, 'query' => $query, 'keypress' => $keypress,
+					'onchange' => "onchange=\"".(string)$opcao->onchange."\"");
 				}elseif($type == 'textarea'){
 					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => strtolower((string)$opcao->tipo),
 						'id' => (string)$opcao->id,'obrigatorio' => $strObrig,'maxlenght' => (string)$opcao->maxlenght);
 				}elseif($type == 'file'){
 					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => strtolower((string)$opcao->tipo),
 						'id' => (string)$opcao->id,'obrigatorio' => $strObrig, 'class' => (string)$opcao->class);
+				}elseif($type == 'hidden'){
+					$arrHidden[]=array('tipo' => $type,	'id' => (string)$opcao->id, 'class' => (string)$opcao->class);
 				}
 			}
 		}
+		
 		$linhas = array();
 		$linhasAux = array();
 		for($i=0; $i<count($arrOptions); $i++){
@@ -115,6 +121,7 @@ class AddBlocoCampos extends AbsCompHtml {
 			}
 		}
 
+		self::getObjSmarty()->assign("ARR_HIDDEN", $arrHidden);
 		self::getObjSmarty()->assign("ARR_LINHAS", $arrOptions);
 		self::getObjSmarty()->assign("CONT_LINHAS", count($linhas)+1);
 	}

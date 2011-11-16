@@ -84,7 +84,7 @@ class Button extends AbsCompHtml {
 		$strParam1 = "";
 		if(isset($this->objXmlComp->goto) && $this->objXmlComp->goto!=""){
 			if( $this->objXmlComp->goto == "?")
-				return "onClick=\"return vaiPara('?')\"";
+				return "onclick=\"return vaiPara('?');\"";
 
 
 			if(isset($this->objXmlComp->param1) && $this->objXmlComp->param1 != ""){
@@ -95,7 +95,7 @@ class Button extends AbsCompHtml {
 				$strParam2 = "&".$this->objXmlComp->param2. "=".self::getParam2();
 			}
 			$strLink = $this->objCrypt->cryptData((self::getCategoria()!=""?self::getCategoria()."&f=":"").parent::getClass()."&".(string)$this->objXmlComp->goto."".$strParam1.$strParam2);
-			return "onClick=\"return vaiPara('?".FormataLink::definiTipoLink(self::getTipo())."=".$strLink."')\";";
+			return "onclick=\"return vaiPara('?".FormataLink::definiTipoLink(self::getTipo())."=".$strLink."');\"";
 		}
     }
 

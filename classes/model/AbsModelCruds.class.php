@@ -300,6 +300,7 @@ abstract class AbsModelCruds extends ADOdb_Active_Record{
 		print("<pre>");
 		for($i=0; $i<count($arrDados); $i++){
 			print_r($arrDados[$i]);
+			print"<br />";
 		}
 		die();
 	}
