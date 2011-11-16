@@ -679,6 +679,20 @@ function verificaCombo(objCombo, valor, idCampo){
 	}
 }
 
+function verificaComboInArray(objCombo, arrValores, idCampo){
+	var existe = false;
+	for(var i = 0; i < arrValores.length; i++){
+		if(objCombo.value == arrValores[i]){
+			existe = true;
+		}
+	}
+	
+	if(existe)
+		jQuery("#" + idCampo ).show();
+	else
+		jQuery("#" + idCampo ).hide();
+}
+
 function verificaComboOposto(objCombo, valor, idCampo){
 	if(objCombo.value == valor){
 		jQuery("#" + idCampo ).hide();

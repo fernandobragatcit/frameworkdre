@@ -15,8 +15,8 @@
 					<th colspan="{$ARR_TITULOS|@count}">
 						<div id="legendaIcons">
 					    	<strong>Legenda:</strong>
-					    	<img width='11' title='Editar' alt='Icone Editar' src='{$smarty.const.URL_IMAGENS}icons/page_white_edit.png'> Editar |
-					    	<img width='11' title='Deletar' alt='Icone Deletar' src='{$smarty.const.URL_IMAGENS}icons/page_white_delete.png'> Deletar
+					    	<img width='11' title='Editar' alt='Icone Editar' src='{$smarty.const.URL_IMAGENS}icons/page_white_edit.png' /> Editar |
+					    	<img width='11' title='Deletar' alt='Icone Deletar' src='{$smarty.const.URL_IMAGENS}icons/page_white_delete.png' /> Deletar
 					    </div>
 					    <form method="post" class="right" id="formFiltro" action="{$URL_SITE}{$LINK_BUSCAR}">
 					    	<input type="text" name="buscaGrid" id="campoFiltro" value="{$VALOR_BUSCA}" />
