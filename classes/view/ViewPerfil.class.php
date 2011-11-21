@@ -205,13 +205,26 @@ class ViewPerfil extends AbsViewClass {
 
 			$arrIdDocumentos = self::getObjDocumentoUsuario()->getDocumentosUsuario($id);
 
+			$auxServEquip = 0;
 			for ($i = 0; $i < sizeof($arrIdDocumentos); $i++) {
-				$arrConteudoDocumentos[$i] = Utf8Parsers::arrayUtf8Encode(self::getObjServicoEquipDAO()->getConteudoServEquip($arrIdDocumentos[$i][0]));
-				$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudTelaConfirmaReserva&a=form&idUsr=".$id."&id=".$arrIdDocumentos[$i][0]);
-				array_unshift($arrConteudoDocumentos[$i], $link);
+				switch ($arrIdDocumentos[$i][1]) {
+					case TIPODOC_SERVEQUIP:
+
+						$arrConteudoServEquip[$auxServEquip] = Utf8Parsers::arrayUtf8Encode(self::getObjServicoEquipDAO()->getConteudoServEquip($arrIdDocumentos[$i][0], 0));
+						$arrLinksServEquip[$auxServEquip][0] = $arrIdDocumentos[$i][0];
+						$arrLinksServEquip[$auxServEquip][1] = self::organizaLinksServEquip($arrConteudoServEquip[$auxServEquip]);
+						$auxServEquip++;
+						break;
+
+					default:
+						break;
+				}
+
 			}
-//			self::debuga($arrConteudoDocumentos);
-			parent::getObjSmarty()->assign("ARRDOCUMENTOS", $arrConteudoDocumentos);
+			parent::getObjSmarty()->assign("ARRSERVEQUIP", $arrConteudoServEquip);
+			parent::getObjSmarty()->assign("ARRLINKSSERVEQUIP", $arrLinksServEquip);
+//			self::debuga($arrLinksServEquip);
+			parent::getObjSmarty()->assign("ARRDOCUMENTOS", $arrConteudoServEquip);
 			if (isset ($strTplPerfilHome) && $strTplPerfilHome != ""){
 
 				return $strTplPerfilHome;
@@ -226,6 +239,49 @@ class ViewPerfil extends AbsViewClass {
 		}
 
 		return FWK_HTML_DEFAULT."perfilUsuario_home.tpl";
+	}
+
+	private function organizaLinksServEquip($arrConteudoServEquip){
+		$idDocumento = $arrConteudoServEquip["id_documento"];
+		$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudTelaConfirmaReserva&a=form&idUsr=".parent::getObjSessao()->getIdUsuario()."&id=".$idDocumento);
+
+		$arrLinks[0]["nome_link"] = "Reservas - Listagem";
+		$arrLinks[0]["link"] = $link;
+
+		switch ($arrConteudoServEquip["id_tipo_serv_equip"]) {
+			case HOSPEDAGEM:
+				$link="?m=".self::getObjCrypt()->cryptData("inventario&f=CrudHospedagem&a=step1&id=".$idDocumento);
+				$arrLinks[1]["nome_link"] = "Inventário B1 - Hospedagem";
+				$arrLinks[1]["link"] = $link;
+
+				$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudDadosComerciaisHotel&a=formHotel&id=".$idDocumento);
+				$arrLinks[2]["nome_link"] = "Dados Comerciais";
+				$arrLinks[2]["link"] = $link;
+				break;
+			case GASTRONOMIA:
+				$link="?m=".self::getObjCrypt()->cryptData("inventario&f=CrudGastronomia&a=step1&id=".$idDocumento);
+				$arrLinks[1]["nome_link"] = "Inventário B2 - Gastronomia";
+				$arrLinks[1]["link"] = $link;
+
+				$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudDadosComerciaisGastro&a=formGastro&id=".$idDocumento);
+				$arrLinks[2]["nome_link"] = "Dados Comerciais";
+				$arrLinks[2]["link"] = $link;
+				break;
+			case TRANSPORTE:
+				$link="?m=".self::getObjCrypt()->cryptData("inventario&f=CrudTransporte&a=step1&id=".$idDocumento);
+				$arrLinks[1]["nome_link"] = "Inventário B4 - Transporte";
+				$arrLinks[1]["link"] = $link;
+
+				break;
+
+			default:
+				break;
+		}
+
+
+//		self::debuga($arrConteudoServEquip);
+
+		return $arrLinks;
 	}
 
 	private function getObjServicoEquipDAO(){

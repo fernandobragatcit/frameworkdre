@@ -71,7 +71,9 @@ class DocumentoUsuario extends AbsModelCruds{
 
     public function getDocumentosUsuario($idUsuario){
 
-    	$strQuery = "SELECT id_documento FROM fwk_documento_usuario
+    	$strQuery = "SELECT fd.id_documento, id_tipo_documento
+    				FROM fwk_documento_usuario fdu
+    				JOIN fwk_documento fd ON fd.id_documento = fdu.id_documento
     				WHERE id_usuario = '".$idUsuario."'";
 
 		return ControlDb::getAll($strQuery);

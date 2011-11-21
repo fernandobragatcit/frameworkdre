@@ -686,7 +686,7 @@ function verificaComboInArray(objCombo, arrValores, idCampo){
 			existe = true;
 		}
 	}
-	
+
 	if(existe)
 		jQuery("#" + idCampo ).show();
 	else
