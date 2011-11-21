@@ -173,7 +173,7 @@ class ControlGrid {
 	 * @since 1.1 - 10/08/2011
 	 */
 	private function regDadosGrid($pagAtual, $buscaGrid, $arrFiltro=null) {
-		$this->busca = ($_POST["buscaGrid"])?$_POST["buscaGrid"]:$buscaGrid;
+		$this->busca = ($_POST["buscaGrid"])?addslashes($_POST["buscaGrid"]):$buscaGrid;
 		self::trataFiltro($arrFiltro);
 		self::registraCss();
 		self::registraJs();
@@ -567,12 +567,17 @@ class ControlGrid {
 			}
 
 			if($this->busca != ""){
-				$arrBusca = FormataPost::limpaArray(explode(" ", $this->busca));
+				$arrBusca = $this->busca;
+				$arrBusca = explode('\"', $arrBusca);
+				if(count($arrBusca) <= 1)
+					$arrBusca = explode(" ", $this->busca);
+				$arrBusca = FormataPost::limpaArray($arrBusca);
+				sort($arrBusca);
 				if(count($arrBusca)>0){
 					for($i=0; $i<count($arrBusca); $i++){
 						$strQuery .= ($i == 0)?"(":"";
 
-						$strQuery .= str_replace("#BUSCA#", strtolower($arrBusca[$i]), trim((string)self::getObjXml()->query->whereBusca));
+						$strQuery .= str_replace("#BUSCA#", utf8_decode($arrBusca[$i]), trim((string)self::getObjXml()->query->whereBusca));
 
 						$strQuery .= ($i != count($arrBusca)-1)?" OR ":"";
 						$strQuery .= ($i == count($arrBusca)-1)?")":"";
@@ -611,7 +616,7 @@ class ControlGrid {
 			$strQuery .= " ORDER BY ";
 			$strQuery .= trim((string)self::getObjXml()->query->orderBy);
 		}
-//		die($strQuery);
+//self::debuga($strQuery);
 		//trata valores especiais query
 
 		return $strQuery;
