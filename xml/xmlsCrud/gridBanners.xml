@@ -15,7 +15,7 @@
 			LEFT JOIN fwk_tipo_basico tb
 			ON ba.id_categoria_banner = tb.id_tipo_basico
 		</from>
-		<orderBy>ba.nome_imagem, tb.desc_tipo_basico</orderBy>
+		<orderBy>tb.desc_tipo_basico, ba.nome_imagem</orderBy>
 	</query>
 	<buttons>
 		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />

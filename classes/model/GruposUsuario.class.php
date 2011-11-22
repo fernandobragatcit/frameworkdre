@@ -75,5 +75,15 @@ class GruposUsuario extends AbsModelCruds{
 
     	return ControlDb::getAll($strQuery);
     }
+    
+
+    public function getLastGrupoUsuario($idUsuario){
+
+    	$strQuery = "SELECT id_grupo
+    				 FROM fwk_grupo_usuario
+    				 WHERE id_usuario = '".$idUsuario."'";
+
+    	return ControlDb::getRow($strQuery);
+    }
 }
 ?>
