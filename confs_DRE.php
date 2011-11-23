@@ -98,6 +98,7 @@ define("DIREITOS_USUARIO",2);
  define("BIB_CAPTCHA",CAPTCHA_PASTA."securimage.php");
  define("CAPTCHA_SHOW",URL_BIBLIOTECAS_DRE."captcha/securimage_show.php");
  define("BIB_FACEBOOK",BIBLIOTECAS_DRE."facebook/src/facebook.php");
+ define("BIB_ISMOBILE",BIBLIOTECAS_DRE."ismobile/ismobile.class.php");
 
 
  define("MSG_ERRO_LOGIN","Email e/ou senha invalidos.");
