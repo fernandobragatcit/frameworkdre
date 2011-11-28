@@ -162,6 +162,13 @@ function setCampoComparavel(id,idComp,txt,erro){
 	this.arrTxtErroFieldsComp.push(erro);
 }
 
+function unsetCampoComparavel(id,idComp,txt,erro){
+	this.arrIdFieldsComp.pop(id);
+	this.arrIdCompFields.pop(idComp);
+	this.arrTxtFieldsComp.pop(txt);
+	this.arrTxtErroFieldsComp.pop(erro);
+}
+
 function setTamanhoCampos(id,txt,max, min){
 	this.arrIdFieldsTam.push(id);
 	this.arrTxtFieldsTam.push(txt);
