@@ -38,6 +38,8 @@ class FormataPost {
 						if($valor1 != $valor2)
 							$novoArray[strtolower($key1)] = $valor2;
 			return $novoArray;
+		}else{
+			return $post;
 		}
 	}
 

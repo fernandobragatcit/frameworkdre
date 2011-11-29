@@ -94,7 +94,7 @@ function validaCamposEspeciais(erro){
 		for(var i=0;i<this.arrIdFieldsEspec.length;i++){
 			switch (this.arrTipoFieldsEspec[i]) {
 				case "email":
-					if(verificaEmail(this.arrIdFieldsEspec[i])){
+					if(verificaEmail(this.arrIdFieldsEspec[i]) && jQuery('#'+this.arrIdFieldsEspec[i]).val() != ""){
 						erro = false;
 						setErroField(this.arrIdFieldsEspec[i],this.arrTxtFieldsEspec[i],this.arrTxtErroFieldsEspec[i]);
 					}
@@ -105,7 +105,7 @@ function validaCamposEspeciais(erro){
 						if(jQuery('#'+this.arrIdFieldsEspec[i]).val() == ""){
 							jQuery('#'+this.arrIdFieldsEspec[i]).val(null);
 						}
-						if(!soNumeros(jQuery('#'+this.arrIdFieldsEspec[i]).val())){
+						if(!soNumeros(jQuery('#'+this.arrIdFieldsEspec[i]).val()) && jQuery('#'+this.arrIdFieldsEspec[i]).val() != ""){
 							erro = false;
 							setErroField(this.arrIdFieldsEspec[i],this.arrTxtFieldsEspec[i],this.arrTxtErroFieldsEspec[i]);
 						}
