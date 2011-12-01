@@ -616,7 +616,8 @@ class ControlGrid {
 			$strQuery .= " ORDER BY ";
 			$strQuery .= trim((string)self::getObjXml()->query->orderBy);
 		}
-//self::debuga($strQuery);
+
+//		self::debuga($strQuery);
 		//trata valores especiais query
 
 		return $strQuery;

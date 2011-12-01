@@ -11,6 +11,7 @@ require_once(CLASSES_DAO."UsrEnderecoDAO.class.php");
 require_once(CLASSES_DAO."UsrContatoDAO.class.php");
 require_once(CLASSES_DAO."FotosDAO.class.php");
 require_once(CLASSES_DAO."ServicoEquipDAO.class.php");
+require_once(CLASSES_DAO."PlanosComerciaisDAO.class.php");
 require_once(FWK_MODEL."DocumentoUsuario.class.php");
 
 require_once(FWK_CONTROL."ControlSessao.class.php");
@@ -24,6 +25,7 @@ class ViewPerfil extends AbsViewClass {
 	private $ctrlPerfil;
 	private $envio;
 	private $objFoto;
+	private $objPlanosComerciais;
 
 	public function executa($get, $post, $file) {
 		switch ($get["a"]) {
@@ -245,45 +247,88 @@ class ViewPerfil extends AbsViewClass {
 		$idDocumento = $arrConteudoServEquip["id_documento"];
 		$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudTelaConfirmaReserva&a=form&idUsr=".parent::getObjSessao()->getIdUsuario()."&id=".$idDocumento);
 
-		$arrLinks[0]["nome_link"] = "Reservas - Listagem";
-		$arrLinks[0]["link"] = $link;
+		$arrPlano =  Utf8Parsers::arrayUtf8Encode(self::getObjPlanosComerciaisDAO()->getDadosPlanoDocumento($idDocumento, 0));
+
+		$i = 0;
+		if($arrPlano["permite_reserva"] == "C" || $arrPlano["permite_reserva"] == "O"){
+			$arrLinks[$i]["nome_link"] = "Reservas - Listagem";
+			$arrLinks[$i]["link"] = $link;
+			$i++;
+		}
+//		self::debuga($arrLinks);
+
 
 		switch ($arrConteudoServEquip["id_tipo_serv_equip"]) {
 			case HOSPEDAGEM:
 				$link="?m=".self::getObjCrypt()->cryptData("inventario&f=CrudHospedagem&a=step1&id=".$idDocumento);
-				$arrLinks[1]["nome_link"] = "Inventário B1 - Hospedagem";
-				$arrLinks[1]["link"] = $link;
+				$arrLinks[$i]["nome_link"] = "Inventário B1 - Hospedagem";
+				$arrLinks[$i]["link"] = $link;
+				$i++;
 
 				$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudDadosComerciaisHotel&a=formHotel&id=".$idDocumento);
-				$arrLinks[2]["nome_link"] = "Dados Comerciais";
-				$arrLinks[2]["link"] = $link;
+				$arrLinks[$i]["nome_link"] = "Dados Comerciais";
+				$arrLinks[$i]["link"] = $link;
+				$i++;
+
+				if($arrPlano["permite_reserva"] == "C"){
+					$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudAcomodacoes&a=listaAcomodacoes&id=".$idDocumento);
+					$arrLinks[$i]["nome_link"] = "Acomodações";
+					$arrLinks[$i]["link"] = $link;
+					$i++;
+				}
+
 				break;
 			case GASTRONOMIA:
 				$link="?m=".self::getObjCrypt()->cryptData("inventario&f=CrudGastronomia&a=step1&id=".$idDocumento);
-				$arrLinks[1]["nome_link"] = "Inventário B2 - Gastronomia";
-				$arrLinks[1]["link"] = $link;
+				$arrLinks[$i]["nome_link"] = "Inventário B2 - Gastronomia";
+				$arrLinks[$i]["link"] = $link;
+				$i++;
 
 				$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudDadosComerciaisGastro&a=formGastro&id=".$idDocumento);
-				$arrLinks[2]["nome_link"] = "Dados Comerciais";
-				$arrLinks[2]["link"] = $link;
+				$arrLinks[$i]["nome_link"] = "Dados Comerciais";
+				$arrLinks[$i]["link"] = $link;
+				$i++;
+
+				if($arrPlano["permite_reserva"] == "C"){
+					$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudEspacoMesa&a=listaEspacoMesa&id=".$idDocumento);
+					$arrLinks[$i]["nome_link"] = "Espaço/Mesa";
+					$arrLinks[$i]["link"] = $link;
+					$i++;
+
+					$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudCardapio&a=listaCardapios&id=".$idDocumento);
+					$arrLinks[$i]["nome_link"] = "Cardápio";
+					$arrLinks[$i]["link"] = $link;
+					$i++;
+				}
+
 				break;
 			case TRANSPORTE:
 				$link="?m=".self::getObjCrypt()->cryptData("inventario&f=CrudTransporte&a=step1&id=".$idDocumento);
-				$arrLinks[1]["nome_link"] = "Inventário B4 - Transporte";
-				$arrLinks[1]["link"] = $link;
+				$arrLinks[$i]["nome_link"] = "Inventário B4 - Transporte";
+				$arrLinks[$i]["link"] = $link;
+				$i++;
 
+				if($arrPlano["permite_reserva"] == "C"){
+					$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudVeiculo&a=listaVeiculo&id=".$idDocumento);
+					$arrLinks[$i]["nome_link"] = "Veículos";
+					$arrLinks[$i]["link"] = $link;
+					$i++;
+				}
 				break;
-
 			default:
 				break;
 		}
-
 
 //		self::debuga($arrConteudoServEquip);
 
 		return $arrLinks;
 	}
 
+	private function getObjPlanosComerciaisDAO(){
+		if($this->objPlanosComerciais == null)
+			$this->objPlanosComerciais = new PlanosComerciaisDAO();
+		return $this->objPlanosComerciais;
+	}
 	private function getObjServicoEquipDAO(){
 		if($this->objServicoEquip == null)
 			$this->objServicoEquip = new ServicoEquipDAO();
