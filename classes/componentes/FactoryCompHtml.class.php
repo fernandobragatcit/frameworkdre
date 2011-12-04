@@ -70,6 +70,7 @@ class FactoryCompHtml {
 		$objBtn->setTipo(self::getTipo());
 		$objBtn->setParam1(self::getParamWhere1());
 		$objBtn->setParam2(self::getParamWhere2());
+		$objBtn->setIdReferencia(self::getIdReferencia());
 		$objBtn->setCategoria(self::getCategoria());
 		$objBtn->setClass($this->strClassAtual);
 		$objBtn->getComponente($label);

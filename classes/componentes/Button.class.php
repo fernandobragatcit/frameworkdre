@@ -25,6 +25,13 @@ class Button extends AbsCompHtml {
     public function setParam2($param2 = null){
 		$this->strParam2 =$param2;
     }
+    public function setIdReferencia($idReferencia = null){
+		$this->idReferencia =$idReferencia;
+    }
+
+    public function getIdReferencia(){
+		return $this->idReferencia;
+    }
 
     public function getParam2(){
 		return $this->strParam2;
@@ -74,7 +81,8 @@ class Button extends AbsCompHtml {
 			$strMens = $this->objXmlComp->mens;
 			if( $this->objXmlComp->confirme == "?")
 				return "onClick=\"return confirmIr('?','".$strMens."')\"";
-			$strCam = $this->objCrypt->cryptData((self::getCategoria()!=""?self::getCategoria()."&f=":"").parent::getClass()."&".(string)$this->objXmlComp->goto);
+				
+			$strCam = $this->objCrypt->cryptData((self::getCategoria()!=""?self::getCategoria()."&f=":"").parent::getClass()."&".(((string)$this->objXmlComp->goto != "")?(string)$this->objXmlComp->goto."&":"").(((string)$this->objXmlComp->param1 != "")?(string)$this->objXmlComp->param1."=".self::getIdReferencia()."&":""));
 			return "onClick=\"return confirmIr('?".FormataLink::definiTipoLink(self::getTipo())."=".$strCam."','".$strMens."')\";";
 		}
     }
