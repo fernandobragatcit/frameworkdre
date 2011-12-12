@@ -8,10 +8,10 @@
 		</td>
 		<td  class="tdListBoxCentro">
 			<input type="button" style="width:30px" name="insere" value="&gt;&gt;"
-				OnClick="addListBox('{$ID_COMP}_source','{$ID_COMP}_dest','{$NOME_COMP}')" />
+				onclick="addListBox('{$ID_COMP}_source','{$ID_COMP}_dest','{$NOME_COMP}')" />
 			<br />
 			<input type="button" style="width:30px" name="deleta" value="&lt;&lt;"
-				OnClick="delListBox('{$ID_COMP}_dest','{$ID_COMP}_source','{$NOME_COMP}')" />
+				onclick="delListBox('{$ID_COMP}_dest','{$ID_COMP}_source','{$NOME_COMP}')" />
 			<br />
 		</td>
 		<td  class="tdListBoxDir">

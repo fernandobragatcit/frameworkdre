@@ -49,7 +49,7 @@ class FormataLink {
 			if ( $var != null and $var != "" and $var != $strVarFiltro) {
 				if ( $value != null and $value != "") {
 					if ( $boolTemVar ) {
-						$strBase .= "&{$var}={$value}";
+						$strBase .= "&amp;{$var}={$value}";
 					}
 					else {
 						$strBase .= "?{$var}={$value}";
@@ -62,7 +62,7 @@ class FormataLink {
 		// Acrescentando ao final a variavel do filtro
 		if ( $incluiAmp ) {
 			if ( $boolTemVar ) {
-				$strBase .= "&";
+				$strBase .= "&amp;";
 			}
 			else {
 				$strBase .= "?";

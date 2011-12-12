@@ -59,13 +59,17 @@ class Button extends AbsCompHtml {
 	    		$this->objSmarty->assign("VALUE_COMP",$this->strLabelBtn);
 	    	else
 	    		$this->objSmarty->assign("VALUE_COMP",self::getValueBtn());
+	    		
 	    	if(isset($this->objXmlComp->name) && !isset($this->objXmlComp->id) ){
-	    		$this->objSmarty->assign("ID_COMP",$this->objXmlComp->name);
+	    		if(!isset($this->objXmlComp->semId))
+	    			$this->objSmarty->assign("ID_COMP","id=\"".$this->objXmlComp->name."\"");
 	    		$this->objSmarty->assign("NAME_COMP",$this->objXmlComp->name);
 	    	}else if(isset($this->objXmlComp->id) && !isset($this->objXmlComp->name) ){
-	    		$this->objSmarty->assign("ID_COMP",$this->objXmlComp->id);
+	    		if(!isset($this->objXmlComp->semId))
+	    			$this->objSmarty->assign("ID_COMP","id=\"".$this->objXmlComp->name."\"");
 	    		$this->objSmarty->assign("NAME_COMP",$this->objXmlComp->id);
 	    	}
+	    	
 	    	$this->objSmarty->assign("ACTION_COMP",self::getActionBtn());
 	    	$this->objSmarty->assign("GOTO_COMP",self::getGoToBtn());
 	    	$this->objSmarty->assign("CONFIRME_COMP",self::getConfirmeBtn());

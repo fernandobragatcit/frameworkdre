@@ -126,24 +126,31 @@ abstract class AbsCompHtml{
 			case "inteiro" :
 			case "integer":
 				self::getObjSmarty()->assign("ONKEYPRESS_COMP","onkeypress=\"mascara(this,soNumeros)\"");
+				self::getObjSmarty()->assign("TYPE_COMP","text");
 				break;
 			case "cpf":
 				self::getObjSmarty()->assign("ONKEYPRESS_COMP","onkeypress=\"mascara(this,cpf)\"");
+				self::getObjSmarty()->assign("TYPE_COMP","text");
 				break;
 			case "cnpj":
 				self::getObjSmarty()->assign("ONKEYPRESS_COMP","onkeypress=\"mascara(this,cnpj)\"");
+				self::getObjSmarty()->assign("TYPE_COMP","text");
 				break;
 			case "telefone":
 				self::getObjSmarty()->assign("ONKEYPRESS_COMP","onkeypress=\"mascara(this,telefone)\"");
+				self::getObjSmarty()->assign("TYPE_COMP","text");
 				break;
 			case "email":
 				self::getObjSmarty()->assign("ONKEYPRESS_COMP","onkeypress=\"mascara(this,email)\"");
+				self::getObjSmarty()->assign("TYPE_COMP","text");
 				break;
 			case "cep":
 				self::getObjSmarty()->assign("ONKEYPRESS_COMP","onkeypress=\"mascara(this,cep)\"");
+				self::getObjSmarty()->assign("TYPE_COMP","text");
 				break;
 			case "hora":
 				self::getObjSmarty()->assign("ONKEYPRESS_COMP","onkeypress=\"mascara(this,hora)\"");
+				self::getObjSmarty()->assign("TYPE_COMP","text");
 				break;
 			case "double":
 				$strUnidade = 3;
@@ -153,18 +160,22 @@ abstract class AbsCompHtml{
 				if(isset(self::getObjXmlCompDados()->masckDec) && (string)self::getObjXmlCompDados()->masckDec !="" )
 					$strDecimais = (string)self::getObjXmlCompDados()->masckDec;
 				self::getObjSmarty()->assign("ONKEYPRESS_COMP","onkeypress=\"mascaraParams(this,double, ".$strUnidade.", ".$strDecimais.")\"");
+				self::getObjSmarty()->assign("TYPE_COMP","text");
 				break;
 			case "site":
 				self::getObjSmarty()->assign("ONKEYPRESS_COMP","onkeypress=\"mascara(this,site)\"");
+				self::getObjSmarty()->assign("TYPE_COMP","text");
 				break;
 			case "longlat":
 				self::getObjSmarty()->assign("ONKEYPRESS_COMP","onkeypress=\"mascara(this,longlat)\"");
+				self::getObjSmarty()->assign("TYPE_COMP","text");
 				break;
 			case "text":
 				self::getObjSmarty()->assign("ONKEYPRESS_COMP"," ");
 				break;
 			case "data":
 				self::getObjSmarty()->assign("FILE_PATH_CALENDAR",FWK_JS."vlaCalendar.v2.1/inc/");
+				self::getObjSmarty()->assign("TYPE_COMP","text");
 				break;
 			case "file":
 				if((string)self::getObjXmlCompDados()->colocaNull == "true")
@@ -225,7 +236,7 @@ abstract class AbsCompHtml{
     		self::getObjSmarty()->assign("ESTILO_CALENDARIO","");
 
 		if(isset(self::getObjXmlCompDados()->onchange) && self::getObjXmlCompDados()->onchange!="")
-			self::getObjSmarty()->assign("ONCHANGE_COMP","onChange=\"".(string)self::getObjXmlCompDados()->onchange."\"");
+			self::getObjSmarty()->assign("ONCHANGE_COMP","onchange=\"".(string)self::getObjXmlCompDados()->onchange."\"");
 		else
 			self::getObjSmarty()->assign("ONCHANGE_COMP","");
 
@@ -279,6 +290,16 @@ abstract class AbsCompHtml{
     		self::getObjSmarty()->assign("ONKEYPRESS_COMP","onkeypress=\"".self::getObjXmlCompDados()->onkeypress."\"");
     	else
     		self::getObjSmarty()->assign("ONKEYPRESS_COMP"," ");
+
+    	if(self::getObjXmlCompDados()->rows!= "" )
+    		self::getObjSmarty()->assign("ROWS_COMP","rows=\"".self::getObjXmlCompDados()->rows."\"");
+    	else
+    		self::getObjSmarty()->assign("ROWS_COMP","rows=\"3\"");
+
+    	if(self::getObjXmlCompDados()->cols!= "" )
+    		self::getObjSmarty()->assign("COLS_COMP","cols=\"".self::getObjXmlCompDados()->cols."\"");
+    	else
+    		self::getObjSmarty()->assign("COLS_COMP","cols=\"30\"");
 		
 		if(self::getValue() != "")
     		self::getObjSmarty()->assign("VALUE_COMP",utf8_encode(self::getValue()));

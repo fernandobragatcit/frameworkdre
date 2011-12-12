@@ -121,13 +121,13 @@ class Form{
 	private function getAtributosAction(){
 		$strAddCation = "";
 		if(isset($this->objXML->attributes()->paramAction1) && $this->objXML->attributes()->paramAction1!="")
-			$strAddCation .= "&atrib1=".self::getObjCrypt()->cryptData((string)$this->objXML->attributes()->paramAction1);
+			$strAddCation .= "&amp;atrib1=".self::getObjCrypt()->cryptData((string)$this->objXML->attributes()->paramAction1);
 		if(isset($this->objXML->attributes()->paramAction2) && $this->objXML->attributes()->paramAction2!="")
-			$strAddCation .= "&atrib2=".self::getObjCrypt()->cryptData((string)$this->objXML->attributes()->paramAction2);
+			$strAddCation .= "&amp;atrib2=".self::getObjCrypt()->cryptData((string)$this->objXML->attributes()->paramAction2);
 		if(isset($this->objXML->attributes()->paramAction3) && $this->objXML->attributes()->paramAction3!="")
-			$strAddCation .= "&atrib3=".self::getObjCrypt()->cryptData((string)$this->objXML->attributes()->paramAction3);
+			$strAddCation .= "&amp;atrib3=".self::getObjCrypt()->cryptData((string)$this->objXML->attributes()->paramAction3);
 		if(isset($this->objXML->attributes()->tipo) && $this->objXML->attributes()->tipo!="")
-			$strAddCation .= "&tipo=".self::getObjCrypt()->cryptData((string)$this->objXML->attributes()->tipo);
+			$strAddCation .= "&amp;tipo=".self::getObjCrypt()->cryptData((string)$this->objXML->attributes()->tipo);
 		return $strAddCation;
 	}
 

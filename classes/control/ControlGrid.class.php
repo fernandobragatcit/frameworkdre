@@ -182,6 +182,11 @@ class ControlGrid {
 		self::regBtnsGrid();
 		self::getObjSmarty()->assign("ARR_TITULOS", self::getColTitulos());
 		$arrDadosGrid = self::getDadosDb(self::getInicioPaginacao($pagAtual));
+		foreach ($arrDadosGrid as $key => $array){
+			foreach ($array as $key2 => $valor){
+				$arrDadosGrid[$key][$key2] = str_replace("&", "&amp;", $valor);
+			}
+		}
 		self::getObjSmarty()->assign("NUM_DADOS_INI", count($arrDadosGrid) > 0 ? "TRUE" : "FALSE");
 		self::getObjSmarty()->assign("ARR_DADOS", self::verTipoDados(self::doFieldFormat($arrDadosGrid)));
 		self::getObjSmarty()->assign("LINK_BUSCAR", self::makeLinkPag(""));
@@ -511,7 +516,7 @@ class ControlGrid {
 
 
 								if ($index == $cont && $permissao == true) {
-									$newData .= " " . $objForAction->gridConfirm($data, $value, self::getClassGrid(), "<img width='14' title='Deletar' alt='Deletar' src='".URL_IMAGENS."icons/page_white_delete.png'>", "Tem certeza que gostaria de deletar este registro?",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
+									$newData .= " " . $objForAction->gridConfirm($data, $value, self::getClassGrid(), "<img width='14' title='Deletar' alt='Deletar' src='".URL_IMAGENS."icons/page_white_delete.png' />", "Tem certeza que gostaria de deletar este registro?",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							default :
