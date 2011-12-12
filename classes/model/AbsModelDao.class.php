@@ -295,6 +295,17 @@ class AbsModelDao extends ADOdb_Active_Record{
 		return $this->objCripto;
 	}
 
+	protected function setDadosPost($arrDados, $post){
+		if(count($arrDados)>0 && count($post)>0){
+			foreach ($arrDados as $key1 => $valor1)
+				foreach ($post as $key2 => $valor2)
+					if($key1 == $key2)
+						if($valor1 != $valor2)
+							if($this->$key1 != $valor2)
+								$this->$key1 = $valor2;
+		}
+	}
+
 	protected function setIdUserCad($idUserCad, $dataCad = null){
 		if(is_numeric($idUserCad))
 		$this->id_usuario_cad = (int)$idUserCad;
