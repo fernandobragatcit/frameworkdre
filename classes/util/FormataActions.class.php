@@ -25,7 +25,12 @@ class FormataActions {
      * @param String $label: label do link
      * @param String $tipo: tipo de parametro a ser setado
      * @param String $strCategoria: caso seja de alguma categoria, é setado aqui
-     * @return String $strLink: o html do link criado
+     * @return String $strLink: o html do link criado //$strLink = "<a href=\"javascript:void(vaiPara('?".$tipo."=".$link."'))\">".$label."</a>";
+	 * 
+	 * 
+     * @author Matheus Vieira
+     * @since 2.1 - 15/12/2011
+     * @return String $strLink: o html do link criado direto no href, desta forma o botão voltar do navegador funciona.
      */
 	public function gridAction($data,$value,$classe,$label,$tipo = "c",$strCategoria = "",$param1="",$valParam1="",$param2="",$valParam2=""){
 		$strParam = "";
@@ -34,7 +39,7 @@ class FormataActions {
 		if($param2 !="" && $valParam2!="")
 			$strParam2 = "&".$param2."=".$valParam2;
 		$link = self::getObjCrypt()->cryptData(($strCategoria!=""?$strCategoria."&f=":"").$classe."&".$value."&id=".$data.$strParam.$strParam2);
-		$strLink = "<a href=\"javascript:void(vaiPara('?".$tipo."=".$link."'))\">".$label."</a>";
+		$strLink = "<a href=\"?".$tipo."=".$link."\">".$label."</a>";
 		return $strLink;
     }
 
