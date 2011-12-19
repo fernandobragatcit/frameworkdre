@@ -1,5 +1,6 @@
 <?php
 require_once(FWK_DAO."LinkEncurtadoDAO.class.php");
+require_once(FWK_DAO."VerificacaoDAO.class.php");
 require_once(FWK_UTIL."Cryptografia.class.php");
 
 class FormataLink {
@@ -74,7 +75,8 @@ class FormataLink {
 	}
 	
 	/*
-	 * Converte uma url em mini url.
+	 * Converte uma url em mini url. 
+	 * Esta fica salva no banco por um período de 30 dias.
 	 * 
 	 * Exemplo:
 	 * $urlLong = "http://www.tcit.com.br/?m=KAJSD983123LKJADASLKJDAS891230983432KL4JASDLKJSOADSIUASDOIUASDLKU123098="
@@ -96,7 +98,21 @@ class FormataLink {
 	public static function abreMiniUrl($idUrlShort){
 		$objLink = new LinkEncurtadoDAO();
 		$urlLong = $objLink->getUrlById($idUrlShort);
-		header("Location: ".$urlLong);
+		if($urlLong != "")
+			header("Location: ".$urlLong);
+		else{
+			$_SESSION["erro_short_url"] = true;
+			header("Location: ".RET_SERVIDOR."aviso/");
+		}
+	}
+	
+	public static function verificaMiniUrl($tabela){
+		$objVer = new VerificacaoDAO();
+		if(!$objVer->checkHoje($tabela)){
+			$objLink = new LinkEncurtadoDAO();
+			$objLink->verificaMiniUrl();
+			$objVer->setVerificacao($tabela);
+		}
 	}
 	
 }

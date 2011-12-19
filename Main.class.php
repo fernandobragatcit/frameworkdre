@@ -12,6 +12,7 @@ require_once (FWK_CONTROL."ControlFactory.class.php");
 require_once (FWK_VIEW."ViewMenu.class.php");
 
 require_once(FWK_UTIL."FormataParametros.class.php");
+require_once(FWK_UTIL."FormataLink.class.php");
 
 require_once (FWK_EXCEPTION."HtmlException.class.php");
 require_once (FWK_EXCEPTION."XMLException.class.php");
@@ -186,6 +187,7 @@ class Main {
 			$objFormatParam->setParametros($arrGet);
 			self::registraTagsBasicas($objFormatParam->getParametros(), $arrPost);
 			self::regsMenu();
+			self::verificaShortUrl();
 			$this->getObjHttp()->escreEm(self::getAssinaturaMenu(),self::getTplEstruturaMenu());
 			$objFactoryTela = new ControlFactory($srcClass);
 			$objFactoryTela->setDirClassDefault(self::getPastaClassesView());
@@ -423,6 +425,16 @@ class Main {
 		}catch(HtmlException $e){
 			die("ViewAdminPage()->telaLogin(): ".self::getTplRecuperaSenha().$e->__toString());
 		}
+	}
+
+	/**
+	 * Realiza a limpeza das short urls.
+	 *
+	 * @author Matheus Vieira
+	 * @since 1.0 - 15/12/2011
+	 */
+	private function verificaShortUrl(){
+		FormataLink::verificaMiniUrl("fwk_link_encurtado");
 	}
 
 	/**

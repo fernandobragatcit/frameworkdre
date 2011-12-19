@@ -14,9 +14,9 @@ class LinkEncurtadoDAO {
 		try{
 			$objBanco = ControlDb::getBanco();
 			$strQuery = "INSERT INTO ".$this->_table."
-							(url_completa)
+							(url_completa, data_cadastro)
 						VALUES
-							('".$urlLong."')";
+							('".$urlLong."', CURDATE())";
 			if(!$objBanco->Execute($strQuery)){
 				if(self::ErrorMsg()){
 					print($strQuery."<br />");
@@ -51,6 +51,20 @@ class LinkEncurtadoDAO {
 					WHERE 
 						url_completa = '".$urlLong."'";
 		return end(ControlDB::getRow($strQuery,3));
+	}
+
+	public function verificaMiniUrl(){
+		$strQuery = "	SELECT id_link
+						FROM ".$this->_table."
+						WHERE CURDATE() > DATE_ADD(data_cadastro, INTERVAL 1 MONTH) ";
+		$arrUrls =  ControlDb::getAll($strQuery);
+		for($i=0; $i<count($arrUrls); $i++){
+			$sql = "DELETE FROM ".$this->_table." WHERE id_link = '".$arrUrls[$i][0]."'";
+			$objBanco = ControlDb::getBanco();
+			$objBanco->Execute($sql);
+			$sql = null;
+			$objBanco = null;
+		}
 	}
 	
 }
