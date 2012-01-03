@@ -17,7 +17,9 @@ class ControlConfiguracoes {
 	private $objCtrlSessao;
 	private $strAssignMenu;
 	private $arrCtrlCss = array();
+	private $arrCtrlCssSim = array();
 	private $arrCtrlJs = array();
+	private $arrCtrlJsSim = array();
 
 	public function __construct() {
     }
@@ -321,6 +323,12 @@ class ControlConfiguracoes {
 			if(is_file($caminhoXml))
 				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
 			else{
+				if(count($this->arrCtrlCssSim) > 0){
+					ksort($this->arrCtrlCssSim);
+				}
+				foreach ($this->arrCtrlCssSim as $css2) {
+					self::getObjCtrlCss()->setStrCss($css2);
+				}
 				foreach ($this->arrCtrlCss as $delCss){
 					self::getObjCtrlCss()->removeCss($delCss);
 				}
@@ -337,10 +345,10 @@ class ControlConfiguracoes {
 					if(count($dadosPortal->portal->stilos->css) != 0){
 						foreach ($dadosPortal->portal->stilos->css as $css) {
 							if($css->attributes()->ativo == "S")
-								self::getObjCtrlCss()->setStrCss(URL_DEP_CSS.$css);
+								$this->arrCtrlCssSim[(int)$css->attributes()->id] = URL_DEP_CSS.$css;
 							else if($css->attributes()->ativo == "N")
 								$this->arrCtrlCss[] = URL_DEP_CSS.$css;
-						}
+						}	
 					}
 				}
 			}
@@ -355,6 +363,12 @@ class ControlConfiguracoes {
 			if(is_file($caminhoXml)){
 				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
 			}else{
+				if(count($this->arrCtrlJsSim) > 0){
+					ksort($this->arrCtrlJsSim);
+				}
+				foreach ($this->arrCtrlJsSim as $js) {
+					self::getObjCtrlJs()->setStrJs($js, false);
+				}
 				foreach ($this->arrCtrlJs as $delJs){
 					self::getObjCtrlJs()->removeJs($delJs);
 				}
@@ -370,7 +384,7 @@ class ControlConfiguracoes {
 					if(count($dadosPortal->portal->javascripts->js) != 0){
 						foreach ($dadosPortal->portal->javascripts->js as $strJs) {
 							if($strJs->attributes()->ativo == "S"){
-								self::getObjCtrlJs()->setStrJs(URL_DEP_JS.$strJs, false);
+								$this->arrCtrlJsSim[(int)$strJs->attributes()->id] = URL_DEP_JS.$strJs;
 							}
 							else if($strJs->attributes()->ativo == "N")
 								$this->arrCtrlJs[] = URL_DEP_JS.$strJs;
