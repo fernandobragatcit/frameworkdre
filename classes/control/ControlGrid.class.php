@@ -543,8 +543,9 @@ class ControlGrid {
 		$strQuery .= self::getObjXml()->query->campos;
 		$strQuery .= " FROM ";
 		$strQuery .= self::getTablesQuery();
+		$strQuery .= " WHERE 1 = 1 ";
 		if (trim((string)self::getObjXml()->query->where) != "") {
-			$strQuery .= " WHERE ";
+			$strQuery .= " AND ";
 			$string = trim((string)self::getObjXml()->query->where);
 			$strQuery .= str_replace("#idReferencia#", self::getIdReferencia(),$string);
 			if(self::getVariavelWhere1() != "")
@@ -552,11 +553,7 @@ class ControlGrid {
 		}
 		if (trim((string)self::getObjXml()->query->whereCondicao) != "") {
 			if(self::getVariavelWhere2() != ""){
-				if (trim((string)self::getObjXml()->query->where) != "") {
-					$strQuery .= " AND ";
-				}else{
-					$strQuery .= " WHERE ";
-				}
+				$strQuery .= " AND ";
 				$strQuery .= trim((string)self::getObjXml()->query->whereCondicao);
 				$strQuery .= " ".self::getVariavelWhere2()." ";
 			}
@@ -565,13 +562,8 @@ class ControlGrid {
 		$idUsuario = self::getVariavelUsuario();
 
 		if (trim((string)self::getObjXml()->query->whereBusca) != "") {
-			if (trim((string)self::getObjXml()->query->where) != "" || trim((string)self::getObjXml()->query->whereCondicao) != "") {
-				$strQuery .= " AND ";
-			}else{
-				$strQuery .= " WHERE ";
-			}
-
 			if($this->busca != ""){
+				$strQuery .= " AND ";
 				$arrBusca = $this->busca;
 				$arrBusca = explode('\"', $arrBusca);
 				if(count($arrBusca) <= 1)
@@ -587,30 +579,28 @@ class ControlGrid {
 						$strQuery .= ($i != count($arrBusca)-1)?" OR ":"";
 						$strQuery .= ($i == count($arrBusca)-1)?")":"";
 					}
-				}else{
-					$strQuery .= " 1=1 ";
 				}
-			}else{
-				$strQuery .= " 1=1 ";
 			}
 		}
 
 		if($idUsuario)
 			if (trim((string)self::getObjXml()->query->whereUsuario) != "") {
-				if (trim((string)self::getObjXml()->query->where) != "" || trim((string)self::getObjXml()->query->whereCondicao) != "" || trim((string)self::getObjXml()->query->whereBusca) != "") {
-					$strQuery .= " AND ";
-				}else{
-					$strQuery .= " WHERE ";
-				}
+				$strQuery .= " AND ";
 				$strQuery .= trim((string)self::getObjXml()->query->whereUsuario);
 				$strQuery .= " ".$idUsuario." ";
 			}
 		if ($this->arrFiltros[0] != "") {
 			$strQuery .= " AND ";
-
 			for($fi=0; $fi<count($this->arrFiltros); $fi++){
 				$strQuery .= $this->arrFiltros[$fi];
 				$strQuery .= ($fi != count($this->arrFiltros)-1)?" AND ":"";
+			}
+		}
+		if (self::getCtrlConfiguracoes()->getIdPortal()){
+			$portal = (string)self::getObjXml()->attributes()->portal;
+			if(strtolower((string)self::getObjXml()->attributes()->portal) == "true"){
+				$strQuery .= " AND ";
+				$strQuery .= trim((string)self::getObjXml()->query->campoPortal)." = ".self::getCtrlConfiguracoes()->getIdPortal();
 			}
 		}
 		if (trim((string)self::getObjXml()->query->groupBy) != "") {

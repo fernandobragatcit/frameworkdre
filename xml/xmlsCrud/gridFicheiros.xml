@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Ficheiros" classe="CrudFicheiros">
+<grid titulo="Ficheiros" classe="CrudFicheiros" portal="true">
 	<header>
 		<titulo type="STRING">#Id</titulo>
 		<titulo type="STRING">Título</titulo>
@@ -16,6 +16,7 @@
 		<whereBusca>
 			(id_ficheiro LIKE '%#BUSCA#%' OR titulo_ficheiro LIKE '%#BUSCA#%' OR identificador_ficheiro LIKE '%#BUSCA#%') 
 		</whereBusca>
+		<campoPortal>id_portal</campoPortal>
 		<orderBy>titulo_ficheiro</orderBy>
 	</query>
 	<buttons>

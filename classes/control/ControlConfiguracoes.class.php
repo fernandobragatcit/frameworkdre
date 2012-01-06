@@ -316,6 +316,32 @@ class ControlConfiguracoes {
 		return self::getUrlSite("../".$caminhoXml);
 	}
 
+	/**
+	 * Função de retorno do id_portal em fwk_portal.
+	 *
+	 * @author Matheus
+	 * @since 1.0 - 05/01/2011
+	 */
+	public function getIdPortal($caminhoXml = null){
+		if($caminhoXml == null)
+				$caminhoXml = self::getConfigFile();
+		if($caminhoXml != null){
+			if(is_file($caminhoXml))
+				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
+			else
+				return;
+		}
+		//configura título página
+		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
+			if(!isset($dadosPortal->portal->idPortal) && $dadosPortal->portal->idPortal == ""){
+				return self::getIdPortal("../".$caminhoXml);
+			}else{
+				return (string)$dadosPortal->portal->idPortal;
+			}
+		}
+		return self::getIdPortal("../".$caminhoXml);
+	}
+
 	public function getCssArea($caminhoXml = null){
 		if($caminhoXml == null)
 			$caminhoXml = self::getConfigFile();

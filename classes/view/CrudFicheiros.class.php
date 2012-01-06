@@ -56,8 +56,9 @@ class CrudFicheiros extends AbsCruds {
 					$post["id_foto"] = null;
 				}
 			}
+			$post["id_portal"] = self::getCtrlConfiguracoes()->getIdPortal();
 			self::getClassModel()->alterar($id,self::getXmlForm(),$post,$file);
-			self::vaiPara(self::getStringClass()."&msg=Ã�tem alterado com sucesso!");
+			self::vaiPara(self::getStringClass()."&msg=Ítem alterado com sucesso!");
 		}catch(CrudException $e){
 			self::vaiPara(self::getStringClass()."&msg=".$e->getMensagem());
 		}
