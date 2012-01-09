@@ -205,26 +205,6 @@ class ViewPerfil extends AbsViewClass {
 			parent::getObjSmarty()->assign("IDUSUARIO",$id);
 			$strTplPerfilHome = self::getCtrlPerfil()->getCtrlConfiguracoes()->getCustomCadUsuarios(null, "perfilAdminHome");
 
-			$arrIdDocumentos = self::getObjDocumentoUsuario()->getDocumentosUsuario($id);
-
-			$auxServEquip = 0;
-			for ($i = 0; $i < sizeof($arrIdDocumentos); $i++) {
-				switch ($arrIdDocumentos[$i][1]) {
-					case TIPODOC_SERVEQUIP:
-
-						$arrConteudoServEquip[$auxServEquip] = Utf8Parsers::arrayUtf8Encode(self::getObjServicoEquipDAO()->getConteudoServEquip($arrIdDocumentos[$i][0], 0));
-						$arrLinksServEquip[$auxServEquip][0] = $arrIdDocumentos[$i][0];
-						$arrLinksServEquip[$auxServEquip][1] = self::organizaLinksServEquip($arrConteudoServEquip[$auxServEquip]);
-						$auxServEquip++;
-						break;
-
-					default:
-						break;
-				}
-
-			}
-			parent::getObjSmarty()->assign("ARRSERVEQUIP", $arrConteudoServEquip);
-			parent::getObjSmarty()->assign("ARRLINKSSERVEQUIP", $arrLinksServEquip);
 //			self::debuga($arrLinksServEquip);
 			parent::getObjSmarty()->assign("ARRDOCUMENTOS", $arrConteudoServEquip);
 			if (isset ($strTplPerfilHome) && $strTplPerfilHome != ""){
@@ -241,87 +221,6 @@ class ViewPerfil extends AbsViewClass {
 		}
 
 		return FWK_HTML_DEFAULT."perfilUsuario_home.tpl";
-	}
-
-	private function organizaLinksServEquip($arrConteudoServEquip){
-		$idDocumento = $arrConteudoServEquip["id_documento"];
-		$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudTelaConfirmaReserva&a=form&idUsr=".parent::getObjSessao()->getIdUsuario()."&id=".$idDocumento);
-
-		$arrPlano =  Utf8Parsers::arrayUtf8Encode(self::getObjPlanosComerciaisDAO()->getDadosPlanoDocumento($idDocumento, 0));
-
-		$i = 0;
-		if($arrPlano["permite_reserva"] == "C" || $arrPlano["permite_reserva"] == "O"){
-			$arrLinks[$i]["nome_link"] = "Reservas - Listagem";
-			$arrLinks[$i]["link"] = $link;
-			$i++;
-		}
-//		self::debuga($arrLinks);
-
-
-		switch ($arrConteudoServEquip["id_tipo_serv_equip"]) {
-			case HOSPEDAGEM:
-				$link="?m=".self::getObjCrypt()->cryptData("inventario&f=CrudHospedagem&a=step1&id=".$idDocumento);
-				$arrLinks[$i]["nome_link"] = "Inventário B1 - Hospedagem";
-				$arrLinks[$i]["link"] = $link;
-				$i++;
-
-				$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudDadosComerciaisHotel&a=formHotel&id=".$idDocumento);
-				$arrLinks[$i]["nome_link"] = "Dados Comerciais";
-				$arrLinks[$i]["link"] = $link;
-				$i++;
-
-				if($arrPlano["permite_reserva"] == "C"){
-					$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudAcomodacoes&a=listaAcomodacoes&id=".$idDocumento);
-					$arrLinks[$i]["nome_link"] = "Acomodações";
-					$arrLinks[$i]["link"] = $link;
-					$i++;
-				}
-
-				break;
-			case GASTRONOMIA:
-				$link="?m=".self::getObjCrypt()->cryptData("inventario&f=CrudGastronomia&a=step1&id=".$idDocumento);
-				$arrLinks[$i]["nome_link"] = "Inventário B2 - Gastronomia";
-				$arrLinks[$i]["link"] = $link;
-				$i++;
-
-				$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudDadosComerciaisGastro&a=formGastro&id=".$idDocumento);
-				$arrLinks[$i]["nome_link"] = "Dados Comerciais";
-				$arrLinks[$i]["link"] = $link;
-				$i++;
-
-				if($arrPlano["permite_reserva"] == "C"){
-					$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudEspacoMesa&a=listaEspacoMesa&id=".$idDocumento);
-					$arrLinks[$i]["nome_link"] = "Espaço/Mesa";
-					$arrLinks[$i]["link"] = $link;
-					$i++;
-
-					$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudCardapio&a=listaCardapios&id=".$idDocumento);
-					$arrLinks[$i]["nome_link"] = "Cardápio";
-					$arrLinks[$i]["link"] = $link;
-					$i++;
-				}
-
-				break;
-			case TRANSPORTE:
-				$link="?m=".self::getObjCrypt()->cryptData("inventario&f=CrudTransporte&a=step1&id=".$idDocumento);
-				$arrLinks[$i]["nome_link"] = "Inventário B4 - Transporte";
-				$arrLinks[$i]["link"] = $link;
-				$i++;
-
-				if($arrPlano["permite_reserva"] == "C"){
-					$link="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudVeiculo&a=listaVeiculo&id=".$idDocumento);
-					$arrLinks[$i]["nome_link"] = "Veículos";
-					$arrLinks[$i]["link"] = $link;
-					$i++;
-				}
-				break;
-			default:
-				break;
-		}
-
-//		self::debuga($arrConteudoServEquip);
-
-		return $arrLinks;
 	}
 
 	private function getObjPlanosComerciaisDAO(){

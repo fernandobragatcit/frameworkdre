@@ -22,16 +22,16 @@ class AddBlocoCampos extends AbsCompHtml {
 		self::getObjSmarty()->assign("INICIA",((integer)self::getObjXmlCompDados()->inicio)-1);
 		self::getObjSmarty()->assign("CLASS",(string)self::getObjXmlCompDados()->class);
 		self::getObjSmarty()->assign("CSSAREA",(string)self::getObjXmlCompDados()->cssArea);
-		
+
 		$linhas = (string)self::getObjXmlCompDados()->linhas;
-		
+
 		if(isset($this->objXmlCompChilds->campo)){
 			$arrOptions = array();
 			$arrHidden = array();
 			foreach ($this->objXmlCompChilds->campo as $opcao) {
 				$type = strtolower((string)$opcao->tipo);
 				$strObrig = ((boolean)$opcao->obrigatorio)?" <span class=\"campoObrigatorio\">*</span> ":"";
-				
+
 				switch ($type){
 					case "inteiro":
 						$keypress = "onkeypress=\"mascara(this,soNumeros)\"";
@@ -46,7 +46,7 @@ class AddBlocoCampos extends AbsCompHtml {
 					$keypress = "onkeypress=\"mascaraParams(this,double, ".$strUnidade.", ".$strDecimais.")\"";
 					break;
 				}
-				
+
 				if($type == 'text' || $type == 'data' || $type == 'inteiro' || $type == 'double'){
 					$tipoAux = ($type == 'inteiro' || $type == 'text'|| $type == 'double')?'text':'data';
 					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => $tipoAux, 'keypress' => $keypress,
@@ -54,10 +54,10 @@ class AddBlocoCampos extends AbsCompHtml {
 						'onchange' => "onchange=\"".(string)$opcao->onchange."\"");
 				}
 				elseif($type == 'select'){
-					
+
 					$strQuery = (string)$opcao->query;
 					$strLoop = $opcao->loop;
-					
+
 					if($strQuery != ""){
 						if(strpos($strQuery, "#idReferencia#") > 0){
 							$strQuery = str_replace("#idReferencia#", parent::getIdReferencia(), $strQuery);
@@ -78,7 +78,7 @@ class AddBlocoCampos extends AbsCompHtml {
 						$optionsSelect = $optionPassados;
 						$query = "N";
 					}
-					
+
 					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => strtolower((string)$opcao->tipo),
 					'id' => (string)$opcao->id,'obrigatorio' => $strObrig, 'option' => $optionsSelect, 'query' => $query, 'keypress' => $keypress,
 					'onchange' => "onchange=\"".(string)$opcao->onchange."\"");
@@ -90,10 +90,14 @@ class AddBlocoCampos extends AbsCompHtml {
 						'id' => (string)$opcao->id,'obrigatorio' => $strObrig, 'class' => (string)$opcao->class);
 				}elseif($type == 'hidden'){
 					$arrHidden[]=array('tipo' => $type,	'id' => (string)$opcao->id, 'class' => (string)$opcao->class);
+				}elseif($type == 'checkbox'){
+					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => 'checkbox', 'value'=> (string)$opcao->value,
+						'id' => (string)$opcao->id, 'class' => (string)$opcao->class,
+						'onchange' => "onchange=\"".(string)$opcao->onchange."\"");
 				}
 			}
 		}
-		
+
 		$linhas = array();
 		$linhasAux = array();
 		for($i=0; $i<count($arrOptions); $i++){
@@ -128,7 +132,7 @@ class AddBlocoCampos extends AbsCompHtml {
 
 	private function registraOptions(){
 		try{
-			
+
 			if(!isset(self::getObjXmlCompDados()->classe) || self::getObjXmlCompDados()->classe == "")
 				throw new ElementsException("Não foi passado o parametro 'classe' para o componente AddBlocoCampos");
 
@@ -143,7 +147,7 @@ class AddBlocoCampos extends AbsCompHtml {
 
 			if(!file_exists($caminho.$classe.".class.php"))
 				throw new ElementsException("Não foi a classe passada no caminho correspondente para o componente AddBlocoCampos");
-			
+
 			//tudo ok, chamo o dao
 			require_once($caminho.$classe.".class.php");
 			$objDao = new $classe();
@@ -151,17 +155,17 @@ class AddBlocoCampos extends AbsCompHtml {
 				$arrCampos = $objDao->$metodo(parent::getIdReferencia());
 			else
 				$arrCampos = $objDao->$metodo();
-			
-				
+
+
 			$this->objSmarty->assign("ARR_CAMPOS",$arrCampos);
 			self::getObjSmarty()->assign("DADOS_AUX",(integer)self::getObjXmlCompDados()->inicio);
 			self::getObjSmarty()->assign("DADOS",$arrCampos);
-			
+
 		}catch (ElementsException $e){
 			throw new ElementsException($e->getMensagem());
 		}
-		 
-		 
+
+
 	}
 }
 ?>
