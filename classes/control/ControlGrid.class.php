@@ -481,35 +481,42 @@ class ControlGrid {
 							case "permsDel" :
 								/*
 								 * Como proceder aqui:
-								 * permissão por direito: permsDel="d:168|a=deletar";
-								 * permissão por grupo: permsDel="g:1,2|a=deletar";
+								 * permissão por direito: a=deleta&amp;tipo=direito&amp;idsPerm=168,169";
+								 * permissão por grupo: a=deleta&amp;tipo=grupo&amp;idsPerm=1,2";
+								 * 
+								 * 		@param a = case do switch interno no Crud.
+								 * 		@param tipo = direito(atribuido por direito) | grupo(permitido por grupo).
+								 * 		@param idsPerm = ids que tem permissão, separados por virgula (id do direito no caso de [$tipo = direito] e id do grupo para [$tipo = grupo]) 
+							 	 * 				para verificacao com os dados na sessao do usuário.
 								 *
 								 * @author Matheus Vieira
-								 * @since 1.0 - 10/11/2011
+								 * @since 1.0 - 09/01/2012
 								 *
 								 */
 								$objCtrlSess = new ControlSessao();
 								$objUsuario = $objCtrlSess->getObjSessao(SESSAO_FWK_DRE);
-								$arrGruposUsr = $objUsuario->getGrupoUsuario();
-								$arrDireitosUsr = $objUsuario->getDireitosUsuario();
 								$permissao = false;
-
-								$parametros = explode(":", (string)$value);
-								$tipoPermissao = array_shift($parametros);
-
-								$arrGridPerms = explode("|", $parametros[0]);
-								$value = array_pop($arrGridPerms);
-								$arrGrupoPerms = explode(",", $arrGrupoPerms[0]);
-
-
-								if($tipoPermissao == "d"){
-									foreach ($arrDireitosUsr as $direitoUsr){
-										if(in_array($direitoUsr, $arrGridPerms))
+								$aux = null;
+								$auxPos = null;
+								
+								$aux = explode("&", (string)$value);
+								foreach ($aux as $pos){
+									$auxPos = explode("=", $pos);
+									if($auxPos[0] != "idsPerm")
+										$parametros[$auxPos[0]] = $auxPos[1]; 
+									else{
+										$parametros[$auxPos[0]] =  explode(",", $auxPos[1]);
+									}
+								}
+								
+								if($parametros["tipo"] == "direito"){
+									foreach ($objUsuario->getDireitosUsuario() as $direitoUsr){
+										if(in_array($direitoUsr, $parametros["idsPerm"]))
 											$permissao = true;
 									}
-								}elseif($tipoPermissao == "g"){
-									foreach ($arrGruposUsr as $grupoUsr){
-										if(in_array($grupoUsr, $arrGridPerms))
+								}else{
+									foreach ($objUsuario->getGrupoUsuario() as $grupoUsr){
+										if(in_array($grupoUsr, $parametros["idsPerm"]))
 											$permissao = true;
 									}
 								}
@@ -517,6 +524,55 @@ class ControlGrid {
 
 								if ($index == $cont && $permissao == true) {
 									$newData .= " " . $objForAction->gridConfirm($data, $value, self::getClassGrid(), "<img width='14' title='Deletar' alt='Deletar' src='".URL_IMAGENS."icons/page_white_delete.png' />", "Tem certeza que gostaria de deletar este registro?",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
+								}
+								break;
+							case "permsPers" :
+								/*
+								 * Como proceder aqui:
+								 * permissão por direito: a=listaInscritos&amp;title=Lista Inscrições&amp;icone=application_view_detail.png&amp;tipo=direito&amp;idsPerm=168,169";
+								 * 		@param a = case do switch interno no Crud.
+								 * 		@param title = Texto que aparecerá no atributo alt e title do link e imagem.
+								 * 		@param icone = nome do arquivo de imagem (14x14) dentro da pasta html/imagens/icons/.
+								 * 		@param tipo = direito(atribuido por direito) | grupo(permitido por grupo).
+								 * 		@param idsPerm = ids que tem permissão, separados por virgula (id do direito no caso de [$tipo = direito] e id do grupo para [$tipo = grupo]) 
+							 	 * 				para verificacao com os dados na sessao do usuário.
+								 *
+								 * @author Matheus Vieira
+								 * @since 1.0 - 09/01/2012
+								 *
+								 */
+								$objCtrlSess = new ControlSessao();
+								$objUsuario = $objCtrlSess->getObjSessao(SESSAO_FWK_DRE);
+								$permissao = false;
+								$aux = null;
+								$auxPos = null;
+								
+								$aux = explode("&", (string)$value);
+								foreach ($aux as $pos){
+									$auxPos = explode("=", $pos);
+									if($auxPos[0] != "idsPerm")
+										$parametros[$auxPos[0]] = ($auxPos[0] != "title")?$auxPos[1]:utf8_decode($auxPos[1]); 
+									else{
+										$parametros[$auxPos[0]] =  explode(",", $auxPos[1]);
+									}
+								}
+								
+								if($parametros["tipo"] == "direito"){
+									foreach ($objUsuario->getDireitosUsuario() as $direitoUsr){
+										if(in_array($direitoUsr, $parametros["idsPerm"]))
+											$permissao = true;
+									}
+								}else{
+									foreach ($objUsuario->getGrupoUsuario() as $grupoUsr){
+										if(in_array($grupoUsr, $parametros["idsPerm"]))
+											$permissao = true;
+									}
+								}
+								
+								//self::debuga($value, $parametros);
+
+								if ($index == $cont && $permissao == true) {
+									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='".$parametros["title"]."' alt='".$parametros["title"]."' src='".URL_IMAGENS."icons/".$parametros["icone"]."' />",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							default :
