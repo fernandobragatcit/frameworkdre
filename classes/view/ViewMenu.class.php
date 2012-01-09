@@ -116,15 +116,12 @@ class ViewMenu {
 
     private function getMenuPai(){
     	$strQuery = "SELECT DISTINCT
-						me.nome_menu, me.link_menu, me.id_menu,me.tipo_menu
+						me.nome_menu, me.link_menu, me.id_menu, me.tipo_menu
 					FROM
 						fwk_menu me
-						INNER JOIN fwk_direitos di
-						on me.id_menu = di.id_menu
-						LEFT JOIN fwk_direitos_usuario du
-						ON di.id_direitos = du.id_direitos
-						LEFT JOIN fwk_direitos_grupo dg
-						ON di.id_direitos = dg.id_direitos
+						INNER JOIN fwk_direitos di ON me.id_menu = di.id_menu
+						LEFT JOIN fwk_direitos_usuario du ON di.id_direitos = du.id_direitos
+						LEFT JOIN fwk_direitos_grupo dg	ON di.id_direitos = dg.id_direitos
 						INNER JOIN fwk_grupo gr
 						ON dg.id_grupo = gr.id_grupo
 					WHERE
@@ -203,27 +200,30 @@ class ViewMenu {
     }
 
     private function getSubMenuNetos(){
-		$itemMenu = 0;
-		$itemSubMenu = 0;
-    	$arrSubMenuFi = array();
-    	$arrSubMenuNets = array();
-    	$arrDados = self::getMenuPai();
-    	if(is_array($arrDados) && count($arrDados)>0){
-	    	foreach($arrDados as $menu){
-	    		$itemSubMenu = 0;
-	    		if(is_array($menu) && count($menu)>0){
-		    		foreach(self::getItensMenu($menu[2]) as $subMenus){
-						$arrAdd = self::getSubItensMenu($subMenus[2]);
-						foreach ($arrAdd as $subItemMenu) {
-							$arrNetos = self::getSubItensMenu($subItemMenu[2]);
-							//evita que o menu se repita caso tenham mesmo id menu pai e filho
-							$arrSubMenuNets[$itemMenu][$itemSubMenu++]=($subMenus[2]!=$arrAdd[0][2])?$arrAdd:array();
+    	$arrMenu = self::getMenuPai();
+    	if(is_array($arrMenu) && count($arrMenu)>0){
+    		for($m = 0; $m < count($arrMenu); $m++){
+	    	//foreach($arrMenu as $menu){
+	    	//	$itemSubMenu = 0;
+	    		if(is_array($arrMenu[$m]) && count($arrMenu[$m])>0){
+	    			$arrFilho1 = self::getItensMenu($arrMenu[$m][2]);
+	    			for($f1 = 0; $f1 < count($arrFilho1); $f1++){
+		    		//foreach($arrFilho1 as $filho1){
+						$arrFilho2 = self::getSubItensMenu($arrFilho1[$f1][2]);
+						for($f2 = 0; $f2 < count($arrFilho2); $f2++){
+						//foreach ($arrFilho2 as $filho2) {
+							if(is_array($arrFilho2[$f2]) && count($arrFilho2[$f2])>0){
+								$arrFilho3 = self::getSubItensMenu($arrFilho2[$f2][2]);
+								//evita que o menu se repita caso tenham mesmo id menu pai e filho
+								$arrSubMenuNets[$m][$f1][$f2] = $arrFilho3;
+								//$arrSubMenuNets[$arrMenu[$m]][$arrFilho1[$f1]][$arrFilho2[$f2]] = ($subMenus[2]!=$arrFilho3[0][2])?$arrFilho3:array();
+							}
 						}
 		    		}
 	    		}
-	    		$itemMenu++;
 	    	}
    		}
+//self::debuga($arrMenu[$m],$subMenus[2], $arrFilho3, $arrSubMenuNets);
     	return $arrSubMenuNets;
     }
 
@@ -293,5 +293,15 @@ class ViewMenu {
     public function setObjJs($objJs){
 		$this->objJs = $objJs;
     }
+    
+	public function debuga(){
+		$arrDados = func_get_args();
+		print("<pre>");
+		for($i=0; $i<count($arrDados); $i++){
+			print_r($arrDados[$i]);
+			print"<br />";
+		}
+		die();
+	}
 }
 ?>

@@ -22,9 +22,8 @@
 												<a href="{$ARR_FILHOS2[cont][cont2][cont3][1]}" title="{$ARR_FILHOS2[cont][cont2][cont3][0]}">
 													{$ARR_FILHOS2[cont][cont2][cont3][0]}
 												</a>
-												<!--
 												{if $ARR_FILHOS2[cont][cont2][cont3]}
-													<ul class="navigation-3">
+													<ul class="navigation-4">
 														{section name=cont4 loop=$ARR_FILHOS3[cont][cont2][cont3]}
 															<li class="subMenu2Dre">
 																<a href="{$ARR_FILHOS3[cont][cont2][cont3][cont4][1]}" title="{$ARR_FILHOS3[cont][cont2][cont3][cont4][0]}">
@@ -34,7 +33,6 @@
 														{/section}
 													</ul>
 												{/if}
-												-->
 											</li>
 										{if $smarty.section.cont3.last}
 											</ul>
