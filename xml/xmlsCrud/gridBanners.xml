@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Banners" classe="CrudBanners">
+<grid titulo="Banners" classe="CrudBanners" portal="true">
 	<header>
 		<titulo type="STRING">Nome Banner</titulo>
 		<titulo type="STRING">Title Banner</titulo>
@@ -12,9 +12,9 @@
 		</campos>
 		<from>
 			fwk_banner ba
-			LEFT JOIN fwk_tipo_basico tb
-			ON ba.id_categoria_banner = tb.id_tipo_basico
+			LEFT JOIN fwk_tipo_basico tb ON ba.id_categoria_banner = tb.id_tipo_basico
 		</from>
+		<campoPortal>ba.id_portal</campoPortal>
 		<orderBy>tb.desc_tipo_basico, ba.nome_imagem</orderBy>
 	</query>
 	<buttons>

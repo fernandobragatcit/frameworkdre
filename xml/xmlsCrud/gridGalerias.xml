@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Galerias" classe="CrudGalerias">
+<grid titulo="Galerias" classe="CrudGalerias" portal="true">
 	<header>
 		<titulo type="STRING">#Id</titulo>
 		<titulo type="STRING">Título</titulo>
@@ -16,6 +16,7 @@
 		<whereBusca>
 			(id_galeria LIKE '%#BUSCA#%' OR titulo_galeria LIKE '%#BUSCA#%' OR identificador_galeria LIKE '%#BUSCA#%') 
 		</whereBusca>
+		<campoPortal>id_portal</campoPortal>
 		<orderBy>titulo_galeria</orderBy>
 	</query>
 	<buttons>

@@ -53,6 +53,10 @@ class DireitosAdmin extends AbsModelCruds{
 		$this->id_menu = $id_menu;
     }
 
+    public function setIdPortal($id_portal){
+		$this->id_portal = $id_portal;
+    }
+
     public function setIdItemMenu($id_item_menu){
 		$this->id_item_menu = $id_item_menu;
     }

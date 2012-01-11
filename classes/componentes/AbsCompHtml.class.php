@@ -3,6 +3,7 @@ require_once(FWK_CONTROL."ControlSmarty.class.php");
 require_once(FWK_CONTROL."ControlDB.class.php");
 require_once(FWK_CONTROL."ControlCSS.class.php");
 require_once(FWK_CONTROL."ControlJS.class.php");
+require_once(FWK_CONTROL."ControlConfiguracoes.class.php");
 require_once(FWK_EXCEPTION."ElementsException.class.php");
 require_once(FWK_UTIL."Cryptografia.class.php");
 require_once(FWK_UTIL."FormataLink.class.php");
@@ -20,6 +21,7 @@ abstract class AbsCompHtml{
 	protected $objXmlComp = null;
 	protected $objXmlCompChilds = null;
 	protected $objBanco = null;
+	protected $objControlConfiguracoes = null;
 	protected $objHtmlComp = null;
 	protected $objSmarty = null;
 	protected $strClass = null;
@@ -38,8 +40,10 @@ abstract class AbsCompHtml{
 
 	private $idReferencia;
 	private $idReferencia2;
+	private $idPortal;
 
 	public function __construct($objXMLComp) {
+		self::setIdPortal(self::getCtrlConfiguracoes()->getIdPortal());
 		$this->objXmlComp = null;
 		$this->objXmlComp = $objXMLComp->attributes();
 		self::getSmarty();
@@ -51,16 +55,20 @@ abstract class AbsCompHtml{
     public function setIdReferencia($intIdRef){
 		$this->idReferencia = $intIdRef;
 	}
-
 	public function getIdReferencia(){
 		return $this->idReferencia;
 	}
     public function setIdReferencia2($intIdRef){
 		$this->idReferencia2 = $intIdRef;
 	}
-
 	public function getIdReferencia2(){
 		return $this->idReferencia2;
+	}
+    public function setIdPortal($intIdPortal){
+		$this->idPortal = $intIdPortal;
+	}
+	public function getIdPortal(){
+		return $this->idPortal;
 	}
 
     abstract public function getComponente($value = "");
@@ -69,6 +77,12 @@ abstract class AbsCompHtml{
     	if($this->objXmlComp == null)
     		$this->objXmlComp = $objXMLComp->attributes();
     	return $this->objXmlComp;
+    }
+    
+    protected function getCtrlConfiguracoes(){
+    	if($this->objControlConfiguracoes == null)
+    		$this->objControlConfiguracoes = new ControlConfiguracoes();
+    	return $this->objControlConfiguracoes;
     }
 
     protected function setValue($value){

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Ítens de Menu do Sistema" classe="CrudItemMenu">
+<grid titulo="Ítens de Menu do Sistema" classe="CrudItemMenu" portal="true">
 	<header>
 		<titulo type="STRING">Ítem Menu</titulo>
 		<titulo type="STRING">Menu Pai</titulo>
@@ -12,15 +12,15 @@
 			im.link_item_menu, im.id_item_menu
 		</campos>
 		<from>
-			fwk_item_menu im LEFT JOIN fwk_menu me
-			on me.id_menu = im.id_menu_pai
-			LEFT JOIN fwk_item_menu im2
-			on im.id_item_menu_pai = im2.id_item_menu
+			fwk_item_menu im 
+			LEFT JOIN fwk_menu me ON me.id_menu = im.id_menu_pai
+			LEFT JOIN fwk_item_menu im2 ON im.id_item_menu_pai = im2.id_item_menu
 		</from>
 		<where/>
 		<whereBusca>
 			(im.nome_item_menu LIKE '%#BUSCA#%' OR me.nome_menu LIKE '%#BUSCA#%' OR im2.nome_item_menu LIKE '%#BUSCA#%' OR im.link_item_menu LIKE '%#BUSCA#%') 
 		</whereBusca>
+		<campoPortal>im.id_portal</campoPortal>
 		<orderBy>nome_item_menu</orderBy>
 	</query>
 	<buttons>

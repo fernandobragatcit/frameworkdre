@@ -1,6 +1,7 @@
 <?php
 require_once(FWK_CONTROL."ControlDB.class.php");
 require_once(FWK_CONTROL."ControlSmarty.class.php");
+require_once(FWK_CONTROL."ControlConfiguracoes.class.php");
 require_once(FWK_UTIL."Cryptografia.class.php");
 
 /**
@@ -12,6 +13,7 @@ require_once(FWK_UTIL."Cryptografia.class.php");
 class ViewMenu {
 
 	private $objSmarty;
+	private $objCtrlConfiguracoes;
 	private $objDB;
 	private $objJs;
 	private $objCss;
@@ -37,6 +39,12 @@ class ViewMenu {
     	if($this->objSmarty == null)
     		$this->objSmarty = ControlSmarty::getSmarty();
     	return $this->objSmarty;
+    }
+    
+    private function getCtrlConfiguracoes(){
+    	if($this->objCtrlConfiguracoes == null)
+    		$this->objCtrlConfiguracoes = new ControlConfiguracoes();
+    	return $this->objCtrlConfiguracoes;
     }
 
     /**
@@ -125,11 +133,13 @@ class ViewMenu {
 						INNER JOIN fwk_grupo gr
 						ON dg.id_grupo = gr.id_grupo
 					WHERE
-						gr.id_grupo in(
+						(me.id_portal = '".self::getCtrlConfiguracoes()->getIdPortal()."' OR me.id_portal = '1') 
+						AND
+						(gr.id_grupo in(
 								select id_grupo from fwk_grupo_usuario g1
 								where g1.id_usuario = ".self::getIdUsuario()."
 									  )
-						OR du.id_usuario = ".self::getIdUsuario()."
+						OR du.id_usuario = ".self::getIdUsuario().")
 					ORDER BY
 						ordem_menu";
     	
@@ -157,27 +167,6 @@ class ViewMenu {
     	return $arrMenuFi;
     }
 
-    /*private function getSubMenuFilhos(){
-		$itemMenu = 0;
-		$itemSubMenu = 0;
-    	$arrMenuFi = array();
-    	$arrMenuFilhos = self::getMenuFilhos();
-    	if(is_array($arrMenuFilhos) && count($arrMenuFilhos)>0){
-	    	foreach($arrMenuFilhos as $menu){
-				$itemSubMenu = 0;
-				if(is_array($menu) && count($menu)>0){
-					foreach($menu as $itens){
-						$arrSubMenus = self::getItensMenu($itens[2]);
-						if($arrSubMenus[2] != $arrSubMenus[3])
-							$arrMenuFi[$itemMenu][$itemSubMenu++] = $arrSubMenus;
-					}
-				}
-				$itemMenu++;
-	    	}
-    	}
-    	return $arrMenuFi;
-    }*/
-
     private function getSubMenuFilhos(){
 		$itemMenu = 0;
 		$itemSubMenu = 0;
@@ -203,27 +192,20 @@ class ViewMenu {
     	$arrMenu = self::getMenuPai();
     	if(is_array($arrMenu) && count($arrMenu)>0){
     		for($m = 0; $m < count($arrMenu); $m++){
-	    	//foreach($arrMenu as $menu){
-	    	//	$itemSubMenu = 0;
 	    		if(is_array($arrMenu[$m]) && count($arrMenu[$m])>0){
 	    			$arrFilho1 = self::getItensMenu($arrMenu[$m][2]);
 	    			for($f1 = 0; $f1 < count($arrFilho1); $f1++){
-		    		//foreach($arrFilho1 as $filho1){
 						$arrFilho2 = self::getSubItensMenu($arrFilho1[$f1][2]);
 						for($f2 = 0; $f2 < count($arrFilho2); $f2++){
-						//foreach ($arrFilho2 as $filho2) {
 							if(is_array($arrFilho2[$f2]) && count($arrFilho2[$f2])>0){
 								$arrFilho3 = self::getSubItensMenu($arrFilho2[$f2][2]);
-								//evita que o menu se repita caso tenham mesmo id menu pai e filho
 								$arrSubMenuNets[$m][$f1][$f2] = $arrFilho3;
-								//$arrSubMenuNets[$arrMenu[$m]][$arrFilho1[$f1]][$arrFilho2[$f2]] = ($subMenus[2]!=$arrFilho3[0][2])?$arrFilho3:array();
 							}
 						}
 		    		}
 	    		}
 	    	}
    		}
-//self::debuga($arrMenu[$m],$subMenus[2], $arrFilho3, $arrSubMenuNets);
     	return $arrSubMenuNets;
     }
 
@@ -240,6 +222,8 @@ class ViewMenu {
 						INNER JOIN fwk_grupo gr
 						ON dg.id_grupo = gr.id_grupo
 					WHERE
+						(im.id_portal = '".self::getCtrlConfiguracoes()->getIdPortal()."' OR im.id_portal = '1') 
+						AND
 						im.id_menu_pai = ".$idMenuPai." AND
 						(gr.id_grupo in(select id_grupo from fwk_grupo_usuario g1
 										where g1.id_usuario = ".self::getIdUsuario().")
@@ -270,6 +254,8 @@ class ViewMenu {
 						INNER JOIN fwk_grupo gr
 						ON dg.id_grupo = gr.id_grupo
 					WHERE
+						(im.id_portal = '".self::getCtrlConfiguracoes()->getIdPortal()."' OR im.id_portal = '1') 
+						AND
 						im.id_item_menu_pai = ".$idMenuPai." AND
 						(gr.id_grupo in(select id_grupo from fwk_grupo_usuario g1
 										where g1.id_usuario = ".self::getIdUsuario().")

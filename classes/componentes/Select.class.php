@@ -29,6 +29,9 @@ class Select extends AbsCompHtml {
 			if(strpos($strQuery, "#idReferencia2#") > 0){
 				$strQuery = str_replace("#idReferencia2#", parent::getIdReferencia2(), $strQuery);
 			}
+			if((strpos($strQuery, "#idPortal#") > 0) && ((string)$this->objXmlCompChilds->campoPortal != "")){
+				$strQuery = str_replace("#idPortal#", "(".(string)$this->objXmlCompChilds->campoPortal." = '".parent::getIdPortal()."' OR ".(string)$this->objXmlCompChilds->campoPortal." = ".PORTAL_SISTEMA.")", $strQuery);
+			}
 			self::getBanco()->SetFetchMode(ADODB_FETCH_NUM);
 			$arrQueryComp = self::getBanco()->GetAll($strQuery);
 			//if(self::getValue() != ""){

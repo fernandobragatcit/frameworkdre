@@ -44,6 +44,7 @@ class ItemMenuAdmin  extends AbsModelCruds{
 			//Salva-se a funcionalidade de menu automaticamente em direitos.
 			self::getObjDireitosAdmin()->setIdItemMenu($this->id_item_menu);
 			self::getObjDireitosAdmin()->setNomeDireito(utf8_decode($post["nome_item_menu"]));
+			self::getObjDireitosAdmin()->setIdPortal($post["id_portal"]);
 			self::getObjDireitosAdmin()->salvar();
 			//atribui a funcionalidade criada pelo usuário ao grupo dele ou apenas ao usuário
 			//de acordo com o que foi escolhido no formulário

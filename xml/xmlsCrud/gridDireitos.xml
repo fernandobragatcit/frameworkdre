@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Direitos" classe="CrudDireitos">
+<grid titulo="Direitos" classe="CrudDireitos" portal="true">
 	<header>
 		<titulo type="STRING">Direito</titulo>
 		<titulo type="STRING">Menu</titulo>
@@ -8,19 +8,18 @@
 	</header>
 	<query>
 		<campos>
-			di.nome_direito, me.nome_menu, im.nome_item_menu,di.id_direitos
+			di.nome_direito, me.nome_menu, im.nome_item_menu, di.id_direitos
 		</campos>
 		<from>
 			fwk_direitos di
-			LEFT JOIN fwk_menu me
-			ON di.id_menu = me.id_menu
-			LEFT JOIN fwk_item_menu im
-			ON di.id_item_menu = im.id_item_menu
+			LEFT JOIN fwk_menu me ON di.id_menu = me.id_menu
+			LEFT JOIN fwk_item_menu im ON di.id_item_menu = im.id_item_menu
 		</from>
 		<where/>
 		<whereBusca>
 			(di.nome_direito LIKE '%#BUSCA#%' OR me.nome_menu LIKE '%#BUSCA#%' OR im.nome_item_menu LIKE '%#BUSCA#%') 
 		</whereBusca>
+		<campoPortal>di.id_portal</campoPortal>
 		<orderBy>di.nome_direito</orderBy>
 	</query>
 	<buttons>

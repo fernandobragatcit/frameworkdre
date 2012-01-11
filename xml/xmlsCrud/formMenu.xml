@@ -9,6 +9,15 @@
 	<campos type="text" name="link_menu" id="link_menu"
 		label="Link para o Menu" title="Link para o Menu" obrigatorio="true"
 		maxlength="100" class="small" />
+	
+	<campos type="select" name="id_portal" id="id_portal" obrigatorio="true"
+		label="Exibir para" title="Exibir para">
+		<query>
+			SELECT id_portal, nome_portal FROM fwk_portal ORDER BY nome_portal
+		</query>
+		<value>id_portal</value>
+		<text>nome_portal</text>
+	</campos>
 
 	<campos type="text" name="ordem_menu" id="ordem_menu"
 		label="Ordem do Menu" title="Ordem do Menu" obrigatorio="true"

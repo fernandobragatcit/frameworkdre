@@ -4,7 +4,6 @@ require_once(FWK_MODEL."MenuAdmin.class.php");
 
 class CrudMenu extends AbsCruds {
 
-
 	public function executa($get,$post,$file){
 		self::setXmlForm(FWK_XML_CRUD."formMenu.xml");
 		self::setXmlGrid(FWK_XML_CRUD."gridMenu.xml");

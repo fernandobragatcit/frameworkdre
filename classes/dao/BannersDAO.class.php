@@ -25,6 +25,8 @@ class BannersDAO extends AbsModelDao{
 			$objDoc->setTipoDocumento(TIPODOC_BANNERS);
 			$objDoc->cadastrar($xml, $post, $file);
 			$this->id_banner = $objDoc->getIdDocumento();
+			
+			$this->id_portal = parent::getCtrlConfiguracoes()->getIdPortal();
 
 			self::validaForm($xml,$post);
 			self::salvaPostAutoUtf8($post);
@@ -52,6 +54,8 @@ class BannersDAO extends AbsModelDao{
 			$objDoc->setTipoDocumento(TIPODOC_BANNERS);
 			$objDoc->alterar(((!isset($id)||$id=="")?null:$id), $xml, $post, $file);
 			$this->id_banner = $objDoc->getIdDocumento();
+			
+			$this->id_portal = parent::getCtrlConfiguracoes()->getIdPortal();
 
 			self::validaForm($xml,$post);
 			self::alteraPostAutoUtf8($post,$id);
@@ -112,7 +116,8 @@ class BannersDAO extends AbsModelDao{
 					FROM 
 						fwk_banner
 					WHERE
-						UPPER(nome_imagem) = '".strtoupper($strBanner)."'";
+						UPPER(nome_imagem) = '".strtoupper($strBanner)."' AND
+						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().")";
 		$arrDados = ControlDb::getRow($strQuery,3);
 		return Utf8Parsers::arrayUtf8Encode($arrDados);
 	}
@@ -124,7 +129,8 @@ class BannersDAO extends AbsModelDao{
 						fwk_banner fb
 						INNER JOIN fwk_tipo_basico ftb ON ftb.id_tipo_basico = fb.id_categoria_banner
 					WHERE
-						UPPER(ftb.desc_tipo_basico) = '".strtoupper($strBanner)."'
+						UPPER(ftb.desc_tipo_basico) = '".strtoupper($strBanner)."' AND
+						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().") 
 					ORDER BY 
 						RAND()";
 		$arrDados = ControlDb::getRow($strQuery,3);
@@ -138,7 +144,8 @@ class BannersDAO extends AbsModelDao{
 						fwk_banner fb
 						INNER JOIN fwk_tipo_basico ftb ON ftb.id_tipo_basico = fb.id_categoria_banner
 					WHERE
-						ftb.id_tipo_basico = '".$idCatBanner."'
+						ftb.id_tipo_basico = '".$idCatBanner."' AND
+						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().") 
 					ORDER BY 
 						RAND()";
 		$arrDados = ControlDb::getRow($strQuery,3);
@@ -152,7 +159,8 @@ class BannersDAO extends AbsModelDao{
 						fwk_banner fb
 						INNER JOIN fwk_tipo_basico ftb ON ftb.id_tipo_basico = fb.id_categoria_banner
 					WHERE
-						UPPER(ftb.desc_tipo_basico) = '".strtoupper($strCateg)."'
+						UPPER(ftb.desc_tipo_basico) = '".strtoupper($strCateg)."' AND
+						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().") 
 					ORDER BY 
 						nome_imagem";
 		$arrDados = ControlDb::getAll($strQuery,3);

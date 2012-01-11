@@ -78,6 +78,9 @@ define("XML_LAT_ESQUERDA",CAMINHO_XMLS."latEsquerda.xml");
 define("XML_RODAPE",CAMINHO_XMLS."rodape.xml");
 
 
+//Id Portal
+define("PORTAL_SISTEMA",1);
+
 //Funcionalidades
 define("DIREITOS_GRUPO",1);
 define("DIREITOS_USUARIO",2);

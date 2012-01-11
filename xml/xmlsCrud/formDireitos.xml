@@ -5,23 +5,34 @@
 	<campos type="text" name="nome_direito" id="nome_direito"
 		label="Nome Direito" title="Nome Direito" obrigatorio="true"
 		maxlength="100" class="small" />
+	
+	<campos type="select" name="id_portal" id="id_portal" obrigatorio="true"
+		label="Exibir para" title="Exibir para">
+		<query>
+			SELECT id_portal, nome_portal FROM fwk_portal ORDER BY nome_portal
+		</query>
+		<value>id_portal</value>
+		<text>nome_portal</text>
+	</campos>
 
 	<campos type="select" name="id_menu" id="id_menu"
 		label="Menu" title="Menu" onchange="javascript:verCampoPreenchido('id_menu','id_item_menu')">
 		<query>
-			select id_menu, nome_menu from fwk_menu order by nome_menu
+			SELECT id_menu, nome_menu FROM fwk_menu WHERE #idPortal# ORDER BY nome_menu
 		</query>
 		<value>id_menu</value>
 		<text>nome_menu</text>
+		<campoPortal>id_portal</campoPortal>
 	</campos>
 
 	<campos type="select" name="id_item_menu" id="id_item_menu"
 		label="Sub-Menu" title="Sub-Menu" onchange="javascript:verCampoPreenchido('id_item_menu','id_menu')">
 		<query>
-			select id_item_menu, nome_item_menu from fwk_item_menu order by nome_item_menu
+			SELECT id_item_menu, nome_item_menu FROM fwk_item_menu WHERE #idPortal# ORDER BY nome_item_menu
 		</query>
 		<value>id_item_menu</value>
 		<text>nome_item_menu</text>
+		<campoPortal>id_portal</campoPortal>
 	</campos>
 
 	<buttons>

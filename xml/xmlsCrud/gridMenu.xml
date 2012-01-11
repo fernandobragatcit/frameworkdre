@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Menu da Área Administrativa" classe="CrudMenu">
+<grid titulo="Menu da Área Administrativa" classe="CrudMenu" portal="true">
 	<header>
 		<titulo type="STRING">Menu</titulo>
 		<titulo type="STRING">Link</titulo>
@@ -16,6 +16,7 @@
 		<whereBusca>
 			(nome_menu LIKE '%#BUSCA#% OR link_menu LIKE '%#BUSCA#%) 
 		</whereBusca>
+		<campoPortal>id_portal</campoPortal>
 		<orderBy>ordem_menu</orderBy>
 	</query>
 	<buttons>

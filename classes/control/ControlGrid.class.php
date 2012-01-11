@@ -655,8 +655,9 @@ class ControlGrid {
 		if (self::getCtrlConfiguracoes()->getIdPortal()){
 			$portal = (string)self::getObjXml()->attributes()->portal;
 			if(strtolower((string)self::getObjXml()->attributes()->portal) == "true"){
+				$campoPortal = trim((string)self::getObjXml()->query->campoPortal);
 				$strQuery .= " AND ";
-				$strQuery .= trim((string)self::getObjXml()->query->campoPortal)." = ".self::getCtrlConfiguracoes()->getIdPortal();
+				$strQuery .= "(".$campoPortal." = ".self::getCtrlConfiguracoes()->getIdPortal()." OR ".$campoPortal." = ".PORTAL_SISTEMA." )";
 			}
 		}
 		if (trim((string)self::getObjXml()->query->groupBy) != "") {

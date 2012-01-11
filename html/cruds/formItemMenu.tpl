@@ -33,6 +33,12 @@
 </div>
 
 <div class="formTelaFull">
+	<label>{$id_portal_label} :
+		<span class="small" id="id_portal_erro">{$id_portal_error}</span>
+	</label> {$id_portal_campo}
+</div>
+
+<div class="formTelaFull">
 	<label>{$link_item_menu_label} :
 		<span class="small" id="link_item_menu_erro">{$link_item_menu_error}</span>
 	</label> {$link_item_menu_campo}

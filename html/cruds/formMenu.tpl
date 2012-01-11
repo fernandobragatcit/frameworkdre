@@ -15,6 +15,12 @@
 </div>
 
 <div class="formTelaFull">
+	<label>{$id_portal_label} :
+		<span class="small" id="id_portal_erro">{$id_portal_error}</span>
+	</label> {$id_portal_campo}
+</div>
+
+<div class="formTelaFull">
 	<label>{$funcionalidade_label} :
 	    <span class="small" id="funcionalidade_erro">{$funcionalidade_error}</span>
 	</label> {$funcionalidade_campo}

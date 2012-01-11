@@ -74,6 +74,8 @@ class ListBox extends AbsCompHtml {
 			$querySor.=" WHERE ".(string) $this->objXmlComp->qsWHERE;
 		if(strpos($querySor, "#idReferencia#") > 0)
 			$querySor =str_replace("#idReferencia#", parent::getIdReferencia(), $querySor);
+		if((strpos($querySor, "#idPortal#") > 0) && ((string)$this->objXmlComp->campoPortal != ""))
+			$querySor = str_replace("#idPortal#", "(".(string)$this->objXmlComp->campoPortal." = '".parent::getIdPortal()."' OR ".(string)$this->objXmlComp->campoPortal." = ".PORTAL_SISTEMA.")", $querySor);
 		if(isset($this->objXmlComp->orderby) && (string)$this->objXmlComp->orderby !="")
 			$querySor.=" ORDER BY ".$this->objXmlComp->orderby;
 		$arrDados = array();
@@ -104,9 +106,11 @@ class ListBox extends AbsCompHtml {
 				self::getBanco();
 				$this->objBanco->SetFetchMode(ADODB_FETCH_NUM);
 				$query = (string) $this->objXmlComp->queryAlt . " = '" . $id . "'";
-
-
+				if((strpos($query, "#idPortal#") > 0) && ((string)$this->objXmlComp->campoPortal != ""))
+					$query = str_replace("#idPortal#", "(".(string)$this->objXmlComp->campoPortal." = '".parent::getIdPortal()."' OR ".(string)$this->objXmlComp->campoPortal." = ".PORTAL_SISTEMA.")", $query);
+		
 				$arrQueryComp = $this->objBanco->GetAll($query);
+				
 				if ($arrQueryComp) {
 					$arrCompSelect = array ();
 					$whereField = (string) $this->objXmlComp->values;
@@ -115,7 +119,10 @@ class ListBox extends AbsCompHtml {
 						$queryDest.= " WHERE " . $whereField . " = '" . $idDest[0] . "'";
 						if(isset($this->objXmlComp->qsWHERE) && (string)$this->objXmlComp->qsWHERE !="")
 							$queryDest.=" AND ".(string) $this->objXmlComp->qsWHERE;
-							$arrResult = $this->objBanco->GetRow($queryDest);
+						if((strpos($queryDest, "#idPortal#") > 0) && ((string)$this->objXmlComp->campoPortal != ""))
+							$queryDest = str_replace("#idPortal#", "(".(string)$this->objXmlComp->campoPortal." = '".parent::getIdPortal()."' OR ".(string)$this->objXmlComp->campoPortal." = ".PORTAL_SISTEMA.")", $queryDest);
+						
+						$arrResult = $this->objBanco->GetRow($queryDest);
 						$arrResult[1] = utf8_encode($arrResult[1]);
 						$arrCompSelect[] = $arrResult;
 					}

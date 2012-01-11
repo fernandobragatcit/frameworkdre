@@ -19,21 +19,23 @@
 		label="Filho de " title="Filho de "
 		onchange="javascript:verCampoPreenchido('id_menu_pai','id_item_menu_pai')">
 		<query>
-			SELECT id_menu, nome_menu FROM fwk_menu ORDER BY nome_menu
+			SELECT id_menu, nome_menu FROM fwk_menu WHERE #idPortal# ORDER BY nome_menu
 		</query>
 		<value>id_menu</value>
 		<text>nome_menu</text>
+		<campoPortal>id_portal</campoPortal>
 	</campos>
 
 	<campos type="select" name="id_item_menu_pai" id="id_item_menu_pai"
 		label="Sub-Filho de " title="Sub-Filho de "
 		onchange="javascript:verCampoPreenchido('id_item_menu_pai','id_menu_pai')">
 		<query>
-			SELECT id_item_menu, nome_item_menu FROM fwk_item_menu ORDER BY
+			SELECT id_item_menu, nome_item_menu FROM fwk_item_menu WHERE #idPortal# ORDER BY
 			nome_item_menu
 		</query>
 		<value>id_menu</value>
 		<text>nome_menu</text>
+		<campoPortal>id_portal</campoPortal>
 	</campos>
 
 	<campos type="select" name="funcionalidade" id="funcionalidade"
@@ -62,6 +64,15 @@
 				<text>Framework</text>
 			</option>
 		</array>
+	</campos>
+	
+	<campos type="select" name="id_portal" id="id_portal" obrigatorio="true"
+		label="Exibir para" title="Exibir para">
+		<query>
+			SELECT id_portal, nome_portal FROM fwk_portal ORDER BY nome_portal
+		</query>
+		<value>id_portal</value>
+		<text>nome_portal</text>
 	</campos>
 
 	<buttons>

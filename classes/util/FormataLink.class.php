@@ -116,9 +116,11 @@ class FormataLink {
 	}
 	
 	public static function colocaHttp($strLink) {
-		$linkPartido = substr($strLink, 0, 4);
-		if ($linkPartido != "http") {
-			$strLink = "http://" . $strLink;
+		if($strLink != ""){
+			$linkPartido = substr($strLink, 0, 4);
+			if ($linkPartido != "http") {
+				$strLink = "http://" . $strLink;
+			}
 		}
 		return $strLink;
 	}

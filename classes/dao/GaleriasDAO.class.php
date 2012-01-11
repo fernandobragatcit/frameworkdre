@@ -17,6 +17,8 @@ class GaleriasDAO extends AbsModelDao{
 			$objDoc->cadastrar($xml, $post, $file);
 			$this->id_galeria = $objDoc->getIdDocumento();
 			
+			$this->id_portal = parent::getCtrlConfiguracoes()->getIdPortal();
+			
 			self::validaForm($xml,$post);
 			self::salvaPostAutoUtf8($post);
 			self::salvar();
@@ -44,6 +46,8 @@ class GaleriasDAO extends AbsModelDao{
 			$objDoc->alterar(((!isset($id)||$id=="")?null:$id), $xml, $post, $file);
 			$this->id_galeria = $objDoc->getIdDocumento();
 			
+			$this->id_portal = parent::getCtrlConfiguracoes()->getIdPortal();
+			
 			self::validaForm($xml,$post);
 			self::alteraPostAutoUtf8($post,$id);
 			self::replace();
@@ -68,7 +72,8 @@ class GaleriasDAO extends AbsModelDao{
 					FROM 
 						".$this->_table."
 					WHERE 
-						".$this->_id." = '".$id."'";
+						".$this->_id." = '".$id."' AND
+						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().")";
 		$arrDados =  Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,3));
 		return $arrDados;
 	}
@@ -80,7 +85,8 @@ class GaleriasDAO extends AbsModelDao{
 					FROM 
 						".$this->_table."
 					WHERE 
-						UPPER(identificador_ficheiro) ='".strtoupper($ident)."'";
+						UPPER(identificador_ficheiro) ='".strtoupper($ident)."' AND
+						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().")";
 		$arrDados =  Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,3));
 		return $arrDados;
 	}
@@ -89,7 +95,8 @@ class GaleriasDAO extends AbsModelDao{
     	$strQuery = "SELECT titulo_foto, legenda_foto, ffg.id_foto, ff.id_foto AS 'id_nome_arquivo'
 					FROM fwk_fotos_galeria ffg
 					INNER JOIN fwk_fotos ff ON ffg.id_foto = ff.id_foto
-    				WHERE id_galeria = '".$idGaleria."'";
+    				WHERE id_galeria = '".$idGaleria."' AND
+						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().")";
     	return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery,0));
 	}
 
