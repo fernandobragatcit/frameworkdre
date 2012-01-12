@@ -37,6 +37,7 @@ class ControlGrid {
 
 	private $busca = null;
 	private $arrFiltros = null;
+	private $arrLegenda = null;
 
 	private function __construct() {
 	}
@@ -187,11 +188,22 @@ class ControlGrid {
 				$arrDadosGrid[$key][$key2] = str_replace("&", "&amp;", $valor);
 			}
 		}
+		self::regLegendas();
 		self::getObjSmarty()->assign("NUM_DADOS_INI", count($arrDadosGrid) > 0 ? "TRUE" : "FALSE");
 		self::getObjSmarty()->assign("ARR_DADOS", self::verTipoDados(self::doFieldFormat($arrDadosGrid)));
 		self::getObjSmarty()->assign("LINK_BUSCAR", self::makeLinkPag(""));
 		self::getObjSmarty()->assign("VALOR_BUSCA", $_POST["buscaGrid"]);
 		self::getObjSmarty()->assign("URL_MOMENTO", self::makeLinkPag(""));
+	}
+	
+	private function regLegendas(){
+		if(is_array($this->arrLegenda)){
+			$legendas = null;
+			foreach ($this->arrLegenda as $leg){
+				$legendas[] = $leg;
+			}
+			self::getObjSmarty()->assign("LEGENDA", $legendas);
+		}
 	}
 
 	private function doFieldFormat($arrDadosGrid) {
@@ -450,31 +462,37 @@ class ControlGrid {
 						switch ((string) $attributes) {
 							case "actionEdit" :
 								if ($index == $cont) {
+									$this->arrLegenda["edit"] = array("label" => "Editar", "icone" => "<img width='12' class='iconEditar' title='Editar' alt='Icone Editar' src='".URL_IMAGENS."icons/page_white_edit.png' />");
 									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' class='iconEditar' title='Editar' alt='Editar' src='".URL_IMAGENS."icons/page_white_edit.png' />",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionDelete" :
 								if ($index == $cont) {
+									$this->arrLegenda["delete"] = array("label" => "Deletar", "icone" => "<img width='12' title='Deletar' alt='Icone Deletar' src='".URL_IMAGENS."icons/page_white_delete.png' />");
 									$newData .= " " . $objForAction->gridConfirm($data, $value, self::getClassGrid(), "<img width='14' title='Deletar' alt='Deletar' src='".URL_IMAGENS."icons/page_white_delete.png' />", "Tem certeza que gostaria de deletar este registro?",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionStatus":
 								if ($index == $cont) {
+									$this->arrLegenda["status"] = array("label" => "Status", "icone" => "<img width='12' title='Status' alt='Icone Status' src='".URL_IMAGENS."icons/page_white_star.png' />");
 									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='Status' alt='Status' src='".URL_IMAGENS."icons/page_white_star.png' />",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionSelect":
 								if ($index == $cont) {
+									$this->arrLegenda["select"] = array("label" => "Selecionar", "icone" => "<img width='12' title='Selecionar' alt='Icone Selecionar' src='".URL_IMAGENS."icons/page_white_magnify.png' />");
 									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='Selecionar' alt='Selecionar' src='".URL_IMAGENS."icons/page_white_magnify.png' />",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionReport":
 								if ($index == $cont) {
+									$this->arrLegenda["report"] = array("label" => "Imprimir", "icone" => "<img width='12' title='Imprimir' alt='Icone Imprimir' src='".URL_IMAGENS."icons/printer.png' />");
 									$newData .= " " . $objForAction->gridImprime($data, $value, self::getClassGrid(), "<img width='14' title='Imprimir' alt='Imprimir' src='".URL_IMAGENS."icons/printer.png' />",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
 							case "actionPdf":
 								if ($index == $cont) {
+									$this->arrLegenda["pdf"] = array("label" => "Download PDF", "icone" => "<img width='12' title='Download PDF' alt='Icone Download PDF' src='".URL_IMAGENS."icons/page_white_acrobat.png' />");
 									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='Download PDF' alt='Download PDF' src='".URL_IMAGENS."icons/page_white_acrobat.png' />",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
@@ -523,6 +541,7 @@ class ControlGrid {
 
 
 								if ($index == $cont && $permissao == true) {
+									$this->arrLegenda["delete"] = array("label" => "Deletar", "icone" => "<img width='12' title='Deletar' alt='Icone Deletar' src='".URL_IMAGENS."icons/page_white_delete.png' />");
 									$newData .= " " . $objForAction->gridConfirm($data, $value, self::getClassGrid(), "<img width='14' title='Deletar' alt='Deletar' src='".URL_IMAGENS."icons/page_white_delete.png' />", "Tem certeza que gostaria de deletar este registro?",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;
@@ -572,6 +591,7 @@ class ControlGrid {
 								//self::debuga($value, $parametros);
 
 								if ($index == $cont && $permissao == true) {
+									$this->arrLegenda["personal"] = array("label" => utf8_encode($parametros["title"]), "icone" => "<img width='12' title='".utf8_encode($parametros["title"])."' alt='Icone ".utf8_encode($parametros["title"])."' src='".URL_IMAGENS."icons/".$parametros["icone"]."' />");
 									$newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='".$parametros["title"]."' alt='".$parametros["title"]."' src='".URL_IMAGENS."icons/".$parametros["icone"]."' />",$tipo,$categoria,$strParam,$strValParam, $strParam2,$strValParam2);
 								}
 								break;

@@ -8,21 +8,24 @@
 	    </ul
 	    -->
 	    <div class="box">
+	    <form method="post" class="right" id="formFiltro" action="{$URL_SITE}{$LINK_BUSCAR}">
+	    	<input type="text" name="buscaGrid" id="campoFiltro" value="{$VALOR_BUSCA}" />
+	    	<input type="submit" value="Buscar" id="submitFiltro" />
+	    </form>
+	    <br style="clear:both;" />
 		{if $NUM_DADOS_INI eq "TRUE"}
+			{section name="leg" loop="$LEGENDA"}
+			   	{if $smarty.section.leg.first}
+			    	<div id="legendaIcons">
+			    	<strong>Legenda:</strong>
+			    {/if}
+			    {$LEGENDA[leg].icone} {$LEGENDA[leg].label} 
+			    {if !$smarty.section.leg.last}|{else}</div>{/if}
+		    {/section}
 	        <table style="width:726px">
 	            <tbody>
 	            <tr>
 					<th colspan="{$ARR_TITULOS|@count}">
-						<div id="legendaIcons">
-					    	<strong>Legenda:</strong>
-					    	<img width='11' title='Editar' alt='Icone Editar' src='{$smarty.const.URL_IMAGENS}icons/page_white_edit.png' /> Editar |
-					    	<img width='11' title='Deletar' alt='Icone Deletar' src='{$smarty.const.URL_IMAGENS}icons/page_white_delete.png' /> Deletar
-					    </div>
-					    <form method="post" class="right" id="formFiltro" action="{$URL_SITE}{$LINK_BUSCAR}">
-					    	<input type="text" name="buscaGrid" id="campoFiltro" value="{$VALOR_BUSCA}" />
-					    	<input type="submit" value="Buscar" id="submitFiltro" />
-					    </form>
-					    <br style="clear:both;" />
 					</th>
 	            </tr>
 	            <tr>

@@ -3,6 +3,14 @@
 	<h2>{$TITULO_GRID}</h2>
 	    <div class="box">
 		{if $NUM_DADOS_INI eq "TRUE"}
+			{section name="leg" loop="$LEGENDA"}
+			   	{if $smarty.section.leg.first}
+			    	<div id="legendaIcons">
+			    	<strong>Legenda:</strong>
+			    {/if}
+			    {$LEGENDA[leg].icone} {$LEGENDA[leg].label} 
+			    {if !$smarty.section.leg.last}|{else}</div>{/if}
+		    {/section}
 	        <table>
 	            <tbody>
 	            <tr>

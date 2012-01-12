@@ -22,7 +22,7 @@
 												<a href="{$ARR_FILHOS2[cont][cont2][cont3][1]}" title="{$ARR_FILHOS2[cont][cont2][cont3][0]}">
 													{$ARR_FILHOS2[cont][cont2][cont3][0]}
 												</a>
-												{if $ARR_FILHOS2[cont][cont2][cont3]}
+												{if $ARR_FILHOS3[cont][cont2][cont3]}
 													<ul class="navigation-4">
 														{section name=cont4 loop=$ARR_FILHOS3[cont][cont2][cont3]}
 															<li class="subMenu2Dre">
