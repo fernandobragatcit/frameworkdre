@@ -1,42 +1,42 @@
-tinyMCE.addI18n({en:{
+tinyMCE.addI18n({pt_br:{
 common:{
 edit_confirm:"Do you want to use the WYSIWYG mode for this textarea?",
-apply:"Apply",
-insert:"Insert",
-update:"Update",
-cancel:"Cancel",
-close:"Close",
-browse:"Browse",
+apply:"Aplicar",
+insert:"Inserir",
+update:"Atualiar",
+cancel:"Cancelar",
+close:"Fechar",
+browse:"Navegador",
 class_name:"Class",
-not_set:"-- Not set --",
-clipboard_msg:"Copy/Cut/Paste is not available in Mozilla and Firefox.\nDo you want more information about this issue?",
+not_set:"-- Não Setado --",
+clipboard_msg:"Copiar/Recortar/Colar não está abilitado no Mozilla e Farifox.\nDo you want more information about this issue?",
 clipboard_no_support:"Currently not supported by your browser, use keyboard shortcuts instead.",
 popup_blocked:"Sorry, but we have noticed that your popup-blocker has disabled a window that provides application functionality. You will need to disable popup blocking on this site in order to fully utilize this tool.",
 invalid_data:"Error: Invalid values entered, these are marked in red.",
-more_colors:"More colors"
+more_colors:"Mais cores"
 },
 contextmenu:{
-align:"Alignment",
-left:"Left",
-center:"Center",
-right:"Right",
-full:"Full"
+align:"Alinhamento",
+left:"Esquerda",
+center:"Centralizado",
+right:"Direita",
+full:"Justificado"
 },
 insertdatetime:{
-date_fmt:"%Y-%m-%d",
+date_fmt:"%d-%m-%Y",
 time_fmt:"%H:%M:%S",
-insertdate_desc:"Insert date",
-inserttime_desc:"Insert time",
-months_long:"January,February,March,April,May,June,July,August,September,October,November,December",
-months_short:"Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec",
-day_long:"Sunday,Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday",
-day_short:"Sun,Mon,Tue,Wed,Thu,Fri,Sat,Sun"
+insertdate_desc:"Inserir data",
+inserttime_desc:"Inserir hora",
+months_long:"Janeiro,Fevereiro,Março,Abril,Maio,Junho,Julho,Agosto,Setembro,Outubro,Novembro,Dezembro",
+months_short:"Jan,Fev,Mar,Abr,Mai,Jun,Jul,Ago,Set,Otu,Nov,Dez",
+day_long:"Domingo,Segunda-Feira,Terça-Feira,Quarta-Feira,Quinta-Feira,Sexta-Feira,Sábado,Domingo",
+day_short:"Dom,Seg,Ter,Qua,Qui,Sex,Sab,Dom"
 },
 print:{
-print_desc:"Print"
+print_desc:"Imprimir"
 },
 preview:{
-preview_desc:"Preview"
+preview_desc:"Visualizar"
 },
 directionality:{
 ltr_desc:"Direction left to right",

@@ -314,6 +314,11 @@ abstract class AbsCompHtml{
     		self::getObjSmarty()->assign("COLS_COMP","cols=\"".self::getObjXmlCompDados()->cols."\"");
     	else
     		self::getObjSmarty()->assign("COLS_COMP","cols=\"30\"");
+
+    	if(self::getObjXmlCompDados()->cssEditor!= "" )
+    		self::getObjSmarty()->assign("CSS_EDITOR", self::getObjXmlCompDados()->cssEditor);
+    	else
+    		self::getObjSmarty()->assign("CSS_EDITOR","");
 		
 		if(self::getValue() != "")
     		self::getObjSmarty()->assign("VALUE_COMP",utf8_encode(self::getValue()));

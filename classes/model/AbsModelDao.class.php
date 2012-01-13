@@ -438,6 +438,10 @@ class AbsModelDao extends ADOdb_Active_Record{
 			case "application/pdf":
 				return ".pdf";
 				break;
+			case "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+				return ".docx";
+				break;
+			
 			default:
 				throw new DaoException("Formato de arquivo não aceito pelo sistema: ".$file);
 		}
