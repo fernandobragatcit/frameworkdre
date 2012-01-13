@@ -7,9 +7,7 @@ ini_set("memory_limit","64M");
 require_once("confs_servidor.php");
 require_once("magic_quotes.php");
 
-
 define("PASTA_USUARIO",SERVIDOR_FISICO."usr/");
-
 
  define("FWK_LIMIT_PAGINACAO",20);
  //classes
