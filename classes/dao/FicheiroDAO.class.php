@@ -73,8 +73,7 @@ class FicheiroDAO extends AbsModelDao{
 					FROM 
 						fwk_ficheiro
 					WHERE 
-						id_ficheiro ='".$id."' AND
-						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().")";
+						id_ficheiro ='".$id."'";
 		$arrDados =  Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,3));
 		return $arrDados;
 	}
@@ -86,8 +85,7 @@ class FicheiroDAO extends AbsModelDao{
 					FROM 
 						fwk_ficheiro
 					WHERE 
-						UPPER(identificador_ficheiro) ='".strtoupper($ident)."' AND
-						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().")";
+						UPPER(identificador_ficheiro) ='".strtoupper($ident)."'";
 		$arrDados =  Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,3));
 		return $arrDados;
 	}
@@ -98,8 +96,7 @@ class FicheiroDAO extends AbsModelDao{
 					FROM 
 						fwk_ficheiro
 					WHERE 
-						id_ficheiro = '".$idDoc."' AND
-						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().")";
+						id_ficheiro = '".$idDoc."'";
 		return Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,0));
     }
 
