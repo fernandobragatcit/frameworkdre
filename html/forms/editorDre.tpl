@@ -1,22 +1,27 @@
 <br />
+
 {literal}
 <script type="text/javascript">
 	tinyMCE.init({
 		{/literal}
 		// General options
-		mode : "textareas",
+		//mode : "textareas",
+		mode : "exact",
+		elements : "{$ID_EDITOR}",
 		theme : "advanced",
 		width : {$LARGURA_EDITOR},
 		height : {$ALTURA_EDITOR},
-		plugins : "pagebreak,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
+		//plugins : "pagebreak,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
+		plugins : "table,inlinepopups,paste",
 
 		// Theme options
 		theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,undo,redo,|,link,unlink,|,cleanup,removeformat,|,code",
-		theme_advanced_buttons2 : "cut,copy,pastetext,link,unlink,cleanup,|,tablecontrols,|,styleselect",
+		theme_advanced_buttons2 : "cut,copy,pastetext,|,tablecontrols{if $EXIBE_STYLES},|,styleselect{/if}",
 		theme_advanced_buttons3 : "",
 		theme_advanced_toolbar_location : "bottom",
 		theme_advanced_toolbar_align : "center",
 
+{*}
 /*
 		// Theme options default
 		theme_advanced_buttons1 : "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,styleselect,formatselect,fontselect,fontsizeselect",
@@ -28,35 +33,45 @@
 		theme_advanced_statusbar_location : "bottom",
 		theme_advanced_resizing : true,
 */
+{*}
 		// Example content CSS (should be your site CSS)
 		{if $CSS_EDITOR}
 			content_css : "../../arquivos/css/{$CSS_EDITOR}",
 		{/if}
+				
 		// Drop lists for link/image/media/template dialogs
 		template_external_list_url : "lists/template_list.js",
 		external_link_list_url : "lists/link_list.js",
 		external_image_list_url : "lists/image_list.js",
 		media_external_list_url : "lists/media_list.js",
-		{literal}
-		// Style formats
-		style_formats : [
-			{title : 'Titulo', block : 'h1', classes : 'tit-sub-eventos'},
-			{title : 'SubTitulo', block : 'h2', classes : 'subtitulo'},
-			{title : '', inline : 'b'},
-			{title : 'Red text', inline : 'span', styles : {color : '#ff0000'}},
-			{title : 'Red header', block : 'h1', styles : {color : '#ff0000'}},
-			{title : 'Example 2', inline : 'span', classes : 'example2'},
-			{title : 'Table styles'},
-			{title : 'Table row 1', selector : 'tr', classes : 'tablerow1'}
-		],
 
+		// Style formats
+		{$INCLUDE_STYLES}
+		{*}
+		{literal}
+			style_formats : [
+				{title : 'Titulo', block : 'h1', classes : 'titulo_editor'},
+				{title : 'SubTitulo', block : 'h2', classes : 'subtitulo_editor'},
+				{title : 'Texto Azul', inline : 'span', classes : 'blue'},
+				{title : 'Link Botão', block : 'a', classes : 'button'},
+				{title : 'Example 2', inline : 'span', classes : 'example2'},
+				{title : 'Table styles'},
+				{title : 'Table row 1', selector : 'tr', classes : 'tablerow1'}
+			], 
+		{/literal}
+		{*}
+{literal}
 		// Replace values for the template plugin
 		template_replace_values : {
 			username : "Some User",
 			staffid : "991234"
 		},
 		translate_mode : true,
-		language : "pt_br"
+		language : "pt",
+
+		removeformat : [
+			{selector : '*', remove : 'all', split : true, expand : false, block_expand : true, deep : true}
+		]
 	});
 </script>
 {/literal}

@@ -13,6 +13,8 @@ class EditorHtml extends AbsCompHtml {
 		$this->objSmarty->assign("PATH_SERVIDOR",RET_SERVIDOR);
 		self::setValorEditor($value);
 		self::regTags();
+		self::setIdEditor();
+		self::setStylesEditor();
 		self::setHtmlComp($this->objSmarty->fetch(FWK_HTML_FORMS."editorDre.tpl"));
 		self::setCampos();
     }
@@ -31,6 +33,20 @@ class EditorHtml extends AbsCompHtml {
     private function setValorEditor($value){
 		if($value != "")
     		$this->objSmarty->assign("EDIT_VALUE",utf8_encode($value));
+    }
+
+    private function setIdEditor(){
+		$this->objSmarty->assign("ID_EDITOR",(string)$this->objXmlComp->id);
+    }
+
+    private function setStylesEditor(){
+    	if((string)$this->objXmlComp->tplStylesEditor != ""){
+			$strTela = $this->objSmarty->fetch(DEPOSITO_TPLS.(string)$this->objXmlComp->tplStylesEditor);
+			$this->objSmarty->assign("EXIBE_STYLES", true);
+			$this->objSmarty->assign("INCLUDE_STYLES", $strTela);
+    	}else{
+			$this->objSmarty->assign("EXIBE_STYLES", false);
+    	}
     }
 
     private function regOpcoesEditor(){
