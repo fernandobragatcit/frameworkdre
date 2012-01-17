@@ -179,7 +179,16 @@ class Login extends AbsViewClass {
     	try{
 			$objMail = new PHPMailer();
 			$objMail->SetLanguage("br");
-			$objMail->IsMail();
+			if(SMTP_ISSMTP){
+				$objMail->IsSMTP();
+				$objMail->Host = SMTP_SERV_HOST;
+				$objMail->Port = SMTP_SERV_PORTA;
+				$objMail->SMTPAuth = SMTP_AUTH;
+				$objMail->Username = SMTP_SERV_USER;
+				$objMail->Password = SMTP_SERV_PASS; //Senha da caixa postal
+			}else{
+				$objMail->IsMail();
+			}
 			$objMail->IsHTML(true);
 			$objMail->CharSet = "UTF-8";
 			$objMail->From = self::getCtrlConfiguracoes()->getStrEmailPortal();
