@@ -29,6 +29,7 @@ abstract class AbsTagsFwk {
 	private $objUserSess;
 	private $objCrypt;
 	private $strTipo;
+	private $strCaminho;
 	private $tipoObj;
 	private $idObj;
 	private $localObj;
@@ -183,17 +184,22 @@ abstract class AbsTagsFwk {
 		$this->strTipo = "c";
 		return $this->strTipo;
 	}
-
 	public function setTipo($tipo){
 		$this->strTipo = $tipo;
 	}
+	
+	public function getCaminho(){
+		return $this->strCaminho;
+	}
+	public function setCaminho($caminho){
+		$this->strCaminho = $caminho;
+	}	
 
 	public function getCategoria(){
 		if(!isset($this->strCategoria) || $this->strCategoria == "")
 		$this->strCategoria = "";
 		return $this->strCategoria;
 	}
-
 	public function setCategoria($cat){
 		self::getObjSmarty()->assign("CATEGORIA",$cat);
 		$this->strCategoria = $cat;

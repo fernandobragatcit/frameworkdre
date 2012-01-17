@@ -51,9 +51,6 @@ class ControlUsuario{
 	 * @param Array arrDados vetor com os dados do usuário vindo do banco de dados
 	 */
 	public function setObjUsuario($arrDados){
-		//print("<pre>");
-		//print_r($arrDados);
-		//die();
 		self::getObjUsuario()->setLoginUsuario($arrDados["login_usuario"]);
     	self::getObjUsuario()->setIdTipoUsuario($arrDados["id_tipo_usuario"]);
     	self::getObjUsuario()->setIdUsuario($arrDados["id_usuario"]);
@@ -97,6 +94,11 @@ class ControlUsuario{
 		$arrRet = ControlDB::getRow($strQuery,0);
 		if(!isset($arrRet["id_usuario"]) && count($arrRet)<5 )
 			throw new UserException(MSG_ERRO_LOGIN);
+		else{
+			$queryUpdt = "UPDATE fwk_usuario SET via_facebook = 'S' WHERE email_usuario = '".$strEmail."'";
+			$objBanco = ControlDb::getBanco();
+			$objBanco->Execute($queryUpdt);
+		}
 		self::setObjUsuario($arrRet);
 		return self::getObjUsuario();
 	}
@@ -156,7 +158,6 @@ class ControlUsuario{
 	 * @param String $strEmail: email digitado
 	 */
 	public function salvaSenhaDB($strPassw, $strEmail){
-
 		$strQuery = "UPDATE fwk_usuario SET password_usuario = '".self::getObjCripto()->cryptMd5($strPassw)."' WHERE email_usuario = '".$strEmail."'";
 		$arrRet = ControlDB::getRow($strQuery,0);
 		return "salvo";

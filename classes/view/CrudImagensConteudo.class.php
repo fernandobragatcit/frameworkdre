@@ -108,9 +108,9 @@ class CrudImagensConteudo extends AbsCruds {
 		return $this->objImagem;
 	}
 
-/*
-  public function listDados2() {
-		chdir(DEPOSITO_CSS);
+	
+ /* public function listDados2() {
+		chdir(DEPOSITO_IMGS);
 		$diretorio = getcwd();
 		$ponteiro = opendir($diretorio);
 		$arrnomes = array();
@@ -119,9 +119,9 @@ class CrudImagensConteudo extends AbsCruds {
 			if($nome_itens!="." && $nome_itens!=".."){
 				$tipoArquivo = explode(".",$nome_itens);
 				if(count($tipoArquivo) == 2){
-					if($tipoArquivo[1]=="css"){
-						$strQuery = "INSERT INTO fwk_estilo_css (nome_estilo_css, data_cadastro, id_usuario_cad)
-										VALUES ('".$nome_itens."', '2010-08-04', '1')";
+					if(in_array($tipoArquivo[1],array("jpg","png","gif"))){
+						$strQuery = "INSERT INTO fwk_imagens (nome_imagem, tipo_imagem, data_usuario_cad, id_usuario_cad)
+										VALUES ('".$nome_itens."','".$tipoArquivo[1]."', '2012-01-16', '5')";
 						if(parent::getObjDB()->Execute($strQuery))
 							echo "Inserido -> ".$strQuery."<br /><br />";
 					}
@@ -135,8 +135,7 @@ class CrudImagensConteudo extends AbsCruds {
 		print("<pre>");
 		print_r($arrnomes);
 		die();
-	}
-	*/
+	}*/
 
 }
 ?>

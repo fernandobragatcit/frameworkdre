@@ -134,19 +134,19 @@ class AddBlocoCampos extends AbsCompHtml {
 		try{
 
 			if(!isset(self::getObjXmlCompDados()->classe) || self::getObjXmlCompDados()->classe == "")
-				throw new ElementsException("NÃ£o foi passado o parametro 'classe' para o componente AddBlocoCampos");
+				throw new ElementsException("Não foi passado o parametro 'classe' para o componente AddBlocoCampos");
 
 			if(!isset(self::getObjXmlCompDados()->caminho) || self::getObjXmlCompDados()->caminho == "")
-				throw new ElementsException("NÃ£o foi passado o parametro 'caminho' para o componente AddBlocoCampos");
+				throw new ElementsException("Não foi passado o parametro 'caminho' para o componente AddBlocoCampos");
 
 			if(!isset(self::getObjXmlCompDados()->metodo) || self::getObjXmlCompDados()->metodo == "")
-				throw new ElementsException("NÃ£o foi passado o parametro 'metodo' para o componente AddBlocoCampos");
+				throw new ElementsException("Não foi passado o parametro 'metodo' para o componente AddBlocoCampos");
 			eval('$caminho = '.self::getObjXmlCompDados()->caminho.";");
 			$classe = (string)self::getObjXmlCompDados()->classe;
 			$metodo = (string)self::getObjXmlCompDados()->metodo;
 
 			if(!file_exists($caminho.$classe.".class.php"))
-				throw new ElementsException("NÃ£o foi a classe passada no caminho correspondente para o componente AddBlocoCampos");
+				throw new ElementsException("Não foi a classe passada no caminho correspondente para o componente AddBlocoCampos");
 
 			//tudo ok, chamo o dao
 			require_once($caminho.$classe.".class.php");

@@ -1,7 +1,7 @@
 <p>
 	Selecione o idioma para a edição da área em seu respctivo idioma:
 </p>
-<script>
+<script type="text/javascript">
 	var pagAtual = '{$PAG_ATUAL}'
 </script>
 

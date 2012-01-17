@@ -341,6 +341,36 @@ class ControlConfiguracoes {
 		}
 		return self::getIdPortal("../".$caminhoXml);
 	}
+	
+	/**
+	 * Função de retorno dos dados do aplicativo do facebook.
+	 *
+	 * @author Matheus
+	 * @since 1.0 - 17/01/2011
+	 */
+	public function getDadosFB($caminhoXml = null){
+		if($caminhoXml == null)
+				$caminhoXml = self::getConfigFile();
+		if($caminhoXml != null){
+			if(is_file($caminhoXml))
+				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
+			else
+				return;
+		}
+		
+		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
+			if((isset($dadosPortal->portal->appFB->id) && $dadosPortal->portal->appFB->id != "") && (isset($dadosPortal->portal->appFB->secretKey) && $dadosPortal->portal->appFB->secretKey != "")){
+				$arrDadosFB["id"] = (string)$dadosPortal->portal->appFB->id;
+				$arrDadosFB["secretKey"] = (string)$dadosPortal->portal->appFB->secretKey;
+				$arrDadosFB["url"] = (isset($dadosPortal->portal->appFB->url))?(string)$dadosPortal->portal->appFB->url:null;
+				return $arrDadosFB;
+			}else{
+				return self::getDadosFB("../".$caminhoXml);
+			}			
+		}else{
+			return self::getDadosFB("../".$caminhoXml);
+		}
+	}
 
 	public function getCssArea($caminhoXml = null){
 		if($caminhoXml == null)

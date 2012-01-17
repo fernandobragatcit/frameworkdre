@@ -37,6 +37,23 @@ class Login extends AbsViewClass {
 						self::telaLogin($get,$post);
 					}
 					break;
+				case ($get["a"] == "LoginFB") :
+                    try {
+                        $params = unserialize(parent::getObjCrypt()->decryptData($post["param"]));
+                        $strParam = "";
+                        if (count($params) > 1)
+                            foreach ($params as $key => $valor) {
+                                if ($valor != "login" && $valor != "Login")
+                                    $strParam .= $key . "=" . parent::getObjCrypt()->cryptData($valor) . "&";
+                            }
+                        $objCtrlLogin = new ControlLogin();
+                        $objCtrlLogin->verificaUsuarioFB($get);
+						parent::getObjHttp()->irPag($strParam);
+                    } catch (Exception $e) {
+						parent::getObjSmarty()->assign("MENS_ERRO", $e->__toString());
+						self::telaLogin($get,$post);
+					}
+                    break;
 				case ($get["a"] == "FormRecuperaSenha") :
 					try {
 						self::telaRecuperaSenha($get,$post);

@@ -1,6 +1,7 @@
 <?php
 require_once(FWK_MODEL."AbsModelDao.class.php");
 require_once(FWK_DAO."UsuariosProvDAO.class.php");
+require_once(FWK_DAO."ContatoDAO.class.php");
 require_once(FWK_MODEL."GruposUsuario.class.php");
 require_once(FWK_CONTROL."ControlUsuario.class.php");
 require_once(FWK_CONTROL."ControlSessao.class.php");
@@ -12,8 +13,8 @@ class UsuariosDAO extends AbsModelDao{
 	public $_id = "id_usuario";
 
 	private $objUsrProv;
-
 	private $objGruposUsuario;
+	private $objContato;
 
      public function cadastrar($xml,$post,$file){
 		try{
@@ -21,13 +22,43 @@ class UsuariosDAO extends AbsModelDao{
 				self::setIdUserCad(self::getUsuarioSessao()->getIdUsuario());
 				self::validaForm($xml,$post);
 				self::salvaPostAutoUtf8($post);
-				$this->chave = time();
+				
+				self::getObjContato()->cadastrar($xml,$post,$file);
+				$this->id_contato = self::getObjContato()->getIdContato();
+				
 		    	$this->password_usuario = self::getObjCripto()->cryptMd5($post["password_usuario"]);
 		    	$this->idioma_usuario = self::getUsuarioSessao()->getIdioma();
 		    	$this->data_cadastro = date("Y-m-d");
 		    	$this->id_tipo_usuario = USUARIO_PROVISORIO;
 				self::salvar();
+				self::getObjGruposUsuario()->setUsuarioGrupo($this->id_usuario);
 				self::enviaEmailUsr($post);
+			}else{
+				self::vaiPara("formRecuperaSenha&a=FormRecuperaSenha&msg=E-mail já cadastrado, digite seu email para recuperar sua senha.");
+				throw new DaoException("E-mail existente na base de dados");
+			}
+		}catch(DaoException $e){
+			throw new DaoException($e->getMensagem());
+		}
+    }
+	
+	public function cadastrarViaFB($xml,$post,$file){
+		try{
+			if (self::testaEmail($post["email_usuario"]) == false){
+				self::setIdUserCad(self::getUsuarioSessao()->getIdUsuario());
+				self::validaForm($xml,$post);
+				self::salvaPostAutoUtf8($post);
+				
+				self::getObjContato()->cadastrar($xml,$post,$file);
+				$this->id_contato = self::getObjContato()->getIdContato();
+
+		    	$this->password_usuario = self::getObjCripto()->cryptMd5($post["password_usuario"]);
+		    	$this->idioma_usuario = self::getUsuarioSessao()->getIdioma();
+		    	$this->data_cadastro = date("Y-m-d");
+		    	$this->id_tipo_usuario = USUARIO_ATIVO;
+				self::salvar();
+				self::getObjGruposUsuario()->setUsuarioGrupo($this->id_usuario);
+				self::enviaEmailUsr($post, true);
 			}else{
 				self::vaiPara("formRecuperaSenha&a=FormRecuperaSenha&msg=E-mail já cadastrado, digite seu email para recuperar sua senha.");
 				throw new DaoException("E-mail existente na base de dados");
@@ -48,15 +79,14 @@ class UsuariosDAO extends AbsModelDao{
 			$this->email_usuario = $arrCampos["email_usuario"];
 			$this->data_cadastro = $arrCampos["data_cadastro"];
 			$this->idioma_usuario = $arrCampos["idioma_usuario"];
-
-
+			$this->id_contato = $arrCampos["id_contato"];
 			self::replace();
 		}catch(DaoException $e){
 			throw new DaoException($e->getMensagem());
 		}
     }
 
-    private function enviaEmailUsr($post){
+    private function enviaEmailUsr($post, $viaFB = false){
     	try{
 			$objMail = new PHPMailer();
 			$objMail->SetLanguage("br");
@@ -77,7 +107,7 @@ class UsuariosDAO extends AbsModelDao{
 
 			$objMail->AddAddress($post["email_usuario"]);
 			$objMail->Subject = "Confirmação de Cadastro ".parent::getCtrlConfiguracoes()->getStrTituloPortal();
-			$objMail->Body = self::pagMail($post);
+			$objMail->Body = self::pagMail($post, $viaFB);
 			if ($objMail->Send())
 				self::vaiPara("ViewCadUsuarios&a=concluiprov&envio=ok");
 			else
@@ -89,10 +119,16 @@ class UsuariosDAO extends AbsModelDao{
 		}
     }
 
-    private function pagMail($post) {
+    private function pagMail($post, $viaFB = false) {
 		parent::getObjSmarty()->assign("SUBJECT", "Confirmação de Cadastro no Portal ".parent::getCtrlConfiguracoes()->getStrTituloPortal());
 		parent::getObjSmarty()->assign("NOME_PORTAL", parent::getCtrlConfiguracoes()->getStrTituloPortal());
 		parent::getObjSmarty()->assign("NOME_USUARIO", $post["nome_usuario"]);
+		
+		if($viaFB){
+			parent::getObjSmarty()->assign("LOGIN", $post["email_usuario"]);
+			parent::getObjSmarty()->assign("SENHA", $post["password_usuario"]);
+		}
+		
 		$strPort=($_SERVER["SERVER_PORT"]==80)?"":":".$_SERVER["SERVER_PORT"];
 
 		parent::getObjSmarty()->assign("LINK_CADASTRO", "http://".$_SERVER["SERVER_NAME"].$strPort.
@@ -129,8 +165,6 @@ class UsuariosDAO extends AbsModelDao{
 			$this->email_usuario = $arrCampos["email_usuario"];
 			$this->data_cadastro = $arrCampos["data_cadastro"];
 			$this->idioma_usuario = $arrCampos["idioma_usuario"];
-
-
 			self::replace();
 		}catch(DaoException $e){
 			throw new DaoException($e->getMensagem());
@@ -243,6 +277,12 @@ class UsuariosDAO extends AbsModelDao{
     	if($this->objGruposUsuario == null)
     		$this->objGruposUsuario = new GruposUsuario();
     	return $this->objGruposUsuario;
+    }
+	
+    private function getObjContato(){
+    	if($this->objContato == null)
+    		$this->objContato = new ContatoDAO();
+    	return $this->objContato;
     }
 
     public function getIdUsuario(){

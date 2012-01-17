@@ -314,7 +314,7 @@ class ViewPerfil extends AbsViewClass {
 	/**
 	 * Busca o tpl referente a tela de alterar senha
 	 *
-	 * TODO: fazer busca em arquivo de configuraÃ§Ã£o (XML)
+	 * TODO: fazer busca em arquivo de configuração (XML)
 	 */
 	 private function getTplFormAltSenha() {
 		$strTplPerfilAltSenha = self::getCtrlPerfil()->getCtrlConfiguracoes()->getCustomCadUsuarios(null, "perfilUsuarioAltSenha");

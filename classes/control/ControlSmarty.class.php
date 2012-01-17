@@ -47,6 +47,7 @@ class ControlSmarty{
 		self::$_objSmarty->register_function("IMPRIMIR","getModuloImpressao");
 		self::$_objSmarty->register_function("QUIZ","getModuloQuiz");
 		self::$_objSmarty->register_function("FORUM","getModuloForum");
+		self::$_objSmarty->register_function("FACEBOOK","getFacebook");
 		
 		
 		

@@ -490,4 +490,29 @@ function getGaleria($params){
 		die($e->getMensagem());
 	}
 }
+
+function getFacebook($params){
+	$metodo="";
+	$tipoObj="";
+	$caminho="";
+	extract($params);
+
+	try{
+		require_once (FWK_TAGS."ViewFacebookFB.class.php");
+		$objFB = new ViewFacebookFB();
+		
+		if($tipo != "")
+			$objFB->setTipoObj($tipoObj);
+		
+		if($caminho != "")
+			$objFB->setCaminho($caminho);
+		
+		if($metodo != "")
+			$objFB->$metodo();
+		else
+			$objFB->executeTag();
+	}catch (TagsException $e){
+		die($e->getMensagem());
+	}
+}
 ?>

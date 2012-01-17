@@ -15,12 +15,14 @@
 				font-size: 13px;
             }
 			#containerPrincipal{
+			{/literal}
+				height:{if $SENHA}265{else}220{/if}px;
+				margin-top: -{if $SENHA}133{else}110{/if}px;
+			{literal}
 				width: 680px;
-				height:220px;
 				left: 50%;
 				margin-left: -340px;
 				top: 50%;
-				margin-top: -110px;
 				position: absolute;
 				border: 1px solid #CCC;
 			}
@@ -51,6 +53,12 @@
                 Para concluir seu cadastro clique no link abaixo ou copie-o e cole-o no seu navegador. <br /> <br />
 
 				<a href="{$LINK_CADASTRO}">{$LINK_CADASTRO}</a> <br /> <br />
+				
+				{if $SENHA}
+					Login: {$LOGIN}<br />
+					Senha: {$SENHA}
+					<br /> <br />
+				{/if}
 
                 Obrigado,<br />
                 Equipe do {$NOME_PORTAL}.
