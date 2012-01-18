@@ -65,17 +65,28 @@ class AbsModelDao extends ADOdb_Active_Record{
 		return $this->objCtrlForm;
 	}
 
-	protected function alteraPostAutoUtf8($post,$id, $decode = true, $html=false){
+	protected function alteraPostAutoUtf8($post,$id, $decode = true, $html=false, $byPostForced = false){
 		$arrCampos = self::buscaCampos($id);
 
 		foreach ($post as $key => $data) {
 			if(!$html)
 			$data = htmlspecialchars($data, ENT_QUOTES);
-			if($arrCampos[$key] != $data  && $data !="" && isset($data) ){
-				if($decode)
-				$this->$key = utf8_decode($data);
-				else
-				$this->$key = $data;
+			if($arrCampos[$key] != $data){
+				if($byPostForced){
+					if($decode)
+						$this->$key = utf8_decode($data);
+					else
+						$this->$key = $data;
+				}else{
+					if($data !="" && isset($data)){
+						if($decode)
+							$this->$key = utf8_decode($data);
+						else
+							$this->$key = $data;
+					}else{
+						$this->$key = $arrCampos[$key];
+					}
+				}
 			}else{
 				$this->$key = $arrCampos[$key];
 			}

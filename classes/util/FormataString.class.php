@@ -37,7 +37,7 @@ class FormataString {
 		$string = str_replace($c, "c",$string);
 		$n = array("ñ","Ñ");
 		$string = str_replace($n, "n",$string);
-		$string = ereg_replace("[^a-zA-Z0-9_]", "", strtr($string, " ", "-"));
+		$string = ereg_replace("[^a-zA-Z0-9-]", "", strtr($string, " ", "-"));
 		$string = str_replace("--", "-",$string);
 		return $string;
 	}

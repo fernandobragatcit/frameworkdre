@@ -119,6 +119,7 @@ function getFotosTag($params){
 	$objFotos->setParam3($param3);
 	$objFotos->setParam4($param4);
 	$objFotos->setParam5($param5);
+	$objFotos->setParam6($param6);
 	$objFotos->setTitle($title);
 	$objFotos->setCssFoto($cssFoto);
 	$objFotos->setTipoObj($tipoObj);

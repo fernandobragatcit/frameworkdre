@@ -47,6 +47,20 @@ class ViewFotos extends AbsTags{
 
 		//True or False para marca d'agua.
 		$arrLinkImg["marca"] = (self::getParam3())?self::getParam3():false;
+
+		//Seta se será distorcido ou cortado.
+		switch (self::getParam6()){
+			case "simples":
+				$arrLinkImg["redimensiona"] = "simples";
+				break;
+			case "preenchimento":
+				$arrLinkImg["redimensiona"] = "preenchimento";
+				break;
+			case "crop":
+			default:
+				$arrLinkImg["redimensiona"] = "crop";
+				break;
+		}
 		
 		//Retorna o link criptografado do thumb da imagem.
 		$link = self::getObjCrypt()->cryptData(serialize($arrLinkImg));
@@ -92,6 +106,19 @@ class ViewFotos extends AbsTags{
 		$arrLinkImg["w"] = 0;
 		//Seta a altura da imagem.
 		$arrLinkImg["h"] = 0;
+		//Seta se será distorcido ou cortado.
+		switch (self::getParam6()){
+			case "simples":
+				$arrLinkImg["redimensiona"] = "simples";
+				break;
+			case "preenchimento":
+				$arrLinkImg["redimensiona"] = "preenchimento";
+				break;
+			case "crop":
+			default:
+				$arrLinkImg["redimensiona"] = "crop";
+				break;
+		}
 		//Retorna o link criptografado da imagem thumb ampliada.
 		$link = self::getObjCrypt()->cryptData(serialize($arrLinkImg));
 
@@ -121,6 +148,19 @@ class ViewFotos extends AbsTags{
 		$arrLinkImg["h"] = self::getAltura();
 		//True or False para marca d'agua.
 		$arrLinkImg["marca"] = self::getParam3();
+		//Seta se será distorcido ou cortado.
+		switch (self::getParam6()){
+			case "simples":
+				$arrLinkImg["redimensiona"] = "simples";
+				break;
+			case "preenchimento":
+				$arrLinkImg["redimensiona"] = "preenchimento";
+				break;
+			case "crop":
+			default:
+				$arrLinkImg["redimensiona"] = "crop";
+				break;
+		}
 		//Retorna o link criptografado do thumb da imagem.
 		$link = self::getObjCrypt()->cryptData(serialize($arrLinkImg));
 
