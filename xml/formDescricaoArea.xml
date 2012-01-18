@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Descrição da Área" css="formatForm"
+	tipo="FWK_VIEW" tpl="formDescricaoArea.tpl">
+
+	<campos type="text" name="descricao_area" id="descricao_area"
+		label="Descrição da Área" title="Descrição da Área" obrigatorio="true"
+		maxlength="180" class="medium" />
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="?" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>

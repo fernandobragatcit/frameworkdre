@@ -625,7 +625,7 @@ function addCampoText(strNome,strId,strStyle,strClass,strTitle, strNomeBtn,proxB
 		strComponente += "title=\""+strTitle+"\" />";
 	//botao
 	strComponente += "<button type=\"button\" name=\"addField\" class=\"btnPeq\"";
-	strComponente += "onClick=\"javascript:addCampoText('"+strNome+"','"+strId+"','"+strStyle+"','"+strClass+"','"+strTitle+"', '"+strNomeBtn+"','"+(proxBtn + 1)+"');\">";
+	strComponente += "onclick=\"javascript:addCampoText('"+strNome+"','"+strId+"','"+strStyle+"','"+strClass+"','"+strTitle+"', '"+strNomeBtn+"','"+(proxBtn + 1)+"');\">";
 	strComponente += strNomeBtn+"</button>";
 	//div para o proximo campo
 	strComponente += "<div id=\"contentAddMultCampoText_"+(proxBtn + 1)+"\"  class=\"spacoComponente\"></div>";

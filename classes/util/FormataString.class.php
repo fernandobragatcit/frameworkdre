@@ -23,18 +23,22 @@ class FormataString {
 	}
 
 	public static function renomeiaPasta($string){
-		$a = array("á","ã","à","ä","â");
+		$a = array("á","ã","à","ä","â","Á","Ã","À","Ä","Â");
 		$string = str_replace($a, "a",$string);
-		$e = array("é","ë","è","ê");
+		$e = array("é","ë","è","ê","É","Ë","È","Ê");
 		$string = str_replace($e, "e",$string);
-		$i = array("í","ï","ì","î");
+		$i = array("í","ï","ì","î","Í","Ï","Ì","Î");
 		$string = str_replace($i, "i",$string);
-		$o = array("ó","ö","ò","õ","ô");
+		$o = array("ó","ö","ò","õ","ô","Ó","Ö","Ò","Õ","Ô");
 		$string = str_replace($o, "o",$string);
-		$u = array("ú","ü","ù","û");
+		$u = array("ú","ü","ù","û","Ú","Ü","Ù","Û");
 		$string = str_replace($u, "u",$string);
-		$string = str_replace("ç", "c",$string);
-		$string = ereg_replace("[^a-zA-Z0-9_]", "", strtr($string, " ", "_"));
+		$c = array("ç","Ç");
+		$string = str_replace($c, "c",$string);
+		$n = array("ñ","Ñ");
+		$string = str_replace($n, "n",$string);
+		$string = ereg_replace("[^a-zA-Z0-9_]", "", strtr($string, " ", "-"));
+		$string = str_replace("--", "-",$string);
 		return $string;
 	}
 	

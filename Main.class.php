@@ -123,6 +123,12 @@ class Main {
 	public function setTituloPag($strPag) {
 		$this->getObjSmarty()->assign("TITULO_PAG", $strPag);
 	}
+	public function setDescricaoPag($strPag) {
+		$this->getObjSmarty()->assign("DESCRIPTION_PAG", $strPag);
+	}
+	public function setKeyWordsPag($strPag) {
+		$this->getObjSmarty()->assign("KEYWORDS_PAG", $strPag);
+	}
 
 	public function regTplEm($tag, $tpl) {
 		$this->getObjSmarty()->assign($tag, $this->getObjSmarty()->fetch($tpl));

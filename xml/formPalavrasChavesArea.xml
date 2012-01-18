@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Palavras Chaves da Área" css="formatForm"
+	tipo="FWK_VIEW" tpl="formPalavrasChavesArea.tpl">
+
+	<campos type="text" name="palavras_chaves_area" id="palavras_chaves_area"
+		label="Palavras Chaves da Área - Separar com virgula e espaço em branco (, )" 
+		title="Palavras Chaves da Área" obrigatorio="true" class="medium" />
+	
+	<campos type="addBlocoCampos" name="palavras_chaves_area" id="palavrasChave"
+		classe="PalavrasChavesArea" metodo="getPalavrasAtual" caminho="FWK_VIEW"
+		label="Palavras Chaves da Área" title="Palavras Chaves da Área"
+		maxlength="100" nomeBtn=" + "  class="medium" />
+		
+	<campos type="addBlocoCampos" name="palavras_chaves_area" id="palavras_chaves_area" 
+	classe="PalavrasChavesArea" metodo="getPalavrasAtual" caminho="FWK_VIEW" 
+	class="marginTop10" cssArea="borda padding10 left width80p marginBottom5"
+	width="570px" linhas="1" inicio="1" label=" " title=" "  >
+		<campo>
+			<linha>1</linha>
+			<label>Palavra Chave da Área</label>
+			<tipo>text</tipo>
+			<id>palavra</id>
+			<obrigatorio>true</obrigatorio>
+			<maxlenght>100</maxlenght>
+			<class>larguraFormFull</class>
+		</campo>
+	</campos>
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="?" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>

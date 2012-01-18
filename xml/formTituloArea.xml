@@ -4,7 +4,7 @@
 
 	<campos type="text" name="titulo_area" id="titulo_area"
 		label="Título da Área" title="Título da Área" obrigatorio="true"
-		maxlength="100" class="medium" />
+		maxlength="80" class="medium" />
 
 	<buttons>
 		<button name="Cadastrar" value="Salvar" type="submit" />

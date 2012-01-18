@@ -90,6 +90,10 @@ class ControlConfiguracoes {
 		try{
 			//configura título página
 			self::getTituloPag();
+			//configura a description da página
+			self::getDescricaoPag();
+			//configura as keywords da página
+			self::getPalavrasChavesPag();
 			//configura os Css das áreas
 			self::getCssArea();
 			//configura os Js das áreas
@@ -186,6 +190,47 @@ class ControlConfiguracoes {
 		}
 	}
 
+	public function getDescricaoPag($caminhoXml = null){
+		if($caminhoXml == null)
+				$caminhoXml = self::getConfigFile();
+		if($caminhoXml != null){
+			if(is_file($caminhoXml))
+				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
+			else
+				return;
+		}
+		//configura a description da página
+		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
+			if(!isset($dadosPortal->portal->descricao) && $dadosPortal->portal->descricao == ""){
+				return self::getDescricaoPag("../".$caminhoXml);
+			}else{
+				$this->getObjSmarty()->assign("DESCRIPTION_PAG", trim((string)$dadosPortal->portal->descricao));
+				return;
+			}
+		}
+		return self::getDescricaoPag("../".$caminhoXml);
+	}
+
+	public function getPalavrasChavesPag($caminhoXml = null){
+		if($caminhoXml == null)
+				$caminhoXml = self::getConfigFile();
+		if($caminhoXml != null){
+			if(is_file($caminhoXml))
+				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
+			else
+				return;
+		}
+		//configura a description da página
+		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
+			if(!isset($dadosPortal->portal->palavrasChaves) && $dadosPortal->portal->palavrasChaves == ""){
+				return self::getPalavrasChavesPag("../".$caminhoXml);
+			}else{
+				$this->getObjSmarty()->assign("KEYWORDS_PAG", trim((string)$dadosPortal->portal->palavrasChaves));
+				return;
+			}
+		}
+		return self::getPalavrasChavesPag("../".$caminhoXml);
+	}
 
 	public function getTituloPag($caminhoXml = null){
 		if($caminhoXml == null)
@@ -206,6 +251,46 @@ class ControlConfiguracoes {
 			}
 		}
 		return self::getTituloPag("../".$caminhoXml);
+	}
+
+	public function getStrPalavrasChavesArea($caminhoXml = null){
+		if($caminhoXml == null)
+				$caminhoXml = self::getConfigFile();
+		if($caminhoXml != null){
+			if(is_file($caminhoXml))
+				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
+			else
+				return;
+		}
+		//configura palavras chave da página
+		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
+			if(!isset($dadosPortal->portal->palavrasChaves) && $dadosPortal->portal->palavrasChaves == ""){
+				return self::getStrPalavrasChavesArea("../".$caminhoXml);
+			}else{
+				return (string)$dadosPortal->portal->palavrasChaves;
+			}
+		}
+		return self::getStrPalavrasChavesArea("../".$caminhoXml);
+	}
+
+	public function getStrDescricaoArea($caminhoXml = null){
+		if($caminhoXml == null)
+				$caminhoXml = self::getConfigFile();
+		if($caminhoXml != null){
+			if(is_file($caminhoXml))
+				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
+			else
+				return;
+		}
+		//configura descrição da página
+		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
+			if(!isset($dadosPortal->portal->descricao) && $dadosPortal->portal->descricao == ""){
+				return self::getStrDescricaoArea("../".$caminhoXml);
+			}else{
+				return (string)$dadosPortal->portal->descricao;
+			}
+		}
+		return self::getStrDescricaoArea("../".$caminhoXml);
 	}
 
 	public function getStrTituloArea($caminhoXml = null){
@@ -284,6 +369,50 @@ class ControlConfiguracoes {
 				$novoTitulo = $dadosPortal->portal->addChild("titulo",$strTituloArea);
 			}else{
 				$dadosPortal->portal->titulo = $strTituloArea;
+			}
+		}
+
+		self::getObjCtrlXml()->salvaXml($caminhoXml,$dadosPortal->asXML());
+	}
+
+	public function setStrPalavrasChavesArea($strPalavrasChavesArea){
+		$caminhoXml = self::getConfigFile();
+		if($caminhoXml != null){
+			if(is_file($caminhoXml)){
+				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
+			}
+			else
+				return;
+		}
+		//configura título página
+		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
+			if(!isset($dadosPortal->portal->palavrasChaves) && $dadosPortal->portal->palavrasChaves == ""){
+				//cria os nós e a estrutura para o título
+				$novoTitulo = $dadosPortal->portal->addChild("palavrasChaves",$strPalavrasChavesArea);
+			}else{
+				$dadosPortal->portal->palavrasChaves = $strPalavrasChavesArea;
+			}
+		}
+
+		self::getObjCtrlXml()->salvaXml($caminhoXml,$dadosPortal->asXML());
+	}
+
+	public function setStrDescricaoArea($strDescricaoArea){
+		$caminhoXml = self::getConfigFile();
+		if($caminhoXml != null){
+			if(is_file($caminhoXml)){
+				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
+			}
+			else
+				return;
+		}
+		//configura título página
+		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
+			if(!isset($dadosPortal->portal->descricao) && $dadosPortal->portal->descricao == ""){
+				//cria os nós e a estrutura para o título
+				$novoTitulo = $dadosPortal->portal->addChild("descricao",$strDescricaoArea);
+			}else{
+				$dadosPortal->portal->descricao = $strDescricaoArea;
 			}
 		}
 
