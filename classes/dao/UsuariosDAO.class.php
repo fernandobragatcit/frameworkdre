@@ -1,7 +1,6 @@
 <?php
 require_once(FWK_MODEL."AbsModelDao.class.php");
 require_once(FWK_DAO."UsuariosProvDAO.class.php");
-require_once(FWK_DAO."ContatoDAO.class.php");
 require_once(FWK_MODEL."GruposUsuario.class.php");
 require_once(FWK_CONTROL."ControlUsuario.class.php");
 require_once(FWK_CONTROL."ControlSessao.class.php");
@@ -22,10 +21,10 @@ class UsuariosDAO extends AbsModelDao{
 				self::setIdUserCad(self::getUsuarioSessao()->getIdUsuario());
 				self::validaForm($xml,$post);
 				self::salvaPostAutoUtf8($post);
-				
+
 				self::getObjContato()->cadastrar($xml,$post,$file);
 				$this->id_contato = self::getObjContato()->getIdContato();
-				
+
 		    	$this->password_usuario = self::getObjCripto()->cryptMd5($post["password_usuario"]);
 		    	$this->idioma_usuario = self::getUsuarioSessao()->getIdioma();
 		    	$this->data_cadastro = date("Y-m-d");
@@ -41,14 +40,14 @@ class UsuariosDAO extends AbsModelDao{
 			throw new DaoException($e->getMensagem());
 		}
     }
-	
+
 	public function cadastrarViaFB($xml,$post,$file){
 		try{
 			if (self::testaEmail($post["email_usuario"]) == false){
 				self::setIdUserCad(self::getUsuarioSessao()->getIdUsuario());
 				self::validaForm($xml,$post);
 				self::salvaPostAutoUtf8($post);
-				
+
 				self::getObjContato()->cadastrar($xml,$post,$file);
 				$this->id_contato = self::getObjContato()->getIdContato();
 
@@ -123,12 +122,12 @@ class UsuariosDAO extends AbsModelDao{
 		parent::getObjSmarty()->assign("SUBJECT", "Confirmação de Cadastro no Portal ".parent::getCtrlConfiguracoes()->getStrTituloPortal());
 		parent::getObjSmarty()->assign("NOME_PORTAL", parent::getCtrlConfiguracoes()->getStrTituloPortal());
 		parent::getObjSmarty()->assign("NOME_USUARIO", $post["nome_usuario"]);
-		
+
 		if($viaFB){
 			parent::getObjSmarty()->assign("LOGIN", $post["email_usuario"]);
 			parent::getObjSmarty()->assign("SENHA", $post["password_usuario"]);
 		}
-		
+
 		$strPort=($_SERVER["SERVER_PORT"]==80)?"":":".$_SERVER["SERVER_PORT"];
 
 		parent::getObjSmarty()->assign("LINK_CADASTRO", "http://".$_SERVER["SERVER_NAME"].$strPort.
@@ -278,7 +277,7 @@ class UsuariosDAO extends AbsModelDao{
     		$this->objGruposUsuario = new GruposUsuario();
     	return $this->objGruposUsuario;
     }
-	
+
     private function getObjContato(){
     	if($this->objContato == null)
     		$this->objContato = new ContatoDAO();
