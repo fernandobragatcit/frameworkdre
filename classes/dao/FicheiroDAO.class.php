@@ -99,6 +99,16 @@ class FicheiroDAO extends AbsModelDao{
 						id_ficheiro = '".$idDoc."'";
 		return Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,0));
     }
+	
+	public function getIdPdfById($idDoc){
+    	$strQuery = "SELECT 
+    					id_pdf
+					FROM 
+						fwk_ficheiro
+					WHERE 
+						id_ficheiro = '".$idDoc."'";
+		return end(Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,0)));
+    }
 
 }
 ?>

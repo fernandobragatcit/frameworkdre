@@ -98,6 +98,10 @@ function getFotosTag($params){
 	$metodo="";
 	$altura="";
 	$largura="";
+	$marca="";
+	$preLoading="";
+	$cropX="";
+	$cropY="";
 	$param1="";
 	$param2="";
 	$param3="";
@@ -114,6 +118,10 @@ function getFotosTag($params){
 	$objFotos = new ViewFotos();
 	$objFotos->setAltura($altura);
 	$objFotos->setLargura($largura);
+	$objFotos->setMarca($marca);
+	$objFotos->setPreLoading($preLoading);
+	$objFotos->setCropX($cropX);
+	$objFotos->setCropY($cropY);
 	$objFotos->setParam1($param1);
 	$objFotos->setParam2($param2);
 	$objFotos->setParam3($param3);
@@ -128,6 +136,24 @@ function getFotosTag($params){
 		$objFotos->$metodo();
 	else
 		$objFotos->executeTag();
+
+}
+function getArquivoTag($params){
+	$metodo="";
+	$cssLink="";
+	$title="";
+	$idObj="";
+	extract($params);
+
+	require_once(FWK_TAGS."ViewArquivos.class.php");
+	$objArquivo = new ViewArquivos();
+	$objArquivo->setTitle($title);
+	$objArquivo->setCssLink($cssLink);
+	$objArquivo->setIdObj($idObj);
+	if($metodo != "")
+		$objArquivo->$metodo();
+	else
+		$objArquivo->executeTag();
 
 }
 /**

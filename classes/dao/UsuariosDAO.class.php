@@ -13,7 +13,6 @@ class UsuariosDAO extends AbsModelDao{
 
 	private $objUsrProv;
 	private $objGruposUsuario;
-	private $objContato;
 
      public function cadastrar($xml,$post,$file){
 		try{
@@ -21,10 +20,6 @@ class UsuariosDAO extends AbsModelDao{
 				self::setIdUserCad(self::getUsuarioSessao()->getIdUsuario());
 				self::validaForm($xml,$post);
 				self::salvaPostAutoUtf8($post);
-
-				self::getObjContato()->cadastrar($xml,$post,$file);
-				$this->id_contato = self::getObjContato()->getIdContato();
-
 		    	$this->password_usuario = self::getObjCripto()->cryptMd5($post["password_usuario"]);
 		    	$this->idioma_usuario = self::getUsuarioSessao()->getIdioma();
 		    	$this->data_cadastro = date("Y-m-d");
@@ -47,10 +42,6 @@ class UsuariosDAO extends AbsModelDao{
 				self::setIdUserCad(self::getUsuarioSessao()->getIdUsuario());
 				self::validaForm($xml,$post);
 				self::salvaPostAutoUtf8($post);
-
-				self::getObjContato()->cadastrar($xml,$post,$file);
-				$this->id_contato = self::getObjContato()->getIdContato();
-
 		    	$this->password_usuario = self::getObjCripto()->cryptMd5($post["password_usuario"]);
 		    	$this->idioma_usuario = self::getUsuarioSessao()->getIdioma();
 		    	$this->data_cadastro = date("Y-m-d");
@@ -78,7 +69,6 @@ class UsuariosDAO extends AbsModelDao{
 			$this->email_usuario = $arrCampos["email_usuario"];
 			$this->data_cadastro = $arrCampos["data_cadastro"];
 			$this->idioma_usuario = $arrCampos["idioma_usuario"];
-			$this->id_contato = $arrCampos["id_contato"];
 			self::replace();
 		}catch(DaoException $e){
 			throw new DaoException($e->getMensagem());
@@ -276,12 +266,6 @@ class UsuariosDAO extends AbsModelDao{
     	if($this->objGruposUsuario == null)
     		$this->objGruposUsuario = new GruposUsuario();
     	return $this->objGruposUsuario;
-    }
-
-    private function getObjContato(){
-    	if($this->objContato == null)
-    		$this->objContato = new ContatoDAO();
-    	return $this->objContato;
     }
 
     public function getIdUsuario(){

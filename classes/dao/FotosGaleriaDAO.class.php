@@ -19,9 +19,9 @@ class FotosGaleriaDAO extends AbsModelDao{
     }
 
 	/**
-	 * Método para alterar somente os campos que realmente foram alterados não mexendo com os outros
+	 * Mï¿½todo para alterar somente os campos que realmente foram alterados nï¿½o mexendo com os outros
 	 *
-	 * @author André Coura
+	 * @author Andrï¿½ Coura
 	 * @since 1.0 - 26/07/2010
 	 */
     public function alterar($id,$xml,$post,$file){

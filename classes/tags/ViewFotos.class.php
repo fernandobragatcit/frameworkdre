@@ -9,6 +9,10 @@ class ViewFotos extends AbsTags{
 	private $strCssFoto;
 	private $altura;
 	private $largura;
+	private $marca;
+	private $strPreLoading;
+	private $cropX;
+	private $cropY;
 
 
 
@@ -33,6 +37,7 @@ class ViewFotos extends AbsTags{
 
 		//Busca o nome do arquivo.
 		$arrLinkImg["img"] = $arrFoto["nome_arquivo"];
+		
 		//Seta a largura da imagem.
 		if(self::getLargura() != "")
 		$arrLinkImg["w"] = self::getLargura();
@@ -46,8 +51,13 @@ class ViewFotos extends AbsTags{
 		$arrLinkImg["h"] = self::getParam2();
 
 		//True or False para marca d'agua.
-		$arrLinkImg["marca"] = (self::getParam3())?self::getParam3():false;
-
+		if(self::getMarca() != "")
+		$arrLinkImg["marca"] = self::getMarca();
+		elseif(self::getParam3() != "")
+		$arrLinkImg["marca"] = self::getParam3();
+		else
+		$arrLinkImg["marca"] = false;
+		
 		//Seta se será distorcido ou cortado.
 		switch (self::getParam6()){
 			case "simples":
@@ -59,6 +69,10 @@ class ViewFotos extends AbsTags{
 			case "crop":
 			default:
 				$arrLinkImg["redimensiona"] = "crop";
+				if(self::getCropX() != "")
+					$arrLinkImg["x"] = self::getCropX();
+				if(self::getCropY() != "")
+					$arrLinkImg["y"] = self::getCropY();
 				break;
 		}
 		
@@ -79,7 +93,7 @@ class ViewFotos extends AbsTags{
 		parent::getObjSmarty()->assign("TITULO",$arrFoto["titulo_foto"]);
 		
 		//True or False para pre-loading.
-		parent::getObjSmarty()->assign("PRE_LOADING",(self::getParam4())?self::getParam4():"true");
+		parent::getObjSmarty()->assign("PRE_LOADING",(self::getPreLoading())?self::getPreLoading():"true");
 
 		$strTela = parent::getObjSmarty()->fetch(FWK_TAGS_TPL."tagFotoThumb.tpl");
 		print ($strTela);
@@ -142,12 +156,30 @@ class ViewFotos extends AbsTags{
 
 		//Busca o nome do arquivo.
 		$arrLinkImg["img"] = $arrFoto["nome_arquivo"];
+		
+		
 		//Seta a largura da imagem.
-		$arrLinkImg["w"] = self::getLargura();
+		if(self::getLargura() != "")
+			$arrLinkImg["w"] = self::getLargura();
+		elseif(self::getParam1() != "")
+			$arrLinkImg["w"] = self::getParam1();
+		else
+			$arrLinkImg["w"] = 600;
+
 		//Seta a altura da imagem.
-		$arrLinkImg["h"] = self::getAltura();
+		if(self::getAltura() != "")
+			$arrLinkImg["h"] = self::getAltura();
+		else
+			$arrLinkImg["h"] = self::getParam2();
+		
 		//True or False para marca d'agua.
-		$arrLinkImg["marca"] = self::getParam3();
+		if(self::getMarca() != "")
+			$arrLinkImg["marca"] = self::getMarca();
+		elseif(self::getParam3() != "")
+			$arrLinkImg["marca"] = self::getParam3();
+		else
+			$arrLinkImg["marca"] = false;
+			
 		//Seta se será distorcido ou cortado.
 		switch (self::getParam6()){
 			case "simples":
@@ -200,6 +232,30 @@ class ViewFotos extends AbsTags{
 	}
 	public function getLargura(){
 		return $this->largura;
+	}
+	public function setMarca($strMarca){
+		$this->marca = $strMarca;
+	}
+	public function getMarca(){
+		return $this->marca;
+	}
+	public function setPreLoading($strPreLoading){
+		$this->preLoading = $strPreLoading;
+	}
+	public function getPreLoading(){
+		return $this->preLoading;
+	}
+	public function setCropX($strCropX){
+		$this->cropX = $strCropX;
+	}
+	public function getCropX(){
+		return $this->cropX;
+	}
+	public function setCropY($strCropY){
+		$this->cropY = $strCropY;
+	}
+	public function getCropY(){
+		return $this->cropY;
 	}
 
 	public function executeTag(){

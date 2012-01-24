@@ -47,7 +47,6 @@ class ControlSmarty{
 		self::$_objSmarty->register_function("IMPRIMIR","getModuloImpressao");
 		self::$_objSmarty->register_function("QUIZ","getModuloQuiz");
 		self::$_objSmarty->register_function("FORUM","getModuloForum");
-		self::$_objSmarty->register_function("FACEBOOK","getFacebook");
 		
 		
 		
@@ -55,8 +54,10 @@ class ControlSmarty{
 		//funções do framework- @author: André Coura
 		self::$_objSmarty->register_function("BANNER","getBanner");
 		self::$_objSmarty->register_function("FOTO","getFotosTag");
+		self::$_objSmarty->register_function("ARQUIVO","getArquivoTag");
 		self::$_objSmarty->register_function("DOCUMENTO","getDocumento");
 		self::$_objSmarty->register_function("GALERIA","getGaleria");
+		self::$_objSmarty->register_function("FACEBOOK","getFacebook");
 
     }
 

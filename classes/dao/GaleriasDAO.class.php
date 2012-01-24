@@ -99,6 +99,34 @@ class GaleriasDAO extends AbsModelDao{
 						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().")";
     	return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery,0));
 	}
+	
+	
+    public function getGaleriasByIdPortal($idPortal, $limit){
+    	$intPag = ($intPag>0)?(int)$intPag-1:$intPag;
+    	$inicio = ((int)$intPag) * NUM_ELEMENTOS_LISTAGEM;
+    	$strQuery = "SELECT id_galeria, titulo_galeria, bigode_galeria, texto_galeria, identificador_galeria,
+    				(SELECT id_foto FROM fwk_fotos_galeria ffg ORDER BY RAND() LIMIT 0,1) AS 'id_capa'
+					FROM fwk_galeria fg
+    				WHERE id_portal = '".$idPortal."' 
+    				ORDER BY id_galeria DESC 
+    				LIMIT ".$inicio.", ".NUM_ELEMENTOS_LISTAGEM;
+    	return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery,0));
+    }
+    
+    public function getTotalGaleriasByIdPortal($idPortal){
+    	$strQuery = "SELECT COUNT(*)
+					FROM fwk_galeria
+    				WHERE id_portal = '".$idPortal."'";
+    	$arrDados =  Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,0));
+    	return end($arrDados);
+    }
+	
+    public function getTituloGaleriaByIdGaleria($idGaleria){
+    	$strQuery = "SELECT titulo_galeria FROM fwk_galeria	WHERE id_galeria = '".$idGaleria."'";
+    	$arrDados =  Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,0));
+    	return end($arrDados);
+    }
+	
 
 }
 ?>

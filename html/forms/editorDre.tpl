@@ -36,7 +36,7 @@
 {*}
 		// Example content CSS (should be your site CSS)
 		{if $CSS_EDITOR}
-			content_css : "../../arquivos/css/{$CSS_EDITOR}",
+			content_css : "{$PATH_SERVIDOR}arquivos/css/{$CSS_EDITOR}",
 		{/if}
 				
 		// Drop lists for link/image/media/template dialogs
