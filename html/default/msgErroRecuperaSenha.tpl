@@ -9,7 +9,7 @@
             <br />
 			<p>Houve um problema ao recuperar sua senha ou o email não se encontra em nossa base de dados.<br /><br />
 				Favor <a href="{$FORM_ALT_SENHA}" class="darkGray"><strong>tentar novamente</strong></a>
-				novamente dentro de alguns minutos ou entre em contato diretamente com o portal.
+				dentro de alguns minutos ou entre em contato diretamente com o portal.
 				<br /><br />
 				Atenciosamente,<br />
 				<span class="green"><strong>Equipe do Portal Circuito Serra do Cipó.</strong></span>

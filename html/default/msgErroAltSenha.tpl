@@ -8,7 +8,7 @@
             <h2 class="font30 marginTop">Erro</h2>
             <br />
 			<p>Houve um problema ao alterar sua senha.<br /><br />
-				Favor novamente dentro de alguns minutos ou entre em contato diretamente com o portal.
+				Favor tentar novamente dentro de alguns minutos ou entre em contato diretamente com o portal.
 				<br /><br />
 				Atenciosamente,<br />
 				<span class="green"><strong>Equipe do Portal Circuito Serra do Cipó.</strong></span>
