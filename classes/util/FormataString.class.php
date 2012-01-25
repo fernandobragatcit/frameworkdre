@@ -25,7 +25,7 @@ class FormataString {
 	public static function renomeiaPasta($string){
 		$a = array("á","ã","à","ä","â","Á","Ã","À","Ä","Â");
 		$string = str_replace($a, "a",$string);
-		$e = array("é","ë","è","ê","É","Ë","È","Ê");
+		$e = array("é","ë","è","ê","É","Ë","È","Ê","&");
 		$string = str_replace($e, "e",$string);
 		$i = array("í","ï","ì","î","Í","Ï","Ì","Î");
 		$string = str_replace($i, "i",$string);
@@ -38,6 +38,7 @@ class FormataString {
 		$n = array("ñ","Ñ");
 		$string = str_replace($n, "n",$string);
 		$string = ereg_replace("[^a-zA-Z0-9-]", "", strtr($string, " ", "-"));
+		$string = str_replace("--", "-",$string);
 		$string = str_replace("--", "-",$string);
 		return $string;
 	}

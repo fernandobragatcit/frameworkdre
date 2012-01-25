@@ -125,6 +125,25 @@ class FormataLink {
 		return $strLink;
 	}
 	
+	public static function limpaEmail($strEmail){
+		$a = array("á","ã","à","ä","â","Á","Ã","À","Ä","Â");
+		$strEmail = str_replace($a, "a",$strEmail);
+		$e = array("é","ë","è","ê","É","Ë","È","Ê");
+		$strEmail = str_replace($e, "e",$strEmail);
+		$i = array("í","ï","ì","î","Í","Ï","Ì","Î");
+		$strEmail = str_replace($i, "i",$strEmail);
+		$o = array("ó","ö","ò","õ","ô","Ó","Ö","Ò","Õ","Ô");
+		$strEmail = str_replace($o, "o",$strEmail);
+		$u = array("ú","ü","ù","û","Ú","Ü","Ù","Û");
+		$strEmail = str_replace($u, "u",$strEmail);
+		$c = array("ç","Ç");
+		$strEmail = str_replace($c, "c",$strEmail);
+		$n = array("ñ","Ñ");
+		$strEmail = str_replace($n, "n",$strEmail);
+		$strEmail = trim($strEmail);
+		return $strEmail;
+	}
+	
 
 	
 }

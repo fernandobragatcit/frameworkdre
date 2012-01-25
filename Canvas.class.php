@@ -23,6 +23,9 @@ class Canvas {
 	private $rgb;
 	// posicionamento do crop
 	private $posicao_crop;
+	
+	//variaveis para posicionamento do crop
+	private $pos_x, $pos_y;
 
 	/**
 	 * Construtor
@@ -259,7 +262,38 @@ class Canvas {
 	*/
 	public function posicaoCrop( $x, $y )
 	{
-		$this->posicao_crop = array( $x, $y, $this->largura, $this->altura );
+		//$this->posicao_crop = array( $x, $y, $this->largura, $this->altura );
+		
+		//coordenadas inteligentes
+		switch($x){
+          	case 'esquerdo':
+          		$this->pos_x = 0;
+	          	break;
+			case 'direito':
+				$this->pos_x = $this->largura - $this->nova_largura;
+				break;
+			case 'meio':
+				$this->pos_x = ( $this->largura - $this->nova_largura ) / 2;
+				break;
+			default:
+				$this->pos_x = $x;
+				break;
+		}
+          
+		switch($y){
+          	case 'topo':
+          		$this->pos_y = 0;
+				break;
+			case 'inferior':
+				$this->pos_y = $this->altura - $this->nova_altura;
+				break;
+			case 'meio':
+				$this->pos_y = ( $this->altura - $this->nova_altura ) / 2;
+				break;
+			default:
+				$this->pos_y = $y;
+				break;
+		 }
 		return $this;
 	} // fim posicao_crop
 
@@ -421,16 +455,16 @@ class Canvas {
 			{
 				$this->posicao_crop[2] 	= $this->largura / $hm;
 				$this->posicao_crop[3]  = $this->nova_altura;
-				$this->posicao_crop[0]  = ( $this->posicao_crop[2] / 2 ) - $h_width;
-				$this->posicao_crop[1]	= 0;
+				$this->posicao_crop[0]  = (isset($this->pos_x))?$this->pos_x:(( $this->posicao_crop[2] / 2 ) - $h_width);
+				$this->posicao_crop[1]  = (isset($this->pos_y))?$this->pos_y:(( $this->posicao_crop[3] / 2 ) - $h_height);
 			}
 			// largura <= altura
 			elseif ( ( $wm <= $hm ) )
 			{
 				$this->posicao_crop[2] 	= $this->nova_largura;
 				$this->posicao_crop[3]  = $this->altura / $wm;
-				$this->posicao_crop[0]  = 0;
-				$this->posicao_crop[1]	= ( $this->posicao_crop[3] / 2 ) - $h_height;
+				$this->posicao_crop[0]  = (isset($this->pos_x))?$this->pos_x:(( $this->posicao_crop[2] / 2 ) - $h_width);
+				$this->posicao_crop[1]  = (isset($this->pos_y))?$this->pos_y:(( $this->posicao_crop[3] / 2 ) - $h_height);
 			}
 		}
 	} // fim calculaPosicaoCrop
