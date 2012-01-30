@@ -83,6 +83,22 @@ class ControlUsuario{
 	}
 
 	/**
+	 * Método para verificar a existencia de um usuário por email no banco de dados
+	 *
+	 * @author Matheus Vieira
+	 * @since 1.0 - 27/01/2012
+	 * @param String $strEmail: email do usuario
+	 */
+	public function validaUsuarioDBEmail($strEmail){
+		$strQuery = "SELECT * FROM fwk_usuario WHERE email_usuario = '".$strEmail."' ";
+		$arrRet = ControlDB::getRow($strQuery,0);
+		if(!isset($arrRet["id_usuario"]) && count($arrRet)<5 )
+			throw new UserException(MSG_ERRO_LOGIN);
+		self::setObjUsuario($arrRet);
+		return self::getObjUsuario();
+	}
+
+	/**
 	 * Método para verificar a existencia de um usuário por facebook no banco de dados
 	 *
 	 * @author André Coura
