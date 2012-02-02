@@ -188,13 +188,14 @@ abstract class AbsCruds {
 		}
 	}
 
-	protected function listDados($pagAtual=0, $buscaGrid = null, $filtros = null, $idUsuario = null){
+	protected function listDados($post, $pagAtual=0, $buscaGrid = null, $filtros = null, $idUsuario = null){
 		$intDocsGrupo = self::getDocsGrupo();
 		if($intDocsGrupo > 0){
 			self::getObjGrid()->setVariavelWhere2($intDocsGrupo);
 		}
 		self::getObjGrid()->setUtf8Decode(true);
 		self::getObjGrid()->setXmlGrid(self::getXmlGrid());
+		self::getObjGrid()->setPostFiltro($post);
 		self::getObjGrid()->showGrid($pagAtual, $buscaGrid, $filtros);
 	}
 

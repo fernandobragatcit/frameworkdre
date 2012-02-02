@@ -22,6 +22,14 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Grupo">nome_grupo</campo>
+		<campos type="select" name="id_grupo" id="id_grupo" campoQuery="id_grupo"
+			label="Nome Grupo" title="Nome Grupo" class="larguraFormMeia">
+			<query>
+				SELECT id_grupo, nome_grupo FROM
+				fwk_grupo
+			</query>
+			<value>id_grupo</value>
+			<text>nome_grupo</text>
+		</campos>
 	</filtro>
 </grid>

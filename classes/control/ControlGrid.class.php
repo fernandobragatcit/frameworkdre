@@ -35,6 +35,8 @@ class ControlGrid {
 	private $objSessao;
 	private $objUserSess;
 
+	private $postFiltro = null;
+	
 	private $busca = null;
 	private $arrFiltros = null;
 	private $arrLegenda = null;
@@ -183,6 +185,7 @@ class ControlGrid {
 		self::regBtnsGrid();
 		self::getObjSmarty()->assign("ARR_TITULOS", self::getColTitulos());
 		$arrDadosGrid = self::getDadosDb(self::getInicioPaginacao($pagAtual));
+		self::regFiltroGrid();
 		foreach ($arrDadosGrid as $key => $array){
 			foreach ($array as $key2 => $valor){
 				$arrDadosGrid[$key][$key2] = str_replace("&", "&amp;", $valor);
@@ -192,7 +195,7 @@ class ControlGrid {
 		self::getObjSmarty()->assign("NUM_DADOS_INI", count($arrDadosGrid) > 0 ? "TRUE" : "FALSE");
 		self::getObjSmarty()->assign("ARR_DADOS", self::verTipoDados(self::doFieldFormat($arrDadosGrid)));
 		self::getObjSmarty()->assign("LINK_BUSCAR", self::makeLinkPag(""));
-		self::getObjSmarty()->assign("VALOR_BUSCA", $_POST["buscaGrid"]);
+		self::getObjSmarty()->assign("VALOR_BUSCA", stripslashes($this->busca));
 		self::getObjSmarty()->assign("URL_MOMENTO", self::makeLinkPag(""));
 	}
 	
@@ -635,8 +638,50 @@ class ControlGrid {
 			}
 		}
 
-		$idUsuario = self::getVariavelUsuario();
+		if($this->postFiltro != "" && isset(self::getObjXml()->filtro)) {
+			if($this->postFiltro != null){
+				self::getObjSmarty()->assign("ABRE_FILTRO", true);
+			}
+			foreach ($this->postFiltro as $key => $valor){
+				if($valor != ""){
+					foreach (self::getObjXml()->filtro->campos as $campo){
+						if((string)$campo->attributes()->name == $key){
+							if((string)$campo->attributes()->type == "select"){
+								$auxOr = ($campo->attributes()->OR)?"( ":"";
+								$strQuery .= " AND ".$auxOr.(string)$campo->attributes()->campoQuery." = '".$valor."'";
+								if($campo->attributes()->campoQuery2 || $campo->attributes()->campoQuery2 != ""){
+									$orAnd =  ($campo->attributes()->OR)?" OR ":" AND ";
+									$strQuery .= $orAnd.(string)$campo->attributes()->campoQuery2." = '".$valor."'";
+								}
+								$strQuery .= ($campo->attributes()->OR)?") ":"";
+							}else{
+								preg_match_all('/\"([^\"]*)\"/',$valor,$aux);
+								$aux = $aux[1];
+								
+								if(count($aux) == 0)
+									$aux = explode(" ", $valor);
+								$aux = FormataPost::limpaArray($aux);
+								sort($aux);
 
+								if(count($aux)>0){
+									for($i=0; $i<count($aux); $i++){
+										$strQuery .= ($i == 0)?" AND (":"";
+										$strQuery .= $auxOr.(string)$campo->attributes()->campoQuery." LIKE '%".$aux[$i]."%'";
+										if($campo->attributes()->campoQuery2 || $campo->attributes()->campoQuery2 != ""){
+											$strQuery .= " OR ".(string)$campo->attributes()->campoQuery2." LIKE '%".$aux[$i]."%'";
+										}
+										$strQuery .= ($i != count($aux)-1)?" OR ":")";
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		//self::debuga($strQuery);
+		
 		if (trim((string)self::getObjXml()->query->whereBusca) != "") {
 			if($this->busca != ""){
 				$strQuery .= " AND ";
@@ -659,6 +704,7 @@ class ControlGrid {
 			}
 		}
 
+		$idUsuario = self::getVariavelUsuario();
 		if($idUsuario)
 			if (trim((string)self::getObjXml()->query->whereUsuario) != "") {
 				$strQuery .= " AND ";
@@ -950,6 +996,44 @@ class ControlGrid {
 		self::getObjSmarty()->assign("BUTTONS_GRID", $strCampos);
 	}
 
+	/**
+	 * Método para gerar o filtro do grid a partir do XML
+	 *
+	 * @author Matheus Vieira
+	 * @since 1.0 - 01/02/2012
+	 */
+	private function regFiltroGrid($post = null) {
+		if(isset(self::getObjXml()->filtro)){
+				
+			$objFactoryCompsHtml = new FactoryCompHtml();
+			$arrCampos = "";
+			
+			$cont = 0;
+			foreach (self::getObjXml()->filtro->campos as $campo) {
+				if ($campo->attributes()->type != "text" && $campo->attributes()->type != "select")
+					throw new GridException("O atributo type=\"".$campo->attributes()->type."\" no campo ".(string)$campo->attributes()->label." não é válido para filtro. No filtro é permitido apenas campos \"text\" e \"select\".");
+					
+				if (!$campo->attributes()->campoQuery || $campo->attributes()->campoQuery == "")
+					throw new GridException("Não foi passado o atributo \"campoQuery\" no campo ".(string)$campo->attributes()->label." do filtro.");
+
+				$objFactoryCompsHtml->setClasseAtual(self::getObjXml()->attributes()->classe);
+				$objFactoryCompsHtml->buildComp($campo, $this->postFiltro[(string)$campo->attributes()->name]);
+				$arrCampos[$cont]["label"] = (string)$campo->attributes()->label;
+				$arrCampos[$cont]["campo"] = $objFactoryCompsHtml->getObjFactored()->getHtmlComp();
+				$cont++;
+			}
+			
+			self::getObjSmarty()->assign("CAMPOS_FILTRO", $arrCampos);
+			$strLink = (isset(self::getObjXml()->attributes()->categoria))?(string)self::getObjXml()->attributes()->categoria."&f=":"";
+			$strLink .= self::getClassGrid();
+			
+			$strTipo = ((string)self::getObjXml()->attributes()->tipo == "MODULO")?"m":"c";
+			
+			self::getObjSmarty()->assign("ACTION_FILTRO", "?".$strTipo."=".self::getObjCrypt()->cryptData($strLink));
+			self::getObjSmarty()->assign("EXIBE_FILTRO", true);
+		}
+	}
+
 	private function getCtrlConfiguracoes() {
 		if ($this->objCtrlConfiguracoes == null)
 		$this->objCtrlConfiguracoes = new ControlConfiguracoes();
@@ -968,6 +1052,12 @@ class ControlGrid {
 		return $this->idReferencia;
 	}
 
+	public function setPostFiltro($post){
+		$this->postFiltro = $post;
+	}
+	public function getPostFiltro(){
+		return $this->postFiltro;
+	}
 
 	public function debuga(){
 		$arrDados = func_get_args();

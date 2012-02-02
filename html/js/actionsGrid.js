@@ -193,3 +193,15 @@ function imprimir(strParams){
 	window.open(strClass, "Impressao", "scrollbars=yes", "menubar=no", "fullscreen = yes");
 	return false;
 }
+
+function abreFechaDiv(idDiv){
+	if(jQuery("#"+idDiv).hasClass("opened")){
+		jQuery("#abrirFiltro").html("Exibir filtros");
+		jQuery("#"+idDiv).slideUp("slow");
+		jQuery("#"+idDiv).removeClass("opened");
+	}else{
+		jQuery("#"+idDiv).slideDown();
+		jQuery("#"+idDiv).addClass("opened");
+		jQuery("#abrirFiltro").html("Ocultar filtros");
+	}
+}

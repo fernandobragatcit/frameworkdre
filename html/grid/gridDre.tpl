@@ -13,15 +13,40 @@
 	    	<input type="submit" value="Buscar" id="submitFiltro" />
 	    </form>
 	    <br style="clear:both;" />
-		{if $NUM_DADOS_INI eq "TRUE"}
-			{section name="leg" loop="$LEGENDA"}
-			   	{if $smarty.section.leg.first}
-			    	<div id="legendaIcons">
-			    	<strong>Legenda:</strong>
-			    {/if}
-			    {$LEGENDA[leg].icone} {$LEGENDA[leg].label} 
-			    {if !$smarty.section.leg.last}|{else}</div>{/if}
-		    {/section}
+		{section name="leg" loop="$LEGENDA"}
+		   	{if $smarty.section.leg.first}
+		    	<div id="legendaIcons">
+		    	<strong>Legenda:</strong>
+		    {/if}
+		    {$LEGENDA[leg].icone} {$LEGENDA[leg].label} 
+		    {if !$smarty.section.leg.last}|{else}</div>{/if}
+	    {/section}
+	    <br style="clear:both;" />
+	    {if $EXIBE_FILTRO}
+    		<button id="abrirFiltro" onclick="abreFechaDiv('filtroGrid')">Exibir filtros</button>
+		    <div id="boxFiltro">
+				<form method="post" id="filtroGrid" action="{$ACTION_FILTRO}">
+		    		<h2>Especificação de Filtros</h2>
+		    		
+				    <br style="clear:both;" />
+			    	<div class="trataFloat">
+				    	{section name="fil" loop="$CAMPOS_FILTRO"}
+				    		<div class="campoFiltro">
+					    		<div><label>{$CAMPOS_FILTRO[fil].label}</label></div>
+					    		<div>{$CAMPOS_FILTRO[fil].campo}</div>
+				    		</div>
+				    	{/section}
+				    </div>
+				    <div id="alinhaBtnFiltro">
+					    <input type="button" onclick="jQuery('#filtroGrid').submit();" value="Buscar" class="btnGrid" />
+				    </div>
+			    </form>
+			</div>
+			{if $ABRE_FILTRO}<script type="text/javascript">abreFechaDiv('filtroGrid');</script>{/if}
+		    <br style="clear:both;" />
+		{/if}
+    	
+	    {if $NUM_DADOS_INI eq "TRUE"}
 	        <table style="width:726px">
 	            <tbody>
 	            <tr>
