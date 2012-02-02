@@ -35,7 +35,7 @@ function text_get_trusted($tpl_name, & $smarty_obj) {
 
 /**
  * Tag de publicação de banners no fwk
- * 
+ *
  * @author André Coura
  * @since 1.0 - 21/04/2011
  */
@@ -73,7 +73,7 @@ function getBanner($params){
 }
 /**
  * Tag de publicação de banners no fwk
- * 
+ *
  * @author André Coura
  * @since 1.0 - 21/04/2011
  */
@@ -292,6 +292,36 @@ function getModuloPagamento($params){
 		$objClasseTag->$metodo();
 	else
 		$objClasseTag->tagPagamento();
+
+}
+
+function getModuloPlanosComerciais($params){
+	$classe="";
+	$metodo="";
+	$param1="";
+	$param2="";
+	$param3="";
+
+	extract($params);
+
+	require_once(VIEW_COMERCIAIS.$classe.".class.php");
+
+	$objClasseTag = new $classe();
+
+	if($param1 != "")
+		$objClasseTag->setParam1($param1);
+
+	if($param2 != "")
+		$objClasseTag->setParam2($param2);
+
+	if($param3 != "")
+		$objClasseTag->setParam3($param3);
+
+
+	if($metodo != "")
+		$objClasseTag->$metodo();
+	else
+		$objClasseTag->tagPlanosComerciais();
 
 }
 
@@ -527,13 +557,13 @@ function getFacebook($params){
 	try{
 		require_once (FWK_TAGS."ViewFacebookFB.class.php");
 		$objFB = new ViewFacebookFB();
-		
+
 		if($tipo != "")
 			$objFB->setTipoObj($tipoObj);
-		
+
 		if($caminho != "")
 			$objFB->setCaminho($caminho);
-		
+
 		if($metodo != "")
 			$objFB->$metodo();
 		else

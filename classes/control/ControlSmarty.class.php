@@ -41,16 +41,17 @@ class ControlSmarty{
 		self::$_objSmarty->register_function("VOTACAO","getModuloVotacao");
 		self::$_objSmarty->register_function("RESERVA","getModuloReserva");
 		self::$_objSmarty->register_function("PAGAMENTO","getModuloPagamento");
+		self::$_objSmarty->register_function("PLANOS_COMERCIAIS","getModuloPlanosComerciais");
 		self::$_objSmarty->register_function("ROTEIRO","getModuloRoteiro");
 		self::$_objSmarty->register_function("FAVORITOS","getModuloFavoritos");
 		self::$_objSmarty->register_function("ESTIVEAQUI","getModuloEstiveAqui");
 		self::$_objSmarty->register_function("IMPRIMIR","getModuloImpressao");
 		self::$_objSmarty->register_function("QUIZ","getModuloQuiz");
 		self::$_objSmarty->register_function("FORUM","getModuloForum");
-		
-		
-		
-		
+
+
+
+
 		//funções do framework- @author: André Coura
 		self::$_objSmarty->register_function("BANNER","getBanner");
 		self::$_objSmarty->register_function("FOTO","getFotosTag");
