@@ -32,7 +32,7 @@ class CrudImagensConteudo extends AbsCruds {
 				break;
 			case "lista" :
 			default :
-				self::listDados($get["p"]);
+				self::listDados($post, $get["p"]);
 				break;
 		}
 
