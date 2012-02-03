@@ -24,6 +24,7 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Nome Grupo">nome_grupo</campo>
+		<campos type="text" name="nome_grupo" id="nome_grupo" label="Nome Grupo"
+		title="Nome Grupo" class="larguraFormMeia" campoQuery="gr.nome_grupo" />
 	</filtro>
 </grid>

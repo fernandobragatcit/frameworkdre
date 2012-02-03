@@ -26,6 +26,13 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="#Nome Usuário">nome_usuario</campo>
+		<campos type="text" name="nome_usuario" id="nome_usuario" label="Nome"
+		title="Nome" class="larguraFormMeia" campoQuery="us.nome_usuario" />
+
+		<campos type="text" name="login_usuario" id="login_usuario" label="Login"
+		title="Login" class="larguraFormMeia" campoQuery="us.login_usuario" />
+
+		<campos type="text" name="email_usuario" id="email_usuario" label="Email"
+		title="Email" class="larguraFormMeia" campoQuery="us.email_usuario" />
 	</filtro>
 </grid>

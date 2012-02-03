@@ -23,6 +23,7 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Grupo">nome_estilo_css</campo>
+		<campos type="text" name="nome_estilo_css" id="nome_estilo_css" label="Nome CSS"
+		title="Nome CSS" class="larguraFormMeia" campoQuery="nome_estilo_css" />
 	</filtro>
 </grid>

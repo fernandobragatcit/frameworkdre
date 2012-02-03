@@ -28,7 +28,13 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Menu">nome_menu</campo>
-		<campo alias="Lilnk">link_menu</campo>
+		<campos type="text" name="nome_item_menu" id="nome_item_menu" label="Ítem Menu"
+		title="Ítem Menu" class="larguraFormMeia" campoQuery="im.nome_item_menu" />
+		
+		<campos type="text" name="nome_menu" id="nome_menu" label="Menu Pai"
+		title="Menu Pai" class="larguraFormMeia" campoQuery="me.nome_menu" campoQuery2="im2.nome_menu" />
+
+		<campos type="text" name="link_item_menu" id="link_item_menu" label="Link"
+		title="Link" class="larguraFormMeia" campoQuery="im.link_item_menu" />
 	</filtro>
 </grid>

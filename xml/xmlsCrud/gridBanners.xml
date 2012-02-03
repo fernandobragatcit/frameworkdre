@@ -22,7 +22,13 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Nome Banner">ba.nome_imagem</campo>
-		<campo alias="Categoria Banner">tb.desc_tipo_basico</campo>
+		<campos type="text" name="nome_imagem" id="nome_imagem" label="Nome Banner"
+		title="Nome Banner" class="larguraFormMeia" campoQuery="ba.nome_imagem" />
+		
+		<campos type="text" name="title_banner" id="title_banner" label="Title Banner"
+		title="Title Banner" class="larguraFormMeia" campoQuery="ba.title_banner" />
+		
+		<campos type="text" name="desc_tipo_basico" id="desc_tipo_basico" label="Categoria"
+		title="Categoria" class="larguraFormMeia" campoQuery="tb.desc_tipo_basico" />
 	</filtro>
 </grid>

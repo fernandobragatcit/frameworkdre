@@ -11,10 +11,9 @@
 			us.nome_usuario, us.email_usuario,count(gr.id_grupo) AS 'qtdGrupo', us.id_usuario
 		</campos>
 		<from>
-			fwk_usuario us LEFT JOIN fwk_grupo_usuario gu
-			ON us.id_usuario = gu.id_usuario
-			LEFT JOIN fwk_grupo gr
-			ON gu.id_grupo = gr.id_grupo
+			fwk_usuario us 
+			LEFT JOIN fwk_grupo_usuario gu ON us.id_usuario = gu.id_usuario
+			LEFT JOIN fwk_grupo gr ON gu.id_grupo = gr.id_grupo
 		</from>
 		<whereBusca>
 			(us.nome_usuario LIKE '%#BUSCA#%' OR us.email_usuario LIKE '%#BUSCA#%') 
@@ -26,8 +25,10 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Usuário">us.nome_usuario</campo>
-		<campo alias="Email">us.email_usuario</campo>
-		<campo alias="Grupo">gr.nome_grupo</campo>
+		<campos type="text" name="nome_usuario" id="nome_usuario" label="Usuário"
+		title="Usuário" class="larguraFormMeia" campoQuery="us.nome_usuario" />
+		
+		<campos type="text" name="email_usuario" id="email_usuario" label="E-mail Usuário"
+		title="E-mail Usuário" class="larguraFormMeia" campoQuery="us.email_usuario" />
 	</filtro>
 </grid>

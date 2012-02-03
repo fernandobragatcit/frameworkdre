@@ -23,6 +23,7 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Grupo">nome_javascript</campo>
+		<campos type="text" name="nome_javascript" id="nome_javascript" label="Nome JS"
+		title="Nome JS" class="larguraFormMeia" campoQuery="nome_javascript" />
 	</filtro>
 </grid>

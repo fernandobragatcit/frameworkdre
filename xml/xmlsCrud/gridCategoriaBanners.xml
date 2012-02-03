@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Categorias Banners" classe="CrudCategoriaBanners">
 	<header>
-		<titulo type="STRING" ordena="desc_tipo_basico" encoding="UFT8">Categoria Banners</titulo>
+		<titulo type="STRING" ordena="desc_tipo_basico" encoding="UFT8">Categoria Banner</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
 	</header>
 	<query>
@@ -22,6 +22,7 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Categoria">desc_tipo_basico</campo>
+		<campos type="text" name="desc_tipo_basico" id="desc_tipo_basico" label="Categoria Banner"
+		title="Categoria Banner" class="larguraFormMeia" campoQuery="desc_tipo_basico" />
 	</filtro>
 </grid>

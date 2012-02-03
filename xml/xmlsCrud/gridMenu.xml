@@ -24,7 +24,10 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Menu">nome_menu</campo>
-		<campo alias="Lilnk">link_menu</campo>
+		<campos type="text" name="nome_menu" id="nome_menu" label="Menu"
+		title="Menu" class="larguraFormMeia" campoQuery="nome_menu" />
+		
+		<campos type="text" name="link_menu" id="link_menu" label="Link"
+		title="Link" class="larguraFormMeia" campoQuery="link_menu" />
 	</filtro>
 </grid>

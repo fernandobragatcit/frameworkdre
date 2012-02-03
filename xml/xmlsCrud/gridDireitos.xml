@@ -27,8 +27,13 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Direito">nome_direito</campo>
-		<campo alias="Menu">nome_menu</campo>
-		<campo alias="Sub-Menu">nome_item_menu</campo>
+		<campos type="text" name="nome_direito" id="nome_direito" label="Direito"
+		title="Direito" class="larguraFormMeia" campoQuery="di.nome_direito" />
+		
+		<campos type="text" name="nome_menu" id="nome_menu" label="Menu"
+		title="Menu" class="larguraFormMeia" campoQuery="me.nome_menu" />
+		
+		<campos type="text" name="nome_item_menu" id="nome_item_menu" label="Sub-Menu"
+		title="Sub-Menu" class="larguraFormMeia" campoQuery="im.nome_item_menu" />
 	</filtro>
 </grid>

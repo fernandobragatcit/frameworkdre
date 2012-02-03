@@ -22,6 +22,10 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Grupo">nome_imagem</campo>
+		<campos type="text" name="nome_imagem" id="nome_imagem" label="Nome Imagem"
+		title="Nome Imagem" class="larguraFormMeia" campoQuery="nome_imagem" />
+		
+		<campos type="text" name="tipo_imagem" id="tipo_imagem" label="Tipo da Imagem"
+		title="Tipo da Imagem" class="larguraFormMeia" campoQuery="tipo_imagem" />
 	</filtro>
 </grid>

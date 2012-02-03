@@ -24,7 +24,13 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Título">titulo_galeria</campo>
-		<campo alias="Identificador">identificador_galeria</campo>
+		<campos type="text" name="id_galeria" id="id_galeria" label="#Id"
+		title="#Id" class="larguraFormMeia" campoQuery="id_galeria" />
+		
+		<campos type="text" name="titulo_galeria" id="titulo_galeria" label="Título"
+		title="Título" class="larguraFormMeia" campoQuery="titulo_galeria" />
+		
+		<campos type="text" name="identificador_galeria" id="identificador_galeria" label="Identificador"
+		title="Identificador" class="larguraFormMeia" campoQuery="identificador_galeria" />
 	</filtro>
 </grid>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Documentos de Usuários" classe="CrudDocumentoUsuario">
 	<header>
-		<titulo type="STRING" ordena="fu.nome_usuario">Nome Usuario</titulo>
+		<titulo type="STRING" ordena="fu.nome_usuario">Nome Usuário</titulo>
 		<titulo type="STRING" ordena="qtdDir" encoding="UFT8">Qtde de Direitos</titulo>
 		<titulo type="none" actionEdit="a=formAlt">Ações</titulo>
 	</header>
@@ -25,6 +25,7 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Nome Grupo">nome_usuario</campo>
+		<campos type="text" name="nome_usuario" id="nome_usuario" label="Nome Usuário"
+		title="Nome Usuário" class="larguraFormMeia" campoQuery="fu.nome_usuario" />
 	</filtro>
 </grid>
