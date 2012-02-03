@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Usuários por Grupo" classe="CrudUsuariosGrupo">
 	<header>
-		<titulo type="STRING">Grupo</titulo>
-		<titulo type="STRING">Qtde de Usuários para o Grupo</titulo>
+		<titulo type="STRING" ordena="gr.nome_grupo">Grupo</titulo>
+		<titulo type="STRING" ordena="qtdUsr">Qtde de Usuários para o Grupo</titulo>
 		<titulo type="none" actionEdit="a=formAlt">Ações</titulo>
 	</header>
 	<query>
 		<campos>
 			gr.nome_grupo, 
-			(SELECT COUNT(*) FROM fwk_grupo_usuario gru WHERE gru.id_grupo = gr.id_grupo), 
+			(SELECT COUNT(*) FROM fwk_grupo_usuario gru WHERE gru.id_grupo = gr.id_grupo) AS 'qtdUsr', 
 			gr.id_grupo
 		</campos>
 		<from>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Ítens de Menu do Sistema" classe="CrudItemMenu" portal="true">
 	<header>
-		<titulo type="STRING">Ítem Menu</titulo>
-		<titulo type="STRING">Menu Pai</titulo>
-		<titulo type="STRING">Link</titulo>
+		<titulo type="STRING" ordena="im.nome_item_menu">Ítem Menu</titulo>
+		<titulo type="STRING" ordena="menu_pai">Menu Pai</titulo>
+		<titulo type="STRING" ordena="im.link_item_menu">Link</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
 	</header>
 	<query>
 		<campos>
-			im.nome_item_menu, if(me.nome_menu is null,im2.nome_item_menu,me.nome_menu),
+			im.nome_item_menu, if(me.nome_menu is null,im2.nome_item_menu,me.nome_menu) AS 'menu_pai',
 			im.link_item_menu, im.id_item_menu
 		</campos>
 		<from>

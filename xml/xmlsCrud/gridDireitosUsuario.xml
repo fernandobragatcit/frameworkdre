@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Direitos por Usuário" classe="CrudDireitosUsuario">
 	<header>
-		<titulo type="STRING">Nome Usuário</titulo>
-		<titulo type="STRING">Qtde de funcionalidades</titulo>
+		<titulo type="STRING" ordena="us.nome_usuario">Nome Usuário</titulo>
+		<titulo type="STRING" ordena="qtdDir">Qtde de funcionalidades</titulo>
 		<titulo type="none" actionEdit="a=formAlt">Ações</titulo>
 	</header>
 	<query>
 		<campos>
-			us.nome_usuario, COUNT(du.id_direitos), us.id_usuario
+			us.nome_usuario, COUNT(du.id_direitos) AS 'qtdDir', us.id_usuario
 		</campos>
 		<from>
 			fwk_direitos_usuario du

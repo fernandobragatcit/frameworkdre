@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Categorias Banners" classe="CrudCategoriaBanners">
 	<header>
-		<titulo type="STRING" encoding="UFT8">Categoria Banners</titulo>
+		<titulo type="STRING" ordena="desc_tipo_basico" encoding="UFT8">Categoria Banners</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
 	</header>
 	<query>

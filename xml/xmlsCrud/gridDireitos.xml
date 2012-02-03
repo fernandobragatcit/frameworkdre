@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Direitos" classe="CrudDireitos" portal="true">
 	<header>
-		<titulo type="STRING">Direito</titulo>
-		<titulo type="STRING">Menu</titulo>
-		<titulo type="STRING">Sub-Menu</titulo>
+		<titulo type="STRING" ordena="di.nome_direito">Direito</titulo>
+		<titulo type="STRING" ordena="me.nome_menu">Menu</titulo>
+		<titulo type="STRING" ordena="im.nome_item_menu">Sub-Menu</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
 	</header>
 	<query>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Scripts do Sistema" classe="CrudJsPasta">
 	<header>
-		<titulo type="STRING">Nome JS</titulo>
-		<titulo type="STRING">Status</titulo>
+		<titulo type="STRING" ordena="nome_javascript">Nome JS</titulo>
+		<titulo type="STRING" ordena="status">Status</titulo>
 		<titulo type="none" actionEdit="a=formAlt"
 		actionStatus="a=status" actionDelete="a=deleta">
 		Ações
@@ -10,7 +10,7 @@
 	</header>
 	<query>
 		<campos>
-			nome_javascript, if(status='S','Ativo','Inativo') ,id_javascript
+			nome_javascript, if(status='S','Ativo','Inativo') AS 'status' ,id_javascript
 		</campos>
 		<from>fwk_javascript</from>
 		<whereBusca>

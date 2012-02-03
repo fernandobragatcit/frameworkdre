@@ -321,8 +321,11 @@ class ControlGrid {
 		if(isset(self::getObjXml()->filtro) && $this->post){
 			$filtros = "&filtros=".serialize($this->post);
 		}
+		if(!empty($this->get["orderBy"])){
+			$orderBy = "&orderBy=".$this->get["orderBy"];
+		}
 
-		return  "?".$tipo."=".self::getObjCrypt()->cryptData(($categoria!=""?$categoria."&f=":"").self::getClassGrid()."&".((string)self::getObjXml()->attributes()->actionBusca?(string)self::getObjXml()->attributes()->actionBusca:"a=lista") . ($get["id"]!=""?"&id=".$get["id"]:"") . ($mantemBusca!=""?$mantemBusca:"") . ($filtros!=""?$filtros:""). $params);
+		return  "?".$tipo."=".self::getObjCrypt()->cryptData(($categoria!=""?$categoria."&f=":"").self::getClassGrid()."&".((string)self::getObjXml()->attributes()->actionBusca?(string)self::getObjXml()->attributes()->actionBusca:"a=lista") . ($get["id"]!=""?"&id=".$get["id"]:"") . ($mantemBusca!=""?$mantemBusca:"") . ($orderBy!=""?$orderBy:"").($filtros!=""?$filtros:""). $params);
 		//return "?c=" . self::getObjCrypt()->cryptData(self::getClassGrid() . "&a=lista" . $params);
 	}
 
@@ -733,12 +736,23 @@ class ControlGrid {
 			$strQuery .= " GROUP BY ";
 			$strQuery .= trim((string)self::getObjXml()->query->groupBy);
 		}
-		if (trim((string)self::getObjXml()->query->orderBy) != "") {
+		if (trim((string)self::getObjXml()->query->orderBy) != "" || !empty($this->get["orderBy"])) {
 			$strQuery .= " ORDER BY ";
-			$strQuery .= trim((string)self::getObjXml()->query->orderBy);
+			if(!empty($this->get["orderBy"])){
+				$arrOrdGet = unserialize($this->get["orderBy"]);
+				$strQuery .= $arrOrdGet["campo"]." ".$arrOrdGet["orderBy"];
+				if (trim((string)self::getObjXml()->query->orderBy) != ""){
+					$strQuery .= ", ";
+				}
+			}
+			if (trim((string)self::getObjXml()->query->orderBy) != ""){
+				$strQuery .= trim((string)self::getObjXml()->query->orderBy);
+			}
 		}
 
-//		self::debuga($strQuery);
+		//if(!empty($this->get))
+			//self::debuga($this->get, $arrOrdGet, $arrTitulos);		
+		//self::debuga($strQuery);
 		//trata valores especiais query
 
 		return $strQuery;
@@ -840,12 +854,43 @@ class ControlGrid {
 	 * @since 1.0 - 09/07/2008
 	 */
 	private function getColTitulos() {
+		$arrOrdGet = (!empty($this->get["orderBy"]))?unserialize($this->get["orderBy"]):null;
 		$arrTitulos = array ();
 		if (self::getObjXml()->header || self::getObjXml()->header != "") {
 			if (self::getObjXml()->header->titulo && self::getObjXml()->header->titulo != "") {
 				foreach (self::getObjXml()->header->titulo as $titulo) {
-					$arrTitulos[] = array(self::getOrdenacao($titulo->attributes()->type), (string) $titulo, 'class' => (string)$titulo->attributes()->class);
+					$ord = "ASC";
+					if($titulo->attributes()->ordena){
+						if((string)$titulo->attributes()->ordena == $arrOrdGet["campo"]){
+							if($arrOrdGet["orderBy"] == "DESC"){
+								$ico = "&nbsp;&nbsp;&and;";
+								$ord = "ASC";
+							}elseif($arrOrdGet["orderBy"] == "ASC"){
+								$ico = "&nbsp;&nbsp;&or;";
+								$ord = "DESC";
+							}else{
+								$ico = "";
+								$ord = "ASC";
+							}
+						}else{
+							$ico = "";
+						}
+						$arrOrd = serialize(array("campo" => (string)$titulo->attributes()->ordena, "orderBy" => $ord)); 
+						$arrTitulos[] = array(
+									self::getOrdenacao($titulo->attributes()->type), 
+									"<a href=\"".self::makeLinkPag("&orderBy=".$arrOrd)."\" title=\"".(string)$titulo."\">".(string)$titulo.$ico."</a>", 
+									'class' => (string)$titulo->attributes()->class
+								);
+					}else{
+						$arrTitulos[] = array(
+									self::getOrdenacao($titulo->attributes()->type), 
+									(string)$titulo, 
+									'class' => (string)$titulo->attributes()->class
+								);
+					}
 				}
+						//if(!empty($this->get))
+						//self::debuga($this->get, $arrOrdGet, $arrTitulos);			
 			}
 		} else {
 			self::getTitulosDb();

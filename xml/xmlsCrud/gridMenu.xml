@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Menu da Área Administrativa" classe="CrudMenu" portal="true">
 	<header>
-		<titulo type="STRING">Menu</titulo>
-		<titulo type="STRING">Link</titulo>
+		<titulo type="STRING" ordena="nome_menu">Menu</titulo>
+		<titulo type="STRING" ordena="link_menu">Link</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
 	</header>
 	<query>

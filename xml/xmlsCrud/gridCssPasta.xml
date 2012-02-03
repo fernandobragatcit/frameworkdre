@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Estilos do Sistema" classe="CrudCssPasta">
 	<header>
-		<titulo type="STRING">Nome CSS</titulo>
-		<titulo type="STRING">Status</titulo>
+		<titulo type="STRING" ordena="nome_estilo_css">Nome CSS</titulo>
+		<titulo type="STRING" ordena="status">Status</titulo>
 		<titulo type="none" actionEdit="a=formAlt"
 			actionStatus="a=status" actionDelete="a=deleta">
 			Ações
@@ -10,7 +10,7 @@
 	</header>
 	<query>
 		<campos>
-			nome_estilo_css, if(status='S','Ativo','Inativo'),id_estilo_css
+			nome_estilo_css, if(status='S','Ativo','Inativo') AS 'status',id_estilo_css
 		</campos>
 		<from>fwk_estilo_css</from>
 		<whereBusca>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Usuários" classe="CrudUsuario">
 	<header>
-		<titulo type="STRING">Nome</titulo>
-		<titulo type="STRING">Login</titulo>
-		<titulo type="STRING">Email</titulo>
+		<titulo type="STRING" ordena="us.nome_usuario">Nome</titulo>
+		<titulo type="STRING" ordena="us.login_usuario">Login</titulo>
+		<titulo type="STRING" ordena="us.email_usuario">Email</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
 	</header>
 	<query>

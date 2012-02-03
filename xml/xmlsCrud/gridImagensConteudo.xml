@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Imagens do Portal" classe="CrudImagensConteudo">
 	<header>
-		<titulo type="STRING">Nome Imagem</titulo>
-		<titulo type="STRING">Tipo da Imagem</titulo>
+		<titulo type="STRING" ordena="nome_imagem">Nome Imagem</titulo>
+		<titulo type="STRING" ordena="tipo_imagem">Tipo da Imagem</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
 	</header>
 	<query>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Grupos por Usuário" classe="CrudGruposUsuario">
 	<header>
-		<titulo type="STRING">Usuário</titulo>
-		<titulo type="STRING">E-mail Usuário</titulo>
-		<titulo type="STRING">Qtde de Grupos para o Usuário</titulo>
+		<titulo type="STRING" ordena="us.nome_usuario">Usuário</titulo>
+		<titulo type="STRING" ordena="us.email_usuario">E-mail Usuário</titulo>
+		<titulo type="STRING" ordena="qtdGrupo">Qtde de Grupos para o Usuário</titulo>
 		<titulo type="none" actionEdit="a=formAlt">Ações</titulo>
 	</header>
 	<query>
 		<campos>
-			us.nome_usuario, us.email_usuario,count(gr.id_grupo), us.id_usuario
+			us.nome_usuario, us.email_usuario,count(gr.id_grupo) AS 'qtdGrupo', us.id_usuario
 		</campos>
 		<from>
 			fwk_usuario us LEFT JOIN fwk_grupo_usuario gu

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Galerias" classe="CrudGalerias" portal="true">
 	<header>
-		<titulo type="STRING">#Id</titulo>
-		<titulo type="STRING">Título</titulo>
-		<titulo type="STRING">Identificador</titulo>
+		<titulo type="STRING" ordena="id_galeria">#Id</titulo>
+		<titulo type="STRING" ordena="titulo_galeria">Título</titulo>
+		<titulo type="STRING" ordena="identificador_galeria">Identificador</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
 	</header>
 	<query>

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Documentos de Usuários" classe="CrudDocumentoUsuario">
 	<header>
-		<titulo type="STRING">Nome Usuario</titulo>
-		<titulo type="STRING" encoding="UFT8">Qtde de Direitos</titulo>
+		<titulo type="STRING" ordena="fu.nome_usuario">Nome Usuario</titulo>
+		<titulo type="STRING" ordena="qtdDir" encoding="UFT8">Qtde de Direitos</titulo>
 		<titulo type="none" actionEdit="a=formAlt">Ações</titulo>
 	</header>
 	<query>
 		<campos>
-			fu.nome_usuario, COUNT(fdu.id_documento), fu.id_usuario
+			fu.nome_usuario, COUNT(fdu.id_documento) AS 'qtdDir', fu.id_usuario
 		</campos>
 		<from>
 			fwk_documento_usuario fdu

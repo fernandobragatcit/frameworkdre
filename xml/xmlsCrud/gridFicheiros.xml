@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Ficheiros" classe="CrudFicheiros" portal="true">
 	<header>
-		<titulo type="STRING">#Id</titulo>
-		<titulo type="STRING">Título</titulo>
-		<titulo type="STRING">Identificador</titulo>
+		<titulo type="STRING" ordena="id_ficheiro">#Id</titulo>
+		<titulo type="STRING" ordena="titulo_ficheiro">Título</titulo>
+		<titulo type="STRING" ordena="identificador_ficheiro">Identificador</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
 	</header>
 	<query>
