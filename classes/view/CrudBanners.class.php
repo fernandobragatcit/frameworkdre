@@ -29,7 +29,7 @@ class CrudBanners extends AbsCruds {
 				break;
 			case "lista" :
 			default :
-				self::listDados($post, $get["p"], $get["buscaGrid"]);
+				self::listDados($get, $post);
 				break;
 		}
 	}

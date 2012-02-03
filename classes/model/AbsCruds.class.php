@@ -187,16 +187,17 @@ abstract class AbsCruds {
 			return false;
 		}
 	}
-
-	protected function listDados($post, $pagAtual=0, $buscaGrid = null, $filtros = null, $idUsuario = null){
+	
+	protected function listDados($get, $post){
 		$intDocsGrupo = self::getDocsGrupo();
 		if($intDocsGrupo > 0){
 			self::getObjGrid()->setVariavelWhere2($intDocsGrupo);
 		}
 		self::getObjGrid()->setUtf8Decode(true);
 		self::getObjGrid()->setXmlGrid(self::getXmlGrid());
-		self::getObjGrid()->setPostFiltro($post);
-		self::getObjGrid()->showGrid($pagAtual, $buscaGrid, $filtros);
+		self::getObjGrid()->setArrPost($post);
+		self::getObjGrid()->setArrGet($get);
+		self::getObjGrid()->showGrid();
 	}
 
 	protected function getObjGrid(){

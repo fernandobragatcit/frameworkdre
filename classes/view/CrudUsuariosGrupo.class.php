@@ -27,7 +27,7 @@ class CrudUsuariosGrupo extends AbsCruds {
 				break;
 			case "lista":
 			default:
-				self::listDados($post, $get['p']);
+				self::listDados($get, $post);
 				break;
 		}
 	}

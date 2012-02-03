@@ -35,7 +35,8 @@ class ControlGrid {
 	private $objSessao;
 	private $objUserSess;
 
-	private $postFiltro = null;
+	private $post = null;
+	private $get = null;
 	
 	private $busca = null;
 	private $arrFiltros = null;
@@ -146,8 +147,8 @@ class ControlGrid {
 	 * @author André Coura
 	 * @since 1.0 - 13/07/2008
 	 */
-	public function showGrid($pagAtual, $buscaGrid = null, $arrFiltro = null) {
-		self::regDadosGrid($pagAtual, $buscaGrid, $arrFiltro);
+	public function showGrid() {
+		self::regDadosGrid($this->get["p"], $this->get["buscaGrid"]);
 		$strGrid = self::getObjSmarty()->fetch(self::getTplGrid());
 		self::getObjSmarty()->assign("CORPO", $strGrid);
 	}
@@ -155,7 +156,7 @@ class ControlGrid {
 	/**
 	 * Fazer depois grid sem XML
 	 */
-	public function showGridNoXml($pagAtual){
+	public function showGridNoXml(){
 		$strGrid = self::getObjSmarty()->fetch(self::getTplGrid());
 		self::getObjSmarty()->assign("CORPO", $strGrid);
 	}
@@ -175,17 +176,17 @@ class ControlGrid {
 	 * @author Matheus Vieira
 	 * @since 1.1 - 10/08/2011
 	 */
-	private function regDadosGrid($pagAtual, $buscaGrid, $arrFiltro=null) {
-		$this->busca = ($_POST["buscaGrid"])?addslashes($_POST["buscaGrid"]):$buscaGrid;
+	private function regDadosGrid($pagAtual, $buscaGrid) {
+		$this->busca = ($this->post["buscaGrid"])?addslashes($this->post["buscaGrid"]):$buscaGrid;
 		self::trataFiltro($arrFiltro);
 		self::registraCss();
 		self::registraJs();
 		self::getTituloGrid();
+		self::regFiltroGrid();
 		self::regDadosPaginacao($pagAtual);
 		self::regBtnsGrid();
 		self::getObjSmarty()->assign("ARR_TITULOS", self::getColTitulos());
 		$arrDadosGrid = self::getDadosDb(self::getInicioPaginacao($pagAtual));
-		self::regFiltroGrid();
 		foreach ($arrDadosGrid as $key => $array){
 			foreach ($array as $key2 => $valor){
 				$arrDadosGrid[$key][$key2] = str_replace("&", "&amp;", $valor);
@@ -307,7 +308,7 @@ class ControlGrid {
 		$objFormatParam = new FormataParametros();
 		$objFormatParam->setParametros($_GET);
 		$get = $objFormatParam->getParametros();
-//		self::debuga($get);
+
 		if(isset(self::getObjXml()->attributes()->tipo) && self::getObjXml()->attributes()->tipo!=""){
 			$tipo = FormataLink::definiTipoLink((string)self::getObjXml()->attributes()->tipo);
 		}
@@ -317,11 +318,8 @@ class ControlGrid {
 		if(isset($this->busca) && trim((string)self::getObjXml()->query->whereBusca) != ""){
 			$mantemBusca = "&buscaGrid=".$this->busca;
 		}
-		if($this->arrFiltros[0] != ""){
-			$filtros = "&filtros=";
-			for($fi=0; $fi<count($this->arrFiltros); $fi++){
-				$filtros .= str_replace(" = ", ":", $this->arrFiltros[$fi]).(($fi<count($this->arrFiltros)-1)?"/":"");
-			}
+		if(isset(self::getObjXml()->filtro) && $this->post){
+			$filtros = "&filtros=".serialize($this->post);
 		}
 
 		return  "?".$tipo."=".self::getObjCrypt()->cryptData(($categoria!=""?$categoria."&f=":"").self::getClassGrid()."&".((string)self::getObjXml()->attributes()->actionBusca?(string)self::getObjXml()->attributes()->actionBusca:"a=lista") . ($get["id"]!=""?"&id=".$get["id"]:"") . ($mantemBusca!=""?$mantemBusca:"") . ($filtros!=""?$filtros:""). $params);
@@ -638,20 +636,26 @@ class ControlGrid {
 			}
 		}
 
-		if($this->postFiltro != "" && isset(self::getObjXml()->filtro)) {
-			if($this->postFiltro != null){
+		if($this->post != "" && isset(self::getObjXml()->filtro)) {
+			if($this->post != null){
 				self::getObjSmarty()->assign("ABRE_FILTRO", true);
 			}
-			foreach ($this->postFiltro as $key => $valor){
+			foreach ($this->post as $key => $valor){
 				if($valor != ""){
 					foreach (self::getObjXml()->filtro->campos as $campo){
 						if((string)$campo->attributes()->name == $key){
 							if((string)$campo->attributes()->type == "select"){
 								$auxOr = ($campo->attributes()->OR)?"( ":"";
+								$orAnd =  ($campo->attributes()->OR)?" OR ":" AND ";
 								$strQuery .= " AND ".$auxOr.(string)$campo->attributes()->campoQuery." = '".$valor."'";
 								if($campo->attributes()->campoQuery2 || $campo->attributes()->campoQuery2 != ""){
-									$orAnd =  ($campo->attributes()->OR)?" OR ":" AND ";
 									$strQuery .= $orAnd.(string)$campo->attributes()->campoQuery2." = '".$valor."'";
+								}
+								if($campo->attributes()->campoQuery3 || $campo->attributes()->campoQuery3 != ""){
+									$strQuery .= $orAnd.(string)$campo->attributes()->campoQuery3." = '".$valor."'";
+								}
+								if($campo->attributes()->campoQuery4 || $campo->attributes()->campoQuery4 != ""){
+									$strQuery .= $orAnd.(string)$campo->attributes()->campoQuery4." = '".$valor."'";
 								}
 								$strQuery .= ($campo->attributes()->OR)?") ":"";
 							}else{
@@ -670,6 +674,12 @@ class ControlGrid {
 										if($campo->attributes()->campoQuery2 || $campo->attributes()->campoQuery2 != ""){
 											$strQuery .= " OR ".(string)$campo->attributes()->campoQuery2." LIKE '%".$aux[$i]."%'";
 										}
+										if($campo->attributes()->campoQuery3 || $campo->attributes()->campoQuery3 != ""){
+											$strQuery .= " OR ".(string)$campo->attributes()->campoQuery3." LIKE '%".$aux[$i]."%'";
+										}
+										if($campo->attributes()->campoQuery4 || $campo->attributes()->campoQuery4 != ""){
+											$strQuery .= " OR ".(string)$campo->attributes()->campoQuery2." LIKE '%".$aux[$i]."%'";
+										}
 										$strQuery .= ($i != count($aux)-1)?" OR ":")";
 									}
 								}
@@ -680,18 +690,17 @@ class ControlGrid {
 			}
 		}
 		
-		//self::debuga($strQuery);
-		
 		if (trim((string)self::getObjXml()->query->whereBusca) != "") {
 			if($this->busca != ""){
-				$strQuery .= " AND ";
 				$arrBusca = $this->busca;
 				$arrBusca = explode('\"', $arrBusca);
 				if(count($arrBusca) <= 1)
 					$arrBusca = explode(" ", $this->busca);
+					
 				$arrBusca = FormataPost::limpaArray($arrBusca);
 				sort($arrBusca);
 				if(count($arrBusca)>0){
+					$strQuery .= " AND ";
 					for($i=0; $i<count($arrBusca); $i++){
 						$strQuery .= ($i == 0)?"(":"";
 
@@ -711,13 +720,7 @@ class ControlGrid {
 				$strQuery .= trim((string)self::getObjXml()->query->whereUsuario);
 				$strQuery .= " ".$idUsuario." ";
 			}
-		if ($this->arrFiltros[0] != "") {
-			$strQuery .= " AND ";
-			for($fi=0; $fi<count($this->arrFiltros); $fi++){
-				$strQuery .= $this->arrFiltros[$fi];
-				$strQuery .= ($fi != count($this->arrFiltros)-1)?" AND ":"";
-			}
-		}
+		
 		if (self::getCtrlConfiguracoes()->getIdPortal()){
 			$portal = (string)self::getObjXml()->attributes()->portal;
 			if(strtolower((string)self::getObjXml()->attributes()->portal) == "true"){
@@ -841,78 +844,20 @@ class ControlGrid {
 		if (self::getObjXml()->header || self::getObjXml()->header != "") {
 			if (self::getObjXml()->header->titulo && self::getObjXml()->header->titulo != "") {
 				foreach (self::getObjXml()->header->titulo as $titulo) {
-					if($titulo->attributes()->type != "QUERY"){
-						$arrTitulos[] = array(self::getOrdenacao($titulo->attributes()->type), (string) $titulo, 'class' => (string)$titulo->attributes()->class);
-					}else{
-						$arrDados = self::getObjBanco()->getAll(self::getTitleQuery($titulo->query));
-						for($i=0; $i<count($arrDados); $i++){
-							$arrDados[$i][3] = self::getObjCrypt()->cryptData((string)$titulo->valor.":".$arrDados[$i][0]);
-							for($fi=0; $fi<count($this->arrFiltros); $fi++){
-								if(end(explode(" = ",$this->arrFiltros[$fi])) == $arrDados[$i][0])
-									$arrDados[$i][4] = "selected=selected";
-							}
-						}
-						$arrTitulos[] = array(
-						"select", (string)$titulo->text, (string)$titulo->valor,
-						(string)$titulo->todos,	$arrDados, self::getObjCrypt()->cryptData((string)$titulo->valor.":vazio"),
-						'class' => (string)$titulo->attributes()->class);
-					}
+					$arrTitulos[] = array(self::getOrdenacao($titulo->attributes()->type), (string) $titulo, 'class' => (string)$titulo->attributes()->class);
 				}
 			}
 		} else {
-
 			self::getTitulosDb();
 		}
-		//if (count($arrTitulos) != count(self::getTitulosDb())){
-		//	return self::getTitulosDb();
-		//}
-
-//		self::debuga($arrTitulos);
 		return $arrTitulos;
 	}
 
-	/**
-	 * Método para retornar a query do titulo
-	 *
-	 * @author Matheus Vieira
-	 * @since 1.0 - 17/08/2011
-	 */
-	private function getTitleQuery($query) {
-		$strQuery = "SELECT DISTINCT";
-		$strQuery .= $query->campos;
-		$strQuery .= " FROM ";
-		$strQuery .= $query->from;
-		if (trim((string)$query->where) != "") {
-			$strQuery .= " WHERE ";
-			$strQuery .= trim((string)$query->where);
-		}
-		if (trim((string)$query->orderBy) != "") {
-			$strQuery .= " ORDER BY ";
-			$strQuery .= trim((string)$query->orderBy);
-		}
-		return $strQuery;
-	}
-
 	private function trataFiltro($arrFiltros = null){
-		$arrWheres = array();
-		$arrFiltro1 = array();
-		if($arrFiltros[1] != ""){
-			$arrFiltrosVindo = explode("/", $arrFiltros[1]);
-			for($i=0; $i<count($arrFiltrosVindo); $i++){
-				$filtroNovo = explode(":", $arrFiltrosVindo[$i]);
-				$arrFiltro1[$filtroNovo[0]] = $filtroNovo[1];
-			}
-		}
-		if($arrFiltros[0] != ""){
-			$filtroNovo = explode(":", $arrFiltros[0]);
-			$arrFiltro1[$filtroNovo[0]] = $filtroNovo[1];
-			if($filtroNovo[1] == "vazio")
-			unset($arrFiltro1[$filtroNovo[0]]);
-		}
-		foreach ($arrFiltro1 as $where => $valor){
-			$arrWheres[] = $where." = ".$valor;
-		}
-		$this->arrFiltros = $arrWheres;
+		$objFormatParam = new FormataParametros();
+		$objFormatParam->setParametros($_GET);
+		$get = $objFormatParam->getParametros();
+		$this->arrFiltros = unserialize($get["filtros"]);
 	}
 
 	/**
@@ -1002,9 +947,11 @@ class ControlGrid {
 	 * @author Matheus Vieira
 	 * @since 1.0 - 01/02/2012
 	 */
-	private function regFiltroGrid($post = null) {
+	private function regFiltroGrid() {
+		if(is_array($this->arrFiltros))
+			$this->post = FormataPost::mergeArrayPost($this->post, $this->arrFiltros);
+
 		if(isset(self::getObjXml()->filtro)){
-				
 			$objFactoryCompsHtml = new FactoryCompHtml();
 			$arrCampos = "";
 			
@@ -1017,7 +964,7 @@ class ControlGrid {
 					throw new GridException("Não foi passado o atributo \"campoQuery\" no campo ".(string)$campo->attributes()->label." do filtro.");
 
 				$objFactoryCompsHtml->setClasseAtual(self::getObjXml()->attributes()->classe);
-				$objFactoryCompsHtml->buildComp($campo, $this->postFiltro[(string)$campo->attributes()->name]);
+				$objFactoryCompsHtml->buildComp($campo, $this->post[(string)$campo->attributes()->name]);
 				$arrCampos[$cont]["label"] = (string)$campo->attributes()->label;
 				$arrCampos[$cont]["campo"] = $objFactoryCompsHtml->getObjFactored()->getHtmlComp();
 				$cont++;
@@ -1052,11 +999,20 @@ class ControlGrid {
 		return $this->idReferencia;
 	}
 
-	public function setPostFiltro($post){
-		$this->postFiltro = $post;
+	public function setArrPost($post){
+		if(!empty($post))
+			$this->post = $post;
 	}
-	public function getPostFiltro(){
-		return $this->postFiltro;
+	public function getArrPost(){
+		return $this->post;
+	}
+
+	public function setArrGet($get){
+		if(!empty($get))
+			$this->get = $get;
+	}
+	public function getArrGet(){
+		return $this->get;
 	}
 
 	public function debuga(){

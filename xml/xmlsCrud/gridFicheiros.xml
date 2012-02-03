@@ -24,7 +24,13 @@
 		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
-		<campo alias="Título">titulo_ficheiro</campo>
-		<campo alias="Identificador">identificador_ficheiro</campo>
+		<campos type="text" name="id_ficheiro" id="id_ficheiro" label="#Id"
+		title="#Id" class="larguraFormMeia" campoQuery="id_ficheiro" />
+
+		<campos type="text" name="titulo_ficheiro" id="titulo_ficheiro" label="Título"
+		title="Título" class="larguraFormMeia" campoQuery="titulo_ficheiro" />
+
+		<campos type="text" name="identificador_ficheiro" id="identificador_ficheiro" label="Identificador"
+		title="Identificador" class="larguraFormMeia" campoQuery="identificador_ficheiro" />
 	</filtro>
 </grid>
