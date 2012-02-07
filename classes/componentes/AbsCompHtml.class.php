@@ -319,6 +319,11 @@ abstract class AbsCompHtml{
     		self::getObjSmarty()->assign("CSS_EDITOR", self::getObjXmlCompDados()->cssEditor);
     	else
     		self::getObjSmarty()->assign("CSS_EDITOR","");
+
+    	if(self::getObjXmlCompDados()->onpaste!= "" )
+    		self::getObjSmarty()->assign("ONPASTE_COMP", "onpaste=\"".self::getObjXmlCompDados()->onpaste."\"");
+    	else
+    		self::getObjSmarty()->assign("ONPASTE_COMP","");
 		
 		if(self::getValue() != "")
     		self::getObjSmarty()->assign("VALUE_COMP",utf8_encode(self::getValue()));
