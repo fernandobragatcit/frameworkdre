@@ -32,7 +32,7 @@
 		title="Ítem Menu" class="larguraFormMeia" campoQuery="im.nome_item_menu" />
 		
 		<campos type="text" name="nome_menu" id="nome_menu" label="Menu Pai"
-		title="Menu Pai" class="larguraFormMeia" campoQuery="me.nome_menu" campoQuery2="im2.nome_menu" />
+		title="Menu Pai" class="larguraFormMeia" campoQuery="me.nome_menu" campoQuery2="im2.nome_item_menu" />
 
 		<campos type="text" name="link_item_menu" id="link_item_menu" label="Link"
 		title="Link" class="larguraFormMeia" campoQuery="im.link_item_menu" />

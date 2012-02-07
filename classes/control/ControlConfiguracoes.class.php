@@ -94,6 +94,8 @@ class ControlConfiguracoes {
 			self::getDescricaoPag();
 			//configura as keywords da página
 			self::getPalavrasChavesPag();
+			//configura a url canonical da página
+			self::getUrlCanonical();
 			//configura os Css das áreas
 			self::getCssArea();
 			//configura os Js das áreas
@@ -232,6 +234,25 @@ class ControlConfiguracoes {
 		return self::getPalavrasChavesPag("../".$caminhoXml);
 	}
 
+	public function getUrlCanonical($caminhoXml = null){
+		if($caminhoXml == null)
+				$caminhoXml = self::getConfigFile();
+		if($caminhoXml != null){
+			if(is_file($caminhoXml))
+				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
+			else
+				return;
+		}
+		//configura a url canonical da página
+		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
+			if(!isset($dadosPortal->portal->urlCanonical) && $dadosPortal->portal->urlCanonical == ""){
+				$this->getObjSmarty()->assign("URL_CANONICAL", trim((string)$dadosPortal->portal->urlCanonical));
+				return;
+			}
+		}
+		return false;
+	}
+
 	public function getTituloPag($caminhoXml = null){
 		if($caminhoXml == null)
 				$caminhoXml = self::getConfigFile();
@@ -291,6 +312,26 @@ class ControlConfiguracoes {
 			}
 		}
 		return self::getStrDescricaoArea("../".$caminhoXml);
+	}
+
+	public function getStrUrlCanonical($caminhoXml = null){
+		if($caminhoXml == null)
+				$caminhoXml = self::getConfigFile();
+		if($caminhoXml != null){
+			if(is_file($caminhoXml))
+				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
+			else
+				return;
+		}
+		//configura a url canonical da página
+		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
+			if(!isset($dadosPortal->portal->urlCanonical) && $dadosPortal->portal->urlCanonical == ""){
+				return self::getStrUrlCanonical("../".$caminhoXml);
+			}else{
+				return (string)$dadosPortal->portal->urlCanonical;
+			}
+		}
+		return self::getStrUrlCanonical("../".$caminhoXml);
 	}
 
 	public function getStrTituloArea($caminhoXml = null){
@@ -369,6 +410,28 @@ class ControlConfiguracoes {
 				$novoTitulo = $dadosPortal->portal->addChild("titulo",$strTituloArea);
 			}else{
 				$dadosPortal->portal->titulo = $strTituloArea;
+			}
+		}
+
+		self::getObjCtrlXml()->salvaXml($caminhoXml,$dadosPortal->asXML());
+	}
+
+	public function setStrUrlCanonical($strUrlCanonical){
+		$caminhoXml = self::getConfigFile();
+		if($caminhoXml != null){
+			if(is_file($caminhoXml)){
+				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
+			}
+			else
+				return;
+		}
+		//configura a url canonical da página
+		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
+			if(!isset($dadosPortal->portal->urlCanonical) && $dadosPortal->portal->urlCanonical == ""){
+				//cria os nós e a estrutura para a urlCanonical
+				$novoTitulo = $dadosPortal->portal->addChild("urlCanonical",$strUrlCanonical);
+			}else{
+				$dadosPortal->portal->urlCanonical = $strUrlCanonical;
 			}
 		}
 
