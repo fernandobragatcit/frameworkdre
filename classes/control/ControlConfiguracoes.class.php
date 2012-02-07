@@ -245,7 +245,7 @@ class ControlConfiguracoes {
 		}
 		//configura a url canonical da página
 		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
-			if(!isset($dadosPortal->portal->urlCanonical) && $dadosPortal->portal->urlCanonical == ""){
+			if(isset($dadosPortal->portal->urlCanonical) && $dadosPortal->portal->urlCanonical != ""){
 				$this->getObjSmarty()->assign("URL_CANONICAL", trim((string)$dadosPortal->portal->urlCanonical));
 				return;
 			}
@@ -325,13 +325,10 @@ class ControlConfiguracoes {
 		}
 		//configura a url canonical da página
 		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
-			if(!isset($dadosPortal->portal->urlCanonical) && $dadosPortal->portal->urlCanonical == ""){
-				return self::getStrUrlCanonical("../".$caminhoXml);
-			}else{
+			if(isset($dadosPortal->portal->urlCanonical) && $dadosPortal->portal->urlCanonical != ""){
 				return (string)$dadosPortal->portal->urlCanonical;
 			}
 		}
-		return self::getStrUrlCanonical("../".$caminhoXml);
 	}
 
 	public function getStrTituloArea($caminhoXml = null){

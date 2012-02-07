@@ -2,9 +2,8 @@
 <form method="post" nome="Url Canonical" css="formatForm"
 	tipo="FWK_VIEW" tpl="formUrlCanonicalArea.tpl">
 
-	<campos type="text" name="url_canonical_area" id="url_canonical_area"
-		label="Url Canonical da Área" title="Url Canonical da Área" obrigatorio="true"
-		maxlength="80" class="medium" />
+	<campos type="text" name="url_canonical_area" id="url_canonical_area" obrigatorio="true" 
+		label="Url Canonical da Área" title="Url Canonical da Área" class="medium" />
 
 	<buttons>
 		<button name="Cadastrar" value="Salvar" type="submit" />
