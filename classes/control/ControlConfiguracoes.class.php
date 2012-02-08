@@ -315,13 +315,14 @@ class ControlConfiguracoes {
 	}
 
 	public function getStrUrlCanonical($caminhoXml = null){
+		
 		if($caminhoXml == null)
 				$caminhoXml = self::getConfigFile();
 		if($caminhoXml != null){
 			if(is_file($caminhoXml))
 				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
 			else
-				return;
+				return null;
 		}
 		//configura a url canonical da página
 		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
@@ -413,8 +414,10 @@ class ControlConfiguracoes {
 		self::getObjCtrlXml()->salvaXml($caminhoXml,$dadosPortal->asXML());
 	}
 
-	public function setStrUrlCanonical($strUrlCanonical){
-		$caminhoXml = self::getConfigFile();
+	public function setStrUrlCanonical($strUrlCanonical, $caminhoXml = null){
+		if($caminhoXml == null)
+			$caminhoXml = self::getConfigFile();
+			
 		if($caminhoXml != null){
 			if(is_file($caminhoXml)){
 				$dadosPortal = self::getDadosXmlPasta($caminhoXml);
@@ -426,12 +429,11 @@ class ControlConfiguracoes {
 		if(isset($dadosPortal->portal) && $dadosPortal->portal !=""){
 			if(!isset($dadosPortal->portal->urlCanonical) && $dadosPortal->portal->urlCanonical == ""){
 				//cria os nós e a estrutura para a urlCanonical
-				$novoTitulo = $dadosPortal->portal->addChild("urlCanonical",$strUrlCanonical);
+				$novaUrlCanonical = $dadosPortal->portal->addChild("urlCanonical",$strUrlCanonical);
 			}else{
 				$dadosPortal->portal->urlCanonical = $strUrlCanonical;
 			}
 		}
-
 		self::getObjCtrlXml()->salvaXml($caminhoXml,$dadosPortal->asXML());
 	}
 
