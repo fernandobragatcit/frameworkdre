@@ -3,6 +3,7 @@ require_once(FWK_CONTROL."ControlDB.class.php");
 require_once(FWK_CONTROL."ControlSmarty.class.php");
 require_once(FWK_CONTROL."ControlJS.class.php");
 require_once(FWK_CONTROL."ControlCSS.class.php");
+require_once(FWK_CONTROL."ControlConfiguracoes.class.php");
 require_once(FWK_EXCEPTION."HtmlException.class.php");
 require_once(FWK_EXCEPTION."FieldsException.class.php");
 require_once(FWK_UTIL."FormataInt.class.php");
@@ -142,6 +143,12 @@ abstract class AbsViewClass{
 		}
 		return $this->objUserSess;
 	}
+	
+	protected function getCtrlConfiguracoes() {
+        if ($this->objCtrlConfiguracoes == null)
+            $this->objCtrlConfiguracoes = new ControlConfiguracoes();
+        return $this->objCtrlConfiguracoes;
+    }
 
 
 	public function showTela($strCorpo, $strEstrutura = "index.tpl") {
