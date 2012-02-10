@@ -144,7 +144,7 @@ abstract class AbsViewClass{
 		return $this->objUserSess;
 	}
 	
-	protected function getCtrlConfiguracoes() {
+	public function getCtrlConfiguracoes() {
         if ($this->objCtrlConfiguracoes == null)
             $this->objCtrlConfiguracoes = new ControlConfiguracoes();
         return $this->objCtrlConfiguracoes;

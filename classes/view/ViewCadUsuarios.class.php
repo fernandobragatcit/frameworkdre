@@ -2,7 +2,6 @@
 require_once(FWK_MODEL."AbsViewClass.class.php");
 require_once(FWK_CONTROL."ControlForms.class.php");
 require_once(FWK_CONTROL."ControlPost.class.php");
-require_once(FWK_CONTROL."ControlConfiguracoes.class.php");
 require_once(FWK_DAO."UsuariosProvDAO.class.php");
 require_once(FWK_DAO."UsuariosDAO.class.php");
 
@@ -109,12 +108,6 @@ class ViewCadUsuarios extends AbsViewClass{
 			self::getObjSmarty()->assign("TITULO_CADASTRO", $e->getMensagem());
 			self::concluiCadastro(self::getMsgErroValUsuario());
 		}
-	}
-
-	private function getCtrlConfiguracoes(){
-		if($this->objCtrlConfiguracoes == null)
-			$this->objCtrlConfiguracoes = new ControlConfiguracoes();
-		return $this->objCtrlConfiguracoes;
 	}
 
 	private function getMsgValUsuario(){

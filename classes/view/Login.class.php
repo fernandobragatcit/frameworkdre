@@ -1,7 +1,6 @@
 <?php
 require_once (FWK_MODEL."AbsViewClass.class.php");
 require_once(FWK_CONTROL."ControlSessao.class.php");
-require_once(FWK_CONTROL."ControlConfiguracoes.class.php");
 require_once(FWK_CONTROL."ControlLogin.class.php");
 
 //require_once(FWK_MODEL."AbsModelDao.class.php");
@@ -10,7 +9,6 @@ class Login extends AbsViewClass {
 
 	private $objCtrlSess;
 	private $objUsuario;
-	private $objCtrlConfiguracoes;
 
 	public function executa($get, $post, $file) {
 
@@ -146,12 +144,6 @@ class Login extends AbsViewClass {
 				$this->strTplLogin = FWK_HTML_DEFAULT."formLogin.tpl";
 		}
 		return $this->strTplLogin;
-	}
-
-	private function getCtrlConfiguracoes(){
-		if($this->objCtrlConfiguracoes == null)
-			$this->objCtrlConfiguracoes = new ControlConfiguracoes();
-		return $this->objCtrlConfiguracoes;
 	}
 
 	/**

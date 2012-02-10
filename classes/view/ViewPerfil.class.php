@@ -1,19 +1,13 @@
 <?php
 require_once (FWK_MODEL."AbsViewClass.class.php");
+require_once (FWK_MODEL."GruposUsuario.class.php");
+require_once (FWK_MODEL."DocumentoUsuario.class.php");
 require_once (FWK_DAO."UsuarioCompDAO.class.php");
 require_once (FWK_DAO."IdiomaDAO.class.php");
 require_once (FWK_DAO."TemasDAO.class.php");
+require_once (FWK_DAO."UsuariosDAO.class.php");
 require_once (FWK_CONTROL."ControlForms.class.php");
-require_once(FWK_DAO."UsuariosDAO.class.php");
-require_once(FWK_MODEL."GruposUsuario.class.php");
-require_once(FWK_CONTROL."ControlPerfil.class.php");
-require_once(CLASSES_DAO."UsrEnderecoDAO.class.php");
-require_once(CLASSES_DAO."UsrContatoDAO.class.php");
-require_once(CLASSES_DAO."FotosDAO.class.php");
-require_once(CLASSES_DAO."ServicoEquipDAO.class.php");
-require_once(CLASSES_DAO."PlanosComerciaisDAO.class.php");
-require_once(FWK_MODEL."DocumentoUsuario.class.php");
-
+require_once (FWK_CONTROL."ControlPerfil.class.php");
 require_once(FWK_CONTROL."ControlSessao.class.php");
 
 class ViewPerfil extends AbsViewClass {
@@ -223,17 +217,6 @@ class ViewPerfil extends AbsViewClass {
 		return FWK_HTML_DEFAULT."perfilUsuario_home.tpl";
 	}
 
-	private function getObjPlanosComerciaisDAO(){
-		if($this->objPlanosComerciais == null)
-			$this->objPlanosComerciais = new PlanosComerciaisDAO();
-		return $this->objPlanosComerciais;
-	}
-	private function getObjServicoEquipDAO(){
-		if($this->objServicoEquip == null)
-			$this->objServicoEquip = new ServicoEquipDAO();
-		return $this->objServicoEquip;
-	}
-
 	private function getObjDocumentoUsuario(){
 		if($this->objDocumentoUsuario == null)
 			$this->objDocumentoUsuario = new DocumentoUsuario();
@@ -270,21 +253,6 @@ class ViewPerfil extends AbsViewClass {
 		return $this->objTemas;
 	}
 
-	private function getObjUsrEnderecoDAO() {
-		if ($this->getObjUsrEndereco == null)
-			$this->getObjUsrEndereco = new UsrEnderecoDAO();
-		return $this->getObjUsrEndereco;
-	}
-
-	private function getObjUsrContatoDAO() {
-		if ($this->getObjUsrContato == null)
-			$this->getObjUsrContato = new UsrContatoDAO();
-		return $this->getObjUsrContato;
-	}
-
-
-
-
 	/**
 	 * Exibe a tela de alterar de senha
 	 *
@@ -314,7 +282,7 @@ class ViewPerfil extends AbsViewClass {
 	/**
 	 * Busca o tpl referente a tela de alterar senha
 	 *
-	 * TODO: fazer busca em arquivo de configuração (XML)
+	 * TODO: fazer busca em arquivo de configuraï¿½ï¿½o (XML)
 	 */
 	 private function getTplFormAltSenha() {
 		$strTplPerfilAltSenha = self::getCtrlPerfil()->getCtrlConfiguracoes()->getCustomCadUsuarios(null, "perfilUsuarioAltSenha");
