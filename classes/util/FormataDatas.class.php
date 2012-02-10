@@ -9,76 +9,76 @@ class FormataDatas {
 	 * @since 1.0 - 20/08/2007
 	 * @param String data em formato brasileiro
 	 */
-     public static function parseDataSql($data){
-    	if(!ereg ("([0-9]{1,2})/([0-9]{1,2})/([0-9]{4})", $data))
-    		return null;
-   		$newDate = explode("/",$data);
-    	if(count($newDate)!=3)
-    		return null;
-    	return $newDate[2]."-".$newDate[1]."-".$newDate[0];
-     }
+	public static function parseDataSql($data){
+		if(!ereg ("([0-9]{1,2})/([0-9]{1,2})/([0-9]{4})", $data))
+		return null;
+		$newDate = explode("/",$data);
+		if(count($newDate)!=3)
+		return null;
+		return $newDate[2]."-".$newDate[1]."-".$newDate[0];
+	}
 
-    /**
+	/**
 	 * Parser de datas em formato SQL para formato brasileiro
 	 *
 	 * @author André Coura
 	 * @since 1.0 - 20/08/2007
 	 */
 	public static function parseDataBR($data){
-    	$newDate = self::getArrData($data);
-    	return $newDate[2]."/".$newDate[1]."/".$newDate[0];
-    }
+		$newDate = self::getArrData($data);
+		return $newDate[2]."/".$newDate[1]."/".$newDate[0];
+	}
 
 	public static function getArrData($data){
-    	if(!ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", $data))
-    		return null;
-    	$newDate = explode("-",$data);
-    	if(count($newDate)!=3)
-    		return null;
-    	return $newDate;
-    }
+		if(!ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", $data))
+		return null;
+		$newDate = explode("-",$data);
+		if(count($newDate)!=3)
+		return null;
+		return $newDate;
+	}
 
-    /**
+	/**
 	 * Parser de datas em formato SQL para formato brasileiro
 	 *
 	 * @author André Coura
 	 * @since 1.0 - 20/08/2007
 	 */
 	public static function parseDataUSA($data){
-    	$newDate = self::getArrData($data);
-    	return $newDate[1]."/".$newDate[2]."/".$newDate[0];
-    }
-    /**
+		$newDate = self::getArrData($data);
+		return $newDate[1]."/".$newDate[2]."/".$newDate[0];
+	}
+	/**
 	 * Parser de datas em formato SQL para formato brasileiro
 	 *
 	 * @author André Coura
 	 * @since 1.0 - 20/08/2007
 	 */
 	public static function parseDataMesAno($data){
-    	$newDate = self::getArrData($data);
-    	return $newDate[1]." / ".$newDate[0];
-    }
-    /**
+		$newDate = self::getArrData($data);
+		return $newDate[1]." / ".$newDate[0];
+	}
+	/**
 	 * Parser de datas em formato SQL para formato brasileiro
 	 *
 	 * @author André Coura
 	 * @since 1.0 - 20/08/2007
 	 */
 	public static function parseDataDiaMes($data){
-    	$newDate = self::getArrData($data);
-    	return $newDate[2]." / ".$newDate[1];
-    }
+		$newDate = self::getArrData($data);
+		return $newDate[2]." / ".$newDate[1];
+	}
 
-    public static function parseDataUSAExtenso($data){
+	public static function parseDataUSAExtenso($data){
 		if(!ereg ("([0-9]{4})-([0-9]{1,2})-([0-9]{1,2})", $data))
-    		return null;
-    	$newDate = explode("-",$data);
-    	if(count($newDate)!=3)
-    		return null;
+		return null;
+		$newDate = explode("-",$data);
+		if(count($newDate)!=3)
+		return null;
 		$arrMeses = array("","Jan","Feb","Mar","Apr","May", "June", "July", "Aug", "Sept", "Oct", "Nov", "Dec");
 		$dia = $newDate[2];
 		if($dia{0} == "0")
-			$dia = $dia{1};
+		$dia = $dia{1};
 		if(strlen($dia)==1){
 			switch($dia){
 				case 1: 	$dia = $dia."st"; break;
@@ -86,38 +86,38 @@ class FormataDatas {
 				case 3: 	$dia = $dia."rd"; break;
 				default: 	$dia = $dia."th"; break;
 			}
-   		}else{
+		}else{
 			if($dia > 20){
 				switch($dia{1}){
-				case 1: 	$dia = $dia."st"; break;
-				case 2: 	$dia = $dia."nd"; break;
-				case 3: 	$dia = $dia."rd"; break;
-				default: 	$dia = $dia."th"; break;
-			}
+					case 1: 	$dia = $dia."st"; break;
+					case 2: 	$dia = $dia."nd"; break;
+					case 3: 	$dia = $dia."rd"; break;
+					default: 	$dia = $dia."th"; break;
+				}
 			}else{
 				$dia = $dia."th";
 			}
 		}
 		return $arrMeses[$newDate[1]]." ".$dia.", ".$newDate[0];
-    }
+	}
 
 
 
-    /**
-	  * Função para preencher em um array as datas de um determinado intervalo entre 2 datas
-	  *
-	  * @author André Coura
-	  * @since 30/07/2007
-	  * @param date $dateIni data de inicio do intervalo
-	  * @param date $dateFim data de termino do intervalo
-	  * @return array $arrDatas vetor de datas ja tratadas em formato SQL
-	  */
-	 public static function parsePeriodosDatas($dateIni,$dateFim){
+	/**
+	 * Função para preencher em um array as datas de um determinado intervalo entre 2 datas
+	 *
+	 * @author André Coura
+	 * @since 30/07/2007
+	 * @param date $dateIni data de inicio do intervalo
+	 * @param date $dateFim data de termino do intervalo
+	 * @return array $arrDatas vetor de datas ja tratadas em formato SQL
+	 */
+	public static function parsePeriodosDatas($dateIni,$dateFim){
 		if(strpos($dateIni, '-') === false){
 			$dateIni = self::parseDataSql($dateIni);
 		}
 		if(strpos($dateFim, '-') === false){
-	 		$dateFim = self::parseDataSql($dateFim);
+			$dateFim = self::parseDataSql($dateFim);
 		}
 
 		$arrDatas[0] = $dateIni;
@@ -129,34 +129,34 @@ class FormataDatas {
 			}
 		}
 		return $arrDatas;
-	 }
-	 /**
-	  * Parser para transformar as data em formato texto, passados pelo formulário em um array de datas recorrentes
-	  *
-	  * @author André Coura
-	  * @since 1.0 - Jul 30, 2007
-	  * @param String texto contendo as datas separadas por vírgulas
-	  * @return array $arrDatas vetor de datas em formato SQL
-	  */
-	  public static function parserDatasRecorrentes($strDatas){
-	  	$arrDatasBR = explode(",",$strDatas);
-	  	$arrDatas = array();
-	  	foreach($arrDatasBR as $dataBR){
-	  		$strNewDate="";
-	  		//parser de lixos entre os caracteres
-	  		for($i=0;$i<strlen($dataBR);$i++){
-	  			if(ord($dataBR{$i})!=13&&ord($dataBR{$i})!=10)
-	  				$strNewDate.= $dataBR{$i};
-	  		}
-	  		//retirada da quebra de linha adicionada pela máscara do javascript
-  			if($strNewDate!='')
-  				array_push($arrDatas,FormataCampos::parseDataSql($strNewDate));
-	  	}
-	  return $arrDatas;
-	  }
+	}
+	/**
+	 * Parser para transformar as data em formato texto, passados pelo formulário em um array de datas recorrentes
+	 *
+	 * @author André Coura
+	 * @since 1.0 - Jul 30, 2007
+	 * @param String texto contendo as datas separadas por vírgulas
+	 * @return array $arrDatas vetor de datas em formato SQL
+	 */
+	public static function parserDatasRecorrentes($strDatas){
+		$arrDatasBR = explode(",",$strDatas);
+		$arrDatas = array();
+		foreach($arrDatasBR as $dataBR){
+			$strNewDate="";
+			//parser de lixos entre os caracteres
+			for($i=0;$i<strlen($dataBR);$i++){
+				if(ord($dataBR{$i})!=13&&ord($dataBR{$i})!=10)
+				$strNewDate.= $dataBR{$i};
+			}
+			//retirada da quebra de linha adicionada pela máscara do javascript
+			if($strNewDate!='')
+			array_push($arrDatas,FormataCampos::parseDataSql($strNewDate));
+		}
+		return $arrDatas;
+	}
 
-	  public static function getMesExtenso($mes){
-	  	switch(intval($mes)){
+	public static function getMesExtenso($mes){
+		switch(intval($mes)){
 			case 1:
 				return "janeiro";
 			case 2:
@@ -182,9 +182,9 @@ class FormataDatas {
 			case 12:
 				return "dezembro";
 			default;
-				return "mes invalido";
+			return "mes invalido";
 		}
-	  }
+	}
 
 	/**
 	 * Data no formato brasileiro por extenso exemplo : 08 de novembro de 2009
@@ -192,7 +192,7 @@ class FormataDatas {
 	 * @author André Coura
 	 * @since 1.0 - 14/11/2009
 	 */
-	  public static function getDataBrasilExtenso(){
+	public static function getDataBrasilExtenso(){
 		$diaAtual = date("d");
 		$mesAtual = date("m");
 		$anoAtual = date("Y");
@@ -201,9 +201,9 @@ class FormataDatas {
 		$dataExtenso = $diaAtual." de ".self::getMesExtenso($mesAtual)." de ". $anoAtual;
 
 		return $dataExtenso;
-	  }
+	}
 
-	  public static function diaSemana($data) {
+	public static function diaSemana($data) {
 		$ano =  substr("$data", 0, 4);
 		$mes =  substr("$data", 5, -3);
 		$dia =  substr("$data", 8, 9);
@@ -221,7 +221,7 @@ class FormataDatas {
 		}
 		return $diasemana;
 	}
-	 public static function diaSemanaExtenso($data) {
+	public static function diaSemanaExtenso($data) {
 		$ano =  substr("$data", 0, 4);
 		$mes =  substr("$data", 5, -3);
 		$dia =  substr("$data", 8, 9);
@@ -243,20 +243,20 @@ class FormataDatas {
 	public static function calculaNumDiasEntreDatas ($dataInicial, $dataFinal){
 
 		if(strpos($dataInicial, '-') === false){
-	 		$arrDateIni = explode("/",$dataInicial);
+			$arrDateIni = explode("/",$dataInicial);
 			$dataIni = mktime (0,0,0,$arrDateIni[1],$arrDateIni[0],$arrDateIni[2]);
 		}else{
-	 		$arrDateIni = explode("-",$dataInicial);
+			$arrDateIni = explode("-",$dataInicial);
 			$dataIni = mktime (0,0,0,$arrDateIni[1],$arrDateIni[2],$arrDateIni[0]);
 		}
 		if(strpos($dataFinal, '-') === false){
-	 		$arrDateFim = explode("/",$dataFinal);
+			$arrDateFim = explode("/",$dataFinal);
 			$dataFim = mktime (0,0,0,$arrDateFim[1],$arrDateFim[0],$arrDateFim[2]);
 		}else{
-	 		$arrDateFim = explode("-",$dataFinal);
+			$arrDateFim = explode("-",$dataFinal);
 			$dataFim = mktime (0,0,0,$arrDateFim[1],$arrDateFim[2],$arrDateFim[0]);
 		}
-		
+
 		$dias = ($dataFim - $dataIni)/86400;
 		$dias = ceil($dias);
 		return $dias;
@@ -265,15 +265,78 @@ class FormataDatas {
 	public static function addDiaData ($dataInicial, $qtdAdd){
 
 		if(strpos($dataInicial, '-') === false){
-	 		$arrDateIni = explode("/",$dataInicial);
+			$arrDateIni = explode("/",$dataInicial);
 			$dataIni = mktime (0,0,0,$arrDateIni[1],$arrDateIni[0],$arrDateIni[2]);
 		}else{
-	 		$arrDateIni = explode("-",$dataInicial);
+			$arrDateIni = explode("-",$dataInicial);
 			$dataIni = mktime (0,0,0,$arrDateIni[1],$arrDateIni[2],$arrDateIni[0]);
 		}
 		$dias = mktime(0,0,0,$arrDateIni[1],$arrDateIni[2]+$qtdAdd,$arrDateIni[0]);
-		
+
 		return strftime("%Y-%m-%d", $dias);
+	}
+	
+	/**
+	 * Função para comparação de datas.
+	 * @author Fernando Braga <fernando.braga@tcit.com.br>
+	 * @since 1.0 10/02/2012 
+	 * @param string $data1 //primeira data a ser comparada.
+	 * @param string $comparacao //tipo de comparação. ex.(>=, <=, ==...)
+	 * @param string $data2 //segunda data a ser comparada.
+	 */
+	public static function comparaDatas($data1, $comparacao, $data2) {
+		$result = false;
+		//se padrão BR, transforma para padrão SQL
+		if (strpos($data1, '/') === false) {
+			self::parseDataSql($data1);
+		}
+		//se padrão BR, transforma para padrão SQL
+		if (strpos($data2, '/') === false) {
+			self::parseDataSql($data2);
+		}
+		// trabalhando a primeira data
+		$dt1 = strtotime($data1);
+		// trabalhando a segunda data
+		$dt2 = strtotime($data2);
+
+		if ($comparacao == "==") {
+			if ($dt1 == $dt2) {
+				$result = true;
+			}
+		} else if ($comparacao == "<=") {
+			if ($dt1 <= $dt2) {
+				$result = true;
+			}
+		} else if ($comparacao == ">=") {
+			if ($dt1 >= $dt2) {
+				$result = true;
+			}
+		} else if ($comparacao == "!=") {
+			if ($dt1 != $dt2) {
+				$result = true;
+			}
+		} else if ($comparacao == "<") {
+			if ($dt1 < $dt2) {
+				$result = true;
+			}
+		} else if ($comparacao == ">") {
+			if ($dt1 > $dt2) {
+				$result = true;
+			}
+		} else if ($comparacao == "===") {
+			if ($dt1 === $dt2) {
+				$result = true;
+			}
+		} else if ($comparacao == "<>") {
+			if ($dt1 <> $dt2) {
+				$result = true;
+			}
+		} else if ($comparacao == "!==") {
+			if ($dt1 !== $dt2) {
+				$result = true;
+			}
+		}
+		return $result;
 	}
 
 }
