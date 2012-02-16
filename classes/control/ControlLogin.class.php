@@ -27,7 +27,7 @@ class ControlLogin {
 			$ativo = self::verificaUsuarioAtivo($arrCampos["email"]);
 
 			if(!$ativo)
-				throw new FieldsException("Usuario ainda não validado pelo sistema! Por favor, ative sua conta através do link que foi mandado no seu e-mail.");
+				throw new FieldsException("Usuário ainda não validado pelo sistema! Por favor, ative sua conta através do link que foi enviado para seu e-mail.");
 
 			FormataCampos::validaLogin($arrCampos["email"]);
 			FormataCampos::validaSenha($arrCampos["passwd"]);
