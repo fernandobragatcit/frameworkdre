@@ -33,7 +33,8 @@ class ArquivosDAO extends AbsModelDao {
 			self::salvaPostAutoUtf8($post);
 
 			//Tratamento especifico para a foto
-			$this->file_arquivo = $file[$this->strNomeCampo]["name"];
+			$strNovoNome = "DOC".str_replace(".", "",str_replace(" ", "", microtime()));
+			$this->file_arquivo = $strNovoNome.self::getExtFile($file[$this->strNomeCampo]["type"]);
 			$this->extensao_arquivo = end(explode(".", self::getExtFile($file[$this->strNomeCampo]["type"])));
 
 			$this->tiposArquivos = array(".pdf",".doc",".docx",".xls",".xlsx");
