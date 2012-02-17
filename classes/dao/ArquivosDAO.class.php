@@ -84,7 +84,8 @@ class ArquivosDAO extends AbsModelDao {
 				}catch(DaoException $e){
 					//mesmo que não consiga apagar o arquivo, procigo com o processo de upload
 				}
-				$this->file_arquivo = time().$file[$this->strNomeCampo]["name"];
+				$strNovoNome = "DOC".str_replace(".", "",str_replace(" ", "", microtime()));
+				$this->file_arquivo = $strNovoNome.self::getExtFile($file[$this->strNomeCampo]["type"]);
 				$this->extensao_arquivo = end(explode(".", self::getExtFile($file[$this->strNomeCampo]["type"])));
 
 				$this->tiposArquivos = array(".pdf",".doc",".docx",".xls",".xlsx");
