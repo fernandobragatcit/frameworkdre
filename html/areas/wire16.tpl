@@ -4,9 +4,9 @@
 <div id="mensSistema">
 	{$MENS_SISTEMA}
 </div>
-<div id="containerSubCabecalho">
+<span id="containerSubCabecalho">
 	{$SUB_CABECALHO}
-</div>
+</span>
 <div id="containerCorpo">
 	{$CORPO}
 </div>
