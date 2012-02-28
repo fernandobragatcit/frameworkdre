@@ -87,7 +87,7 @@ class Button extends AbsCompHtml {
 				return "onclick=\"return confirmIr('?','".$strMens."')\"";
 				
 			$strCam = $this->objCrypt->cryptData((self::getCategoria()!=""?self::getCategoria()."&f=":"").parent::getClass()."&".(((string)$this->objXmlComp->goto != "")?(string)$this->objXmlComp->goto."&":"").(((string)$this->objXmlComp->param1 != "")?(string)$this->objXmlComp->param1."=".self::getIdReferencia()."&":""));
-			return "onclick=\"return confirmIr('?".FormataLink::definiTipoLink(self::getTipo())."=".$strCam."','".$strMens."')\";";
+			return "onclick=\"return confirmIr('?".FormataLink::definiTipoLink(self::getTipo())."=".$strCam."','".$strMens."');\"";
 		}
     }
 
