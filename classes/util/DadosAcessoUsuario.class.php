@@ -18,49 +18,51 @@ class DadosAcessoUsuario {
      * @return seta na sessao se o navegador for autorizado;
      */
     public function validaNavegador() {
-    	//seta na sessão o navegador e a sessão.
-    	self::getBrowser();
-    	
-    	$htmlAviso = "
-    		<div id=\"tarjaNavegador\">
-    			<p>Atenção! Nosso portal não é compatível com este navegador. Portanto, 
-    			diferentes erros poderão ocorrer durante as operações. Por favor, para que 
-    			tudo funcione corretamente, utilize um dos seguintes navegadores: ";
-    		
-        for($i = 0; $i<count($_SESSION["navegadores"]); $i++){
-        	$navegadores[] = $_SESSION["navegadores"][$i]["navegador"];
-            $versao[] = $_SESSION["navegadores"][$i]["menorVersao"];
-            $htmlAviso .= $_SESSION["navegadores"][$i]["navegador"]." ";
-            $htmlAviso .= $_SESSION["navegadores"][$i]["menorVersao"]." ou superior";
-            if($i != count($_SESSION["navegadores"])-1)
-            	$htmlAviso .= ", ";
-            else
-            	$htmlAviso .= ". ";
-		}
-    			
-    	$htmlAviso .= "
-    			</p>
-    		</div>
-    	";
-    	
-        if (in_array($_SESSION['navegador'], $navegadores)) {
-        	$aux = false;
-            foreach ($navegadores as $key => $navegador){
-	        	if ($_SESSION['navegador'] == $navegador) {
-	            	if ($_SESSION['versao'] < $versao[$key]) {
-			        	$aux = true;
-					}
-	            }
-           	}
-           	if($aux)
+    	if($_COOKIE["tarjaNavegador"] != "true"){
+	    	//seta na sessão o navegador e a sessão.
+	    	self::getBrowser();
+	    	
+	    	$htmlAviso = "
+	    		<div id=\"tarjaNavegador\">
+	    			<strong>Atenção!</strong>
+	    			<p>Nosso portal não é compatível com este navegador. Para que 
+	    			tudo funcione corretamente, utilize um dos seguintes navegadores: <br />";
+	    		
+	        for($i = 0; $i<count($_SESSION["navegadores"]); $i++){
+	        	$navegadores[] = $_SESSION["navegadores"][$i]["navegador"];
+	            $versao[] = $_SESSION["navegadores"][$i]["menorVersao"];
+	            $htmlAviso .= $_SESSION["navegadores"][$i]["navegador"]." ";
+	            $htmlAviso .= $_SESSION["navegadores"][$i]["menorVersao"];
+	            if($i != count($_SESSION["navegadores"])-1)
+	            	$htmlAviso .= ", ";
+	            else
+	            	$htmlAviso .= " ou versões superiores. ";
+			}
+	    			
+	    	$htmlAviso .= "
+	    			</p>
+	    			<a href=\"javascript:void(0);\" id=\"fechar\" onclick=\"fechaTarjaNavegador();\" title=\"Fechar\">X Fechar</a>
+	    		</div>
+	    	";
+	    	
+	        if (in_array($_SESSION['navegador'], $navegadores)) {
+	        	$aux = false;
+	            foreach ($navegadores as $key => $navegador){
+		        	if ($_SESSION['navegador'] == $navegador) {
+		            	if ($_SESSION['versao'] < $versao[$key]) {
+				        	$aux = true;
+						}
+		            }
+	           	}
+	           	if($aux){
+		        	return $htmlAviso;
+	           	}else{
+		        	return false;
+	           	}
+	        } else {
 	        	return $htmlAviso;
-	        else
-	        	return false;
-        } else {
-        	return $htmlAviso;
-		}
-        
-        
+			}
+    	}
     }
 	
 	/**

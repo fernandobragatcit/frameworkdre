@@ -55,6 +55,13 @@ class Main {
 
 	public function __construct() {
 		self::criaSessao();
+		//seta na sessão os navegadores homologados para o portal.
+		$arrNavs = explode(";" ,NAVEGADORES_HOMOLOGADOS);
+		$arrVersionNavs = explode(";" ,VERSAO_NAVEGADORES_HOMOLOGADOS);
+		foreach ($arrNavs as $kn => $nn){
+			$_SESSION["navegadores"][$kn] = array("navegador" => $nn,"menorVersao" => intval($arrVersionNavs[$kn]));
+		}
+		
 	}
 
 	public function getCtrlConfigs(){
