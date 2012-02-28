@@ -13,6 +13,7 @@ require_once (FWK_VIEW."ViewMenu.class.php");
 
 require_once(FWK_UTIL."FormataParametros.class.php");
 require_once(FWK_UTIL."FormataLink.class.php");
+require_once(FWK_UTIL."DadosAcessoUsuario.class.php");
 
 require_once (FWK_EXCEPTION."HtmlException.class.php");
 require_once (FWK_EXCEPTION."XMLException.class.php");
@@ -194,6 +195,7 @@ class Main {
 			self::registraTagsBasicas($objFormatParam->getParametros(), $arrPost);
 			self::regsMenu();
 			self::verificaShortUrl();
+			self::getObjSmarty()->assign("AVISO_NAVEGADOR", DadosAcessoUsuario::validaNavegador());
 			$this->getObjHttp()->escreEm(self::getAssinaturaMenu(),self::getTplEstruturaMenu());
 			$objFactoryTela = new ControlFactory($srcClass);
 			$objFactoryTela->setDirClassDefault(self::getPastaClassesView());
