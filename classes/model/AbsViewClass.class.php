@@ -175,6 +175,13 @@ abstract class AbsViewClass{
 		self::getObjSmarty()->assign("PARAM2",$param2);
 		$this->param2 = $param2;
 	}
+	public function getParam3(){
+		return $this->param3;
+	}
+	public function setParam3($param3 = null){
+		self::getObjSmarty()->assign("PARAM3",$param3);
+		$this->param3 = $param3;
+	}
 	
 	/**
 	 * Busca as respectivas áreas, lembrando que o ultimo elemento do array 
