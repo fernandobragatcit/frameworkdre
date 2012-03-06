@@ -12,11 +12,11 @@
 		width : {$LARGURA_EDITOR},
 		height : {$ALTURA_EDITOR},
 		//plugins : "pagebreak,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,wordcount,advlist,autosave",
-		plugins : "table,inlinepopups,paste",
+		plugins : "pagebreak,table,inlinepopups,paste",
 
 		// Theme options
 		theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,undo,redo,|,link,unlink,|,cleanup,removeformat,|,code",
-		theme_advanced_buttons2 : "cut,copy,pastetext,|,tablecontrols{if $EXIBE_STYLES},|,styleselect{/if}",
+		theme_advanced_buttons2 : "pagebreak,cut,copy,pastetext,|,tablecontrols{if $EXIBE_STYLES},|,styleselect{/if}",
 		theme_advanced_buttons3 : "",
 		theme_advanced_toolbar_location : "bottom",
 		theme_advanced_toolbar_align : "center",
