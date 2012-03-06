@@ -25,8 +25,8 @@ class DadosAcessoUsuario {
 	    	$htmlAviso = "
 	    		<div id=\"tarjaNavegador\">
 	    			<strong>Atenção!</strong>
-	    			<p>Nosso portal não é compatível com este navegador. Para que 
-	    			tudo funcione corretamente, utilize um dos seguintes navegadores: <br />";
+	    			<p>Este portal não está homologado para o seu navegador, portando, erros poderão ocorrer.<br /> 
+	    			Para evitar falhas utilize: ";
 	    		
 	        for($i = 0; $i<count($_SESSION["navegadores"]); $i++){
 	        	$navegadores[] = $_SESSION["navegadores"][$i]["navegador"];
