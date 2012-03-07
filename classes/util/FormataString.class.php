@@ -42,6 +42,24 @@ class FormataString {
 		$string = str_replace("--", "-",$string);
 		return $string;
 	}
+
+	public static function retiraCaracterEspecial($string){
+		$a = array("á","ã","à","ä","â","Á","Ã","À","Ä","Â");
+		$string = str_replace($a, "a",$string);
+		$e = array("é","ë","è","ê","É","Ë","È","Ê","&");
+		$string = str_replace($e, "e",$string);
+		$i = array("í","ï","ì","î","Í","Ï","Ì","Î");
+		$string = str_replace($i, "i",$string);
+		$o = array("ó","ö","ò","õ","ô","Ó","Ö","Ò","Õ","Ô");
+		$string = str_replace($o, "o",$string);
+		$u = array("ú","ü","ù","û","Ú","Ü","Ù","Û");
+		$string = str_replace($u, "u",$string);
+		$c = array("ç","Ç");
+		$string = str_replace($c, "c",$string);
+		$n = array("ñ","Ñ");
+		$string = str_replace($n, "n",$string);
+		return $string;
+	}
 	
 	
 	public static function retiraHtmlVetor($array){

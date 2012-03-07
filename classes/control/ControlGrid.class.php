@@ -645,6 +645,7 @@ class ControlGrid {
 			}
 			foreach ($this->post as $key => $valor){
 				if($valor != ""){
+					$valor = FormataString::retiraCaracterEspecial($valor);
 					foreach (self::getObjXml()->filtro->campos as $campo){
 						if((string)$campo->attributes()->name == $key){
 							if((string)$campo->attributes()->type == "select"){
@@ -1009,7 +1010,7 @@ class ControlGrid {
 					throw new GridException("Não foi passado o atributo \"campoQuery\" no campo ".(string)$campo->attributes()->label." do filtro.");
 
 				$objFactoryCompsHtml->setClasseAtual(self::getObjXml()->attributes()->classe);
-				$objFactoryCompsHtml->buildComp($campo, $this->post[(string)$campo->attributes()->name]);
+				$objFactoryCompsHtml->buildComp($campo, utf8_decode($this->post[(string)$campo->attributes()->name]));
 				$arrCampos[$cont]["label"] = (string)$campo->attributes()->label;
 				$arrCampos[$cont]["campo"] = $objFactoryCompsHtml->getObjFactored()->getHtmlComp();
 				$cont++;
