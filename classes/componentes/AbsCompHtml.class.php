@@ -118,6 +118,7 @@ abstract class AbsCompHtml{
     	try{
     		self::getObjSmarty()->assign(self::getName()."_check",self::getCheck());
     		self::getObjSmarty()->assign(self::getName()."_label",self::getLabel());
+    		self::getObjSmarty()->assign(self::getName()."_informativo",self::getInformativo());
     		self::getObjSmarty()->assign(self::getName()."_campo",self::getHtmlComp());
     	}catch(ElementsException $e){
     		die($e->__toString());
@@ -358,6 +359,18 @@ abstract class AbsCompHtml{
     	if(self::getObjXmlCompDados()->type=="button" || self::getObjXmlCompDados()->type=="submit")
     		return "";
     	throw new ElementsException(FORM_LABEL_ERRO);
+    }
+
+	public function getInformativo(){
+    	$strDado = self::getObjXmlCompDados()->informativo;
+    	if(isset($strDado) && $strDado!=""){
+    			$strObrig = "
+    				<span class=\"campoInformativo\">
+	    				<span onmouseover=\"exibeInformativo(this);\" onmouseout=\"ocultaInformativo(this);\" class=\"iconInformativo\"><img src=\"".URL_IMAGENS."icon_informativo.png\" width=\"15\" height=\"15\" alt=\"Informações do Campo\" /></span>
+	    				<p class=\"descInformativo\">".$strDado."</p>
+	    			</span>";
+    		return $strObrig;
+    	}
     }
 
 	public function getCheck(){

@@ -652,6 +652,13 @@ function removeBlocoCampo(strId, id){
 	jQuery("#"+strId+"Count").val(parseInt(count2)-1);
 }
 
+function exibeInformativo(objHover){
+	jQuery(objHover).next(".descInformativo").show();
+}
+function ocultaInformativo(objHover){
+	jQuery(objHover).next(".descInformativo").hide();
+}
+
 function exibeCampos(objCB, idCampo){
 	if(objCB.checked){
 		jQuery("#" + idCampo ).show();
