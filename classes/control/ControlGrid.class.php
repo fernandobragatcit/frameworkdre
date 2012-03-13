@@ -639,8 +639,9 @@ class ControlGrid {
 			}
 		}
 
+		unset($this->post["buscaGrid"]);
 		if($this->post != "" && isset(self::getObjXml()->filtro)) {
-			if($this->post != null){
+			if(!empty($this->post)){
 				self::getObjSmarty()->assign("ABRE_FILTRO", true);
 			}
 			foreach ($this->post as $key => $valor){
