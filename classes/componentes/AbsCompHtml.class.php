@@ -326,8 +326,10 @@ abstract class AbsCompHtml{
     	else
     		self::getObjSmarty()->assign("ONPASTE_COMP","");
 		
-		if(self::getValue() != "")
+		if(self::getValue() != ""){
+			self::setValue(str_replace("\"", "&quot;", self::getValue()));
     		self::getObjSmarty()->assign("VALUE_COMP",utf8_encode(self::getValue()));
+		}
     }
 
    public function getName(){
