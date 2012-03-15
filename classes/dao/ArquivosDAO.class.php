@@ -60,6 +60,9 @@ class ArquivosDAO extends AbsModelDao {
 	public function getIdArquivo(){
 		return $this->id_arquivo;
 	}
+	public function setNomeCampo($nomeCampo){
+		$this->strNomeCampo = $nomeCampo;
+	}
 
 	/**
 	 * Método para alterar somente os campos que realmente foram alterados não mexendo com os outros
@@ -78,6 +81,7 @@ class ArquivosDAO extends AbsModelDao {
 			$arrCampos = self::buscaCampos($id,0);
 			self::validaForm($xml, $post);
 			self::alteraPostAutoUtf8($post, $id);
+			$this->id_arquivo = $objDoc->getIdDocumento();
 			$this->file_arquivo = $arrCampos["file_arquivo"];
 			if($file[$this->strNomeCampo]["name"] != ""){
 				try{
@@ -120,6 +124,15 @@ class ArquivosDAO extends AbsModelDao {
 			return ControlDB::getAll($strQuery);
 		} catch (DaoException $e) {
 			throw new DaoException($e->getMensagem());
+		}
+	}
+	
+	public function deletaArquivo($id){
+		try {
+			self::apagaArquivoFisico($id, $this->strNomeCampo, PASTA_UPLOADS_ARQUIVOS);
+			self::deletar($id);
+		} catch (CrudException $e) {
+			throw new CrudException($e->getMensagem());
 		}
 	}
 
