@@ -39,7 +39,7 @@ class CrudBanners extends AbsCruds {
 			$arrDados = self::getClassModel()->buscaCampos($id,0);
 			if($arrDados["id_foto"] != null){
 				if($file["nome_arquivo"]["name"] != "" || $file["nome_arquivo"]["name"] != null){
-					self::getObjFoto()->cadastrar(parent::getXmlForm(),$post,$file);
+					self::getObjFoto()->alterar($arrDados["id_foto"], parent::getXmlForm(),$post,$file);
 					$post["id_foto"] = self::getObjFoto()->getIdFoto();
 				}else{
 					$post["id_foto"] = $arrDados["id_foto"];

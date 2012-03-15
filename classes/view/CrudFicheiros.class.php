@@ -36,6 +36,7 @@ class CrudFicheiros extends AbsCruds {
 			$post = FormataPost::mergeArrayPost($arrDados,$post);
 			
 			if($post["nome_arquivo_null"]){
+				self::getObjFoto()->deletaFoto($arrDados["id_foto"]);
 				self::anulaCampo($id, "id_foto");
 				$arrDados["id_foto"] = null;
 				$post["id_foto"] = null;

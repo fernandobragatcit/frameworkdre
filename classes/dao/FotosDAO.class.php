@@ -92,7 +92,7 @@ class FotosDAO extends AbsModelDao {
 				try{
 					parent::apagaArquivoFisico($id,$this->strNomeCampo,PASTA_UPLOADS_FOTOS);
 				}catch(DaoException $e){ }
-				$strNovoNomeFoto = "FOT".time();
+				$strNovoNomeFoto = "FOT".str_replace(".", "",str_replace(" ", "", microtime()));
 				$this->nome_arquivo = $strNovoNomeFoto.self::getExtFile($file[$this->strNomeCampo]["type"]);
 				$this->tipo_foto = end(explode(".", self::getExtFile($file[$this->strNomeCampo]["type"])));
 
