@@ -195,7 +195,7 @@ class ControlGrid {
 		self::regLegendas();
 		self::getObjSmarty()->assign("NUM_DADOS_INI", count($arrDadosGrid) > 0 ? "TRUE" : "FALSE");
 		self::getObjSmarty()->assign("ARR_DADOS", self::verTipoDados(self::doFieldFormat($arrDadosGrid)));
-		self::getObjSmarty()->assign("LINK_BUSCAR", self::makeLinkPag(""));
+		self::getObjSmarty()->assign("LINK_BUSCAR", self::makeLinkPag("", true));
 		self::getObjSmarty()->assign("VALOR_BUSCA", stripslashes($this->busca));
 		self::getObjSmarty()->assign("URL_MOMENTO", self::makeLinkPag(""));
 	}
@@ -302,7 +302,7 @@ class ControlGrid {
 	 * @author André Coura
 	 * @since 1.0 - 13/07/2008
 	 */
-	private function makeLinkPag($params) {
+	private function makeLinkPag($params, $busca = false) {
 		$tipo = "c";
 		$categoria = "";
 		$objFormatParam = new FormataParametros();
@@ -318,7 +318,8 @@ class ControlGrid {
 		if(isset($this->busca) && trim((string)self::getObjXml()->query->whereBusca) != ""){
 			$mantemBusca = "&buscaGrid=".$this->busca;
 		}
-		if(isset(self::getObjXml()->filtro) && $this->post){
+		
+		if(isset(self::getObjXml()->filtro) && $this->post && $busca == false){
 			$filtros = "&filtros=".serialize($this->post);
 		}
 		if(!empty($this->get["orderBy"])){
