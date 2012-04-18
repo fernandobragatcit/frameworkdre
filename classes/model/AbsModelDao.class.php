@@ -222,12 +222,17 @@ class AbsModelDao extends ADOdb_Active_Record{
 		header("Location: ?".$meio."=".$objCrypt->cryptData($strLocal));
 	}
 
-	protected function verificaCampos($post,$campo){
+	protected function verificaCampos($post,$campo,$valIgual=false){
 		$arrRet = array();
 		foreach ($post as $indice => $valor) {
 			$arrIndice = explode("_",$indice);
 			if($arrIndice[0] == $campo){
-				$arrRet[] = $valor;}
+				if($valIgual){
+					if($arrIndice[1] == $valor)
+						$arrRet[] = $valor;
+				}else
+					$arrRet[] = $valor;
+			}
 		}
 		return $arrRet;
 	}
