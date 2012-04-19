@@ -31,8 +31,11 @@ class EditorHtml extends AbsCompHtml {
     }
 
     private function setValorEditor($value){
-		if($value != "")
+		if($value != ""){
     		$this->objSmarty->assign("EDIT_VALUE",utf8_encode($value));
+		}else{
+    		$this->objSmarty->assign("EDIT_VALUE", null);
+		}
     }
 
     private function setIdEditor(){
