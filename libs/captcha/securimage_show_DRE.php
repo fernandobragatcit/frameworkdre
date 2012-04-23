@@ -70,7 +70,14 @@ $img = new securimage();
 
 // see securimage.php for more options that can be set
 
-
+$img->image_width 		= 120;
+$img->image_height 		= 50;
+$img->code_length 		= rand(4, 4);
+$img->image_bg_color  	= new Securimage_Color("#8B9FA7");
+$img->text_color      	= new Securimage_Color("#EAEAEA");
+$img->line_color 		= new Securimage_Color("#336587");
+$img->perturbation    	= 0.8;
+$img->image_type      	= SI_IMAGE_JPEG; 
 
 $img->show();  // outputs the image and content headers to the browser
 // alternate use: 
