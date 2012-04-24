@@ -650,9 +650,10 @@ class ControlGrid {
 					$valor = FormataString::retiraCaracterEspecial($valor);
 					foreach (self::getObjXml()->filtro->campos as $campo){
 						if((string)$campo->attributes()->name == $key){
-							if((string)$campo->attributes()->type == "select"){
 								$auxOr = ($campo->attributes()->OR)?"( ":"";
+								$auxOrEnd = ($campo->attributes()->OR)?") ":"";
 								$orAnd =  ($campo->attributes()->OR)?" OR ":" AND ";
+							if((string)$campo->attributes()->type == "select"){
 								$strQuery .= " AND ".$auxOr.(string)$campo->attributes()->campoQuery." = '".$valor."'";
 								if($campo->attributes()->campoQuery2 || $campo->attributes()->campoQuery2 != ""){
 									$strQuery .= $orAnd.(string)$campo->attributes()->campoQuery2." = '".$valor."'";
@@ -665,36 +666,28 @@ class ControlGrid {
 								}
 								$strQuery .= ($campo->attributes()->OR)?") ":"";
 							}else{
-								preg_match_all('/\"([^\"]*)\"/',$valor,$aux);
-								$aux = $aux[1];
-								
-								if(count($aux) == 0)
-									$aux = explode(" ", $valor);
-								$aux = FormataPost::limpaArray($aux);
-								sort($aux);
+								$aux = str_replace("\"", "", $valor);
 
-								if(count($aux)>0){
-									for($i=0; $i<count($aux); $i++){
-										$strQuery .= ($i == 0)?" AND (":"";
-										$strQuery .= $auxOr.(string)$campo->attributes()->campoQuery." LIKE '%".$aux[$i]."%'";
-										if($campo->attributes()->campoQuery2 || $campo->attributes()->campoQuery2 != ""){
-											$strQuery .= " OR ".(string)$campo->attributes()->campoQuery2." LIKE '%".$aux[$i]."%'";
-										}
-										if($campo->attributes()->campoQuery3 || $campo->attributes()->campoQuery3 != ""){
-											$strQuery .= " OR ".(string)$campo->attributes()->campoQuery3." LIKE '%".$aux[$i]."%'";
-										}
-										if($campo->attributes()->campoQuery4 || $campo->attributes()->campoQuery4 != ""){
-											$strQuery .= " OR ".(string)$campo->attributes()->campoQuery2." LIKE '%".$aux[$i]."%'";
-										}
-										$strQuery .= ($i != count($aux)-1)?" OR ":")";
-									}
+								$strQuery .= " AND (";
+								$strQuery .= $auxOr.(string)$campo->attributes()->campoQuery." LIKE '%".$aux."%'";
+								if($campo->attributes()->campoQuery2 || $campo->attributes()->campoQuery2 != ""){
+									$strQuery .= " OR ".(string)$campo->attributes()->campoQuery2." LIKE '%".$aux."%'";
 								}
+								if($campo->attributes()->campoQuery3 || $campo->attributes()->campoQuery3 != ""){
+									$strQuery .= " OR ".(string)$campo->attributes()->campoQuery3." LIKE '%".$aux."%'";
+								}
+								if($campo->attributes()->campoQuery4 || $campo->attributes()->campoQuery4 != ""){
+									$strQuery .= " OR ".(string)$campo->attributes()->campoQuery2." LIKE '%".$aux."%'";
+								}
+								$strQuery .= $auxOrEnd.")";
 							}
 						}
 					}
 				}
 			}
 		}
+		
+		//self::debuga($strQuery);
 		
 		if (trim((string)self::getObjXml()->query->whereBusca) != "") {
 			if($this->busca != ""){
