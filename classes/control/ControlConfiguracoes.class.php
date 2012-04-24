@@ -88,6 +88,8 @@ class ControlConfiguracoes {
 
     private function verificaXmlConfigs(){
 		try{
+			//configura a url da página principal
+			$this->getObjSmarty()->assign("RET_PORTAL", self::getUrlSite());
 			//configura título página
 			self::getTituloPag();
 			//configura a description da página
