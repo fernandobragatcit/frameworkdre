@@ -1,5 +1,8 @@
 <br />
 
+<textarea name="{$NOME_COMP}" id="{$ID_COMP}" {$ROWS_COMP} {$COLS_COMP} {$WRAP_COMP} {$STYLE_COMP} class="{$CLASS_COMP}"
+{$STYLE_COMP} {$LANG_COMP} {$TABINDEX}>{$EDIT_VALUE}</textarea>
+
 {literal}
 <script type="text/javascript">
 	tinyMCE.init({
@@ -75,13 +78,11 @@
 	});
 </script>
 {/literal}
-<textarea name="{$NOME_COMP}" id="{$ID_COMP}" {$ROWS_COMP} {$COLS_COMP} {$WRAP_COMP} {$STYLE_COMP} class="{$CLASS_COMP}"
-{$STYLE_COMP} {$LANG_COMP} {$TABINDEX}>{$EDIT_VALUE}</textarea>
 
 <!-- Some integration calls -->
+<div class="clear"></div>
 <a href="javascript:;" onmousedown="tinyMCE.get('{$ID_COMP}').show();">[Exibir Editor]</a>
 <a href="javascript:;" onmousedown="tinyMCE.get('{$ID_COMP}').hide();">[Ocultar HTML]</a>
 <script type="text/javascript">jQuery(".mceLayout").attr('width','620px');</script>
-
 
 <br />
