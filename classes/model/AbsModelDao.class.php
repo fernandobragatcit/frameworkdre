@@ -201,11 +201,11 @@ class AbsModelDao extends ADOdb_Active_Record{
 		return ControlDb::selectAllRows($arrDados,$fetchMode);
 	}
 
-	public function buscaCampos2wheres($campo1, $valor1,$campo2, $valor2){
+	public function buscaCampos2wheres($campo1, $valor1,$campo2, $valor2, $fetchMode = ADODB_FETCH_ASSOC){
 		$query = "SELECT * FROM ".$this->_table."
 				  WHERE LOWER(".$campo1.") = '".strtolower(utf8_decode($valor1))."'
 				  AND LOWER(".$campo2.") = '".strtolower(utf8_decode($valor2))."'";
-		ControlDb::getBanco()->SetFetchMode(ADODB_FETCH_ASSOC);
+		ControlDb::getBanco()->SetFetchMode($fetchMode);
 		return ControlDb::getBanco()->GetRow($query);
 	}
 
