@@ -18,7 +18,7 @@
 		plugins : "pagebreak,table,inlinepopups,paste",
 
 		// Theme options
-		theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,|,undo,redo,|,link,unlink,|,cleanup,removeformat,|,code",
+		theme_advanced_buttons1 : "bold,italic,underline,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,|,undo,redo,|,link,unlink,|,cleanup,removeformat,|,code",
 		theme_advanced_buttons2 : "pagebreak,cut,copy,pastetext,|,tablecontrols{if $EXIBE_STYLES},|,styleselect{/if}",
 		theme_advanced_buttons3 : "",
 		theme_advanced_toolbar_location : "bottom",
