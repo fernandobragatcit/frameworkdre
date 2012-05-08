@@ -97,6 +97,24 @@ class ControlUsuario{
 		self::setObjUsuario($arrRet);
 		return self::getObjUsuario();
 	}
+	
+	/**
+	* Método para verificar a existencia de um usuário por ID no banco de dados
+	*
+	* @author Fernando Braga
+	* @since 1.0 - 08/05/2012
+	* @param String $id: id do usuario
+	*/
+	public function validaUsuarioById($id){
+		$strQuery = "SELECT * FROM fwk_usuario WHERE id_usuario = ".$id;
+		$arrRet = ControlDB::getRow($strQuery,0);
+		if(!isset($arrRet["id_usuario"]) && count($arrRet)<5 )
+			throw new UserException(MSG_ERRO_LOGIN);
+		self::setObjUsuario($arrRet);
+		return self::getObjUsuario();
+	}
+	
+	
 
 	/**
 	 * Método para verificar a existencia de um usuário por facebook no banco de dados
