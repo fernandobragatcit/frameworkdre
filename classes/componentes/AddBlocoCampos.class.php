@@ -24,11 +24,13 @@ class AddBlocoCampos extends AbsCompHtml {
 		self::getObjSmarty()->assign("CSSAREA",(string)self::getObjXmlCompDados()->cssArea);
 
 		$linhas = (string)self::getObjXmlCompDados()->linhas;
-
+                //FormataString::debuga($_POST);
 		if(isset($this->objXmlCompChilds->campo)){
 			$arrOptions = array();
 			$arrHidden = array();
+                        $contador=0;
 			foreach ($this->objXmlCompChilds->campo as $opcao) {
+                            $contador=$contador++;
 				$type = strtolower((string)$opcao->tipo);
 				$strObrig = ((boolean)$opcao->obrigatorio)?" <span class=\"campoObrigatorio\">*</span> ":"";
 
@@ -78,9 +80,10 @@ class AddBlocoCampos extends AbsCompHtml {
 						$optionsSelect = $optionPassados;
 						$query = "N";
 					}
-
+                                        $optionsSelect=Utf8Parsers::matrizUtf8Encode($optionsSelect);
+                                        //FormataString::debuga($opcao);
 					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => strtolower((string)$opcao->tipo),
-					'id' => (string)$opcao->id,'obrigatorio' => $strObrig, 'option' => $optionsSelect, 'query' => $query, 'keypress' => $keypress,
+					'id' => (string)$opcao->id,'obrigatorio' => $strObrig, 'contadorClass'=>(string)$opcao->contadorClass,'option' => $optionsSelect, 'query' => $query,'class' => (string)$opcao->class, 'keypress' => $keypress,
 					'onchange' => "onchange=\"".(string)$opcao->onchange."\"");
 				}elseif($type == 'textarea'){
 					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => strtolower((string)$opcao->tipo),
@@ -94,6 +97,8 @@ class AddBlocoCampos extends AbsCompHtml {
 					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => 'checkbox', 'value'=> (string)$opcao->value,
 						'id' => (string)$opcao->id, 'class' => (string)$opcao->class,
 						'onchange' => "onchange=\"".(string)$opcao->onchange."\"");
+				}elseif($type == 'label'){
+					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => 'label','id' => (string)$opcao->id, 'class' => (string)$opcao->class);
 				}
 			}
 		}
@@ -134,19 +139,19 @@ class AddBlocoCampos extends AbsCompHtml {
 		try{
 
 			if(!isset(self::getObjXmlCompDados()->classe) || self::getObjXmlCompDados()->classe == "")
-				throw new ElementsException("Não foi passado o parametro 'classe' para o componente AddBlocoCampos");
+				throw new ElementsException("Nï¿½o foi passado o parametro 'classe' para o componente AddBlocoCampos");
 
 			if(!isset(self::getObjXmlCompDados()->caminho) || self::getObjXmlCompDados()->caminho == "")
-				throw new ElementsException("Não foi passado o parametro 'caminho' para o componente AddBlocoCampos");
+				throw new ElementsException("Nï¿½o foi passado o parametro 'caminho' para o componente AddBlocoCampos");
 
 			if(!isset(self::getObjXmlCompDados()->metodo) || self::getObjXmlCompDados()->metodo == "")
-				throw new ElementsException("Não foi passado o parametro 'metodo' para o componente AddBlocoCampos");
+				throw new ElementsException("Nï¿½o foi passado o parametro 'metodo' para o componente AddBlocoCampos");
 			eval('$caminho = '.self::getObjXmlCompDados()->caminho.";");
 			$classe = (string)self::getObjXmlCompDados()->classe;
 			$metodo = (string)self::getObjXmlCompDados()->metodo;
 
 			if(!file_exists($caminho.$classe.".class.php"))
-				throw new ElementsException("Não foi a classe passada no caminho correspondente para o componente AddBlocoCampos");
+				throw new ElementsException("Nï¿½o foi a classe passada no caminho correspondente para o componente AddBlocoCampos");
 
 			//tudo ok, chamo o dao
 			require_once($caminho.$classe.".class.php");
