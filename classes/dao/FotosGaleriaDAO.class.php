@@ -33,9 +33,7 @@ class FotosGaleriaDAO extends AbsModelDao{
     }
 
     public function limpaGaleria($id){
-    	ControlDb::delRowTable(array("table" => $this->_table,
-									 "campo" => $this->_id,
-									 "valor" => $id));
+    	ControlDb::delRowTable(array("table" => $this->_table,"campo" => $this->_id, "valor" => $id));
     }
 
     private function salvaGaleria($idGaleria,$idFoto){
