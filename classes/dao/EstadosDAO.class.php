@@ -58,6 +58,17 @@ class EstadosDAO extends AbsModelDao{
 			throw new DaoException($e->getMensagem());
 		}
     }
-    
+	public function getNomeEstadoById($id) {
+       $strQuery = "
+                       SELECT estado
+                       FROM ".$this->_table." 
+                       WHERE id_estado=".$id;
+       
+       $result = ControlDb::getRow($strQuery, 1);
+       //self::debuga($strQuery);
+       
+       return $result[0];
+   }
+	
 }
 ?>

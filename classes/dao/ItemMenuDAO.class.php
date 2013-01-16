@@ -1,53 +1,54 @@
 <?php
-require_once(FWK_MODEL."AbsModelDao.class.php");
 
-class ItemMenuDAO extends AbsModelDao{
+require_once(FWK_MODEL . "AbsModelDao.class.php");
 
-	public $_table = "fwk_item_menu";
+class ItemMenuDAO extends AbsModelDao {
 
-	/**
-	 * Chave primária para utilização em funções genéricas
-	 */
-	public $_id = "id_item_menu";
+    public $_table = "fwk_item_menu";
 
-    public function cadastrar($xml,$post,$file){
-		try{
-			self::validaForm($xml,$post);
-			self::salvaPostAutoUtf8($post);
-			self::salvar();
-		}catch(DaoException $e){
-			throw new DaoException($e->getMensagem());
-		}
+    /**
+     * Chave primária para utilização em funções genéricas
+     */
+    public $_id = "id_item_menu";
+
+    public function cadastrar($xml, $post, $file) {
+        try {
+            self::validaForm($xml, $post);
+            self::salvaPostAutoUtf8($post);
+            self::salvar();
+        } catch (DaoException $e) {
+            throw new DaoException($e->getMensagem());
+        }
     }
 
-	/**
-	 * Método para alterar somente os campos que realmente foram alterados não mexendo com os outros
-	 *
-	 * @author André Coura
-	 * @since 1.0 - 26/07/2010
-	 */
-    public function alterar($id,$xml,$post,$file){
-		try{
-			$this->id_item_menu = $id;
-			$arrCampos = self::buscaCampos($id);
-			self::validaForm($xml,$post);
-			self::alteraPostAutoUtf8($post,$id);
-			self::replace();
-		}catch(DaoException $e){
-			throw new DaoException($e->getMensagem());
-		}
+    /**
+     * Método para alterar somente os campos que realmente foram alterados não mexendo com os outros
+     *
+     * @author André Coura
+     * @since 1.0 - 26/07/2010
+     */
+    public function alterar($id, $xml, $post, $file) {
+        try {
+            $this->id_item_menu = $id;
+            $arrCampos = self::buscaCampos($id);
+            self::validaForm($xml, $post);
+            self::alteraPostAutoUtf8($post, $id);
+            self::replace();
+        } catch (DaoException $e) {
+            throw new DaoException($e->getMensagem());
+        }
     }
 
-    public function getIdItemMenu(){
-    	return $this->id_item_menu;
+    public function getIdItemMenu() {
+        return $this->id_item_menu;
     }
 
-    public function getItensInventario($idUsr){
+    public function getItensInventario($idUsr) {
 //		$strQuery = "SELECT id_item_menu, id_menu_pai, id_item_menu_pai, tipo_item_menu, nome_item_menu, link_item_menu, ordem_item_menu
 //					 FROM fwk_item_menu
 //					 WHERE id_menu_pai = '10'";
 
-	    $strQuery = "SELECT DISTINCT
+        $strQuery = "SELECT DISTINCT
 							im.nome_item_menu, im.link_item_menu, im.id_item_menu, im.id_menu_pai, tipo_item_menu
 						FROM
 							fwk_item_menu im LEFT JOIN fwk_direitos di
@@ -61,14 +62,20 @@ class ItemMenuDAO extends AbsModelDao{
 						WHERE
 							im.id_menu_pai = '10' AND
 							(gr.id_grupo in(select id_grupo from fwk_grupo_usuario g1
-											where g1.id_usuario = '".$idUsr."')
-							OR du.id_usuario = '".$idUsr."')
+											where g1.id_usuario = '" . $idUsr . "')
+							OR du.id_usuario = '" . $idUsr . "')
 						ORDER BY
 							im.ordem_item_menu";
 //			die($strQuery);
-		return ControlDB::getAll($strQuery);
+        return ControlDB::getAll($strQuery);
     }
 
+    public function getDadosFormSelect($value=null, $name=null, $tabela=null, $condicao=null) {
+        $strQuery = "SELECT " . $value . "," . $name . " FROM " . $tabela . " " . $condicao;
+        $arrDados = Utf8Parsers::matrizUtf8Encode(ControlDB::getAll($strQuery, 0));
+        return $arrDados;
+    }
 
 }
+
 ?>

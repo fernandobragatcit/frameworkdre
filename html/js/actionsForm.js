@@ -642,7 +642,10 @@ function addBlocoCampo( strId ){
 	var html = jQuery("#"+strId+"Template").html();
 	var count = jQuery("#"+strId+"Count").val();
 	jQuery("#"+strId+"Count").val(parseInt(count)+1);
+        var v=parseInt(count)+1;
 	html = html.split("number").join(""+parseInt(count));
+	html = html.split("Xml1").join("Xml"+v);
+	html = html.split("Xml2").join("Xml"+v);
 	jQuery("#"+strId+"Add").append(html);
 }
 
