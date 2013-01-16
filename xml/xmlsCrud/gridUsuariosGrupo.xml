@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Usuários por Grupo" classe="CrudUsuariosGrupo">
+<grid titulo="Usuários por Grupo" classe="CrudUsuariosGrupo" direito="167">
 	<header>
 		<titulo type="STRING" ordena="gr.nome_grupo">Grupo</titulo>
 		<titulo type="STRING" ordena="qtdUsr">Qtde de Usuários para o Grupo</titulo>

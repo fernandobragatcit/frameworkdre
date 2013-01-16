@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid titulo="Permissões por Direitos de Grupo" classe="CrudSubDireitosGrupo" direito="64">
+    <header>
+        <titulo type="STRING" ordena="us.nome_usuario">Nome Grupo</titulo>
+        <titulo type="STRING" ordena="qtdDir">Qtde de Direitos</titulo>
+        <titulo type="none" actionSelect="a=formPerms">Ações</titulo>
+    </header>
+    <layout>
+        <marcador>
+            <titulo>ETAPA 1 de 3</titulo>
+        </marcador>
+    </layout>
+    <query>
+        <campos>
+            gru.nome_grupo, (select COUNT(dg.id_grupo) FROM fwk_direitos_grupo dg 
+            INNER JOIN fwk_direitos dir ON dir.id_direitos=dg.id_direitos 
+            INNER JOIN fwk_item_menu it ON it.id_item_menu=dir.id_item_menu 
+            WHERE it.formulario=1 AND dg.id_grupo=gru.id_grupo) as total,gru.id_grupo	
+        </campos>
+        <from>
+            fwk_grupo gru 
+            LEFT JOIN fwk_direitos_grupo dg
+            ON dg.id_grupo = gru.id_grupo 
+        </from>
+        <whereBusca>
+            (gru.nome_grupo LIKE '%#BUSCA#%') 
+        </whereBusca>
+        <orderBy>gru.id_grupo</orderBy>
+        <groupBy>gru.id_grupo</groupBy>
+    </query>
+    <buttons>
+        <campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+    </buttons>
+    <filtro>
+        <campos type="text" name="nome_grupo" id="nome_grupo" label="Nome Grupo"
+                title="Nome Grupo" class="larguraFormMeia" campoQuery="gru.nome_grupo" />
+    </filtro>
+</grid>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Direitos" classe="CrudDireitos" portal="true">
+<grid titulo="Direitos" classe="CrudDireitos" portal="true" direito="8">
 	<header>
 		<titulo type="STRING" ordena="di.nome_direito">Direito</titulo>
 		<titulo type="STRING" ordena="me.nome_menu">Menu</titulo>
@@ -19,7 +19,7 @@
 		<whereBusca>
 			(di.nome_direito LIKE '%#BUSCA#%' OR me.nome_menu LIKE '%#BUSCA#%' OR im.nome_item_menu LIKE '%#BUSCA#%') 
 		</whereBusca>
-		<campoPortal>di.id_portal</campoPortal>
+		<campoPortal>im.id_portal</campoPortal>
 		<orderBy>di.nome_direito</orderBy>
 	</query>
 	<buttons>

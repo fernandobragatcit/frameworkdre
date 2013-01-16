@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" nome="Direitos por Usuários" classe="CrudDireitosUsuario"
-	css="formatForm" tipo="FWK" tpl="formDireitosUsuario.tpl">
+	css="formatForm" tipo="FWK" tpl="formDireitosUsuario.tpl" direito="9">
 
 	<campos type="listBox" name="direitosUsuario" id="direitosUsuario" title="Direitos" label="Direitos"
 		querySource="SELECT id_direitos, nome_direito FROM fwk_direitos" 
@@ -9,7 +9,7 @@
 		orderby="nome_direito" class="listBoxCompDre"/>
 
 	<buttons>
-		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cadastrar" value="Salvar" type="submit" direito="9" />
 		<button name="Cancelar" value="Cancelar" type="button"
 			confirme="a=home" mens="Deseja realmente sair do formulario?" />
 	</buttons>

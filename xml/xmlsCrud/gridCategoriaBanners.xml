@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Categorias Banners" classe="CrudCategoriaBanners">
+<grid titulo="Categorias Banners" classe="CrudCategoriaBanners" direito="150">
 	<header>
 		<titulo type="STRING" ordena="desc_tipo_basico" encoding="UFT8">Categoria Banner</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>

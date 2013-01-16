@@ -1,31 +1,37 @@
 <?php
-require_once(FWK_MODEL."AbsModelDao.class.php");
 
-class VerificacaoDAO extends AbsModelDao{
+require_once(FWK_MODEL . "AbsModelDao.class.php");
 
-	public $_table = "fwk_verificacao";
+class VerificacaoDAO extends AbsModelDao {
 
-	/**
-	 * Chave primária para utilização em funções genéricas
-	 */
-	public $_id = "tabela_verificacao";
+    public $_table = "fwk_verificacao";
 
-	public function checkHoje($tabela){
-		$strQuery = "SELECT 
+    /**
+     * Chave primária para utilização em funções genéricas
+     */
+    public $_id = "tabela_verificacao";
+
+    public function checkHoje($tabela) {
+        $strQuery = "SELECT 
 						if(data_verificacao >= CURDATE(), true, false)
 					FROM 
-						".$this->_table."
+						" . $this->_table . "
 					WHERE 
-						tabela_verificacao = '".$tabela."'";
-		return end(ControlDb::getRow($strQuery));
-	}
-	
-	public function setVerificacao($tabela){
-		$objBanco = ControlDb::getBanco();
-		$sql = "UPDATE ".$this->_table." SET data_verificacao = CURDATE() WHERE tabela_verificacao = '".$tabela."'";
-		$objBanco->Execute($sql);
-	}
+						tabela_verificacao = '" . $tabela . "'";
+        return end(ControlDb::getRow($strQuery));
+    }
 
+    public function setVerificacao($tabela) {
+        $objBanco = ControlDb::getBanco();
+        $sql = "UPDATE " . $this->_table . " SET data_verificacao = CURDATE() WHERE tabela_verificacao = '" . $tabela . "'";
+        $objBanco->Execute($sql);
+    }
+
+    public function checaAutorizacaoPendencia() {
+        $strQuery = "SELECT status FROM fwk_configuracoes WHERE id_configuracao=1";
+        return end(ControlDb::getRow($strQuery));
+    }
 
 }
+
 ?>

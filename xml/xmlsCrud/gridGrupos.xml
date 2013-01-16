@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Grupos" classe="CrudGrupos" portal="true">
+<grid titulo="Grupos" classe="CrudGrupos" direito="12">
 	<header>
 		<titulo type="STRING" ordena="nome_grupo">Nome Grupo</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>

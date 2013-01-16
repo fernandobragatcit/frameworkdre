@@ -37,6 +37,11 @@
 		<span class="small" id="id_portal_erro">{$id_portal_error}</span>
 	</label> {$id_portal_campo}
 </div>
+<div class="formTelaFull">
+	<label>{$formulario_label} :
+		<span class="small" id="formulario_erro">{$formulario_error}</span>
+	</label> {$formulario_campo}
+</div>
 
 <div class="formTelaFull">
 	<label>{$link_item_menu_label} :

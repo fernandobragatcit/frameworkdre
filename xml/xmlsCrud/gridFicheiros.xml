@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Ficheiros" classe="CrudFicheiros" portal="true">
+<grid titulo="Ficheiros" classe="CrudFicheiros" portal="true" direito="152">
 	<header>
 		<titulo type="STRING" ordena="id_ficheiro">#Id</titulo>
 		<titulo type="STRING" ordena="titulo_ficheiro">Título</titulo>

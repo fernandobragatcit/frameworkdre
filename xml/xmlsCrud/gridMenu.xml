@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Menu da Área Administrativa" classe="CrudMenu" portal="true">
+<grid titulo="Menu da Área Administrativa" classe="CrudMenu" portal="true" direito="43">
 	<header>
 		<titulo type="STRING" ordena="nome_menu">Menu</titulo>
 		<titulo type="STRING" ordena="link_menu">Link</titulo>

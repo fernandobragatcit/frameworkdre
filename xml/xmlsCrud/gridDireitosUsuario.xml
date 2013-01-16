@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Direitos por Usuário" classe="CrudDireitosUsuario">
-	<header>
-		<titulo type="STRING" ordena="us.nome_usuario">Nome Usuário</titulo>
-		<titulo type="STRING" ordena="qtdDir">Qtde de funcionalidades</titulo>
-		<titulo type="none" actionEdit="a=formAlt">Ações</titulo>
-	</header>
-	<query>
-		<campos>
-			us.nome_usuario, COUNT(du.id_direitos) AS 'qtdDir', us.id_usuario
-		</campos>
-		<from>
-			fwk_direitos_usuario du
-			RIGHT JOIN fwk_usuario us
-			ON du.id_usuario = us.id_usuario
-		</from>
-		<whereBusca>
-			(us.nome_usuario LIKE '%#BUSCA#%') 
-		</whereBusca>
-		<groupBy>us.nome_usuario</groupBy>
-		<orderBy>us.nome_usuario</orderBy>
-	</query>
-	<buttons>
-		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
-	</buttons>
-	<filtro>
-		<campos type="text" name="nome_usuario" id="nome_usuario" label="Nome Usuário"
-		title="Nome Usuário" class="larguraFormMeia" campoQuery="us.nome_usuario" />
-	</filtro>
+<grid titulo="Direitos por Usuário" classe="CrudDireitosUsuario" direito="9">
+    <header>
+        <titulo type="STRING" ordena="us.nome_usuario">Nome Usuário</titulo>
+        <titulo type="STRING" ordena="qtdDir">Qtde de funcionalidades</titulo>
+        <titulo type="none" actionEdit="a=formAlt">Ações</titulo>
+    </header>
+    <query>
+        <campos>
+            us.nome_usuario, (select COUNT(id_direitos) FROM fwk_direitos_usuario where id_usuario=us.id_usuario) as total,us.id_usuario	
+        </campos>
+        <from>
+            fwk_usuario us 
+            LEFT JOIN fwk_direitos_usuario du
+            ON du.id_usuario = us.id_usuario
+            INNER JOIN fgv_colaborador col 
+            ON col.id_usuario=us.id_usuario
+        </from>
+        <whereBusca>
+            (us.nome_usuario LIKE '%#BUSCA#%') 
+        </whereBusca>
+        <groupBy>us.nome_usuario</groupBy>
+        <orderBy>us.nome_usuario</orderBy>
+    </query>
+    <buttons>
+        <campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+    </buttons>
+    <filtro>
+        <campos type="text" name="nome_usuario" id="nome_usuario" label="Nome Usuário"
+                        title="Nome Usuário" class="larguraFormMeia" campoQuery="us.nome_usuario" />
+    </filtro>
 </grid>

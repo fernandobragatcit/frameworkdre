@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Estilos do Sistema" classe="CrudCssPasta">
+<grid titulo="Estilos do Sistema" classe="CrudCssPasta" direito="62">
 	<header>
 		<titulo type="STRING" ordena="nome_estilo_css">Nome CSS</titulo>
 		<titulo type="STRING" ordena="status">Status</titulo>

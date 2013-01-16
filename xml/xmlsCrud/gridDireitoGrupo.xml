@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Direitos por Grupos de Usuários" classe="CrudDireitoGrupo">
+<grid titulo="Direitos por Grupos de Usuários" classe="CrudDireitoGrupo" direito="10">
 	<header>
 		<titulo type="STRING" ordena="gr.nome_grupo">Nome Grupo</titulo>
 		<titulo type="STRING" ordena="qtdDir" encoding="UFT8">Qtde de funcionalidades</titulo>

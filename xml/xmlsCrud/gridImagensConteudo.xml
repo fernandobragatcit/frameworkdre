@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Imagens do Portal" classe="CrudImagensConteudo">
+<grid titulo="Imagens do Portal" classe="CrudImagensConteudo" direito="63">
 	<header>
 		<titulo type="STRING" ordena="nome_imagem">Nome Imagem</titulo>
 		<titulo type="STRING" ordena="tipo_imagem">Tipo da Imagem</titulo>

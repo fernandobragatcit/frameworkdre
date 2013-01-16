@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" nome="Categoria Banners" classe="CrudCategoriaBanners"
-	css="formatForm" tipo="FWK" tpl="formCategoriaBanners.tpl">
+	css="formatForm" tipo="FWK" tpl="formCategoriaBanners.tpl" direito="150">
 
 	<campos type="text" name="desc_tipo_basico" id="desc_tipo_basico"
 		label="Categoria" title="Categoria Banners" obrigatorio="true"
 		maxlength="100" class="small" />
 
 	<buttons>
-		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cadastrar" value="Salvar" type="submit" direito="150" />
 		<button name="Cancelar" value="Cancelar" type="button"
 			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
 	</buttons>

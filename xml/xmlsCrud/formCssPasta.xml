@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" nome="CSS" classe="CrudCssPasta" css="formatForm"
-	tipo="FWK" tpl="formCssPasta.tpl">
+	tipo="FWK" tpl="formCssPasta.tpl" direito="62">
 
 	<campos type="file" name="nome_estilo_css" id="nome_estilo_css"
 		label="Arquivo Css" title="Arquivo Css" class="inputFile"
 		obrigatorio="true" />
 
 	<buttons>
-		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cadastrar" value="Salvar" type="submit" direito="62" />
 		<button name="Cancelar" value="Cancelar" type="button"
 			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
 	</buttons>

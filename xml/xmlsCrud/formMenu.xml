@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" nome="Menu" classe="CrudMenu"
-	css="formatForm" tipo="FWK" tpl="formMenu.tpl">
+	css="formatForm" tipo="FWK" tpl="formMenu.tpl" direito="43">
 
 	<campos type="text" name="nome_menu" id="nome_menu"
 		label="Nome do Menu" title="Nome do Menu" obrigatorio="true"
@@ -39,7 +39,7 @@
 
 	<buttons>
 
-		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cadastrar" value="Salvar" type="submit" direito="43" />
 		<button name="Cancelar" value="Cancelar" type="button"
 			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" nome="Banners" classe="CrudBanners"
-	css="formatForm" tipo="FWK" tpl="formBanners.tpl">
+	css="formatForm" tipo="FWK" tpl="formBanners.tpl" direito="151">
 
 	<campos type="text" name="nome_imagem" id="nome_imagem"
 		label="Nome Banner" title="Nome Banner" obrigatorio="true"
@@ -28,7 +28,7 @@
 		label="Imagem" class="inputFile" obrigatorio="true" />
 
 	<buttons>
-		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cadastrar" value="Salvar" type="submit" direito="151" />
 		<button name="Cancelar" value="Cancelar" type="button"
 			confirme="a=lista" mens="Deseja realmente sair deste formulario?" />
 	</buttons>

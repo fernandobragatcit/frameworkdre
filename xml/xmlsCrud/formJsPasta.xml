@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" nome="Javascript" classe="CrudJsPasta"
-	css="formatForm" tipo="FWK" tpl="formJsPasta.tpl">
+	css="formatForm" tipo="FWK" tpl="formJsPasta.tpl" direito="64">
 
 	<campos type="file" name="nome_javascript" id="nome_javascript"
 		label="Arquivo Javascript" title="Arquivo Javascript" class="inputFile" obrigatorio="true" />
 
 	<buttons>
-		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cadastrar" value="Salvar" type="submit" direito="64" />
 		<button name="Cancelar" value="Cancelar" type="button"
 			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
 	</buttons>

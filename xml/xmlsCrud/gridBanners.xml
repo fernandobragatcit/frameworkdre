@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Banners" classe="CrudBanners" portal="true">
+<grid titulo="Banners" classe="CrudBanners" portal="true" direito="151">
 	<header>
 		<titulo type="STRING" ordena="ba.nome_imagem">Nome Banner</titulo>
 		<titulo type="STRING" ordena="ba.title_banner">Title Banner</titulo>

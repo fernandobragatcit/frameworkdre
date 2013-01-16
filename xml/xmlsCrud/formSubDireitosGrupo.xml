@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="SubDireitos por Usuários" classe="CrudSubDireitosGrupo"
+	css="formatForm" tipo="FWK" tpl="formSubDireitosGrupo.tpl" direito="64">
+
+	<campos type="listBox" name="direitosUsuario" id="direitosUsuario" title="Direitos" label="Direitos"
+		querySource="SELECT id_direitos, nome_direito FROM fwk_direitos" 
+		queryAlt="SELECT id_direitos FROM fwk_direitos_usuario WHERE id_usuario"
+		values="id_direitos" texts="nome_direito"
+		orderby="nome_direito" class="listBoxCompDre"/>
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" direito="64" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=home" mens="Deseja realmente sair do formulario?" />
+	</buttons>
+
+</form>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" nome="Grupos por Usuários" classe="CrudGruposUsuario"
-	css="formatForm" tipo="FWK" tpl="formGruposUsuario.tpl">
+	css="formatForm" tipo="FWK" tpl="formGruposUsuario.tpl" direito="13">
 
 	<campos type="listBox" name="gruposUsuario" id="gruposUsuario" title="Grupos" label="Grupos"
 		querySource="SELECT id_grupo, nome_grupo FROM fwk_grupo "
@@ -9,7 +9,7 @@
 		orderby="nome_grupo" class="listBoxCompDre"/>
 
 	<buttons>
-		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cadastrar" value="Salvar" type="submit" direito="13" />
 		<button name="Cancelar" value="Cancelar" type="button"
 			confirme="a=home" mens="Deseja realmente sair do formulario?" />
 	</buttons>

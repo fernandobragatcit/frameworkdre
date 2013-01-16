@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" nome="Ítens de Menu" classe="CrudItemMenu"
-	css="formatForm" tipo="FWK" tpl="formItemMenu.tpl">
+	css="formatForm" tipo="FWK" tpl="formItemMenu.tpl" direito="4">
 
 	<campos type="text" name="nome_item_menu" id="nome_item_menu"
 		label="Ítem de Menu" title="Ítem de Menu" obrigatorio="true"
@@ -74,10 +74,19 @@
 		<value>id_portal</value>
 		<text>nome_portal</text>
 	</campos>
+        <campos type="select" name="formulario" id="formulario"
+		label="Tipo de Funcionalidade" title="Tipo de Funcionalidade" obrigatorio="false" >
+		<array>
+			<option>
+				<value>1</value>
+				<text>Formulário</text>
+			</option>
+		</array>
+	</campos>
 
 	<buttons>
 
-		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cadastrar" value="Salvar" type="submit" direito="4"/>
 		<button name="Cancelar" value="Cancelar" type="button"
 			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
 

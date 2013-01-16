@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" nome="Galerias" classe="CrudGalerias" css="formatForm"
-	tipo="FWK" tpl="formGalerias.tpl">
+	tipo="FWK" tpl="formGalerias.tpl" direito="154">
 
 	<campos type="text" name="titulo_galeria" id="titulo_galeria"
 		label="Título" title="Título" obrigatorio="true" maxlength="100"
@@ -45,7 +45,7 @@
 	</campos>
 	
 	<buttons>
-		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cadastrar" value="Salvar" type="submit" direito="154" />
 		<button name="Cancelar" value="Cancelar" type="button"
 			confirme="a=lista" mens="Deseja realmente sair deste formulario?" />
 	</buttons>

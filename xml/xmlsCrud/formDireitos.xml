@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" nome="Direitos" classe="CrudDireitos"
-	css="formatForm" tipo="FWK" tpl="formDireitos.tpl">
+	css="formatForm" tipo="FWK" tpl="formDireitos.tpl" direito="8">
 
 	<campos type="text" name="nome_direito" id="nome_direito"
 		label="Nome Direito" title="Nome Direito" obrigatorio="true"
@@ -36,7 +36,7 @@
 	</campos>
 
 	<buttons>
-		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cadastrar" value="Salvar" type="submit" direito="8" />
 		<button name="Cancelar" value="Cancelar" type="button"
 			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
 	</buttons>

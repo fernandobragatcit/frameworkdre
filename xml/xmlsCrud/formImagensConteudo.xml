@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" nome="Imagens do Conteúdo" classe="CrudImagensConteudo"
-	css="formatForm" tipo="FWK" tpl="formImagensConteudo.tpl">
+	css="formatForm" tipo="FWK" tpl="formImagensConteudo.tpl" direito="63">
 
 	<campos type="file" name="nome_imagem" id="nome_imagem"
 		label="Imagem" title="Imagem" class="inputFile" obrigatorio="false" />
@@ -9,7 +9,7 @@
 		label="Arquivo Zip" title="Arquivo Zip" class="inputFile" obrigatorio="false" />
 
 	<buttons>
-		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cadastrar" value="Salvar" type="submit" direito="63" />
 		<button name="Cancelar" value="Cancelar" type="button"
 			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
 	</buttons>

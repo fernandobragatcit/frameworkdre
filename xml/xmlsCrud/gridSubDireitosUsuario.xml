@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid titulo="Permissões por Direitos de Usuário" classe="CrudSubDireitosUsuario" direito="64">
+    <header>
+        <titulo type="STRING" ordena="us.nome_usuario">Nome Usuário</titulo>
+        <titulo type="STRING" ordena="qtdDir">Qtde de direitos</titulo>
+        <titulo type="none" actionSelect="a=formPerms">Ações</titulo>
+    </header>
+    <layout>
+        <marcador>
+            <titulo>ETAPA 1 de 3</titulo>
+        </marcador>
+    </layout>
+    <query>
+        <campos>
+            us.nome_usuario,
+            (SELECT count(dg.id_direitos) FROM fwk_direitos_grupo dg
+            INNER JOIN fwk_direitos dir ON dir.id_direitos=dg.id_direitos
+            INNER JOIN fwk_item_menu it ON it.id_item_menu=dir.id_item_menu
+            WHERE it.formulario=1 AND dg.id_grupo in(SELECT id_grupo FROM fwk_grupo_usuario WHERE id_usuario=us.id_usuario))
+            +
+            (SELECT count(ds.id_direitos) as cont FROM fwk_direitos_usuario ds
+            INNER JOIN fwk_direitos dir ON dir.id_direitos=ds.id_direitos
+            INNER JOIN fwk_item_menu it ON it.id_item_menu=dir.id_item_menu
+            WHERE it.formulario=1 AND ds.id_usuario=us.id_usuario) as total,
+            us.id_usuario	
+        </campos>
+        <from>
+            fwk_usuario us 
+            LEFT JOIN fwk_direitos_usuario du
+            ON du.id_usuario = us.id_usuario
+            INNER JOIN fgv_colaborador col 
+            ON col.id_usuario=us.id_usuario
+        </from>
+        <whereBusca>
+            (us.nome_usuario LIKE '%#BUSCA#%') 
+        </whereBusca>
+        <groupBy>us.nome_usuario</groupBy>
+        <orderBy>us.nome_usuario</orderBy>
+    </query>
+    <buttons>
+        <campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+    </buttons>
+    <filtro>
+        <campos type="text" name="nome_usuario" id="nome_usuario" label="Nome Usuário"
+                title="Nome Usuário" class="larguraFormMeia" campoQuery="us.nome_usuario" />
+    </filtro>
+</grid>

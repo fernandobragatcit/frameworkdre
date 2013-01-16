@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Galerias" classe="CrudGalerias" portal="true">
+<grid titulo="Galerias" classe="CrudGalerias" portal="true" direito="154">
 	<header>
 		<titulo type="STRING" ordena="id_galeria">#Id</titulo>
 		<titulo type="STRING" ordena="titulo_galeria">Título</titulo>

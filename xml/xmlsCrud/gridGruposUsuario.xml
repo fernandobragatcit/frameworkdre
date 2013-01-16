@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<grid titulo="Grupos por Usuário" classe="CrudGruposUsuario">
+<grid titulo="Grupos por Usuário" classe="CrudGruposUsuario" direito="13">
 	<header>
 		<titulo type="STRING" ordena="us.nome_usuario">Usuário</titulo>
 		<titulo type="STRING" ordena="us.email_usuario">E-mail Usuário</titulo>

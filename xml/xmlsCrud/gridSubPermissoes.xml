@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<grid titulo="Permissões por Direitos de Usuário" classe="CrudSubDireitosUsuario" direito="64">
+    <header>
+        <titulo type="STRING" >Nome Usuário</titulo>
+        <titulo type="STRING" >Permissões</titulo>
+        <titulo type="none" actionEdit="a=formAddPermissoes">Ações</titulo>
+    </header>
+    <layout>
+        <!-- ################## SOBRE TAG marcador ###################################################################### 
+        Serve como uma Div Marcadora com titulo para mostrar informações de etapa do grid ou informação específica do 
+        Grid em questão.
+        -->
+        <marcador>
+            <titulo>ETAPA 2 de 3</titulo>
+        </marcador>
+    <!-- ################## SOBRE TAG INFOS ############################################################################## 
+    Infos serve para colocar informação especificas e diferenciada em cada grid.
+    É obrigado ter os labels e metodos, os métodos vão trazer os resultados para os labels.
+    O atributo passado como parametro no método deverá ser setado na chamada do grid XML em questão, utilizando o método 
+    setArrAttrInfosGrid, dentro dele podemos passar todos os atributos que quizermos de acordo com a quantidade 
+    de metodoslabel existentes no grid.
+    Sempre seguir o exemplo abaixo, numerando o label e metodolabel e não esquecer de informar no quantLabels a quantidade 
+    de label ou metodolabel, sendo que as duas tags devem ter as mesmas quantidades.-->
+        <infos>
+            <quantLabels>1</quantLabels>
+            <label1>Usuário:</label1>
+            <metodolabel1>getNomeUsuarioById</metodolabel1>
+        </infos>
+    </layout>
+    <tipoSelect>
+        <nome>Union</nome>
+        <valor>UNION DISTINCT</valor>
+    </tipoSelect>
+     <parametroGetA>formPerms</parametroGetA>
+    <query>
+        <campos>
+           	
+        </campos>
+        <from>
+            
+        </from>
+        
+    </query>
+    <query1>
+        <campos>
+            dir.nome_direito,
+            (SELECT if(group_concat(sd.nome_direito)is null,'-',group_concat(sd.nome_direito))
+            FROM fwk_sub_direitos_usuarios sdg
+            INNER JOIN fwk_sub_direitos sd ON sd.id_sub_direito=sdg.id_sub_direito
+            where id_usuario=#idReferencia# and dir.id_direitos=sdg.id_direito)as permissoes,
+            dg.id_direitos FROM fwk_direitos_grupo dg
+            INNER JOIN fwk_direitos dir ON dir.id_direitos=dg.id_direitos 
+            INNER JOIN fwk_item_menu it ON it.id_item_menu=dir.id_item_menu 
+        </campos>
+        <where>it.formulario=1 AND dg.id_grupo in (SELECT id_grupo FROM fwk_grupo_usuario where id_usuario=#idReferencia# order by dir.nome_direito)</where>
+        <whereBusca>
+            (dir.nome_direito LIKE '%#BUSCA#%') 
+        </whereBusca>
+    </query1>
+    <query2>
+        <campos>
+            dir.nome_direito,
+            (SELECT if(group_concat(sd.nome_direito)is null,'-',group_concat(sd.nome_direito))
+            FROM fwk_sub_direitos_usuarios sdg
+            INNER JOIN fwk_sub_direitos sd ON sd.id_sub_direito=sdg.id_sub_direito
+            where id_usuario=#idReferencia# and dir.id_direitos=sdg.id_direito)as permissoes,
+            dir.id_direitos FROM fwk_direitos_usuario ds
+            INNER JOIN fwk_direitos dir ON dir.id_direitos=ds.id_direitos 
+            INNER JOIN fwk_item_menu it ON it.id_item_menu=dir.id_item_menu 
+        </campos>
+        <where>it.formulario=1 AND id_usuario=#idReferencia# order by dir.nome_direito</where>
+         <whereBusca>
+            (dir.nome_direito LIKE '%#BUSCA#%') 
+        </whereBusca>
+    </query2>
+    <buttons>
+        <campos name="Voltar" value="Voltar Para Etapa 1" type="button" goto="a=lista" class="btnReport" />
+    </buttons>
+</grid>
