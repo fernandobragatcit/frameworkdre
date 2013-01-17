@@ -501,6 +501,7 @@ class Main {
     }
 
     private function registraTagsBasicas($get, $post) {
+        $_SESSION["ACAO_FORM"]=$get["a"];
         $nParams = array();
         //define o tema do usuário logado
         self::getTemasUsuario();
