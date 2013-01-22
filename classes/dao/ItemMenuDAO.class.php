@@ -70,10 +70,51 @@ class ItemMenuDAO extends AbsModelDao {
         return ControlDB::getAll($strQuery);
     }
 
-    public function getDadosFormSelect($value=null, $name=null, $tabela=null, $condicao=null) {
+    public function getDadosFormSelect($value = null, $name = null, $tabela = null, $condicao = null) {
         $strQuery = "SELECT " . $value . "," . $name . " FROM " . $tabela . " " . $condicao;
         $arrDados = Utf8Parsers::matrizUtf8Encode(ControlDB::getAll($strQuery, 0));
         return $arrDados;
+    }
+
+    public function getOrdemMenuPai($idMenu) {
+
+        $strQuery = "SELECT ordem_menu FROM fwk_menu WHERE id_menu = '" . $idMenu . "'";
+
+        return end(ControlDb::getRow($strQuery, 0));
+    }
+
+    public function getOrdemItemMenuPai($idItemMenu) {
+
+        $strQuery = "SELECT ordem_item_menu 
+					FROM fwk_item_menu WHERE id_item_menu = '" . $idItemMenu . "'";
+
+        return end(ControlDb::getRow($strQuery, 0));
+    }
+
+    public function getIdMenuPaiByIdItemMenuPai($idItemMenu) {
+
+        $strQuery = "SELECT id_menu_pai	FROM fwk_item_menu WHERE id_item_menu = '" . $idItemMenu . "'";
+
+        return end(ControlDb::getRow($strQuery, 0));
+    }
+
+    public function getIdItemMenuPaiByIdItemMenuPai($idItemMenu) {
+
+        $strQuery = "SELECT id_item_menu_pai 
+					FROM fwk_item_menu WHERE id_item_menu = '" . $idItemMenu . "'";
+
+        return end(ControlDb::getRow($strQuery, 0));
+    }
+
+    public function getIdDireitoByIdItemMenu($idItemMenu) {
+        $strQuery = "SELECT id_direitos	FROM fwk_direitos WHERE id_item_menu = '" . $idItemMenu . "'";
+        return end(ControlDb::getRow($strQuery, 0));
+    }
+
+    public function alterarNomeDireito($nome, $id) {
+        $objBanco = ControlDb::getBanco();
+        $sql = "UPDATE fwk_direitos SET nome_direito = '" . $nome . "' WHERE id_direitos = '" . $id . "'";
+        $objBanco->Execute($sql);
     }
 
 }
