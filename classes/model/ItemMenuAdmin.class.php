@@ -44,9 +44,7 @@ class ItemMenuAdmin extends AbsModelCruds {
             //pego as ordens para montar a numeração do nome do direito
             if ($this->id_menu_pai) {
                 $ordemMenuPai = self::getObjItemMenuDAO()->getOrdemMenuPai($this->id_menu_pai);
-                $caiu = "if";
             } else {
-                $caiu = "else";
                 $idItemMenuPai = $this->id_item_menu_pai;
                 while (empty($ordemMenuPai)) {
                     $idMenuPai = self::getObjItemMenuDAO()->getIdMenuPaiByIdItemMenuPai($idItemMenuPai);
