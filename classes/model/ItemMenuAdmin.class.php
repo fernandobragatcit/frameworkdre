@@ -156,7 +156,7 @@ class ItemMenuAdmin extends AbsModelCruds {
                         $idItemMenuPai = self::getObjItemMenuDAO()->getIdItemMenuPaiByIdItemMenuPai($idItemMenuPai);
                         $ordemItemMenuPai[] = self::getObjItemMenuDAO()->getOrdemItemMenuPai($idItemMenuPaiAtual);
                         if ($idItemMenuPaiAtual == $idItemMenuPai) {
-                            $ordemMenuPai=0;
+                            $ordemMenuPai = 0;
                             break;
                         }
                     } else {
@@ -165,24 +165,28 @@ class ItemMenuAdmin extends AbsModelCruds {
                     }
                 }
             }
-            if ($ordemFilho) {
-                $ordemMenuPai.="." . $ordemFilho;
-            }
-            if ($ordemItemMenuPai) {
-                if (count($ordemItemMenuPai) > 1) {
-                    $ordemItemMenuPai = krsort($ordemItemMenuPai);
+            if ($ordemMenuPai == 0) {
+                $numeracaoNome = "";
+            } else {
+                if ($ordemFilho) {
+                    $ordemMenuPai.="." . $ordemFilho;
                 }
-                foreach ($ordemItemMenuPai as $valor) {
-                    $ordemMenuPai.="." . $valor;
+                if ($ordemItemMenuPai) {
+                    if (count($ordemItemMenuPai) > 1) {
+                        $ordemItemMenuPai = krsort($ordemItemMenuPai);
+                    }
+                    foreach ($ordemItemMenuPai as $valor) {
+                        $ordemMenuPai.="." . $valor;
+                    }
                 }
+                $numeracaoNome = $ordemMenuPai . "." . $post["ordem_item_menu"];
             }
-            $numeracaoNome = $ordemMenuPai . "." . $post["ordem_item_menu"];
             //self::debuga($numeracaoNome,$post);
             //#####################################################################################################
             //
             //
             $idDireito = self::getObjItemMenuDAO()->getIdDireitoByIdItemMenu($this->id_item_menu);
-            self::getObjItemMenuDAO()->alterarNomeDireito($numeracaoNome . " " . utf8_decode($post["nome_item_menu"]), $idDireito);
+            self::getObjItemMenuDAO()->alterarNomeDireito(trim($numeracaoNome . " " . utf8_decode($post["nome_item_menu"])), $idDireito);
         } catch (CrudException $e) {
             throw new CrudException($e->getMensagem());
         }
