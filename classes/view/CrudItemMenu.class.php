@@ -19,6 +19,9 @@ class CrudItemMenu extends AbsCruds {
                 if (empty($post["formulario"])) {
                     $post["formulario"] = 0;
                 }
+                if (empty($post["id_menu_pai"]) && empty($post["id_item_menu_pai"])) {
+                    $post["id_menu_pai"] = 1;
+                }
                 self::postCadastro($post, $file);
                 break;
             case "formAlt":
@@ -27,6 +30,9 @@ class CrudItemMenu extends AbsCruds {
             case "altera":
                 if (empty($post["formulario"])) {
                     $post["formulario"] = 0;
+                }
+                if (empty($post["id_menu_pai"]) && empty($post["id_item_menu_pai"])) {
+                    $post["id_menu_pai"] = 1;
                 }
                 self::postAltera($get['id'], $post, $file);
                 break;

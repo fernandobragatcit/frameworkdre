@@ -21,7 +21,7 @@
 			(im.nome_item_menu LIKE '%#BUSCA#%' OR me.nome_menu LIKE '%#BUSCA#%' OR im2.nome_item_menu LIKE '%#BUSCA#%' OR im.link_item_menu LIKE '%#BUSCA#%') 
 		</whereBusca>
 		<campoPortal>im.id_portal</campoPortal>
-		<orderBy>nome_item_menu</orderBy>
+		<orderBy>im.nome_item_menu</orderBy>
 	</query>
 	<buttons>
 		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />

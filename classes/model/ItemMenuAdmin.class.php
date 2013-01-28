@@ -133,6 +133,7 @@ class ItemMenuAdmin extends AbsModelCruds {
      * @since 1.0 - 05/09/2008
      */
     public function alterar($id, $xml, $post, $file) {
+        //self::debuga($post);
         try {
             $this->id_item_menu = $id;
             self::validaForm($xml, $post);
@@ -154,6 +155,10 @@ class ItemMenuAdmin extends AbsModelCruds {
                         $idItemMenuPaiAtual = $idItemMenuPai;
                         $idItemMenuPai = self::getObjItemMenuDAO()->getIdItemMenuPaiByIdItemMenuPai($idItemMenuPai);
                         $ordemItemMenuPai[] = self::getObjItemMenuDAO()->getOrdemItemMenuPai($idItemMenuPaiAtual);
+                        if ($idItemMenuPaiAtual == $idItemMenuPai) {
+                            $ordemMenuPai=0;
+                            break;
+                        }
                     } else {
                         $ordemMenuPai = self::getObjItemMenuDAO()->getOrdemMenuPai($idMenuPai);
                         $ordemFilho = self::getObjItemMenuDAO()->getOrdemItemMenuPai($idItemMenuPai);

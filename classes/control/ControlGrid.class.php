@@ -166,7 +166,8 @@ class ControlGrid {
      * @since 1.0 - 13/07/2008
      */
     public function showGrid() {
-        self::regDadosGrid($this->get["p"], $this->get["buscaGrid"]);
+        $arrGet=$this->getArrGet();         
+        self::regDadosGrid((empty($this->get["p"]))?$arrGet["pag"]:$this->get["p"], (empty($this->get["buscaGrid"]))?$arrGet["buscaGrid"]:$this->get["buscaGrid"]);
         $strGrid = self::getObjSmarty()->fetch(self::getTplGrid());
         self::getObjSmarty()->assign("CORPO", $strGrid);
     }
@@ -638,11 +639,12 @@ class ControlGrid {
                                     }
                                 }
 
+                                //FormataString::debuga($this->get["p"],$this->get["filtros"],$this->get["buscaGrid"]);
                                 //self::debuga($value, $parametros);
 
                                 if ($index == $cont && $permissao == true) {
                                     $this->arrLegenda["personal"] = array("label" => utf8_encode($parametros["title"]), "icone" => "<img width='12' title='" . utf8_encode($parametros["title"]) . "' alt='Icone " . utf8_encode($parametros["title"]) . "' src='" . URL_IMAGENS . "icons/" . $parametros["icone"] . "' />");
-                                    $newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='" . $parametros["title"] . "' alt='" . $parametros["title"] . "' src='" . URL_IMAGENS . "icons/" . $parametros["icone"] . "' />", $tipo, $categoria, $strParam, $strValParam, $strParam2, $strValParam2);
+                                    $newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='" . $parametros["title"] . "' alt='" . $parametros["title"] . "' src='" . URL_IMAGENS . "icons/" . $parametros["icone"] . "' />", $tipo, $categoria, $strParam, $strValParam, $strParam2, $strValParam2,"",$this->get["p"],$this->get["filtros"],$this->get["buscaGrid"]);
                                 }
                                 break;
 

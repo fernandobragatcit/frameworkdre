@@ -32,14 +32,21 @@ class FormataActions {
      * @since 2.1 - 15/12/2011
      * @return String $strLink: o html do link criado direto no href, desta forma o botão voltar do navegador funciona.
      */
-	public function gridAction($data,$value,$classe,$label,$tipo = "c",$strCategoria = "",$param1="",$valParam1="",$param2="",$valParam2="",$xmlParam=""){
+	public function gridAction($data,$value,$classe,$label,$tipo = "c",$strCategoria = "",$param1="",$valParam1="",$param2="",$valParam2="",$xmlParam="",$pag="",$filtros="",$buscaGrid=""){
 		$strParam = "";
+		$strParam3 = "";
 		if($param1 !="" && $valParam1!="")
 			$strParam = "&".$param1."=".$valParam1;
 		if($param2 !="" && $valParam2!="")
 			$strParam2 = "&".$param2."=".$valParam2;
+		if($pag !="")
+			$strParam3 .="&pag=".$pag;
+		if($filtros !="")
+			$strParam3 .="&filtros=".$filtros;
+		if($buscaGrid !="")
+			$strParam3 .="&buscaGrid=".$buscaGrid;
 		
-		$link = self::getObjCrypt()->cryptData(($strCategoria!=""?$strCategoria."&f=":"").$classe."&".$value."&id=".$data.$strParam.$strParam2.$xmlParam);
+		$link = self::getObjCrypt()->cryptData(($strCategoria!=""?$strCategoria."&f=":"").$classe."&".$value."&id=".$data.$strParam.$strParam2.$xmlParam.$strParam3);
 		$strLink = "<a href=\"?".$tipo."=".$link."\">".$label."</a>";
 		return $strLink;
     }
