@@ -116,6 +116,10 @@ class ItemMenuDAO extends AbsModelDao {
         $sql = "UPDATE fwk_direitos SET nome_direito = '" . $nome . "' WHERE id_direitos = '" . $id . "'";
         $objBanco->Execute($sql);
     }
+    public function getIdDireitoByIdMenu($idMenu) {
+        $strQuery = "SELECT id_direitos	FROM fwk_direitos WHERE id_menu = '" . $idMenu . "'";
+        return end(ControlDb::getRow($strQuery, 0));
+    }
 
 }
 
