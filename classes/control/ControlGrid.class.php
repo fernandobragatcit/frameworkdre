@@ -42,6 +42,8 @@ class ControlGrid {
     private $dataCont = null;
     private $xmlWhere = null;
     private $xmlParam = null;
+    private $dataIni = null;
+    private $dataFim = null;
 
     private function __construct() {
         
@@ -128,6 +130,22 @@ class ControlGrid {
         return $this->xmlParam;
     }
 
+    public function setDataIni($x) {
+        $this->dataIni = $x;
+    }
+
+    public function getDataIni() {
+        return $this->dataIni;
+    }
+
+    public function setDataFim($x) {
+        $this->dataFim = $x;
+    }
+
+    public function getDataFim() {
+        return $this->dataFim;
+    }
+
     /**
      * TODO:
      */
@@ -166,8 +184,8 @@ class ControlGrid {
      * @since 1.0 - 13/07/2008
      */
     public function showGrid() {
-        $arrGet=$this->getArrGet();         
-        self::regDadosGrid((empty($this->get["p"]))?$arrGet["pag"]:$this->get["p"], (empty($this->get["buscaGrid"]))?$arrGet["buscaGrid"]:$this->get["buscaGrid"]);
+        $arrGet = $this->getArrGet();
+        self::regDadosGrid((empty($this->get["p"])) ? $arrGet["pag"] : $this->get["p"], (empty($this->get["buscaGrid"])) ? $arrGet["buscaGrid"] : $this->get["buscaGrid"]);
         $strGrid = self::getObjSmarty()->fetch(self::getTplGrid());
         self::getObjSmarty()->assign("CORPO", $strGrid);
     }
@@ -644,7 +662,7 @@ class ControlGrid {
 
                                 if ($index == $cont && $permissao == true) {
                                     $this->arrLegenda["personal"] = array("label" => utf8_encode($parametros["title"]), "icone" => "<img width='12' title='" . utf8_encode($parametros["title"]) . "' alt='Icone " . utf8_encode($parametros["title"]) . "' src='" . URL_IMAGENS . "icons/" . $parametros["icone"] . "' />");
-                                    $newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='" . $parametros["title"] . "' alt='" . $parametros["title"] . "' src='" . URL_IMAGENS . "icons/" . $parametros["icone"] . "' />", $tipo, $categoria, $strParam, $strValParam, $strParam2, $strValParam2,"",$this->get["p"],$this->get["filtros"],$this->get["buscaGrid"]);
+                                    $newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='" . $parametros["title"] . "' alt='" . $parametros["title"] . "' src='" . URL_IMAGENS . "icons/" . $parametros["icone"] . "' />", $tipo, $categoria, $strParam, $strValParam, $strParam2, $strValParam2, "", $this->get["p"], $this->get["filtros"], $this->get["buscaGrid"]);
                                 }
                                 break;
 
@@ -820,14 +838,19 @@ class ControlGrid {
                                 }
                                 $strQuery .= ($campo->attributes()->OR) ? ") " : "";
                             } else if ((string) $campo->attributes()->type == "data") {
-                                //if($this->dataCont==null){
-                                $proximo = array_values($this->post);
-
-                                $proximoValor = $proximo[1];
-                                $strQuery .= " AND " . $auxOr . "DATE_FORMAT(" . (string) $campo->attributes()->campoQuery . ",'%d/%m/%Y')" . " BETWEEN '" . $valor . "' AND '" . $proximoValor . "'";
-                                $strQuery .= ($campo->attributes()->OR) ? ") " : "";
-                                //}
-                                //$this->dataCont=1;
+                                //se houver filtro intervalo entre datas, deve ter no grid data inicial e data final
+                                if (self::getDataIni() == "") {
+                                    self::setDataIni($valor);
+                                }else if (self::getDataFim() == "") {
+                                    self::setDataFim($valor);
+                                }
+                                if (self::getDataIni() != "" && self::getDataFim() != "") {
+                                    $data1 = FormataDatas::parseDataSql(self::getDataIni());
+                                    $data2 = FormataDatas::parseDataSql(self::getDataFim());
+                                    $strQuery .= " AND " . $auxOr . "date(".$campo->attributes()->campoQuery.") 
+                                        BETWEEN date('".$data1."') AND date('".$data2."') ";
+                                    $strQuery .= ($campo->attributes()->OR) ? ") " : "";
+                                }
                             } else {
                                 $aux = str_replace("\"", "", $valor);
 
