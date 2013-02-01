@@ -1,8 +1,5 @@
-
-<p>
-	Seleção de permissões para o Grupo.
-</p>
-
+<p>Seleção de permissões para o Grupo:</p>
+<h2 class="bold font16">{$GRUPO}</h2>
 <div class="formTelaFull">
 	<label>{$direitosGrupo_label} :
 	    <span class="small" id="direitosGrupo_erro">{$direitosGrupo_error}</span>

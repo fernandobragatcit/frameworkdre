@@ -124,11 +124,17 @@ class GrupoUsuarioDAO extends AbsModelDao {
 
         return end(ControlDb::getRow($strQuery, 0));
     }
+
     public function getTodosIdsItemMenu() {
 
         $strQuery = "SELECT id_item_menu FROM fwk_item_menu";
 
         return ControlDb::getAll($strQuery, 1);
+    }
+
+    public function getNomeGrupoById($id) {
+        $strQuery = "SELECT nome_grupo FROM fwk_grupo WHERE id_grupo=" . $id;
+        return end(ControlDb::getRow($strQuery, 1));
     }
 
 }

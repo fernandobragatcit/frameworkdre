@@ -1,4 +1,5 @@
-<p></p>
+<p>Seleção de Usuários para o Grupo:</p>
+<h2 class="bold font16">{$GRUPO}</h2>
 
 <div class="formTelaFull">
 	<label>{$usuariosGrupo_label} :
