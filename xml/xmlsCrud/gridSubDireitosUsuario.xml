@@ -43,5 +43,7 @@
     <filtro>
         <campos type="text" name="nome_usuario" id="nome_usuario" label="Nome Usuário"
                 title="Nome Usuário" class="larguraFormMeia" campoQuery="us.nome_usuario" />
+        <campos type="text" name="email_usuario" id="email_usuario" label="E-mail Usuário"
+                        title="E-mail Usuário" class="larguraFormMeia" campoQuery="us.email_usuario" />
     </filtro>
 </grid>

@@ -756,6 +756,7 @@ class ControlGrid {
         } else {
             $filtro = false;
         }
+        ##########################LISTAGEM RESTRITA###################################################################################################
         //$filtro = true;
         // quem tiver tal permissão podera ver listagem sem restrição mas se filtrar poderá ver outros.
         if ($this->busca == "" && $filtro == false) {
@@ -763,16 +764,17 @@ class ControlGrid {
             $objUsuario = $objCtrlSess->getObjSessao(SESSAO_FWK_DRE);
             if (self::getObjXml()->permissaoListByUsu) {
                 if (in_array(self::getObjXml()->permissaoListByUsu->campo2, $objUsuario->getDireitosUsuario())) {
-                    $strQuery .= " AND  cli.colaborador_cliente IN (SELECT distinct(celcol.id_colaborador) 
-                        FROM fgv_celula cel, fgv_colaborador col,fgv_celula_colaborador celcol WHERE celcol.id_celula 
-                        in(SELECT id_celula FROM fgv_celula where gestor_celula=(select id_colaborador from fgv_colaborador 
-                        where id_usuario=" . self::getIdUsrSessao() . ") OR supervisor_celula=(select id_colaborador from fgv_colaborador where id_usuario=" . self::getIdUsrSessao() . ") 
-                        OR supervisor_celula_2=(select id_colaborador from fgv_colaborador where id_usuario=" . self::getIdUsrSessao() . ")) 
-                        AND (fun.id_unidade = (select id_unidade FROM fgv_colaborador WHERE id_colaborador = (select id_colaborador from fgv_colaborador where id_usuario=" . self::getIdUsrSessao() . "))))";
+                    $strReplaceFun = (string) self::getObjXml()->permissaoListByUsu->replace2->para->funcao;
+                    $strReplaceVal = self::$strReplaceFun();
+                    $strReplace = str_replace(self::getObjXml()->permissaoListByUsu->replace2->de, $strReplaceVal, self::getObjXml()->permissaoListByUsu->where2);
+                    $strQuery .= " AND " . $strReplace . " ";
+                    //FormataString::debuga($strReplaceFun,$strReplaceVal,$strReplace);
                 } else if (in_array(self::getObjXml()->permissaoListByUsu->campo1, $objUsuario->getDireitosUsuario())) {
                     if (self::getObjXml()->permissaoListByUsu->where1) {
-
-                        $strQuery .= " AND  " . self::getObjXml()->permissaoListByUsu->where1 . self::getIdUsrSessao() . ")) ";
+                        $strReplaceFun = (string) self::getObjXml()->permissaoListByUsu->replace1->para->funcao;
+                        $strReplaceVal = self::$strReplaceFun();
+                        $strReplace = str_replace(self::getObjXml()->permissaoListByUsu->replace1->de, $strReplaceVal, self::getObjXml()->permissaoListByUsu->where1);
+                        $strQuery .= " AND " . $strReplace . " ";
                     }
                 }
             }
@@ -783,20 +785,21 @@ class ControlGrid {
                 if (!in_array(self::getObjXml()->permissaoListByUsu->campo2, $objUsuario->getDireitosUsuario())) {
                     if (in_array(self::getObjXml()->permissaoListByUsu->campo1, $objUsuario->getDireitosUsuario())) {
                         if (self::getObjXml()->permissaoListByUsu->wherebusca1) {
-                            $strQuery .= " AND  " . self::getObjXml()->permissaoListByUsu->wherebusca1;
+                            $strReplaceFun = (string) self::getObjXml()->permissaoListByUsu->replace1->para->funcao;
+                            $strReplaceVal = self::$strReplaceFun();
+                            $strReplace = str_replace(self::getObjXml()->permissaoListByUsu->replace1->de, $strReplaceVal, self::getObjXml()->permissaoListByUsu->wherebusca1);
+                            $strQuery .= " AND " . $strReplace . " ";
                         }
                     }
                 } else if (in_array(self::getObjXml()->permissaoListByUsu->campo2, $objUsuario->getDireitosUsuario())) {
-
-                    $strQuery .= " AND  cli.colaborador_cliente IN (SELECT distinct(celcol.id_colaborador) 
-                        FROM fgv_celula cel, fgv_colaborador col,fgv_celula_colaborador celcol WHERE celcol.id_celula 
-                        in(SELECT id_celula FROM fgv_celula where gestor_celula=(select id_colaborador from fgv_colaborador 
-                        where id_usuario=" . self::getIdUsrSessao() . ") OR supervisor_celula=(select id_colaborador from fgv_colaborador where id_usuario=" . self::getIdUsrSessao() . ") 
-                        OR supervisor_celula_2=(select id_colaborador from fgv_colaborador where id_usuario=" . self::getIdUsrSessao() . ")) 
-                        AND (fun.id_unidade = (select id_unidade FROM fgv_colaborador WHERE id_colaborador = (select id_colaborador from fgv_colaborador where id_usuario=" . self::getIdUsrSessao() . "))))";
+                    $strReplaceFun = (string) self::getObjXml()->permissaoListByUsu->replace2->para->funcao;
+                    $strReplaceVal = self::$strReplaceFun();
+                    $strReplace = str_replace(self::getObjXml()->permissaoListByUsu->replace2->de, $strReplaceVal, self::getObjXml()->permissaoListByUsu->wherebusca2);
+                    $strQuery .= " AND " . $strReplace . " ";
                 }
             }
         }
+        //##############################################################################################################################################
         if (trim((string) self::getObjXml()->query->where) != "") {
             $strQuery .= " AND ";
             $string = trim((string) self::getObjXml()->query->where);
@@ -841,14 +844,14 @@ class ControlGrid {
                                 //se houver filtro intervalo entre datas, deve ter no grid data inicial e data final
                                 if (self::getDataIni() == "") {
                                     self::setDataIni($valor);
-                                }else if (self::getDataFim() == "") {
+                                } else if (self::getDataFim() == "") {
                                     self::setDataFim($valor);
                                 }
                                 if (self::getDataIni() != "" && self::getDataFim() != "") {
                                     $data1 = FormataDatas::parseDataSql(self::getDataIni());
                                     $data2 = FormataDatas::parseDataSql(self::getDataFim());
-                                    $strQuery .= " AND " . $auxOr . "date(".$campo->attributes()->campoQuery.") 
-                                        BETWEEN date('".$data1."') AND date('".$data2."') ";
+                                    $strQuery .= " AND " . $auxOr . "date(" . $campo->attributes()->campoQuery . ") 
+                                        BETWEEN date('" . $data1 . "') AND date('" . $data2 . "') ";
                                     $strQuery .= ($campo->attributes()->OR) ? ") " : "";
                                 }
                             } else {
