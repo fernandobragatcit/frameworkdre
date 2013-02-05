@@ -792,10 +792,12 @@ class ControlGrid {
                         }
                     }
                 } else if (in_array(self::getObjXml()->permissaoListByUsu->campo2, $objUsuario->getDireitosUsuario())) {
-                    $strReplaceFun = (string) self::getObjXml()->permissaoListByUsu->replace2->para->funcao;
-                    $strReplaceVal = self::$strReplaceFun();
-                    $strReplace = str_replace(self::getObjXml()->permissaoListByUsu->replace2->de, $strReplaceVal, self::getObjXml()->permissaoListByUsu->wherebusca2);
-                    $strQuery .= " AND " . $strReplace . " ";
+                    if (self::getObjXml()->permissaoListByUsu->wherebusca2) {
+                        $strReplaceFun = (string) self::getObjXml()->permissaoListByUsu->replace2->para->funcao;
+                        $strReplaceVal = self::$strReplaceFun();
+                        $strReplace = str_replace(self::getObjXml()->permissaoListByUsu->replace2->de, $strReplaceVal, self::getObjXml()->permissaoListByUsu->wherebusca2);
+                        $strQuery .= " AND " . $strReplace . " ";
+                    }
                 }
             }
         }
