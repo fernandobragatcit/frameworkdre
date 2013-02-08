@@ -44,7 +44,7 @@ class FormataActions {
 		if($filtros !="")
 			$strParam3 .="&filtros=".$filtros;
 		if($buscaGrid !="")
-			$strParam3 .="&buscaGrid=".$buscaGrid;
+			$strParam3 .=$buscaGrid;
 		
 		$link = self::getObjCrypt()->cryptData(($strCategoria!=""?$strCategoria."&f=":"").$classe."&".$value."&id=".$data.$strParam.$strParam2.$xmlParam.$strParam3);
 		$strLink = "<a href=\"?".$tipo."=".$link."\">".$label."</a>";
