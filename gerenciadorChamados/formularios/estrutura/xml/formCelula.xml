@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Celulas de Atendimento" classe="CrudCelula"
+	css="formatForm" tipo="MODULO" categoria="formularios" tpl="formCelula.tpl" direito="148">
+
+	<campos type="text" name="nome_celula" id="nome_celula" label="Nome Celula"
+		title="Celula Atendimento" obrigatorio="true" maxlength="120"
+		class="larguraFormFull" />
+
+	<campos type="select" name="gestor_celula" obrigatorio="true"
+		id="gestor_celula" label="Gestor" title="Gestor responsável pela Celula"
+		class="larguraFormMeia">
+		<query>
+			SELECT id_colaborador, nome_usuario FROM
+			fgv_colaborador co
+			INNER JOIN fwk_usuario us ON co.id_usuario = us.id_usuario
+			WHERE us.id_usuario IN (SELECT id_usuario FROM fwk_grupo_usuario WHERE id_grupo = 9) AND status_colaborador = 'A'
+		</query>
+		<value>id_colaborador</value>
+		<text>nome_usuario</text>
+	</campos>
+	
+    <campos type="select" name="supervisor_celula"
+		id="supervisor_celula" label="Supervisor" title="Supervisor"
+		class="larguraFormMeia">
+		<query>
+			SELECT id_colaborador, nome_usuario FROM
+			fgv_colaborador co
+			INNER JOIN fwk_usuario us ON co.id_usuario = us.id_usuario
+			WHERE us.id_usuario IN (SELECT id_usuario FROM fwk_grupo_usuario WHERE id_grupo = 10) AND status_colaborador = 'A' 
+                        OR id_colaborador in (SELECT supervisor_celula FROM fgv_celula where id_celula=#idReferencia#)
+		</query>
+		<value>id_colaborador</value>
+		<text>nome_usuario</text>
+	</campos>
+	
+    <campos type="select" name="supervisor_celula_2" 
+		id="supervisor_celula_2" label="Supervisor" title="Supervisor"
+		class="larguraFormMeia">
+		<query>
+			SELECT id_colaborador, nome_usuario FROM
+			fgv_colaborador co
+			INNER JOIN fwk_usuario us ON co.id_usuario = us.id_usuario
+			WHERE us.id_usuario IN (SELECT id_usuario FROM fwk_grupo_usuario WHERE id_grupo = 10) AND status_colaborador = 'A' 
+                        OR id_colaborador in (SELECT supervisor_celula_2 FROM fgv_celula where id_celula=#idReferencia#)
+		</query>
+		<value>id_colaborador</value>
+		<text>nome_usuario</text>
+	</campos>
+	
+	<campos type="select" name="id_unidade" obrigatorio="true" id="id_unidade"
+		label="Unidade" title="Unidade" class="larguraFormMeia">
+		<query>
+			SELECT id_unidade, nome_unidade FROM fgv_unidade
+		</query>
+		<value>id_unidade</value>
+		<text>nome_unidade</text>
+	</campos>
+
+	<!-- O nome de identificação do campo("name") para o listBox não pode conter 
+		"_"(underline) -->
+	<campos type="listBox" name="idColabCelula" id="idColabCelula"
+		title="Colaboradores" label="Colaboradores"
+		querySource="SELECT id_colaborador, nome_usuario FROM
+			fgv_colaborador co
+			INNER JOIN fwk_usuario us ON co.id_usuario = us.id_usuario"
+		qsWHERE="us.id_usuario IN (SELECT id_usuario FROM fwk_grupo_usuario WHERE id_grupo IN (8,9,10)) AND status_colaborador = 'A'"
+		queryAlt="SELECT id_colaborador FROM fgv_celula_colaborador WHERE id_celula"
+		values="id_colaborador" texts="nome_usuario" orderby="nome_usuario"
+		class="listBoxCompDre" style="height: 120px !important; width:255px !important;" />
+
+	<!-- O nome de identificação do campo("name") para o listBox não pode conter 
+		"_"(underline) -->
+	<campos type="listBox" name="idCursoCelula" id="idCursoCelula"
+		title="Cursos" label="Cursos" 
+		querySource="
+		SELECT fc.id_curso , CONCAT(fc.nome_curso,' - ', fcat.titulo_categoria, ' - ', fu.nome_unidade) AS 'nome_curso'
+		FROM fgv_curso fc 
+		INNER JOIN fgv_categoria_curso fcat ON fc.id_categoria_curso = fcat.id_categoria_curso
+		INNER JOIN fgv_unidade fu ON fc.id_unidade_curso = fu.id_unidade"
+		queryAlt="
+		SELECT fc.id_curso, CONCAT(fc.nome_curso,' - ', fcat.titulo_categoria, ' - ', fu.nome_unidade) AS 'nome_curso'
+		FROM fgv_celula_curso fcc 
+		INNER JOIN fgv_curso  fc ON fcc.id_curso = fc.id_curso
+		INNER JOIN fgv_categoria_curso fcat ON fc.id_categoria_curso = fcat.id_categoria_curso
+		INNER JOIN fgv_unidade fu ON fc.id_unidade_curso = fu.id_unidade
+		WHERE id_celula"		
+		values="fc.id_curso" 
+		texts="nome_curso" 
+		orderby="nome_curso" class="listBoxCompDre"
+		style="height: 120px !important; width:255px !important;" />
+
+
+	<buttons>
+		<button name="Salvar" value="Salvar" type="submit" class="btnForm" semId="true" direito="148" />
+		<button name="Cancelar" value="Cancelar" type="button" class="btnForm"
+			confirme="a=home" mens="Deseja realmente sair do formulario?" />
+	</buttons>
+
+</form>

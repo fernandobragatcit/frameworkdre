@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid titulo="Celulas de Atendimento" classe="CrudCelula" tipo="MODULO"
+	categoria="formularios" direito="148">
+	<header>
+		<titulo type="STRING" ordena="nome_celula">Célula</titulo>
+		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações
+		</titulo>
+	</header>
+	<query>
+		<campos>
+			nome_celula, id_celula
+		</campos>
+		<from>
+			fgv_celula
+		</from>
+		<where />
+		<whereBusca>
+			(nome_celula LIKE '%#BUSCA#%') 
+		</whereBusca>
+		<orderBy>nome_celula</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad"
+			class="btnGrid" semId="true" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?"
+			class="btnGrid" semId="true" />
+	</buttons>
+	<filtro>
+		<campos type="text" name="nome_celula" id="nome_celula" label="Célula"
+		title="Célula" class="larguraFormMeia" campoQuery="nome_celula" />
+	</filtro>
+</grid>
