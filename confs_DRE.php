@@ -25,13 +25,27 @@ define("FWK_TAGS", FWK_DRE . "tags/");
 //CHAMADOS ***************************************************************
 define("FWK_DRE_CH", SERVIDOR_FISICO . "framework/gerenciadorChamados/");
 define("FWK_FORM_CH", FWK_DRE_CH . "formularios/");
-define("FWK_VIEW_CH", FWK_DRE_CH . "formularios/classes/view/");
-define("FWK_DAO_CH", FWK_DRE_CH . "formularios/classes/dao/");
-define("FWK_MODEL_CH", FWK_DRE_CH . "formularios/classes/model/");
-define("FWK_JS_CH", FWK_DRE_CH . "formularios/estrutura/js/");
-define("FWK_CSS_CH", FWK_DRE_CH . "formularios/estrutura/css/");
-define("FWK_XML_CH", FWK_DRE_CH . "formularios/estrutura/xml/");
-define("FWK_TPLS_CH", FWK_DRE_CH . "formularios/estrutura/tpls/");
+define("FWK_CLASSES_CH", FWK_FORM_CH . "classes/");
+define("FWK_DAO_CH", FWK_CLASSES_CH . "dao/");
+define("FWK_MODEL_CH", FWK_CLASSES_CH . "model/");
+define("FWK_VIEW_CH", FWK_CLASSES_CH . "view/");
+define("FWK_ESTRUTURA_CH", FWK_FORM_CH . "estrutura/");
+define("FWK_CSS_CH", FWK_ESTRUTURA_CH . "css/");
+define("FWK_JS_CH", FWK_ESTRUTURA_CH . "js/");
+define("FWK_TPLS_CH", FWK_ESTRUTURA_CH . "tpls/");
+define("FWK_XML_CH", FWK_ESTRUTURA_CH . "xml/");
+//CHAMADOS URL
+define("FWK_DRE_CH_URL", RET_SERVIDOR . "framework/gerenciadorChamados/");
+define("FWK_FORM_CH_URL", FWK_DRE_CH_URL . "formularios/");
+define("FWK_CLASSES_CH_URL", FWK_FORM_CH_URL . "classes/");
+define("FWK_DAO_CH_URL", FWK_CLASSES_CH_URL . "dao/");
+define("FWK_MODEL_CH_URL", FWK_CLASSES_CH_URL . "model/");
+define("FWK_VIEW_CH_URL", FWK_CLASSES_CH_URL . "view/");
+define("FWK_ESTRUTURA_CH_URL", FWK_FORM_CH_URL . "estrutura/");
+define("FWK_CSS_CH_URL", FWK_ESTRUTURA_CH_URL . "css/");
+define("FWK_JS_CH_URL", FWK_ESTRUTURA_CH_URL . "js/");
+define("FWK_TPLS_CH_URL", FWK_ESTRUTURA_CH_URL . "tpls/");
+define("FWK_XML_CH_URL", FWK_ESTRUTURA_CH_URL . "xml/");
 //************************************************************************
 
 define("FWK_HTML", SERVIDOR_FISICO . "framework/html/");
