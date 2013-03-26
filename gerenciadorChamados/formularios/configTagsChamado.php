@@ -6,7 +6,8 @@
  * @since 19/07/2010
  */
 
- define("CHA_FORMULARIOS",GERENCIADORCHAMADOS."formularios/");
+ define("GERENCIADOR_CHAMADOS",PASTA_FWK."gerenciadorChamados/");
+ define("CHA_FORMULARIOS",GERENCIADOR_CHAMADOS."formularios/");
  define("CHA_CLASSES",CHA_FORMULARIOS."classes/");
  define("CHA_ESTRUTURA",CHA_FORMULARIOS."estrutura/");
   
