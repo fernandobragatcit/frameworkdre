@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Chamados" classe="CrudChamados"
+      css="formatForm" tipo="MODULO" categoria="formularios" tpl="formCadastrarSetor.tpl">
+
+    <campos type="text" name="setor" id="setor" label="Setor"
+            title="Setor" obrigatorio="true" maxlength="100"
+            class="larguraFormFull" />
+            
+    <campos type="text" name="email_setor" id="email_setor" label="E-mail"
+            title="E-mail" obrigatorio="true" maxlength="100"
+            class="larguraFormFull" />
+
+    <buttons>
+        <button name="Salvar" value="Salvar" type="submit" class="btnForm" semId="true" direito="148" />
+        <button name="Cancelar" value="Cancelar" type="button" class="btnForm"
+                confirme="a=home" mens="Deseja realmente sair do formulario?" />
+    </buttons>
+
+</form>

@@ -1,34 +1,43 @@
 <?php
+
 require(FWK_FORM_CH . "configTagsChamado.php");
 require_once(FWK_MODEL . "AbsCruds.class.php");
-require_once(FWK_DAO_CH. "ChamadosDAO.class.php");
-
+require_once(FWK_DAO_CH . "ChamadosDAO.class.php");
+require_once(FWK_DAO_CH . "SetorDAO.class.php");
+require_once(CHA_MODEL . "AbsModelFormsCha.class.php");
+require_once(FWK_MODEL_CH . "AbsModelFormsCha.class.php");
 
 class CrudChamados extends AbsCruds {
 
-     public function executa($get, $post, $file) {
-        ControlJS::getJS()->addJs(FWK_JS_CH."acoesCh.js");
+    public function executa($get, $post, $file) {
+        ControlJS::getJS()->addJs(FWK_JS_CH_URL . "acoesCh.js");
+        ControlCSS::getCSS()->addCss(FWK_CSS_CH_URL . "styleChamados.css");
         parent::setTipo("MODULO");
         parent::setCategoria("formularios");
         self::setTipoForm("formularios");
+        parent::setXmlForm(CHA_XML . "formCadastrarChamado.xml");
         //fazer ler direto do XML para essa classe tambÃ©m futuramente
         parent::setClassModel(new ChamadosDAO());
         parent::setStringClass("" . __CLASS__ . "");
         $strLink = self::getObjCrypt()->cryptData(parent::getStrLinkClass());
         parent::getObjSmarty()->assign("LINK_CLASS", $strLink);
         switch ($get["a"]) {
-            case "exibeCrm":
-                self::exibeCrm();
+            case "exibeTelaChamados":
+                self::exibeTelaChamados();
+                break;
+            case "salvarFormularioChamado":
+                self::postCadastraChamado($get["id"], $post, $file);
+                break;
+            case "salvarFormularioSetor":
+                self::postCadastraSetor($get["id"], $post, $file);
                 break;
             default:
-                self::exibeCrm();
+                self::exibeTelaChamados();
                 break;
         }
     }
 
-    public function exibeCrm() {
-        //self::getLeads();
-        self::debuga("dfdfdf");
+    public function exibeTelaChamados() {
         $mes = date('m');
         $ano = date('Y');
         $status = true;
@@ -51,95 +60,72 @@ class CrudChamados extends AbsCruds {
             $dataFim = date("Y-m-d");
             $status = false;
         }
-//        $arrCelula = Utf8Parsers::arrayUtf8Encode(self::getObjCelula()->buscaCampos($id, 0));
-//        $arrAcessos = Utf8Parsers::matrizUtf8Encode(self::getClassModel()->buscaAcessos($id, $dataIni, $dataFim));
-//        $arrFila = Utf8Parsers::matrizUtf8Encode(self::getObjColabCel()->getColaboradoresByIdCelula($id));
+
         $textoData = $data1 . " à " . $data2;
         self::getObjSmarty()->assign("DATA", $textoData);
         self::getObjSmarty()->assign("DATAINI", $data1);
         self::getObjSmarty()->assign("DATAFIM", $data2);
 
-        self::getObjSmarty()->assign("TITULO_FORMS", "CRM IBS");
-        //self::getObjSmarty()->assign("TITULO", "Novos Leads");
+        self::getObjSmarty()->assign("TITULO_FORMS", "SISTEMA DE CHAMADOS");
 
-        $params = FORMS_VIEW;
-        $params .= "&classe=CrudCrmIbs";
-        $params .= "&metodo=exibeCrm";
+        $params = FWK_VIEW_CH;
+        $params .= "&classe=CrudChamados";
+        $params .= "&metodo=exibeTelaChamados";
         $params = self::getObjCrypt()->cryptData($params);
         self::getObjSmarty()->assign("PARAMS", $params);
 
         if ($_GET['jsoncallback']) {
             require_once(FWK_CONTROL . "ControlHttp.class.php");
             $objHttp = new ControlHttp(self::getObjSmarty());
-            if ($_GET["aba"] == "leads") {
-                $strTela = self::getLeads();
-            } else if ($_GET["aba"] == "eventos") {
-                $strTela = $strTela = self::getEventos();
-            } else if ($_GET["aba"] == "lembretes") {
-                $strTela = $strTela = self::getLembretes();
-            } else if ($_GET["aba"] == "oportunidades") {
-                $strTela = $strTela = self::getOportunidades();
+            if ($_GET["aba"] == "chamados") {
+                $strTela = self::getChamados();
+            } else if ($_GET["aba"] == "abrechamados") {
+                $strTela = $strTela = self::AbreChamados();
+            } else if ($_GET["aba"] == "cadastrarsetor") {
+                $strTela = $strTela = self::AbreSetor();
+            } else if ($_GET["aba"] == "setor") {
+                $strTela = $strTela = self::getSetor();
             } else if ($_GET["aba"] == "contatos") {
                 $strTela = $strTela = self::getContatos();
             } else {
-                $strTela = parent::getObjSmarty()->fetch(FORMS_TPL . "ibsfgv/formCrmIbs.tpl");
+                $strTela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagChamados.tpl");
             }
             print ($_GET["jsoncallback"] . "(" . self::getObjJson()->encode(array("resultado" => true, "retorno" => $strTela)) . ")");
         } else {
-            $strTela = parent::getObjSmarty()->fetch(FORMS_TPL . "tagCrmDefault.tpl");
+            $strTela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagCrmDefault.tpl");
         }
         if ($objHttp) {
-            $objHttp->escreEm("CORPO", FORMS_TPL . "formCrmIbs.tpl");
+            $objHttp->escreEm("CORPO", FWK_TPLS_CH . "tagChamados.tpl");
         } else {
 
             self::getObjSmarty()->assign("CONTEUDO", $strTela);
-            self::getObjHttp()->escreEm("CORPO", FORMS_TPL . "formCrmIbs.tpl");
+            self::getObjHttp()->escreEm("CORPO", FWK_TPLS_CH . "tagChamados.tpl");
         }
-
-//        self::getObjSmarty()->assign("NOME_REFERENCIAL", $arrCelula["nome_celula"]);
-//        self::getObjSmarty()->assign("LINKFILTRO", "?m=" . self::getObjCrypt()->cryptData("formularios&f=CrudCrmIbs&a=exibeCrm&id=" . $arrCelula["id_celula"] . ""));
-//        self::getObjSmarty()->assign("BTN_CANCELAR", "<a class='button' onclick=\"return vaiPara('?m=" . self::getObjCrypt()->cryptData("formularios&f=CrudCrmIbs") . "');\" name=\"Voltar\">Voltar</a>");
-//        self::getObjHttp()->escreEm("CORPO", FORMS_TPL . "formCrmIbs.tpl");
     }
 
-    public function getLeads() {
+    public function getChamados() {
+        $dadosChamados = self::getObjChamados()->getAllChamado();
+        self::getObjSmarty()->assign("CHAMADOS", $dadosChamados);
+        self::getObjSmarty()->assign("TITULO", "Lista de Chamados");
         $intPag = trim($_GET["pag"]);
         $intPag = intval(FormataString::retiraCharsInvalidos($intPag));
-//        if ($_GET['jsoncallback2']) {
-//            self::debuga($intPag);
-//        }
-        self::getObjSmarty()->assign("TITULO", "Leads");
-        $novos_cadastros = self::getObjLogCliente()->getDadosNovosCadastros($intPag, NUM_ELEMENTOS_LEADS);
-        $totDados = self::getObjLogCliente()->getCountDadosNovosCadastros();
-        foreach ($novos_cadastros as $i => $valor) {
-            $novos_cadastros[$i]["link"]="?m=".self::getObjCrypt()->cryptData("formularios&f=CrudClientes&a=formAlt&id=".$valor["id_cliente"]);
-            $novos_cadastros[$i]["telefones"] = $valor["tel1_contato"];
-            $novos_cadastros[$i]["telefones"] .= ($valor["cel1_contato"]) ? " | " . $valor["cel1_contato"] : "";
-        }
-
-        $params = FORMS_VIEW;
-        $params .= "&classe=CrudCrmIbs";
-        $params .= "&metodo=getLeads";
+        $params = FWK_VIEW_CH;
+        $params .= "&classe=CrudChamados";
+        $params .= "&metodo=getChamados";
         $params = self::getObjCrypt()->cryptData($params);
         //PAGINAÇÃO
         if ($totDados > NUM_ELEMENTOS_LEADS) {
             parent::getObjSmarty()->assign("PAGINACAO", true);
             $totPags = ceil($totDados / NUM_ELEMENTOS_LEADS);
             $intPag = ($intPag == 0 || $intPag == 1) ? 1 : $intPag;
-
             if ($intPag > 2)
                 parent::getObjSmarty()->assign("PAG_PROXIMO", $params .= "&pag=" . ($intPag - 1));
             elseif ($intPag == 2)
                 parent::getObjSmarty()->assign("PAG_PROXIMO", $params);
-
             if ($intPag < $totPags)
                 parent::getObjSmarty()->assign("PAG_ANTERIOR", $params .= "&pag=" . ($intPag + 1));
         }
-        
-        //self::debuga($novos_cadastros);
-        self::getObjSmarty()->assign("NOVOS_CADASTROS", $novos_cadastros);
-        //self::debuga($novos_cadastros);
-        $tela = parent::getObjSmarty()->fetch(FORMS_TPL . "tagCrmLeads.tpl");
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaChamados.tpl");
         if ($_GET['jsoncallback2']) {
             print ($_GET["jsoncallback2"] . "(" . self::getObjJson()->encode(array("resultado" => true, "retorno" => $tela)) . ")");
         } else {
@@ -147,60 +133,92 @@ class CrudChamados extends AbsCruds {
         }
     }
 
-    private function getLembretes() {
+    private function AbreChamados($msg = null) {
+        //self::debuga($msg);
+        $setor = self::getObjChamados()->getAllSetorChamados();
+        $prioridade = self::getObjChamados()->getAllPrioridadeChamados();
+        self::getObjSmarty()->assign("ARR_SETOR", $setor);
+        self::getObjSmarty()->assign("ARR_PRIORIDADE", $prioridade);
+        $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioChamado");
+        self::getObjSmarty()->assign("SALVAR", $salvar);
+        self::getObjSmarty()->assign("TITULO", "Cadastrar Chamados");
+        if ($msg) {
+            self::getObjSmarty()->assign("MSG", $msg);
+        }
 
-        self::getObjSmarty()->assign("TITULO", "Lembretes");
-        $tela = parent::getObjSmarty()->fetch(FORMS_TPL . "tagCrmLembretes.tpl");
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarChamado.tpl");
         return $tela;
     }
 
-    private function getEventos() {
-        self::getObjSmarty()->assign("TITULO", "Eventos");
+    public function postCadastraChamado($id, $post, $file) {
+        if ($id) {
+            $msg = "Chamado cadastrado com sucesso!";
+        } else {
+            $idUsuario = self::getIdUsrSessao();
+            $post["id_usuario_solicitante"] = $idUsuario;
+            $post["id_status"] = STATUS_DEFAULT;
+            parent::getClassModel()->cadastrar(self::getXmlForm(), $post, $file);
+            $msg = "Chamado cadastrado com sucesso!";
+        }
+        self::AbreChamados($msg);
+    }
 
-        $tela = parent::getObjSmarty()->fetch(FORMS_TPL . "tagCrmEventos.tpl");
+    private function AbreSetor($msg = null) {
+        $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioSetor");
+        self::getObjSmarty()->assign("SALVAR", $salvar);
+        self::getObjSmarty()->assign("TITULO", "Cadastro de Setor");
+        if ($msg) {
+            self::getObjSmarty()->assign("MSG", $msg);
+        }
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarSetor.tpl");
         return $tela;
     }
 
-    private function getOportunidades() {
-        self::getObjSmarty()->assign("TITULO", "Oportunidades");
+    public function postCadastraSetor($id, $post, $file) {
+        parent::setClassModel(new SetorDAO());
+        parent::getClassModel()->cadastrar(parent::setXmlForm(CHA_XML . "formCadastrarSetor.xml"), $post, $file);
+        $msg = "Setor cadastrado com sucesso!";
+        self::AbreSetor($msg);
+    }
 
-        $tela = parent::getObjSmarty()->fetch(FORMS_TPL . "tagCrmOportunidades.tpl");
+    private function getSetor() {
+        $setores = self::getObjSetor()->getAllSetor();
+        self::getObjSmarty()->assign("TITULO", "Listagem de Setor");
+        //self::debuga($setores);
+        self::getObjSmarty()->assign("SETORES", $setores);
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaSetor.tpl");
         return $tela;
     }
 
     private function getContatos() {
         self::getObjSmarty()->assign("TITULO", "Contatos");
 
-        $tela = parent::getObjSmarty()->fetch(FORMS_TPL . "tagCrmContatos.tpl");
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagCrmContatos.tpl");
         return $tela;
     }
 
-    private function getObjCelula() {
-        if ($this->objCelula == null) {
-            $this->objCelula = new CrudCrmIbsDAO();
+    private function getObjChamados() {
+        if ($this->objChamados == null) {
+            $this->objChamados = new ChamadosDAO();
         }
-        return $this->objCelula;
+        return $this->objChamados;
     }
 
-    private function getObjColabCel() {
-        if ($this->objColabCel == null) {
-            $this->objColabCel = new ColaboradoresCrudCrmIbsDAO();
+    private function getObjSetor() {
+        if ($this->objSetor == null) {
+            $this->objSetor = new SetorDAO();
         }
-        return $this->objColabCel;
+        return $this->objSetor;
     }
 
-    private function getObjCol() {
-        if ($this->objCol == null) {
-            $this->objCol = new ColaboradorDAO();
-        }
-        return $this->objCol;
+    public function getObjJson() {
+        if ($this->objJason == null)
+            $this->objJason = new Json();
+        return $this->objJason;
     }
 
-    private function getObjLogCliente() {
-        if ($this->objLog == null) {
-            $this->objLog = new LogDAO();
-        }
-        return $this->objLog;
+    private function getIdUsrSessao() {
+        return self::getObjUsrSessao()->getIdUsuario();
     }
 
 }

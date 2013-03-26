@@ -3,14 +3,14 @@
 require_once(FWK_MODEL . "AbsModelDao.class.php");
 require_once(FWK_DAO . "DocumentoDAO.class.php");
 
-class ChamadosDAO extends AbsModelDao {
+class SetorDAO extends AbsModelDao {
 
-    public $_table = "fwk_chamados";
+    public $_table = "fwk_chamados_setor";
 
     /**
      * Chave primária para utilização em funções genéricas
      */
-    public $_id = "id_chamado";
+    public $_id = "id_setor";
 
     /**
      * Método para alterar somente os campos que realmente foram alterados não mexendo com os outros
@@ -35,8 +35,8 @@ class ChamadosDAO extends AbsModelDao {
         }
     }
 
-    public function getIdChamado() {
-        return $this->id_chamado;
+    public function getIdSetor() {
+        return $this->id_setor;
     }
 
     /**
@@ -47,7 +47,7 @@ class ChamadosDAO extends AbsModelDao {
      */
     public function alterar($id, $xml, $post, $file) {
         try {
-            $this->id_chamado = $id;
+            $this->id_setor = $id;
             self::validaForm($xml, $post);
             self::alteraPostAutoUtf8($post, $id);
             self::replace();
@@ -60,29 +60,13 @@ class ChamadosDAO extends AbsModelDao {
             throw new DaoException($e->getMensagem());
         }
     }
-
-    public function getAllChamado() {
-        $strQuery = "SELECT f.id_chamado, f.descricao_chamado, u.nome_usuario, 
-                     DATE_FORMAT(f.data_entrada, '%d/%m/%Y') as data_entrada, p.prioridade,
-                     s.status, g.setor, f.resumo_chamado FROM fwk_chamados f
-                     INNER JOIN fwk_chamados_prioridade p ON p.id_prioridade = f.id_prioridade
-                     LEFT JOIN fwk_chamados_status s ON s.id_status = f.id_status
-                     LEFT JOIN fwk_usuario u ON u.id_usuario = f.id_usuario_solicitante
-                     LEFT JOIN fwk_chamados_setor g ON g.id_setor = f.id_setor ORDER BY id_chamado";
-        return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
-    }
-
-    public function getAllSetorChamados() {
+    
+     public function getAllSetor() {
         $strQuery = "SELECT *
                      FROM fwk_chamados_setor";
         return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
     }
-
-    public function getAllPrioridadeChamados() {
-        $strQuery = "SELECT *
-                     FROM fwk_chamados_prioridade";
-        return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
-    }
+    
 
 }
 

@@ -1,0 +1,194 @@
+root { 
+    display: block;
+}
+.abaSisChamados{
+    width: 130px;
+    height: auto;
+    left: 0px;
+    background-color: #B3C3D0;
+    position: relative;
+    border-radius: 2px 7px 0px 0px;
+    float: left;
+    border-bottom: solid 1px white;
+    padding: 3px 1px 1px 4px;
+}
+.abaSisChamados a{   
+    font-size: 13px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    float: left;
+    height: 20px;
+    width: 100%;
+}
+.ie7 .abaSisChamados a{   
+    font-size: 12px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    float: left;
+    height: 20px;
+    width: 100%;
+}
+.ie8 .abaSisChamados a{   
+    font-size: 12px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    float: left;
+    height: 20px;
+    width: 100%;
+}
+.abaSisChamados a:hover{   
+    font-size: 14px;
+
+}
+.conteudoCrmIbs{   
+    width: 956px;
+    height: 800px; 
+    position: relative;
+    background-color: #E2E7EB;
+    float: left;
+}
+.chamados{
+    width: 921px;
+    height: 70px auto;
+    background-color: white;
+    padding: 4px;
+    float: left;
+    border-bottom: 1px solid #B2C4D0;
+
+}
+.chamados .divDir{
+    width: 28%;
+    float: left;
+}
+.chamados .divEsq{
+    width: 68%;
+    float: left;
+    padding: 4px;
+}
+.chamados:hover{
+    background-color: #B2C4D0;
+}
+.chamados .divEsq:hover .divDir{
+    background-color: #B2C4D0;
+}
+.chamados a{
+    text-decoration: none;
+    color: #3E6D8E;
+    font-weight: bold;
+    width: 100%;
+    float: left;
+}
+.conteudoCrmIbs h2{
+    text-decoration: none;
+    background-color: #3E6D8E;
+    font-weight: bold;
+    padding: 5px;
+    color: white;
+}
+.Progresso{
+    position: absolute;
+    margin: 100px 0px 0px 400px; 
+    text-align: center; 
+}
+.Progresso{
+    font-size: 16px;
+}
+.alinharBotoes{
+    margin-left: 145px !important;
+    margin-top: 35px !important;
+}
+
+.tableMenu{
+    padding: 10px;
+    width: 940px;
+    overflow: auto;
+
+}
+.font14{
+    font-size: 14px !important;
+}
+
+.divAlerta{
+    width: 100%;
+    height: auto;
+    font-size: 14px;
+    background: #ffccff;
+    padding: 5px;   
+}
+.divAlerta p{
+    color: #BB0000;
+}
+
+.gridFGV table {
+    font-size: 11px !important;
+}
+
+.gridFGV a {
+    color: 3E6D8E !important; 
+    text-decoration: none !important;
+}
+
+.gridFGV a:hover {
+    color: #3E6D8E !important;
+    text-decoration: underline !important;
+}
+
+.gridFGV table thead tr {
+    padding: 5px 20px !important;
+    background-color: #3E6D8E !important;
+    border-right: 1px solid #386280 !important;
+    border: none !important;
+    color: #EAEAEB !important;
+}
+
+.gridFGV table thead tr th {
+    text-align: center !important;
+    padding: 8px 10px !important;
+    border-left: 1px solid #527C9A !important;
+}
+.gridFGV table thead tr th a {
+    color: #EAEAEB !important;
+}
+.gridFGV table thead tr th a:hover {
+    color: #EAEAEB !important;
+    text-decoration: underline !important;
+}
+
+.gridFGV table tbody tr td {
+    text-align: center !important;
+    padding: 8px 10px !important;
+}
+.gridFGV table tbody tr:hover {
+    background-color: #DCE1E2 !important;
+}
+.gridFGV .divPaginacao a{
+    color: white !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    padding: 10px !important;
+}
+.gridFGV .divPaginacao a:hover{  
+    text-decoration: none !important;
+    color: white !important;
+
+}
+.statusNovo{
+    background-color: #ff99cc;
+    border-bottom: solid 1px #999999;
+}
+.statusResolvido{
+    background-color: #F0FFFF;
+    border-bottom: solid 1px #999999;
+}
+.statusAndamento{
+    background-color: #90EE90;
+    border-bottom: solid 1px #999999;   
+}
+.tableMenu tbody tr:hover{
+    background-color: #cccccc !important;
+    cursor: pointer;
+}
+

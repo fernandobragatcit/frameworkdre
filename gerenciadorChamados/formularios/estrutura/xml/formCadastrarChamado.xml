@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Chamados" classe="CrudChamados"
+      css="formatForm" tipo="MODULO" categoria="formularios" tpl="formCadastrarChamado.tpl">
+
+    <campos type="text" name="descricao_chamado" id="descricao_chamado" label="Problema"
+                title="Poblema" obrigatorio="true" maxlength="120"
+                class="larguraFormFull" />
+    <campos type="text" name="resumo_chamado" id="resumo_chamado" label="Assunto"
+                title="Assunto" obrigatorio="true" maxlength="120"
+                class="larguraFormFull" />
+
+    <campos type="select" name="id_setor" obrigatorio="true"
+                id="id_setor" label="Setor" title="Setor"
+                class="larguraFormMeia">
+        <query>
+            SELECT id_tipo, tipo FROM fwk_chamados_tipo
+        </query>
+        <value>id_setor</value>
+        <text>setor</text>
+    </campos>
+    <campos type="select" name="id_prioridade" obrigatorio="true"
+                id="id_prioridade" label="Prioridade" title="Prioridade"
+                class="larguraFormMeia">
+        <query>
+            SELECT id_prioridade, prioridade FROM fwk_chamados_prioridade
+        </query>
+        <value>id_prioridade</value>
+        <text>prioridade</text>
+    </campos>
+		
+    <buttons>
+        <button name="Salvar" value="Salvar" type="submit" class="btnForm" semId="true" direito="148" />
+        <button name="Cancelar" value="Cancelar" type="button" class="btnForm"
+                        confirme="a=home" mens="Deseja realmente sair do formulario?" />
+    </buttons>
+
+</form>

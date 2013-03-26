@@ -34,5 +34,7 @@
  define("URL_TAGS_ESTRUTURA",URL_TAGS."estrutura/");
  define("URL_TAGS_JS",URL_TAGS_ESTRUTURA."js/");
 
+ //CONFIG CAMPOS
+ define("STATUS_DEFAULT",1);
 
 ?>
