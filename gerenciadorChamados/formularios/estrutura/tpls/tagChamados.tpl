@@ -27,7 +27,7 @@
 
     </form >  <br /> <br />
     <div class="abaSisChamados" id="abaChamados">
-        <strong ><a id="chamados" class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaChamados','abasetor','abaCadastrarSetor','abaabrechamados','abaContatos');mudarAbaCrm('{$PARAMS}','chamados')" >Chamados </a></strong>
+        <strong ><a id="chamados" class="zurichRegular block"  href="javascript:void(0);" onclick="mudaCorFundo('abaChamados','abasetor','abaCadastrarSetor','abaabrechamados','abaContatos');mudarAbaCrm('{$PARAMS}','chamados')" >Chamados </a></strong>
     </div>
     <div class="abaSisChamados" id="abaabrechamados">
         <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaabrechamados','abasetor','abaCadastrarSetor','abaContatos','abaChamados');mudarAbaCrm('{$PARAMS}','abrechamados')" >Cadastrar Chamados </a></strong>
@@ -51,5 +51,10 @@
 {if $ID}
     <script type="text/javascript">
         mudarCor('{$ID}','#B3C3D0');
+    </script>
+{/if}
+{if $DEFAULT}
+    <script type="text/javascript">
+        mudaCorFundo('abaChamados','abasetor','abaCadastrarSetor','abaabrechamados','abaContatos');
     </script>
 {/if}
