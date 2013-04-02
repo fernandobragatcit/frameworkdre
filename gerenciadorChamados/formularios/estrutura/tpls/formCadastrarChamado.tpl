@@ -1,8 +1,8 @@
 <div class=" padding10 width930">
     <h1>{$TITULO}</h1>
     <br />
-    {if $MSG}    
-        <div class="divAlerta"><center><p>{$MSG}</p></center></div>
+    {if $MSG_CH}    
+        <div class="{$CLASS_ALERTA}"><center><b><p>{$MSG_CH}</p></b></center>{if $INFO_CH}<center><p>{$INFO_CH}</p></center>{/if}</div>
     {/if}
     <form action="{$SALVAR}" name="abrirChamado" method="post">
         <table class="centroContato" border="2">

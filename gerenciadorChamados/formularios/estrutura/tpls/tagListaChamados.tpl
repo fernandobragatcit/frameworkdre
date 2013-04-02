@@ -16,12 +16,12 @@
             <tbody>
                 {section name="cont" loop="$CHAMADOS"}
                     {if $CHAMADOS[cont].status eq "Novo"}
-                        <tr class="statusNovo">
+                        <tr class="statusNovo" onclick="mudarAba('{$CHAMADOS[cont].link}','viewChamados')">
                         {elseif $CHAMADOS[cont].status eq "Em Andamento"}
-                        <tr class="statusAndamento">
+                        <tr class="statusAndamento" onclick="mudarAba('{$CHAMADOS[cont].link}','viewChamados')">
                         {else $CHAMADOS[cont].status eq "Resolvido"}
-                        <tr class="statusResolvido">
-                    {/if}
+                        <tr class="statusResolvido" onclick="mudarAba('{$CHAMADOS[cont].link}','viewChamados')">
+                        {/if}
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$CHAMADOS[cont].id_chamado}">{$CHAMADOS[cont].id_chamado}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$CHAMADOS[cont].resumo_chamado}">{$CHAMADOS[cont].resumo_chamado}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$CHAMADOS[cont].nome_usuario}">{$CHAMADOS[cont].nome_usuario}</span></td>

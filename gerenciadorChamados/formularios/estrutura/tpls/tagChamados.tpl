@@ -27,19 +27,19 @@
 
     </form >  <br /> <br />
     <div class="abaSisChamados" id="abaChamados">
-        <strong ><a id="chamados" class="zurichRegular block"  href="javascript:void(0);" onclick="mudaCorFundo('abaChamados','abasetor','abaCadastrarSetor','abaabrechamados','abaContatos');mudarAbaCrm('{$PARAMS}','chamados')" >Chamados </a></strong>
+        <strong ><a id="chamados" class="zurichRegular block"  href="javascript:void(0);" onclick="mudaCorFundo('abaChamados','abasetor','abaCadastrarSetor','abaabrechamados','abaContatos');mudarAba('{$PARAMS}','chamados')" >Chamados </a></strong>
     </div>
     <div class="abaSisChamados" id="abaabrechamados">
-        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaabrechamados','abasetor','abaCadastrarSetor','abaContatos','abaChamados');mudarAbaCrm('{$PARAMS}','abrechamados')" >Cadastrar Chamados </a></strong>
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaabrechamados','abasetor','abaCadastrarSetor','abaContatos','abaChamados');mudarAba('{$PARAMS}','abrechamados')" >Cadastrar Chamados </a></strong>
     </div>
     <div class="abaSisChamados" id="abaCadastrarSetor">
-        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaCadastrarSetor','abasetor','abaContatos','abaabrechamados','abaChamados');mudarAbaCrm('{$PARAMS}','cadastrarsetor')" >Cadastrar Setor </a></strong>
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaCadastrarSetor','abasetor','abaContatos','abaabrechamados','abaChamados');mudarAba('{$PARAMS}','cadastrarsetor')" >Cadastrar Setor </a></strong>
     </div>
     <div class="abaSisChamados" id="abasetor">
-        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abasetor','abaContatos','abaCadastrarSetor','abaabrechamados','abaChamados');mudarAbaCrm('{$PARAMS}','setor')" >Setor </a></strong>
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abasetor','abaContatos','abaCadastrarSetor','abaabrechamados','abaChamados');mudarAba('{$PARAMS}','setor')" >Setor </a></strong>
     </div>
     <div class="abaSisChamados" id="abaContatos">
-        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaContatos','abasetor','abaCadastrarSetor','abaabrechamados','abaChamados');mudarAbaCrm('{$PARAMS}','contatos')" >Contatos </a></strong>
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaContatos','abasetor','abaCadastrarSetor','abaabrechamados','abaChamados');mudarAba('{$PARAMS}','contatos')" >Contatos </a></strong>
     </div>
 
     <div class="conteudoCrmIbs">

@@ -63,7 +63,7 @@ class SetorDAO extends AbsModelDao {
     
      public function getAllSetor() {
         $strQuery = "SELECT *
-                     FROM fwk_chamados_setor";
+                     FROM fwk_chamados_setor ORDER BY id_setor DESC";
         return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
     }
     

@@ -100,7 +100,6 @@ root {
     margin-left: 145px !important;
     margin-top: 35px !important;
 }
-
 .tableMenu{
     padding: 10px;
     width: 940px;
@@ -111,6 +110,27 @@ root {
     font-size: 14px !important;
 }
 
+.alertaErro{
+    width: 100%;
+    height: auto;
+    font-size: 14px;
+    background: #ffccff;
+    padding: 5px;   
+}
+.alertaErro p{
+    color: #cc0000;
+
+}
+.alertaSucesso{
+    width: 100%;
+    height: auto;
+    font-size: 14px;
+    background: #e4fce4;
+    padding: 5px;   
+}
+.alertaSucesso p{
+    color: #008000;
+}
 .divAlerta{
     width: 100%;
     height: auto;
@@ -121,21 +141,17 @@ root {
 .divAlerta p{
     color: #BB0000;
 }
-
 .gridFGV table {
     font-size: 11px !important;
 }
-
 .gridFGV a {
     color: 3E6D8E !important; 
     text-decoration: none !important;
 }
-
 .gridFGV a:hover {
     color: #3E6D8E !important;
     text-decoration: underline !important;
 }
-
 .gridFGV table thead tr {
     padding: 5px 20px !important;
     background-color: #3E6D8E !important;
@@ -143,7 +159,6 @@ root {
     border: none !important;
     color: #EAEAEB !important;
 }
-
 .gridFGV table thead tr th {
     text-align: center !important;
     padding: 8px 10px !important;
@@ -173,22 +188,98 @@ root {
 .gridFGV .divPaginacao a:hover{  
     text-decoration: none !important;
     color: white !important;
-
 }
 .statusNovo{
     background-color: #ff99cc;
     border-bottom: solid 1px #999999;
 }
 .statusResolvido{
-    background-color: #F0FFFF;
+    background-color: #90EE90;
     border-bottom: solid 1px #999999;
 }
 .statusAndamento{
-    background-color: #90EE90;
+    background-color: #F0FFFF;
     border-bottom: solid 1px #999999;   
 }
 .tableMenu tbody tr:hover{
     background-color: #cccccc !important;
     cursor: pointer;
 }
+.InfoChamado{
+    color: #386280;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: right;
+    text-transform: capitalize;
+    padding: 2px 7px 3px 3px;
+}
+.infoResChamado{
+    font-size: 14px;
+    text-align: left;
+    color: #386280;
+    width: 380px;
+}
+.viewChaNovo{
+    background-color: #ff99cc;
+    padding: 2px;
+    text-align: center;
+    width: 120px;
+}
+.viewChaResolvido{
+    background-color: #90EE90;
+    padding: 2px;
+    text-align: center;
+    width: 120px;
+}
+.viewChaAndamento{
+    background-color: #F0FFFF;
+    padding: 2px;
+    text-align: center;
+    width: 120px;
+}
 
+.pImediato{
+    background-color: #cc0000;
+    color: #F0FFFF;
+    padding: 2px;
+    text-align: center;
+    width: 120px;
+}
+.pUrgente{
+    background-color: #ff3333;
+    color: #F0FFFF;
+    padding: 2px;
+    text-align: center;
+    width: 120px;
+}
+.pAlta{
+    background-color: #ff6666;
+    padding: 2px;
+    text-align: center;
+    width: 120px;
+}
+.pNormal{
+    background-color: #ffcc66;
+    padding: 2px;
+    text-align: center;
+    width: 120px;
+}
+.pBaixa{
+    background-color: #ffff99;
+    padding: 2px;
+    text-align: center;
+    width: 120px;
+}
+.pNenhuma{
+    background-color: #90EE90;
+    padding: 2px;
+    text-align: center;
+    width: 120px;
+}
+.fundoBranco{
+    background-color: #ffffff;
+}
+.listaSetor{
+    background-color: #F0FFFF;
+    border-bottom: solid 1px #999999;   
+}

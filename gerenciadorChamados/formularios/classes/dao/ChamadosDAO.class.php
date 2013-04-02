@@ -68,8 +68,21 @@ class ChamadosDAO extends AbsModelDao {
                      INNER JOIN fwk_chamados_prioridade p ON p.id_prioridade = f.id_prioridade
                      LEFT JOIN fwk_chamados_status s ON s.id_status = f.id_status
                      LEFT JOIN fwk_usuario u ON u.id_usuario = f.id_usuario_solicitante
-                     LEFT JOIN fwk_chamados_setor g ON g.id_setor = f.id_setor ORDER BY id_chamado";
+                     LEFT JOIN fwk_chamados_setor g ON g.id_setor = f.id_setor ORDER BY id_chamado DESC";
         return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
+    }
+
+    public function getChamadoById($id = null) {
+        $strQuery = "SELECT f.id_chamado, f.descricao_chamado, u.nome_usuario as usuario_solicitante,
+                     DATE_FORMAT(f.data_entrada, '%d/%m/%Y') as data_entrada, p.prioridade,
+                     s.status, g.setor, f.resumo_chamado FROM fwk_chamados f
+                     INNER JOIN fwk_chamados_prioridade p ON p.id_prioridade = f.id_prioridade
+                     LEFT JOIN fwk_chamados_status s ON s.id_status = f.id_status
+                     LEFT JOIN fwk_usuario u ON u.id_usuario = f.id_usuario_solicitante
+                     LEFT JOIN fwk_chamados_setor g ON g.id_setor = f.id_setor
+                     WHERE id_chamado = " . $id;
+        return Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0));
+        //return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
     }
 
     public function getAllSetorChamados() {

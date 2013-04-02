@@ -23,13 +23,16 @@ class CrudChamados extends AbsCruds {
         parent::getObjSmarty()->assign("LINK_CLASS", $strLink);
         switch ($get["a"]) {
             case "exibeTelaChamados":
-                self::exibeTelaChamados();
+                self::exibeTelaChamados($get);
                 break;
             case "salvarFormularioChamado":
                 self::postCadastraChamado($get["id"], $post, $file);
                 break;
+            case "alterarFormularioChamado":
+                self::formAlteraChamado($get["id"]);
+                break;
             case "salvarFormularioSetor":
-                self::postCadastraSetor($get["id"], $post, $file);
+                self::postCadastraSetor($get["id"]);
                 break;
             default:
                 self::exibeTelaChamados();
@@ -37,7 +40,7 @@ class CrudChamados extends AbsCruds {
         }
     }
 
-    public function exibeTelaChamados() {
+    public function exibeTelaChamados($msg = null, $info = null, $alerta = null) {
         $mes = date('m');
         $ano = date('Y');
         $status = true;
@@ -80,19 +83,24 @@ class CrudChamados extends AbsCruds {
             if ($_GET["aba"] == "chamados") {
                 $strTela = self::getChamados();
             } else if ($_GET["aba"] == "abrechamados") {
-                $strTela = $strTela = self::AbreChamados();
+                $strTela = self::AbreChamados();
             } else if ($_GET["aba"] == "cadastrarsetor") {
-                $strTela = $strTela = self::AbreSetor();
+                $strTela = self::AbreSetor();
             } else if ($_GET["aba"] == "setor") {
-                $strTela = $strTela = self::getSetor();
+                $strTela = self::getSetor();
             } else if ($_GET["aba"] == "contatos") {
-                $strTela = $strTela = self::getContatos();
+                $strTela = self::getContatos();
             } else {
                 $strTela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagChamados.tpl");
             }
             print ($_GET["jsoncallback"] . "(" . self::getObjJson()->encode(array("resultado" => true, "retorno" => $strTela)) . ")");
         } else {
-            $strTela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagCrmDefault.tpl");
+            if ($_GET["aba"] == "abrechamados") {
+                $strTela = self::AbreChamados($msg, $info, $alerta);
+            } else {
+                self::getObjSmarty()->assign("DEFAULT", true);
+                $strTela = self::getChamados();
+            }
         }
         if ($objHttp) {
             $objHttp->escreEm("CORPO", FWK_TPLS_CH . "tagChamados.tpl");
@@ -103,10 +111,26 @@ class CrudChamados extends AbsCruds {
         }
     }
 
+    public function formAlteraChamado($id = null) {
+        //self::debuga($id,"Fernando viadinho");
+        parent::setXmlForm(CHA_XML . "formCadastrarChamado.xml");
+
+        $arrDadosChamados = self::getClassModel()->buscaCampos($id);
+        self::getClassModel()->setTipoForm(self::getTipoForm());
+        self::getClassModel()->preencheFormComDados(parent::getXmlForm(), $id, self::getStringClass(), $arrDadosChamados);
+    }
+
     public function getChamados() {
+        $paramsViewChamado = FWK_VIEW_CH;
+        $paramsViewChamado .= "&classe=CrudChamados";
+        $paramsViewChamado .= "&metodo=exibeTelaChamados";
         $dadosChamados = self::getObjChamados()->getAllChamado();
+        foreach ($dadosChamados as $i => $valor) {
+            $dadosChamados[$i]["link"] = self::getObjCrypt()->cryptData($paramsViewChamado . "&id=" . $valor["id_chamado"]);
+        }
         self::getObjSmarty()->assign("CHAMADOS", $dadosChamados);
         self::getObjSmarty()->assign("TITULO", "Lista de Chamados");
+
         $intPag = trim($_GET["pag"]);
         $intPag = intval(FormataString::retiraCharsInvalidos($intPag));
         $params = FWK_VIEW_CH;
@@ -125,6 +149,7 @@ class CrudChamados extends AbsCruds {
             if ($intPag < $totPags)
                 parent::getObjSmarty()->assign("PAG_ANTERIOR", $params .= "&pag=" . ($intPag + 1));
         }
+
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaChamados.tpl");
         if ($_GET['jsoncallback2']) {
             print ($_GET["jsoncallback2"] . "(" . self::getObjJson()->encode(array("resultado" => true, "retorno" => $tela)) . ")");
@@ -133,37 +158,52 @@ class CrudChamados extends AbsCruds {
         }
     }
 
-    private function AbreChamados($msg = null) {
-        //self::debuga($msg);
-        $setor = self::getObjChamados()->getAllSetorChamados();
-        $prioridade = self::getObjChamados()->getAllPrioridadeChamados();
-        self::getObjSmarty()->assign("ARR_SETOR", $setor);
-        self::getObjSmarty()->assign("ARR_PRIORIDADE", $prioridade);
-        $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioChamado");
-        self::getObjSmarty()->assign("SALVAR", $salvar);
-        self::getObjSmarty()->assign("TITULO", "Cadastrar Chamados");
-        if ($msg) {
-            self::getObjSmarty()->assign("MSG", $msg);
-        }
+    private function AbreChamados($msg = null, $info = null, $alerta = null) {
+       //self::debuga($msg);
+       $setor = self::getObjChamados()->getAllSetorChamados();
+       $prioridade = self::getObjChamados()->getAllPrioridadeChamados();
+       self::getObjSmarty()->assign("ARR_SETOR", $setor);
+       self::getObjSmarty()->assign("ARR_PRIORIDADE", $prioridade);
+       $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioChamado");
+       self::getObjSmarty()->assign("SALVAR", $salvar);
+       self::getObjSmarty()->assign("TITULO", "Cadastrar Chamados");
+       if (!is_array($msg) && !empty($msg)) {
+           self::getObjSmarty()->assign("MSG_CH", $msg);
+       }
+       if (!is_array($info) && !empty($info)) {
+           self::getObjSmarty()->assign("INFO_CH", $info);
+       }
+       if (!is_array($alerta) && !empty($alerta)) {
+           self::getObjSmarty()->assign("CLASS_ALERTA", $alerta);
+       }
 
-        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarChamado.tpl");
-        return $tela;
-    }
+       $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarChamado.tpl");
+       return $tela;
+   }
 
     public function postCadastraChamado($id, $post, $file) {
         if ($id) {
-            $msg = "Chamado cadastrado com sucesso!";
+            //ainda nao sabemos o que vai aqui.            
         } else {
             $idUsuario = self::getIdUsrSessao();
             $post["id_usuario_solicitante"] = $idUsuario;
             $post["id_status"] = STATUS_DEFAULT;
             parent::getClassModel()->cadastrar(self::getXmlForm(), $post, $file);
-            $msg = "Chamado cadastrado com sucesso!";
+
+            //################### preparando Mensagem para retornar a tela ########################
+            $alerta = "alertaSucesso"; //classe css
+            $msg = "Seu chamado foi aberto!"; //Título principal da mensagem 
+            $info = "Informações a respeito serão encaminhadas ao seu e-mail cadastrado no portal"; //Qualquer Informação se for necessária.
+            //#####################################################################################
         }
-        self::AbreChamados($msg);
+        $_GET["aba"] = "abrechamados";
+        //$msg=informa a msg,
+        //$info=informação se for necessário
+        //$alerta=classe de alerta que será usada, basta escolher no css, exibirá diferentes cores;
+        self::exibeTelaChamados($msg, $info, $alerta);
     }
 
-    private function AbreSetor($msg = null) {
+    public function AbreSetor($msg = null) {
         $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioSetor");
         self::getObjSmarty()->assign("SALVAR", $salvar);
         self::getObjSmarty()->assign("TITULO", "Cadastro de Setor");
@@ -181,7 +221,7 @@ class CrudChamados extends AbsCruds {
         self::AbreSetor($msg);
     }
 
-    private function getSetor() {
+    public function getSetor() {
         $setores = self::getObjSetor()->getAllSetor();
         self::getObjSmarty()->assign("TITULO", "Listagem de Setor");
         //self::debuga($setores);
@@ -190,10 +230,11 @@ class CrudChamados extends AbsCruds {
         return $tela;
     }
 
-    private function getContatos() {
-        self::getObjSmarty()->assign("TITULO", "Contatos");
-
-        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagCrmContatos.tpl");
+    public function getViewChamado($id = null) {
+        $dadosChamados = self::getObjChamados()->getChamadoById($id);
+        //self::debuga($dadosChamados);
+        self::getObjSmarty()->assign("CHAMADOS", $dadosChamados);
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagViewChamado.tpl");
         return $tela;
     }
 
