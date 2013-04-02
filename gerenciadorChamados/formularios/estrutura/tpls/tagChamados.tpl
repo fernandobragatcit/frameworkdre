@@ -32,14 +32,14 @@
     <div class="abaSisChamados" id="abaabrechamados">
         <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaabrechamados','abasetor','abaCadastrarSetor','abaContatos','abaChamados');mudarAba('{$PARAMS}','abrechamados')" >Cadastrar Chamados </a></strong>
     </div>
-    <div class="abaSisChamados" id="abaCadastrarSetor">
-        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaCadastrarSetor','abasetor','abaContatos','abaabrechamados','abaChamados');mudarAba('{$PARAMS}','cadastrarsetor')" >Cadastrar Setor </a></strong>
-    </div>
     <div class="abaSisChamados" id="abasetor">
         <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abasetor','abaContatos','abaCadastrarSetor','abaabrechamados','abaChamados');mudarAba('{$PARAMS}','setor')" >Setor </a></strong>
     </div>
-    <div class="abaSisChamados" id="abaContatos">
-        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaContatos','abasetor','abaCadastrarSetor','abaabrechamados','abaChamados');mudarAba('{$PARAMS}','contatos')" >Contatos </a></strong>
+    <div class="abaSisChamados" id="abaCadastrarSetor">
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaCadastrarSetor','abasetor','abaContatos','abaabrechamados','abaChamados');mudarAba('{$PARAMS}','cadastrarsetor')" >Cadastrar Setor </a></strong>
+    </div>
+    <div class="abaSisChamados" id="abaPrioridade">
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaContatos','abasetor','abaCadastrarSetor','abaabrechamados','abaChamados');mudarAba('{$PARAMS}','prioridade')" >Prioridade </a></strong>
     </div>
 
     <div class="conteudoCrmIbs">
@@ -55,6 +55,6 @@
 {/if}
 {if $DEFAULT}
     <script type="text/javascript">
-        mudaCorFundo('abaChamados','abasetor','abaCadastrarSetor','abaabrechamados','abaContatos');
+        mudaCorFundo('abaChamados','abasetor','abaCadastrarSetor','abaabrechamados','abaPrioridade');
     </script>
 {/if}

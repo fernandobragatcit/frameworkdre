@@ -2,10 +2,13 @@
 
 require(FWK_FORM_CH . "configTagsChamado.php");
 require_once(FWK_MODEL . "AbsCruds.class.php");
-require_once(FWK_DAO_CH . "ChamadosDAO.class.php");
-require_once(FWK_DAO_CH . "SetorDAO.class.php");
 require_once(CHA_MODEL . "AbsModelFormsCha.class.php");
 require_once(FWK_MODEL_CH . "AbsModelFormsCha.class.php");
+
+//CLASSES DE BANCO DE DADOS RELATIVO AO CHAMADO
+require_once(FWK_DAO_CH . "ChamadosDAO.class.php");
+require_once(FWK_DAO_CH . "PrioridadeDAO.class.php");
+require_once(FWK_DAO_CH . "SetorDAO.class.php");
 
 class CrudChamados extends AbsCruds {
 
@@ -32,7 +35,10 @@ class CrudChamados extends AbsCruds {
                 self::formAlteraChamado($get["id"]);
                 break;
             case "salvarFormularioSetor":
-                self::postCadastraSetor($get["id"]);
+                self::postCadastraSetor($get["id"], $post, $file);
+                break;
+            case "salvarFormularioPrioridade":
+                self::postCadastraPrioridade($get["id"]);
                 break;
             default:
                 self::exibeTelaChamados();
@@ -88,8 +94,8 @@ class CrudChamados extends AbsCruds {
                 $strTela = self::AbreSetor();
             } else if ($_GET["aba"] == "setor") {
                 $strTela = self::getSetor();
-            } else if ($_GET["aba"] == "contatos") {
-                $strTela = self::getContatos();
+            } else if ($_GET["aba"] == "prioridade") {
+                $strTela = self::getPrioridade();
             } else {
                 $strTela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagChamados.tpl");
             }
@@ -98,8 +104,12 @@ class CrudChamados extends AbsCruds {
             if ($_GET["aba"] == "abrechamados") {
                 $strTela = self::AbreChamados($msg, $info, $alerta);
             } else {
-                self::getObjSmarty()->assign("DEFAULT", true);
-                $strTela = self::getChamados();
+                if ($_GET["aba"] == "cadastrarsetor") {
+                    $strTela = self::AbreSetor($msg, $info, $alerta);
+                } else {
+                    self::getObjSmarty()->assign("DEFAULT", true);
+                    $strTela = self::getChamados();
+                }
             }
         }
         if ($objHttp) {
@@ -159,27 +169,27 @@ class CrudChamados extends AbsCruds {
     }
 
     private function AbreChamados($msg = null, $info = null, $alerta = null) {
-       //self::debuga($msg);
-       $setor = self::getObjChamados()->getAllSetorChamados();
-       $prioridade = self::getObjChamados()->getAllPrioridadeChamados();
-       self::getObjSmarty()->assign("ARR_SETOR", $setor);
-       self::getObjSmarty()->assign("ARR_PRIORIDADE", $prioridade);
-       $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioChamado");
-       self::getObjSmarty()->assign("SALVAR", $salvar);
-       self::getObjSmarty()->assign("TITULO", "Cadastrar Chamados");
-       if (!is_array($msg) && !empty($msg)) {
-           self::getObjSmarty()->assign("MSG_CH", $msg);
-       }
-       if (!is_array($info) && !empty($info)) {
-           self::getObjSmarty()->assign("INFO_CH", $info);
-       }
-       if (!is_array($alerta) && !empty($alerta)) {
-           self::getObjSmarty()->assign("CLASS_ALERTA", $alerta);
-       }
+        //self::debuga($msg);
+        $setor = self::getObjChamados()->getAllSetorChamados();
+        $prioridade = self::getObjChamados()->getAllPrioridadeChamados();
+        self::getObjSmarty()->assign("ARR_SETOR", $setor);
+        self::getObjSmarty()->assign("ARR_PRIORIDADE", $prioridade);
+        $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioChamado");
+        self::getObjSmarty()->assign("SALVAR", $salvar);
+        self::getObjSmarty()->assign("TITULO", "Cadastrar Chamado");
+        if (!is_array($msg) && !empty($msg)) {
+            self::getObjSmarty()->assign("MSG_CH", $msg);
+        }
+        if (!is_array($info) && !empty($info)) {
+            self::getObjSmarty()->assign("INFO_CH", $info);
+        }
+        if (!is_array($alerta) && !empty($alerta)) {
+            self::getObjSmarty()->assign("CLASS_ALERTA", $alerta);
+        }
 
-       $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarChamado.tpl");
-       return $tela;
-   }
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarChamado.tpl");
+        return $tela;
+    }
 
     public function postCadastraChamado($id, $post, $file) {
         if ($id) {
@@ -203,27 +213,48 @@ class CrudChamados extends AbsCruds {
         self::exibeTelaChamados($msg, $info, $alerta);
     }
 
-    public function AbreSetor($msg = null) {
+    public function AbreSetor($msg = null, $info = null, $alerta = null) {
         $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioSetor");
         self::getObjSmarty()->assign("SALVAR", $salvar);
-        self::getObjSmarty()->assign("TITULO", "Cadastro de Setor");
-        if ($msg) {
-            self::getObjSmarty()->assign("MSG", $msg);
+        self::getObjSmarty()->assign("TITULO", "Cadastrar Setor");
+        if (!is_array($msg) && !empty($msg)) {
+            self::getObjSmarty()->assign("MSG_CH", $msg);
+        }
+        if (!is_array($info) && !empty($info)) {
+            self::getObjSmarty()->assign("INFO_CH", $info);
+        }
+        if (!is_array($alerta) && !empty($alerta)) {
+            self::getObjSmarty()->assign("CLASS_ALERTA", $alerta);
         }
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarSetor.tpl");
         return $tela;
     }
 
     public function postCadastraSetor($id, $post, $file) {
-        parent::setClassModel(new SetorDAO());
-        parent::getClassModel()->cadastrar(parent::setXmlForm(CHA_XML . "formCadastrarSetor.xml"), $post, $file);
-        $msg = "Setor cadastrado com sucesso!";
-        self::AbreSetor($msg);
+        if ($id) {
+            //ainda nao sabemos o que vai aqui.            
+        } else {
+            $idUsuario = self::getIdUsrSessao();
+            $post["id_usu_cad"] = $idUsuario;
+            parent::setClassModel(new SetorDAO());
+            parent::getClassModel()->cadastrar(parent::setXmlForm(CHA_XML . "formCadastrarSetor.xml"), $post, $file);
+
+            //################### preparando Mensagem para retornar a tela ########################
+            $alerta = "alertaSucesso"; //classe css
+            $msg = "Setor cadastrado com sucesso!"; //Título principal da mensagem 
+            $info = "Informações a respeito serão encaminhadas ao seu e-mail cadastrado no portal"; //Qualquer Informação se for necessária.
+            //#####################################################################################
+        }
+        $_GET["aba"] = "cadastrarsetor";
+        //$msg=informa a msg,
+        //$info=informação se for necessário
+        //$alerta=classe de alerta que será usada, basta escolher no css, exibirá diferentes cores;
+        self::exibeTelaChamados($msg, $info, $alerta);
     }
 
     public function getSetor() {
         $setores = self::getObjSetor()->getAllSetor();
-        self::getObjSmarty()->assign("TITULO", "Listagem de Setor");
+        self::getObjSmarty()->assign("TITULO", "Lista de Setores");
         //self::debuga($setores);
         self::getObjSmarty()->assign("SETORES", $setores);
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaSetor.tpl");
@@ -238,6 +269,21 @@ class CrudChamados extends AbsCruds {
         return $tela;
     }
 
+    public function getPrioridade() {
+        $prioridade = self::getObjPrioridade()->getAllPrioridade();
+        self::getObjSmarty()->assign("TITULO", "Lista de Prioridades");
+        self::getObjSmarty()->assign("PRIORIDADES", $prioridade);
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaPrioridade.tpl");
+        return $tela;
+    }
+
+    public function postCadastraPrioridade($id, $post, $file) {
+        parent::setClassModel(new PrioridadeDAO());
+        parent::getClassModel()->cadastrar(parent::setXmlForm(CHA_XML . "formCadastrarPrioridade.xml"), $post, $file);
+        $msg = "Prioridade cadastrado com sucesso!";
+        self::AbreSetor($msg);
+    }
+
     private function getObjChamados() {
         if ($this->objChamados == null) {
             $this->objChamados = new ChamadosDAO();
@@ -250,6 +296,13 @@ class CrudChamados extends AbsCruds {
             $this->objSetor = new SetorDAO();
         }
         return $this->objSetor;
+    }
+
+    private function getObjPrioridade() {
+        if ($this->objPrioridade == null) {
+            $this->objPrioridade = new PrioridadeDAO();
+        }
+        return $this->objPrioridade;
     }
 
     public function getObjJson() {

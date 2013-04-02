@@ -1,6 +1,9 @@
 <div class=" padding10 width930">
     <h1>{$TITULO}</h1>
-
+    <br />
+    {if $MSG_CH}    
+        <div class="{$CLASS_ALERTA}"><center><b><p>{$MSG_CH}</p></b></center>{if $INFO_CH}<center><p>{$INFO_CH}</p></center>{/if}</div>
+    {/if}
     <form action="{$SALVAR}" name="abrirSetor" method="post">
         <table class="centroContato" border="2">
             <tr>
@@ -12,7 +15,7 @@
                 <td><input type="text" name="email_setor" size="80"></td>
             <tr/>
         </table>
-        
+
         <div class="buttonsReport botoes alinharBotoes">
             <input style="color:#EAEAEB !important; font-weight: bold; background-color: #386280; padding: 6px 20px; border-radius:10px;" title="" class="btnGrid btnForm_ie7"
                    type="submit" value="Salvar"/>
