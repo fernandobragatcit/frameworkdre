@@ -2,7 +2,7 @@ root {
     display: block;
 }
 .abaSisChamados{
-    width: 130px;
+    width: 146px;
     height: auto;
     left: 0px;
     background-color: #B3C3D0;
@@ -43,7 +43,7 @@ root {
     font-size: 14px;
 
 }
-.conteudoCrmIbs{   
+.conteudoChamadoIbs{   
     width: 956px;
     height: 800px; 
     position: relative;
@@ -81,7 +81,7 @@ root {
     width: 100%;
     float: left;
 }
-.conteudoCrmIbs h2{
+.conteudoChamadoIbs h2{
     text-decoration: none;
     background-color: #3E6D8E;
     font-weight: bold;
@@ -279,7 +279,11 @@ root {
 .fundoBranco{
     background-color: #ffffff;
 }
-.listaSetor{
-    background-color: #F0FFFF;
+.listaPar{
+    background-color: #ffffff;
+    border-bottom: solid 1px #999999;   
+}
+.listaImpar{
+    background-color: #cccccc;
     border-bottom: solid 1px #999999;   
 }

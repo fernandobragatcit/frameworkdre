@@ -5,24 +5,22 @@
             <thead >
                 <tr>
                     <th ><span>Id</span></th>
-                    <th ><span>Setor</span></th>
-                    <th ><span>E-mail</span></th>
+                    <th ><span>Status</span></th>
                     <th ><span>Data Cadastro</span></th>
                     <th ><span>Cadastrado Por</span></th>
                 </tr>
             </thead>
             <tbody>
-                {section name="cont" loop="$SETORES"}
+                {section name="cont" loop="$STATUS"}
                     {if $smarty.section.cont.iteration%2==0}
                         <tr class="listaPar">
                         {else}
                         <tr class="listaImpar">
                         {/if}
-                        <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].id_setor}">{$SETORES[cont].id_setor}</span></td>
-                        <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].setor}">{$SETORES[cont].setor}</span></td>
-                        <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].email_setor}">{$SETORES[cont].email_setor}</span></td>
-                        <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].data_cadastro}">{$SETORES[cont].data_cadastro}</span></td>
-                        <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].usu_cadastro}">{$SETORES[cont].usu_cadastro}</span></td>
+                        <td ><span id="{$smarty.section.cont.iteration}" value="{$STATUS[cont].id_status}">{$STATUS[cont].id_status}</span></td>
+                        <td ><span id="{$smarty.section.cont.iteration}" value="{$STATUS[cont].status}">{$STATUS[cont].status}</span></td>
+                        <td ><span id="{$smarty.section.cont.iteration}" value="{$STATUS[cont].data_cadastro}">{$STATUS[cont].data_cadastro}</span></td>
+                        <td ><span id="{$smarty.section.cont.iteration}" value="{$STATUS[cont].usu_cadastro}">{$STATUS[cont].usu_cadastro}</span></td>
                     </tr>
                 {/section}
             </tbody>

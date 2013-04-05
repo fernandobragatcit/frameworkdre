@@ -5,15 +5,11 @@
         <div class="{$CLASS_ALERTA}"><center><b><p>{$MSG_CH}</p></b></center>{if $INFO_CH}<center><p>{$INFO_CH}</p></center>{/if}</div>
     {/if}
     <br />
-    <form action="{$SALVAR}" name="abrirSetor" method="post">
+    <form action="{$SALVAR}" name="abrirPrioridade" method="post">
         <table class="centroContato" border="2">
             <tr>
-                <td>Setor:<span class="campoObrigatorio">*</span></td>
-                <td><input type="text" name="setor" size="80"></td>
-            <tr/>
-            <tr>
-                <td>E-mail: &nbsp &nbsp</span></td>
-                <td><input type="text" name="email_setor" size="80"></td>
+                <td>Prioridade:<span class="campoObrigatorio">*</span></td>
+                <td><input type="text" name="prioridade" size="80"></td>
             <tr/>
         </table>
 

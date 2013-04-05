@@ -5,24 +5,22 @@
             <thead >
                 <tr>
                     <th ><span>Id</span></th>
-                    <th ><span>Setor</span></th>
-                    <th ><span>E-mail</span></th>
+                    <th ><span>Prioridade</span></th>
                     <th ><span>Data Cadastro</span></th>
                     <th ><span>Cadastrado Por</span></th>
                 </tr>
             </thead>
             <tbody>
-                {section name="cont" loop="$SETORES"}
+                {section name="cont" loop="$PRIORIDADES"}
                     {if $smarty.section.cont.iteration%2==0}
                         <tr class="listaPar">
                         {else}
                         <tr class="listaImpar">
                         {/if}
-                        <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].id_setor}">{$SETORES[cont].id_setor}</span></td>
-                        <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].setor}">{$SETORES[cont].setor}</span></td>
-                        <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].email_setor}">{$SETORES[cont].email_setor}</span></td>
-                        <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].data_cadastro}">{$SETORES[cont].data_cadastro}</span></td>
-                        <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].usu_cadastro}">{$SETORES[cont].usu_cadastro}</span></td>
+                        <td ><span id="{$smarty.section.cont.iteration}" value="{$PRIORIDADES[cont].id_prioridade}">{$PRIORIDADES[cont].id_prioridade}</span></td>
+                        <td ><span id="{$smarty.section.cont.iteration}" value="{$PRIORIDADES[cont].prioridade}">{$PRIORIDADES[cont].prioridade}</span></td>
+                        <td ><span id="{$smarty.section.cont.iteration}" value="{$PRIORIDADES[cont].data_cadastro}">{$PRIORIDADES[cont].data_cadastro}</span></td>
+                        <td ><span id="{$smarty.section.cont.iteration}" value="{$PRIORIDADES[cont].usu_cadastro}">{$PRIORIDADES[cont].usu_cadastro}</span></td>
                     </tr>
                 {/section}
             </tbody>

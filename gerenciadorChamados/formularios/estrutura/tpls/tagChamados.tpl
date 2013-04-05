@@ -27,22 +27,31 @@
 
     </form >  <br /> <br />
     <div class="abaSisChamados" id="abaChamados">
-        <strong ><a id="chamados" class="zurichRegular block"  href="javascript:void(0);" onclick="mudaCorFundo('abaChamados','abasetor','abaCadastrarSetor','abaabrechamados','abaContatos');mudarAba('{$PARAMS}','chamados')" >Chamados </a></strong>
+        <strong ><a id="chamados" class="zurichRegular block"  href="javascript:void(0);" onclick="mudaCorFundo('abaChamados','abaabrechamados','abasetor','abaCadastrarSetor','abaPrioridade','abaCadastrarPrioridade','abaStatus','abaCadastrarStatus');mudarAba('{$PARAMS}','chamados')" >Chamados </a></strong>
     </div>
     <div class="abaSisChamados" id="abaabrechamados">
-        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaabrechamados','abasetor','abaCadastrarSetor','abaContatos','abaChamados');mudarAba('{$PARAMS}','abrechamados')" >Cadastrar Chamados </a></strong>
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaabrechamados', 'abaChamados','abasetor','abaCadastrarSetor','abaPrioridade','abaCadastrarPrioridade','abaStatus','abaCadastrarStatus');mudarAba('{$PARAMS}','abrechamados')" >Abrir Chamado </a></strong>
     </div>
     <div class="abaSisChamados" id="abasetor">
-        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abasetor','abaContatos','abaCadastrarSetor','abaabrechamados','abaChamados');mudarAba('{$PARAMS}','setor')" >Setor </a></strong>
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abasetor','abaChamados','abaabrechamados','abaCadastrarSetor','abaPrioridade','abaCadastrarPrioridade','abaStatus','abaCadastrarStatus');mudarAba('{$PARAMS}','setor')" >Setor </a></strong>
     </div>
     <div class="abaSisChamados" id="abaCadastrarSetor">
-        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaCadastrarSetor','abasetor','abaContatos','abaabrechamados','abaChamados');mudarAba('{$PARAMS}','cadastrarsetor')" >Cadastrar Setor </a></strong>
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaCadastrarSetor','abaChamados','abaabrechamados','abasetor','abaPrioridade','abaCadastrarPrioridade','abaStatus','abaCadastrarStatus');mudarAba('{$PARAMS}','cadastrarsetor')" >Cadastrar Setor </a></strong>
     </div>
     <div class="abaSisChamados" id="abaPrioridade">
-        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaContatos','abasetor','abaCadastrarSetor','abaabrechamados','abaChamados');mudarAba('{$PARAMS}','prioridade')" >Prioridade </a></strong>
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaPrioridade','abaChamados','abaabrechamados','abasetor','abaCadastrarSetor','abaCadastrarPrioridade','abaStatus','abaCadastrarStatus');mudarAba('{$PARAMS}','prioridade')" >Prioridade </a></strong>
+    </div>
+    <div class="abaSisChamados" id="abaCadastrarPrioridade">
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaCadastrarPrioridade','abaChamados','abaabrechamados','abasetor','abaCadastrarSetor','abaPrioridade','abaStatus','abaCadastrarStatus');mudarAba('{$PARAMS}','cadastrarprioridade')" >Cadastrar Prioridade </a></strong>
+    </div>
+    <div class="abaSisChamados" id="abaStatus">
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaStatus','abaCadastrarPrioridade','abaChamados','abaabrechamados','abasetor','abaCadastrarSetor','abaPrioridade','abaCadastrarStatus');mudarAba('{$PARAMS}','status')" >Status </a></strong>
+    </div>
+    <div class="abaSisChamados" id="abaCadastrarStatus">
+        <strong ><a class="zurichRegular block"   href="javascript:void(0);" onclick="mudaCorFundo('abaCadastrarStatus','abaStatus','abaCadastrarPrioridade','abaChamados','abaabrechamados','abasetor','abaCadastrarSetor','abaPrioridade');mudarAba('{$PARAMS}','cadastrarstatus')" >Cadastrar Status </a></strong>
     </div>
 
-    <div class="conteudoCrmIbs">
+    <div class="conteudoChamadoIbs">
         {$CONTEUDO}
     </div>
 </div>

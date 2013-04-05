@@ -9,6 +9,7 @@ require_once(FWK_MODEL_CH . "AbsModelFormsCha.class.php");
 require_once(FWK_DAO_CH . "ChamadosDAO.class.php");
 require_once(FWK_DAO_CH . "PrioridadeDAO.class.php");
 require_once(FWK_DAO_CH . "SetorDAO.class.php");
+require_once(FWK_DAO_CH . "StatusDAO.class.php");
 
 class CrudChamados extends AbsCruds {
 
@@ -26,19 +27,19 @@ class CrudChamados extends AbsCruds {
         parent::getObjSmarty()->assign("LINK_CLASS", $strLink);
         switch ($get["a"]) {
             case "exibeTelaChamados":
-                self::exibeTelaChamados($get);
+                self::exibeTelaChamados();
                 break;
             case "salvarFormularioChamado":
                 self::postCadastraChamado($get["id"], $post, $file);
-                break;
-            case "alterarFormularioChamado":
-                self::formAlteraChamado($get["id"]);
                 break;
             case "salvarFormularioSetor":
                 self::postCadastraSetor($get["id"], $post, $file);
                 break;
             case "salvarFormularioPrioridade":
-                self::postCadastraPrioridade($get["id"]);
+                self::postCadastraPrioridade($get["id"], $post, $file);
+                break;
+            case "salvarFormularioStatus":
+                self::postCadastraStatus($get["id"], $post, $file);
                 break;
             default:
                 self::exibeTelaChamados();
@@ -46,11 +47,12 @@ class CrudChamados extends AbsCruds {
         }
     }
 
-    public function exibeTelaChamados($msg = null, $info = null, $alerta = null) {
+    public function exibeTelaChamados($get = null, $msg = null, $info = null, $alerta = null) {
+        //self::debuga($get["id"]);
+        $idChamado = $get["id"];
         $mes = date('m');
         $ano = date('Y');
         $status = true;
-
         if ($_GET["data1"]) {
             $dataIni = FormataDatas::parseDataSql($_GET["data1"]);
             $data1 = $_GET["data1"];
@@ -90,12 +92,20 @@ class CrudChamados extends AbsCruds {
                 $strTela = self::getChamados();
             } else if ($_GET["aba"] == "abrechamados") {
                 $strTela = self::AbreChamados();
+            } else if ($_GET["aba"] == "viewChamados") {
+                $strTela = self::getViewChamado($idChamado);
             } else if ($_GET["aba"] == "cadastrarsetor") {
                 $strTela = self::AbreSetor();
             } else if ($_GET["aba"] == "setor") {
                 $strTela = self::getSetor();
             } else if ($_GET["aba"] == "prioridade") {
                 $strTela = self::getPrioridade();
+            } else if ($_GET["aba"] == "cadastrarprioridade") {
+                $strTela = self::AbrePrioridade();
+            } else if ($_GET["aba"] == "status") {
+                $strTela = self::getStatus();
+            } else if ($_GET["aba"] == "cadastrarstatus") {
+                $strTela = self::AbreStatus();
             } else {
                 $strTela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagChamados.tpl");
             }
@@ -107,24 +117,29 @@ class CrudChamados extends AbsCruds {
                 if ($_GET["aba"] == "cadastrarsetor") {
                     $strTela = self::AbreSetor($msg, $info, $alerta);
                 } else {
-                    self::getObjSmarty()->assign("DEFAULT", true);
-                    $strTela = self::getChamados();
+                    if ($_GET["aba"] == "cadastrarprioridade") {
+                        $strTela = self::AbrePrioridade($msg, $info, $alerta);
+                    } else {
+                        if ($_GET["aba"] == "cadastrarstatus") {
+                            $strTela = self::AbreStatus($msg, $info, $alerta);
+                        } else {
+                            self::getObjSmarty()->assign("DEFAULT", true);
+                            $strTela = self::getChamados();
+                        }
+                    }
                 }
             }
         }
         if ($objHttp) {
             $objHttp->escreEm("CORPO", FWK_TPLS_CH . "tagChamados.tpl");
         } else {
-
             self::getObjSmarty()->assign("CONTEUDO", $strTela);
             self::getObjHttp()->escreEm("CORPO", FWK_TPLS_CH . "tagChamados.tpl");
         }
     }
 
     public function formAlteraChamado($id = null) {
-        //self::debuga($id,"Fernando viadinho");
         parent::setXmlForm(CHA_XML . "formCadastrarChamado.xml");
-
         $arrDadosChamados = self::getClassModel()->buscaCampos($id);
         self::getClassModel()->setTipoForm(self::getTipoForm());
         self::getClassModel()->preencheFormComDados(parent::getXmlForm(), $id, self::getStringClass(), $arrDadosChamados);
@@ -138,6 +153,7 @@ class CrudChamados extends AbsCruds {
         foreach ($dadosChamados as $i => $valor) {
             $dadosChamados[$i]["link"] = self::getObjCrypt()->cryptData($paramsViewChamado . "&id=" . $valor["id_chamado"]);
         }
+        //self::debuga($dadosChamados);
         self::getObjSmarty()->assign("CHAMADOS", $dadosChamados);
         self::getObjSmarty()->assign("TITULO", "Lista de Chamados");
 
@@ -176,7 +192,7 @@ class CrudChamados extends AbsCruds {
         self::getObjSmarty()->assign("ARR_PRIORIDADE", $prioridade);
         $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioChamado");
         self::getObjSmarty()->assign("SALVAR", $salvar);
-        self::getObjSmarty()->assign("TITULO", "Cadastrar Chamado");
+        self::getObjSmarty()->assign("TITULO", "Abrir Chamado");
         if (!is_array($msg) && !empty($msg)) {
             self::getObjSmarty()->assign("MSG_CH", $msg);
         }
@@ -210,7 +226,7 @@ class CrudChamados extends AbsCruds {
         //$msg=informa a msg,
         //$info=informação se for necessário
         //$alerta=classe de alerta que será usada, basta escolher no css, exibirá diferentes cores;
-        self::exibeTelaChamados($msg, $info, $alerta);
+        self::exibeTelaChamados(null, $msg, $info, $alerta);
     }
 
     public function AbreSetor($msg = null, $info = null, $alerta = null) {
@@ -242,20 +258,19 @@ class CrudChamados extends AbsCruds {
             //################### preparando Mensagem para retornar a tela ########################
             $alerta = "alertaSucesso"; //classe css
             $msg = "Setor cadastrado com sucesso!"; //Título principal da mensagem 
-            $info = "Informações a respeito serão encaminhadas ao seu e-mail cadastrado no portal"; //Qualquer Informação se for necessária.
+            //$info = "Informações a respeito serão encaminhadas ao seu e-mail cadastrado no portal"; //Qualquer Informação se for necessária.
             //#####################################################################################
         }
         $_GET["aba"] = "cadastrarsetor";
         //$msg=informa a msg,
         //$info=informação se for necessário
         //$alerta=classe de alerta que será usada, basta escolher no css, exibirá diferentes cores;
-        self::exibeTelaChamados($msg, $info, $alerta);
+        self::exibeTelaChamados(null, $msg, $info, $alerta);
     }
 
     public function getSetor() {
         $setores = self::getObjSetor()->getAllSetor();
         self::getObjSmarty()->assign("TITULO", "Lista de Setores");
-        //self::debuga($setores);
         self::getObjSmarty()->assign("SETORES", $setores);
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaSetor.tpl");
         return $tela;
@@ -263,7 +278,6 @@ class CrudChamados extends AbsCruds {
 
     public function getViewChamado($id = null) {
         $dadosChamados = self::getObjChamados()->getChamadoById($id);
-        //self::debuga($dadosChamados);
         self::getObjSmarty()->assign("CHAMADOS", $dadosChamados);
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagViewChamado.tpl");
         return $tela;
@@ -271,17 +285,100 @@ class CrudChamados extends AbsCruds {
 
     public function getPrioridade() {
         $prioridade = self::getObjPrioridade()->getAllPrioridade();
+        //self::debuga($prioridade);
         self::getObjSmarty()->assign("TITULO", "Lista de Prioridades");
         self::getObjSmarty()->assign("PRIORIDADES", $prioridade);
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaPrioridade.tpl");
         return $tela;
     }
 
+    public function AbrePrioridade($msg = null, $info = null, $alerta = null) {
+        $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioPrioridade");
+        self::getObjSmarty()->assign("SALVAR", $salvar);
+        self::getObjSmarty()->assign("TITULO", "Cadastrar Prioridade");
+        if (!is_array($msg) && !empty($msg)) {
+            self::getObjSmarty()->assign("MSG_CH", $msg);
+        }
+        if (!is_array($info) && !empty($info)) {
+            self::getObjSmarty()->assign("INFO_CH", $info);
+        }
+        if (!is_array($alerta) && !empty($alerta)) {
+            self::getObjSmarty()->assign("CLASS_ALERTA", $alerta);
+        }
+        //self::debuga("novo debuga\n",$msg, $info, $alerta);
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarPrioridade.tpl");
+        return $tela;
+    }
+
     public function postCadastraPrioridade($id, $post, $file) {
-        parent::setClassModel(new PrioridadeDAO());
-        parent::getClassModel()->cadastrar(parent::setXmlForm(CHA_XML . "formCadastrarPrioridade.xml"), $post, $file);
-        $msg = "Prioridade cadastrado com sucesso!";
-        self::AbreSetor($msg);
+        if ($id) {
+            //ainda nao sabemos o que vai aqui.            
+        } else {
+            $idUsuario = self::getIdUsrSessao();
+            $post["id_usu_cad"] = $idUsuario;
+            parent::setClassModel(new PrioridadeDAO());
+            parent::getClassModel()->cadastrar(parent::setXmlForm(CHA_XML . "formCadastrarPrioridade.xml"), $post, $file);
+
+            //################### preparando Mensagem para retornar a tela ########################
+            $alerta = "alertaSucesso"; //classe css
+            $msg = "Prioridade cadastrado com sucesso!"; //Título principal da mensagem 
+            //$info = "Informações a respeito serão encaminhadas ao seu e-mail cadastrado no portal"; //Qualquer Informação se for necessária.
+            //#####################################################################################
+        }
+        $_GET["aba"] = "cadastrarprioridade";
+        //$msg=informa a msg,
+        //$info=informação se for necessário
+        //$alerta=classe de alerta que será usada, basta escolher no css, exibirá diferentes cores;
+        self::exibeTelaChamados(null, $msg, $info, $alerta);
+    }
+
+    public function getStatus() {
+        $status = self::getObjStatus()->getAllStatus();
+        //self::debuga($status);
+        self::getObjSmarty()->assign("TITULO", "Lista de Prioridades");
+        self::getObjSmarty()->assign("STATUS", $status);
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaStatus.tpl");
+        return $tela;
+    }
+
+    public function AbreStatus($msg = null, $info = null, $alerta = null) {
+        $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioStatus");
+        self::getObjSmarty()->assign("SALVAR", $salvar);
+        self::getObjSmarty()->assign("TITULO", "Cadastrar Status");
+        if (!is_array($msg) && !empty($msg)) {
+            self::getObjSmarty()->assign("MSG_CH", $msg);
+        }
+        if (!is_array($info) && !empty($info)) {
+            self::getObjSmarty()->assign("INFO_CH", $info);
+        }
+        if (!is_array($alerta) && !empty($alerta)) {
+            self::getObjSmarty()->assign("CLASS_ALERTA", $alerta);
+        }
+        //self::debuga("novo debuga\n",$msg, $info, $alerta);
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarStatus.tpl");
+        return $tela;
+    }
+
+    public function postCadastraStatus($id, $post, $file) {
+        if ($id) {
+            //ainda nao sabemos o que vai aqui.            
+        } else {
+            $idUsuario = self::getIdUsrSessao();
+            $post["id_usu_cad"] = $idUsuario;
+            parent::setClassModel(new StatusDAO());
+            parent::getClassModel()->cadastrar(parent::setXmlForm(CHA_XML . "formCadastrarStatus.xml"), $post, $file);
+
+            //################### preparando Mensagem para retornar a tela ########################
+            $alerta = "alertaSucesso"; //classe css
+            $msg = "Status cadastrado com sucesso!"; //Título principal da mensagem 
+            //$info = "Informações a respeito serão encaminhadas ao seu e-mail cadastrado no portal"; //Qualquer Informação se for necessária.
+            //#####################################################################################
+        }
+        $_GET["aba"] = "cadastrarstatus";
+        //$msg=informa a msg,
+        //$info=informação se for necessário
+        //$alerta=classe de alerta que será usada, basta escolher no css, exibirá diferentes cores;
+        self::exibeTelaChamados(null, $msg, $info, $alerta);
     }
 
     private function getObjChamados() {
@@ -303,6 +400,13 @@ class CrudChamados extends AbsCruds {
             $this->objPrioridade = new PrioridadeDAO();
         }
         return $this->objPrioridade;
+    }
+
+    private function getObjStatus() {
+        if ($this->objStatus == null) {
+            $this->objStatus = new StatusDAO();
+        }
+        return $this->objStatus;
     }
 
     public function getObjJson() {

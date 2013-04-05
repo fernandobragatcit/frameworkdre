@@ -3,14 +3,14 @@
 require_once(FWK_MODEL . "AbsModelDao.class.php");
 require_once(FWK_DAO . "DocumentoDAO.class.php");
 
-class SetorDAO extends AbsModelDao {
+class StatusDao extends AbsModelDao {
 
-    public $_table = "fwk_chamados_setor";
+    public $_table = "fwk_chamados_status";
 
     /**
      * Chave primária para utilização em funções genéricas
      */
-    public $_id = "id_setor";
+    public $_id = "id_status";
 
     /**
      * Método para alterar somente os campos que realmente foram alterados não mexendo com os outros
@@ -35,8 +35,8 @@ class SetorDAO extends AbsModelDao {
         }
     }
 
-    public function getIdSetor() {
-        return $this->id_setor;
+    public function getIdStatus() {
+        return $this->id_status;
     }
 
     /**
@@ -47,7 +47,7 @@ class SetorDAO extends AbsModelDao {
      */
     public function alterar($id, $xml, $post, $file) {
         try {
-            $this->id_setor = $id;
+            $this->id_status = $id;
             self::validaForm($xml, $post);
             self::alteraPostAutoUtf8($post, $id);
             self::replace();
@@ -61,10 +61,9 @@ class SetorDAO extends AbsModelDao {
         }
     }
 
-    public function getAllSetor() {
-        $strQuery = "SELECT s.id_setor, s.setor, s.email_setor,
-                     DATE_FORMAT(s.data_cadastro, '%d/%m/%Y') as data_cadastro,
-                     u.nome_usuario as usu_cadastro FROM fwk_chamados_setor s
+    public function getAllStatus() {
+        $strQuery = "SELECT s.id_status, s.status, DATE_FORMAT(s.data_cadastro, '%d/%m/%Y') as data_cadastro,
+                     u.nome_usuario as usu_cadastro FROM fwk_chamados_status s
                      INNER JOIN fwk_usuario u ON u.id_usuario = s.id_usu_cad";
         return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
     }

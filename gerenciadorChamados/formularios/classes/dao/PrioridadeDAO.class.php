@@ -3,14 +3,14 @@
 require_once(FWK_MODEL . "AbsModelDao.class.php");
 require_once(FWK_DAO . "DocumentoDAO.class.php");
 
-class SetorDAO extends AbsModelDao {
+class PrioridadeDAO extends AbsModelDao {
 
-    public $_table = "fwk_chamados_setor";
+    public $_table = "fwk_chamados_prioridade";
 
     /**
      * Chave primária para utilização em funções genéricas
      */
-    public $_id = "id_setor";
+    public $_id = "id_prioridade";
 
     /**
      * Método para alterar somente os campos que realmente foram alterados não mexendo com os outros
@@ -35,8 +35,8 @@ class SetorDAO extends AbsModelDao {
         }
     }
 
-    public function getIdSetor() {
-        return $this->id_setor;
+    public function getIdPrioridade() {
+        return $this->id_prioridade;
     }
 
     /**
@@ -61,11 +61,10 @@ class SetorDAO extends AbsModelDao {
         }
     }
 
-    public function getAllSetor() {
-        $strQuery = "SELECT s.id_setor, s.setor, s.email_setor,
-                     DATE_FORMAT(s.data_cadastro, '%d/%m/%Y') as data_cadastro,
-                     u.nome_usuario as usu_cadastro FROM fwk_chamados_setor s
-                     INNER JOIN fwk_usuario u ON u.id_usuario = s.id_usu_cad";
+    public function getAllPrioridade() {
+        $strQuery = "SELECT p.id_prioridade, p.prioridade, DATE_FORMAT(p.data_cadastro, '%d/%m/%Y') as data_cadastro,
+                     u.nome_usuario as usu_cadastro FROM fwk_chamados_prioridade p
+                     INNER JOIN fwk_usuario u ON u.id_usuario = p.id_usu_cad";
         return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
     }
 
