@@ -1,5 +1,10 @@
 <div class=" padding10 width930">
     <h1>{$TITULO}</h1>
+     <br />
+    {if $MSG_CH}    
+        <div class="{$CLASS_ALERTA}"><center><b><p>{$MSG_CH}</p></b></center>{if $INFO_CH}<center><p>{$INFO_CH}</p></center>{/if}</div>
+    {/if}
+     <br />
     <div class="gridFGV">
         <table class="tableMenu">
             <thead >

@@ -1,9 +1,9 @@
 <?php
 
-require_once (FWK_MODEL . "AbsCruds.class.php");
+require_once (CHA_MODEL . "AbsCrudsCha.class.php");
 require_once(BIB_JSON);
 
-abstract class AbsModelFormsCha extends AbsCruds {
+abstract class AbsModelFormsCha extends AbsCrudsCha {
 
     public function __construct() {
         parent::setTipoForm("formularios");
