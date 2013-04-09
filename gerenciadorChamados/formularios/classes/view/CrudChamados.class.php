@@ -41,6 +41,13 @@ class CrudChamados extends AbsCruds {
             case "salvarFormularioStatus":
                 self::postCadastraStatus($get["id"], $post, $file);
                 break;
+            case "deletaSetor":
+                parent::setClassModel(new SetorDAO());
+                parent::setXmlForm(CHA_XML . "formCadastrarSetor.xml");
+                //self::debuga( parent::getClassModel(),"\n", parent::getXmlForm(),"",$get["id"]);
+                self::deleta($get["id"]);
+                //self::postCadastraStatus($get["id"]);
+                break;
             default:
                 self::exibeTelaChamados();
                 break;
@@ -270,9 +277,21 @@ class CrudChamados extends AbsCruds {
 
     public function getSetor() {
         $setores = self::getObjSetor()->getAllSetor();
+        foreach ($setores as $i => $valor) {
+            $setores[$i]["link"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=deletaSetor&id=" . $valor["id_setor"]));
+        }
+        //self::debuga($setores);
         self::getObjSmarty()->assign("TITULO", "Lista de Setores");
         self::getObjSmarty()->assign("SETORES", $setores);
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaSetor.tpl");
+        return $tela;
+    }
+
+    public function getViewSetor($id = null) {
+        $dadosSetor = self::getObjSetor()->getSetorById($id);
+        //self::debuga($dadosSetor);
+        self::getObjSmarty()->assign("DADOS_SETOR", $dadosSetor);
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagViewSetor.tpl");
         return $tela;
     }
 
@@ -334,7 +353,6 @@ class CrudChamados extends AbsCruds {
 
     public function getStatus() {
         $status = self::getObjStatus()->getAllStatus();
-        //self::debuga($status);
         self::getObjSmarty()->assign("TITULO", "Lista de Prioridades");
         self::getObjSmarty()->assign("STATUS", $status);
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaStatus.tpl");

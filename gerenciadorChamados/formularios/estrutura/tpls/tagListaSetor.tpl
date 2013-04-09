@@ -9,6 +9,7 @@
                     <th ><span>E-mail</span></th>
                     <th ><span>Data Cadastro</span></th>
                     <th ><span>Cadastrado Por</span></th>
+                    <th ><span>Ações</span></th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,7 @@
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].email_setor}">{$SETORES[cont].email_setor}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].data_cadastro}">{$SETORES[cont].data_cadastro}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].usu_cadastro}">{$SETORES[cont].usu_cadastro}</span></td>
+                        <td class="linkCursor" ><a href='{$SETORES[cont].link}'> <img width="14" src="http://localhost/ibsfgv/html/imagens/icons/page_white_delete.png" alt="Deletar" title="Deletar"> </a></td>
                     </tr>
                 {/section}
             </tbody>

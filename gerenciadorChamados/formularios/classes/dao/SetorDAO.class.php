@@ -69,6 +69,15 @@ class SetorDAO extends AbsModelDao {
         return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
     }
 
+    public function getSetorById($id) {
+        $strQuery = "SELECT s.id_setor, s.setor, s.email_setor,
+                     DATE_FORMAT(s.data_cadastro, '%d/%m/%Y') as data_cadastro,
+                     u.nome_usuario as usu_cadastro FROM fwk_chamados_setor s
+                     INNER JOIN fwk_usuario u ON u.id_usuario = s.id_usu_cad 
+                     WHERE id_setor = " . $id;
+        return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
+    }
+
 }
 
 ?>

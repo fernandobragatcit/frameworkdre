@@ -287,3 +287,6 @@ root {
     background-color: #cccccc;
     border-bottom: solid 1px #999999;   
 }
+.linkCursor{
+    cursor: default !important;
+}
