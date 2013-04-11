@@ -1,10 +1,10 @@
 <div class=" padding10 width930">
     <h1>{$TITULO}</h1>
-     <br />
+    <br />
     {if $MSG_CH}    
         <div class="{$CLASS_ALERTA}"><center><b><p>{$MSG_CH}</p></b></center>{if $INFO_CH}<center><p>{$INFO_CH}</p></center>{/if}</div>
     {/if}
-     <br />
+    <br />
     <div class="gridFGV">
         <table class="tableMenu">
             <thead >
@@ -29,7 +29,10 @@
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].email_setor}">{$SETORES[cont].email_setor}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].data_cadastro}">{$SETORES[cont].data_cadastro}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].usu_cadastro}">{$SETORES[cont].usu_cadastro}</span></td>
-                        <td class="linkCursor" ><a href='{$SETORES[cont].link}'> <img width="14" src="http://localhost/ibsfgv/html/imagens/icons/page_white_delete.png" alt="Deletar" title="Deletar"> </a></td>
+                        <td class="linkCursor" >
+                            <a href='{$SETORES[cont].link}'> <img width="14" src="http://localhost/ibsfgv/html/imagens/icons/page_white_delete.png" alt="Deletar" title="Deletar"> </a>
+                            <a href='{$SETORES[cont].editar}'> <img width="14" src="http://localhost/ibsfgv/html/imagens/icons/page_white_edit.png" alt="Editar" title="Editar"> </a>
+                        </td>
                     </tr>
                 {/section}
             </tbody>

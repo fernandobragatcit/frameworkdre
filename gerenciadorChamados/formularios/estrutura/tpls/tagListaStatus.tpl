@@ -1,5 +1,10 @@
 <div class=" padding10 width930">
     <h1>{$TITULO}</h1>
+    <br />
+    {if $MSG_CH}    
+        <div class="{$CLASS_ALERTA}"><center><b><p>{$MSG_CH}</p></b></center>{if $INFO_CH}<center><p>{$INFO_CH}</p></center>{/if}</div>
+    {/if}
+    <br />
     <div class="gridFGV">
         <table class="tableMenu">
             <thead >
@@ -8,6 +13,7 @@
                     <th ><span>Status</span></th>
                     <th ><span>Data Cadastro</span></th>
                     <th ><span>Cadastrado Por</span></th>
+                    <th ><span>Ações</span></th>
                 </tr>
             </thead>
             <tbody>
@@ -21,6 +27,7 @@
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$STATUS[cont].status}">{$STATUS[cont].status}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$STATUS[cont].data_cadastro}">{$STATUS[cont].data_cadastro}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$STATUS[cont].usu_cadastro}">{$STATUS[cont].usu_cadastro}</span></td>
+                        <td class="linkCursor" ><a href='{$STATUS[cont].link}'> <img width="14" src="http://localhost/ibsfgv/html/imagens/icons/page_white_delete.png" alt="Deletar" title="Deletar"> </a></td>
                     </tr>
                 {/section}
             </tbody>

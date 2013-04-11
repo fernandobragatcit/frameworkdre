@@ -43,14 +43,23 @@ class CrudChamados extends AbsCrudsCha {
             case "deletaSetor":
                 self::deletaSetor($get);
                 break;
+            case "deletaPrioridade":
+                self::deletaPrioridade($get);
+                break;
+            case "deletaStatus":
+                self::deletaStatus($get);
+                break;
+            case "editaSetor":
+                self::formAlteraSetor($get["id"]);
+                break;
             default:
                 self::exibeTelaChamados();
                 break;
         }
     }
 
+    //TELA PRINCIPAL
     public function exibeTelaChamados($get = null, $msg = null, $info = null, $alerta = null) {
-        //self::debuga($get["id"]);
         $idChamado = $get["id"];
         $mes = date('m');
         $ano = date('Y');
@@ -123,6 +132,10 @@ class CrudChamados extends AbsCrudsCha {
                 $strTela = self::AbreStatus($msg, $info, $alerta);
             } else if ($_GET["aba"] == "setor") {
                 $strTela = self::getSetor($msg, $info, $alerta);
+            } else if ($_GET["aba"] == "prioridade") {
+                $strTela = self::getPrioridade($msg, $info, $alerta);
+            } else if ($_GET["aba"] == "status") {
+                $strTela = self::getStatus($msg, $info, $alerta);
             } else {
                 self::getObjSmarty()->assign("DEFAULT", true);
                 $strTela = self::getChamados();
@@ -134,13 +147,6 @@ class CrudChamados extends AbsCrudsCha {
             self::getObjSmarty()->assign("CONTEUDO", $strTela);
             self::getObjHttp()->escreEm("CORPO", FWK_TPLS_CH . "tagChamados.tpl");
         }
-    }
-
-    public function formAlteraChamado($id = null) {
-        parent::setXmlForm(CHA_XML . "formCadastrarChamado.xml");
-        $arrDadosChamados = self::getClassModel()->buscaCampos($id);
-        self::getClassModel()->setTipoForm(self::getTipoForm());
-        self::getClassModel()->preencheFormComDados(parent::getXmlForm(), $id, self::getStringClass(), $arrDadosChamados);
     }
 
     public function getChamados() {
@@ -251,19 +257,12 @@ class CrudChamados extends AbsCrudsCha {
         $setores = self::getObjSetor()->getAllSetor();
         foreach ($setores as $i => $valor) {
             $setores[$i]["link"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=deletaSetor&id=" . $valor["id_setor"]));
+            $setores[$i]["editar"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=editaSetor&id=" . $valor["id_setor"]));
         }
         self::getObjSmarty()->assign("TITULO", "Lista de Setores");
         self::getObjSmarty()->assign("SETORES", $setores);
         self::setMsgTpl($msg, $info, $alerta);
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaSetor.tpl");
-        return $tela;
-    }
-
-    public function getViewSetor($id = null) {
-        $dadosSetor = self::getObjSetor()->getSetorById($id);
-        //self::debuga($dadosSetor);
-        self::getObjSmarty()->assign("DADOS_SETOR", $dadosSetor);
-        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagViewSetor.tpl");
         return $tela;
     }
 
@@ -274,11 +273,14 @@ class CrudChamados extends AbsCrudsCha {
         return $tela;
     }
 
-    public function getPrioridade() {
+    public function getPrioridade($msg = null, $info = null, $alerta = null) {
         $prioridade = self::getObjPrioridade()->getAllPrioridade();
-        //self::debuga($prioridade);
+        foreach ($prioridade as $i => $valor) {
+            $prioridade[$i]["link"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=deletaPrioridade&id=" . $valor["id_prioridade"]));
+        }
         self::getObjSmarty()->assign("TITULO", "Lista de Prioridades");
         self::getObjSmarty()->assign("PRIORIDADES", $prioridade);
+        self::setMsgTpl($msg, $info, $alerta);
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaPrioridade.tpl");
         return $tela;
     }
@@ -315,10 +317,14 @@ class CrudChamados extends AbsCrudsCha {
         self::exibeTelaChamados(null, $msg, $info, $alerta);
     }
 
-    public function getStatus() {
+    public function getStatus($msg = null, $info = null, $alerta = null) {
         $status = self::getObjStatus()->getAllStatus();
+        foreach ($status as $i => $valor) {
+            $status[$i]["link"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=deletaStatus&id=" . $valor["id_status"]));
+        }
         self::getObjSmarty()->assign("TITULO", "Lista de Prioridades");
         self::getObjSmarty()->assign("STATUS", $status);
+        self::setMsgTpl($msg, $info, $alerta);
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaStatus.tpl");
         return $tela;
     }
@@ -368,6 +374,32 @@ class CrudChamados extends AbsCrudsCha {
         self::exibeTelaChamados(null, $msg, $info, $alerta);
     }
 
+    public function deletaPrioridade($get) {
+        parent::setClassModel(new PrioridadeDAO());
+        parent::setXmlForm(CHA_XML . "formCadastrarPrioridade.xml");
+        $result = self::deleta($get["id"]);
+        if ($result) {
+            $_GET["aba"] = "prioridade";
+            $alerta = "alertaSucesso"; //classe css
+            $msg = "A Prioridade foi deletada com sucesso!"; //Título principal da mensagem 
+            //$info = "Informações a respeito serão encaminhadas ao seu e-mail cadastrado no portal"; //Qualquer Informação se for necessária.
+        }
+        self::exibeTelaChamados(null, $msg, $info, $alerta);
+    }
+
+    public function deletaStatus($get) {
+        parent::setClassModel(new StatusDAO());
+        parent::setXmlForm(CHA_XML . "formCadastrarStatus.xml");
+        $result = self::deleta($get["id"]);
+        if ($result) {
+            $_GET["aba"] = "status";
+            $alerta = "alertaSucesso"; //classe css
+            $msg = "Status foi deletado com sucesso!"; //Título principal da mensagem 
+            //$info = "Informações a respeito serão encaminhadas ao seu e-mail cadastrado no portal"; //Qualquer Informação se for necessária.
+        }
+        self::exibeTelaChamados(null, $msg, $info, $alerta);
+    }
+
     public function setMsgTpl($msg, $info, $alerta) {
         if (!is_array($msg) && !empty($msg)) {
             self::getObjSmarty()->assign("MSG_CH", $msg);
@@ -378,6 +410,15 @@ class CrudChamados extends AbsCrudsCha {
         if (!is_array($alerta) && !empty($alerta)) {
             self::getObjSmarty()->assign("CLASS_ALERTA", $alerta);
         }
+    }
+
+    public function formAlteraSetor($id = null) {
+        parent::setXmlForm(CHA_XML . "formCadastrarSetor.xml");
+        parent::setClassModel(new SetorDAO());
+        $arrDadosSetor = self::getClassModel()->buscaCampos($id);
+        //self::debuga($arrDadosSetor);
+        self::getClassModel()->setTipoForm(self::getTipoForm());
+        self::getClassModel()->preencheFormComDados(parent::getXmlForm(), $id, self::getStringClass(), $arrDadosSetor);
     }
 
     private function getObjChamados() {
