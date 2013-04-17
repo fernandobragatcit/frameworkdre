@@ -26,8 +26,8 @@
 require_once ("classes/util/CaminhoRaiz.class.php");
 
 $caminhoServerRaiz = CaminhoRaiz :: getCaminhoRaiz();
-
-define("CAMINHO_PASTA_PRINCIPAL", "projetodotvaziopontomg/portal/");
+//Mudar de acordo com o projeto
+define("CAMINHO_PASTA_PRINCIPAL", "Nome_da_Pasta/");
 define("SERVIDOR_FISICO", $caminhoServerRaiz);
 //define("SERVIDOR_FISICO","E:/www/dotmg3/");
 
@@ -47,7 +47,7 @@ else
             $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]);
 
 //Endereço Virtual
-define("URL_VIRTUAL", "http://localhost/".CAMINHO_PASTA_PRINCIPAL);
+define("URL_VIRTUAL", "http://localhost/".CAMINHO_PASTA_PRINCIPAL."PORTAL/");
 
 //se SMTP_ISSMTP for true utiliza estas informacoes.
 define("SMTP_ISSMTP", false);
