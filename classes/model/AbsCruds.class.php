@@ -21,7 +21,6 @@ require_once(FWK_EXCEPTION . "CrudException.class.php");
 require_once (FWK_DAO . "DocUsuario.class.php");
 require_once (FWK_DAO . "DocGrupo.class.php");
 require_once (FWK_DAO . "GrupoUsuarioDAO.class.php");
-require_once (CLASSES_DAO . "CursosDAO.class.php");
 
 abstract class AbsCruds {
 
@@ -196,7 +195,6 @@ abstract class AbsCruds {
         self::getObjGrid()->setArrGet($get);
         self::getObjGrid()->showGrid();
     }
-   
 
     protected function getObjGrid() {
         if ($this->objGrid == null) {
@@ -377,23 +375,13 @@ abstract class AbsCruds {
     }
 
     protected function alteraStatus($id, $parametro = null) {
-        if ($parametro) {
-            $arrDados = Utf8Parsers::arrayUtf8Encode(self::getObjCursosDao()->buscaCampos($id));
-            $string=(strpos($arrDados["nome_curso"], '_Cópia') > 0) ? true : false;
-        }
-        
-        if(!$string){
-            try {
+        try {
             self::getClassModel()->alteraStatus($id);
         } catch (CrudException $e) {
             self::vaiPara(self::getStringClass() . "&msg=" . $e->getMensagem());
             return;
         }
         self::vaiPara(self::getStringClass() . "&msg=O Status foi foi alterado com sucesso!");
-        }else{
-        self::vaiPara(self::getStringClass() . "&msg=                              Atenção!".'\n'."Curso Copiado: Para ativa-lo, favor editar!");
-        }
-        
     }
 
     public function getTipo() {
@@ -432,13 +420,6 @@ abstract class AbsCruds {
         if ($this->objDocGrupo == null)
             $this->objDocGrupo = new DocGrupo();
         return $this->objDocGrupo;
-    }
-
-    private function getObjCursosDao() {
-        if ($this->ObjCursos == null) {
-            $this->ObjCursos = new CursosDAO();
-        }
-        return $this->ObjCursos;
     }
 
     /**

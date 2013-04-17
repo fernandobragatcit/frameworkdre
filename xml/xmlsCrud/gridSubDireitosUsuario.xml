@@ -28,8 +28,6 @@
             fwk_usuario us 
             LEFT JOIN fwk_direitos_usuario du
             ON du.id_usuario = us.id_usuario
-            INNER JOIN fgv_colaborador col 
-            ON col.id_usuario=us.id_usuario
         </from>
         <whereBusca>
             (us.nome_usuario LIKE '%#BUSCA#%') 
