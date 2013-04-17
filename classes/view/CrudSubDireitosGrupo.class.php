@@ -2,7 +2,7 @@
 
 require_once(FWK_MODEL . "AbsCruds.class.php");
 require_once(FWK_DAO . "SubDireitosGrupoDAO.class.php");
-require_once(CLASSES_DAO . "UsuariosFgvDAO.class.php");
+require_once(FWK_DAO . "UsuariosDAO.class.php");
 require_once(FWK_CONTROL . "ControlConfiguracoes.class.php");
 
 /**

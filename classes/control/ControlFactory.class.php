@@ -136,6 +136,14 @@ class ControlFactory {
                         $this->objClassFactory->executa($get, $post, $file);
 
                         break;
+                    } else if (is_file(self::getDirClassChamados() . $strClass . ".class.php")) {
+                        require_once (self::getDirClassChamados() . $strClass . ".class.php");
+                        $this->objClassFactory = new $strClass(self::getPagDefault());
+                        //registra as configurações da pasta
+                        self::getCtrlConfigs()->registraConfigs();
+                        self::getCtrlConfigs()->registraConteudos(true);
+                        $this->objClassFactory->executa($get, $post, $file);
+                        break;
                     } else {
                         throw new FactoryException("Classe chamada não existe ou informada incorretamente: " . $strCaminho . $strClass . ".class.php");
                     }

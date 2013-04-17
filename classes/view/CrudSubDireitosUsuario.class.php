@@ -2,7 +2,7 @@
 
 require_once(FWK_MODEL . "AbsCruds.class.php");
 require_once(FWK_DAO . "SubDireitosUsuarioDAO.class.php");
-require_once(CLASSES_DAO . "UsuariosFgvDAO.class.php");
+require_once(FWK_DAO . "UsuariosDAO.class.php");
 require_once(FWK_CONTROL . "ControlConfiguracoes.class.php");
 
 /**
@@ -95,7 +95,7 @@ class CrudSubDireitosUsuario extends AbsCruds {
 
     private function getObjUsuario() {
         if ($this->objUsuario == null) {
-            $this->objUsuario = new UsuariosFgvDAO();
+            $this->objUsuario = new UsuariosDAO();
         }
         return $this->objUsuario;
     }
