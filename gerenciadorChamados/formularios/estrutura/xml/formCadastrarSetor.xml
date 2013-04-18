@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form method="post" nome="Chamados" classe="CrudChamados"
-      css="formatForm" tipo="MODULO" categoria="formularios" tpl="formCadastrarSetor.tpl">
+      css="formatForm" tipo="CHA_TPL" categoria="formularios" tpl="formCadastrarSetor.tpl">
 
     <campos type="text" name="setor" id="setor" label="Setor"
             title="Setor" obrigatorio="true" maxlength="100"

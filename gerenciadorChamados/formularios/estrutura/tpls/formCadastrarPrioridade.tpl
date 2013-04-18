@@ -9,7 +9,7 @@
         <table class="centroContato" border="2">
             <tr>
                 <td>Prioridade:<span class="campoObrigatorio">*</span></td>
-                <td><input type="text" name="prioridade" size="80"></td>
+                <td><input type="text" name="prioridade" size="80" value="{$prioridade}"></td>
             <tr/>
         </table>
 

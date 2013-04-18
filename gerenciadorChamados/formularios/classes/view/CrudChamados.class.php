@@ -52,6 +52,12 @@ class CrudChamados extends AbsCrudsCha {
             case "editaSetor":
                 self::formAlteraSetor($get["id"]);
                 break;
+            case "editaPrioridade":
+                self::formAlteraPrioridade($get["id"]);
+                break;
+            case "editaStatus":
+                self::formAlteraStatus($get["id"]);
+                break;
             default:
                 self::exibeTelaChamados();
                 break;
@@ -225,29 +231,39 @@ class CrudChamados extends AbsCrudsCha {
         self::exibeTelaChamados(null, $msg, $info, $alerta);
     }
 
+    public function getViewChamado($id = null) {
+        $dadosChamados = self::getObjChamados()->getChamadoById($id);
+        self::getObjSmarty()->assign("CHAMADOS", $dadosChamados);
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagViewChamado.tpl");
+        return $tela;
+    }
+
     public function AbreSetor($msg = null, $info = null, $alerta = null) {
-        $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioSetor");
-        self::getObjSmarty()->assign("SALVAR", $salvar);
+        if (self::getIdForm()) {
+            self::setLinkFormSalvar("CrudChamados&a=salvarFormularioSetor&id=" . self::getIdForm());
+        } else {
+            self::setLinkFormSalvar("CrudChamados&a=salvarFormularioSetor");
+        }
         self::getObjSmarty()->assign("TITULO", "Cadastrar Setor");
+        self::getObjSmarty()->assign("ABA_SELECIONADA", "abaCadastrarSetor");
         self::setMsgTpl($msg, $info, $alerta);
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarSetor.tpl");
         return $tela;
     }
 
     public function postCadastraSetor($id, $post, $file) {
+        parent::setClassModel(new SetorDAO());
+        parent::setXmlForm(CHA_XML . "formCadastrarSetor.xml");
         if ($id) {
-            //ainda nao sabemos o que vai aqui.            
-        } else {
-            $idUsuario = self::getIdUsrSessao();
-            $post["id_usu_cad"] = $idUsuario;
-            parent::setClassModel(new SetorDAO());
-            parent::getClassModel()->cadastrar(parent::setXmlForm(CHA_XML . "formCadastrarSetor.xml"), $post, $file);
-
-            //################### preparando Mensagem para retornar a tela ########################
+            parent::getClassModel()->alterar($id, parent::getXmlForm(), $post, $file);
+            //MENSAGENS DE RETORNO
             $alerta = "alertaSucesso"; //classe css
-            $msg = "Setor cadastrado com sucesso!"; //Título principal da mensagem 
-            //$info = "Informações a respeito serão encaminhadas ao seu e-mail cadastrado no portal"; //Qualquer Informação se for necessária.
-            //#####################################################################################
+            $msg = "Setor Alterado com Sucesso!"; //Título principal da mensagem 
+        } else {
+            parent::getClassModel()->cadastrar(parent::getXmlForm(), $post, $file);
+            //MENSAGENS DE RETORNO
+            $alerta = "alertaSucesso"; //classe css
+            $msg = "Setor Cadastrado com Sucesso!"; //Título principal da mensagem 
         }
         $_GET["aba"] = "cadastrarsetor";
         self::exibeTelaChamados(null, $msg, $info, $alerta);
@@ -256,7 +272,7 @@ class CrudChamados extends AbsCrudsCha {
     public function getSetor($msg = null, $info = null, $alerta = null) {
         $setores = self::getObjSetor()->getAllSetor();
         foreach ($setores as $i => $valor) {
-            $setores[$i]["link"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=deletaSetor&id=" . $valor["id_setor"]));
+            $setores[$i]["deletar"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=deletaSetor&id=" . $valor["id_setor"]));
             $setores[$i]["editar"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=editaSetor&id=" . $valor["id_setor"]));
         }
         self::getObjSmarty()->assign("TITULO", "Lista de Setores");
@@ -266,17 +282,42 @@ class CrudChamados extends AbsCrudsCha {
         return $tela;
     }
 
-    public function getViewChamado($id = null) {
-        $dadosChamados = self::getObjChamados()->getChamadoById($id);
-        self::getObjSmarty()->assign("CHAMADOS", $dadosChamados);
-        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagViewChamado.tpl");
+    public function AbrePrioridade($msg = null, $info = null, $alerta = null) {
+        if (self::getIdForm()) {
+            self::setLinkFormSalvar("CrudChamados&a=salvarFormularioPrioridade&id=" . self::getIdForm());
+        } else {
+            self::setLinkFormSalvar("CrudChamados&a=salvarFormularioPrioridade");
+        }
+        self::getObjSmarty()->assign("TITULO", "Cadastrar Prioridade");
+        self::getObjSmarty()->assign("ABA_SELECIONADA", "abaCadastrarPrioridade");
+        self::setMsgTpl($msg, $info, $alerta);
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarPrioridade.tpl");
         return $tela;
+    }
+
+    public function postCadastraPrioridade($id, $post, $file) {
+        parent::setClassModel(new PrioridadeDAO());
+        parent::setXmlForm(CHA_XML . "formCadastrarPrioridade.xml");
+        if ($id) {
+            parent::getClassModel()->alterar($id, parent::getXmlForm(), $post, $file);
+            //MENSAGENS DE RETORNO
+            $alerta = "alertaSucesso"; //classe css
+            $msg = "Prioridade Alterada com Sucesso!"; //Título principal da mensagem 
+        } else {
+            parent::getClassModel()->cadastrar(parent::getXmlForm(), $post, $file);
+            //MENSAGENS DE RETORNO
+            $alerta = "alertaSucesso"; //classe css
+            $msg = "Setor Cadastrado com Sucesso!"; //Título principal da mensagem 
+        }
+        $_GET["aba"] = "cadastrarprioridade";
+        self::exibeTelaChamados(null, $msg, $info, $alerta);
     }
 
     public function getPrioridade($msg = null, $info = null, $alerta = null) {
         $prioridade = self::getObjPrioridade()->getAllPrioridade();
         foreach ($prioridade as $i => $valor) {
-            $prioridade[$i]["link"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=deletaPrioridade&id=" . $valor["id_prioridade"]));
+            $prioridade[$i]["deletar"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=deletaPrioridade&id=" . $valor["id_prioridade"]));
+            $prioridade[$i]["editar"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=editaPrioridade&id=" . $valor["id_prioridade"]));
         }
         self::getObjSmarty()->assign("TITULO", "Lista de Prioridades");
         self::getObjSmarty()->assign("PRIORIDADES", $prioridade);
@@ -285,80 +326,48 @@ class CrudChamados extends AbsCrudsCha {
         return $tela;
     }
 
-    public function AbrePrioridade($msg = null, $info = null, $alerta = null) {
-        $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioPrioridade");
-        self::getObjSmarty()->assign("SALVAR", $salvar);
-        self::getObjSmarty()->assign("TITULO", "Cadastrar Prioridade");
+    public function AbreStatus($msg = null, $info = null, $alerta = null) {
+        if (self::getIdForm()) {
+            self::setLinkFormSalvar("CrudChamados&a=salvarFormularioStatus&id=" . self::getIdForm());
+        } else {
+            self::setLinkFormSalvar("CrudChamados&a=salvarFormularioStatus");
+        }
+        self::getObjSmarty()->assign("TITULO", "Cadastrar Status");
+        self::getObjSmarty()->assign("ABA_SELECIONADA", "abaCadastrarStatus");
         self::setMsgTpl($msg, $info, $alerta);
-        //self::debuga("novo debuga\n",$msg, $info, $alerta);
-        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarPrioridade.tpl");
+        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarStatus.tpl");
         return $tela;
     }
 
-    public function postCadastraPrioridade($id, $post, $file) {
+    public function postCadastraStatus($id, $post, $file) {
+        parent::setClassModel(new StatusDAO());
+        parent::setXmlForm(CHA_XML . "formCadastrarStatus.xml");
         if ($id) {
-            //ainda nao sabemos o que vai aqui.            
-        } else {
-            $idUsuario = self::getIdUsrSessao();
-            $post["id_usu_cad"] = $idUsuario;
-            parent::setClassModel(new PrioridadeDAO());
-            parent::getClassModel()->cadastrar(parent::setXmlForm(CHA_XML . "formCadastrarPrioridade.xml"), $post, $file);
-
-            //################### preparando Mensagem para retornar a tela ########################
+            parent::getClassModel()->alterar($id, parent::getXmlForm(), $post, $file);
+            //MENSAGENS DE RETORNO
             $alerta = "alertaSucesso"; //classe css
-            $msg = "Prioridade cadastrado com sucesso!"; //Título principal da mensagem 
-            //$info = "Informações a respeito serão encaminhadas ao seu e-mail cadastrado no portal"; //Qualquer Informação se for necessária.
-            //#####################################################################################
+            $msg = "Status Alterado com Sucesso!"; //Título principal da mensagem 
+        } else {
+            parent::getClassModel()->cadastrar(parent::getXmlForm(), $post, $file);
+            //MENSAGENS DE RETORNO
+            $alerta = "alertaSucesso"; //classe css
+            $msg = "Status Cadastrado com Sucesso!"; //Título principal da mensagem 
         }
-        $_GET["aba"] = "cadastrarprioridade";
-        //$msg=informa a msg,
-        //$info=informação se for necessário
-        //$alerta=classe de alerta que será usada, basta escolher no css, exibirá diferentes cores;
+        $_GET["aba"] = "cadastrarstatus";
         self::exibeTelaChamados(null, $msg, $info, $alerta);
     }
 
     public function getStatus($msg = null, $info = null, $alerta = null) {
         $status = self::getObjStatus()->getAllStatus();
         foreach ($status as $i => $valor) {
-            $status[$i]["link"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=deletaStatus&id=" . $valor["id_status"]));
+            $status[$i]["deletar"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=deletaStatus&id=" . $valor["id_status"]));
+            $status[$i]["editar"] = ("?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=editaStatus&id=" . $valor["id_status"]));
         }
-        self::getObjSmarty()->assign("TITULO", "Lista de Prioridades");
+        self::getObjSmarty()->assign("TITULO", "Lista de Status");
         self::getObjSmarty()->assign("STATUS", $status);
         self::setMsgTpl($msg, $info, $alerta);
         $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "tagListaStatus.tpl");
         return $tela;
-    }
-
-    public function AbreStatus($msg = null, $info = null, $alerta = null) {
-        $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudChamados&a=salvarFormularioStatus");
-        self::getObjSmarty()->assign("SALVAR", $salvar);
-        self::getObjSmarty()->assign("TITULO", "Cadastrar Status");
-        self::setMsgTpl($msg, $info, $alerta);
-        //self::debuga("novo debuga\n",$msg, $info, $alerta);
-        $tela = parent::getObjSmarty()->fetch(FWK_TPLS_CH . "formCadastrarStatus.tpl");
-        return $tela;
-    }
-
-    public function postCadastraStatus($id, $post, $file) {
-        if ($id) {
-            //ainda nao sabemos o que vai aqui.            
-        } else {
-            $idUsuario = self::getIdUsrSessao();
-            $post["id_usu_cad"] = $idUsuario;
-            parent::setClassModel(new StatusDAO());
-            parent::getClassModel()->cadastrar(parent::setXmlForm(CHA_XML . "formCadastrarStatus.xml"), $post, $file);
-
-            //################### preparando Mensagem para retornar a tela ########################
-            $alerta = "alertaSucesso"; //classe css
-            $msg = "Status cadastrado com sucesso!"; //Título principal da mensagem 
-            //$info = "Informações a respeito serão encaminhadas ao seu e-mail cadastrado no portal"; //Qualquer Informação se for necessária.
-            //#####################################################################################
-        }
-        $_GET["aba"] = "cadastrarstatus";
-        //$msg=informa a msg,
-        //$info=informação se for necessário
-        //$alerta=classe de alerta que será usada, basta escolher no css, exibirá diferentes cores;
-        self::exibeTelaChamados(null, $msg, $info, $alerta);
     }
 
     public function deletaSetor($get) {
@@ -366,6 +375,7 @@ class CrudChamados extends AbsCrudsCha {
         parent::setXmlForm(CHA_XML . "formCadastrarSetor.xml");
         $result = self::deleta($get["id"]);
         if ($result) {
+            self::getObjSmarty()->assign("ABA_SELECIONADA", "abasetor");
             $_GET["aba"] = "setor";
             $alerta = "alertaSucesso"; //classe css
             $msg = "O Setor foi deletado com sucesso!"; //Título principal da mensagem 
@@ -379,6 +389,7 @@ class CrudChamados extends AbsCrudsCha {
         parent::setXmlForm(CHA_XML . "formCadastrarPrioridade.xml");
         $result = self::deleta($get["id"]);
         if ($result) {
+            self::getObjSmarty()->assign("ABA_SELECIONADA", "abaPrioridade");
             $_GET["aba"] = "prioridade";
             $alerta = "alertaSucesso"; //classe css
             $msg = "A Prioridade foi deletada com sucesso!"; //Título principal da mensagem 
@@ -392,6 +403,7 @@ class CrudChamados extends AbsCrudsCha {
         parent::setXmlForm(CHA_XML . "formCadastrarStatus.xml");
         $result = self::deleta($get["id"]);
         if ($result) {
+            self::getObjSmarty()->assign("ABA_SELECIONADA", "abaStatus");
             $_GET["aba"] = "status";
             $alerta = "alertaSucesso"; //classe css
             $msg = "Status foi deletado com sucesso!"; //Título principal da mensagem 
@@ -400,6 +412,41 @@ class CrudChamados extends AbsCrudsCha {
         self::exibeTelaChamados(null, $msg, $info, $alerta);
     }
 
+    public function formAlteraSetor($id = null) {
+        parent::setXmlForm(CHA_XML . "formCadastrarSetor.xml");
+        parent::setClassModel(new SetorDAO());
+        $arrDadosSetor = self::getClassModel()->buscaCampos($id);
+        $arrDadosSetor = Utf8Parsers::arrayUtf8Encode($arrDadosSetor);
+        self::getObjSmarty()->assign("setor", $arrDadosSetor["setor"]);
+        self::getObjSmarty()->assign("email_setor", $arrDadosSetor["email_setor"]);
+        $_GET["aba"] = "cadastrarsetor";
+        self::setIdForm($id);
+        self::exibeTelaChamados();
+    }
+
+    public function formAlteraPrioridade($id = null) {
+        parent::setXmlForm(CHA_XML . "formCadastrarPrioridade.xml");
+        parent::setClassModel(new PrioridadeDAO());
+        $arrDadosPrioridade = self::getClassModel()->buscaCampos($id);
+        $arrDadosPrioridade = Utf8Parsers::arrayUtf8Encode($arrDadosPrioridade);
+        self::getObjSmarty()->assign("prioridade", $arrDadosPrioridade["prioridade"]);
+        $_GET["aba"] = "cadastrarprioridade";
+        self::setIdForm($id);
+        self::exibeTelaChamados();
+    }
+
+    public function formAlteraStatus($id = null) {
+        parent::setXmlForm(CHA_XML . "formCadastrarStatus.xml");
+        parent::setClassModel(new StatusDao());
+        $arrDadosStatus = self::getClassModel()->buscaCampos($id);
+        $arrDadosStatus = Utf8Parsers::arrayUtf8Encode($arrDadosStatus);
+        self::getObjSmarty()->assign("status", $arrDadosStatus["status"]);
+        $_GET["aba"] = "cadastrarstatus";
+        self::setIdForm($id);
+        self::exibeTelaChamados();
+    }
+
+    //FUNÇÃO QUE DA UM SET NA MENSAGEM
     public function setMsgTpl($msg, $info, $alerta) {
         if (!is_array($msg) && !empty($msg)) {
             self::getObjSmarty()->assign("MSG_CH", $msg);
@@ -412,13 +459,10 @@ class CrudChamados extends AbsCrudsCha {
         }
     }
 
-    public function formAlteraSetor($id = null) {
-        parent::setXmlForm(CHA_XML . "formCadastrarSetor.xml");
-        parent::setClassModel(new SetorDAO());
-        $arrDadosSetor = self::getClassModel()->buscaCampos($id);
-        //self::debuga($arrDadosSetor);
-        self::getClassModel()->setTipoForm(self::getTipoForm());
-        self::getClassModel()->preencheFormComDados(parent::getXmlForm(), $id, self::getStringClass(), $arrDadosSetor);
+    //FUNÇÃO QUE CRYPTOGRAFA LINK
+    public function setLinkFormSalvar($params) {
+        $salvar = "?c=" . self::getObjCrypt()->cryptData($params);
+        self::getObjSmarty()->assign("SALVAR", $salvar);
     }
 
     private function getObjChamados() {

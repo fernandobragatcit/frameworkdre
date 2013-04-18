@@ -20,7 +20,7 @@ class StatusDao extends AbsModelDao {
      */
     public function cadastrar($xml, $post, $file) {
         try {
-            //self::debuga( $post);
+            self::setIdUserCad(self::getUsuarioSessao()->getIdUsuario());
             self::validaForm($xml, $post);
             self::salvaPostAutoUtf8($post);
             self::salvar();
@@ -45,11 +45,16 @@ class StatusDao extends AbsModelDao {
      * @author Fernando Braga
      * @since 1.0 - 22/03/2013
      */
-    public function alterar($id, $xml, $post, $file) {
+    public function alterar($id = null, $xml = null, $post = null, $file = null) {
         try {
             $this->id_status = $id;
             self::validaForm($xml, $post);
             self::alteraPostAutoUtf8($post, $id);
+            
+            $arrCampos = self::buscaCampos($id);
+            self::setIdUserCad($arrCampos["id_usuario_cad"], $arrCampos["data_cadastro"]);
+            self::setIdUserAlt(self::getUsuarioSessao()->getIdUsuario());
+            
             self::replace();
             if (self::ErrorMsg()) {
                 print("<pre>");
@@ -64,7 +69,7 @@ class StatusDao extends AbsModelDao {
     public function getAllStatus() {
         $strQuery = "SELECT s.id_status, s.status, DATE_FORMAT(s.data_cadastro, '%d/%m/%Y') as data_cadastro,
                      u.nome_usuario as usu_cadastro FROM fwk_chamados_status s
-                     INNER JOIN fwk_usuario u ON u.id_usuario = s.id_usu_cad";
+                     INNER JOIN fwk_usuario u ON u.id_usuario = s.id_usuario_cad";
         return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
     }
 

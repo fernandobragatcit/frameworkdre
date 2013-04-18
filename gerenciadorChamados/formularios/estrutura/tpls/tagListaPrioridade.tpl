@@ -27,7 +27,10 @@
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$PRIORIDADES[cont].prioridade}">{$PRIORIDADES[cont].prioridade}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$PRIORIDADES[cont].data_cadastro}">{$PRIORIDADES[cont].data_cadastro}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$PRIORIDADES[cont].usu_cadastro}">{$PRIORIDADES[cont].usu_cadastro}</span></td>
-                        <td class="linkCursor" ><a href='{$PRIORIDADES[cont].link}'> <img width="14" src="http://localhost/ibsfgv/html/imagens/icons/page_white_delete.png" alt="Deletar" title="Deletar"> </a></td>
+                        <td class="linkCursor" >
+                            <a href='{$PRIORIDADES[cont].deletar}'> <img width="14" src="http://localhost/ibsfgv/html/imagens/icons/page_white_delete.png" alt="Deletar" title="Deletar"> </a>
+                            <a href='{$PRIORIDADES[cont].editar}'> <img width="14" src="http://localhost/ibsfgv/html/imagens/icons/page_white_edit.png" alt="Editar" title="Editar"> </a>
+                        </td>
                     </tr>
                 {/section}
             </tbody>

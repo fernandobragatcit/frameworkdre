@@ -9,7 +9,7 @@
         <table class="centroContato" border="2">
             <tr>
                 <td>Status:<span class="campoObrigatorio">*</span></td>
-                <td><input type="text" name="status" size="80"></td>
+                <td><input type="text" name="status" size="80" value="{$status}"></td>
             <tr/>
         </table>
 

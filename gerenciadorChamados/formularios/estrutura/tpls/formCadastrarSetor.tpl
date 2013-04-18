@@ -9,11 +9,11 @@
         <table class="centroContato" border="2">
             <tr>
                 <td>Setor:<span class="campoObrigatorio">*</span></td>
-                <td><input type="text" name="setor" size="80"></td>
+                <td><input type="text" name="setor" size="80" value="{$setor}"></td>
             <tr/>
             <tr>
                 <td>E-mail: &nbsp &nbsp</span></td>
-                <td><input type="text" name="email_setor" size="80"></td>
+                <td><input type="text" name="email_setor" size="80" value="{$email_setor}"></td>
             <tr/>
         </table>
 

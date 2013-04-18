@@ -20,17 +20,18 @@
             <tbody>
                 {section name="cont" loop="$SETORES"}
                     {if $smarty.section.cont.iteration%2==0}
-                        <tr class="listaPar">
+                        <tr class="listaPar" >
                         {else}
-                        <tr class="listaImpar">
+                        <tr class="listaImpar" >
                         {/if}
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].id_setor}">{$SETORES[cont].id_setor}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].setor}">{$SETORES[cont].setor}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].email_setor}">{$SETORES[cont].email_setor}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].data_cadastro}">{$SETORES[cont].data_cadastro}</span></td>
                         <td ><span id="{$smarty.section.cont.iteration}" value="{$SETORES[cont].usu_cadastro}">{$SETORES[cont].usu_cadastro}</span></td>
+                        </a>
                         <td class="linkCursor" >
-                            <a href='{$SETORES[cont].link}'> <img width="14" src="http://localhost/ibsfgv/html/imagens/icons/page_white_delete.png" alt="Deletar" title="Deletar"> </a>
+                            <a href='{$SETORES[cont].deletar}'> <img width="14" src="http://localhost/ibsfgv/html/imagens/icons/page_white_delete.png" alt="Deletar" title="Deletar"> </a>
                             <a href='{$SETORES[cont].editar}'> <img width="14" src="http://localhost/ibsfgv/html/imagens/icons/page_white_edit.png" alt="Editar" title="Editar"> </a>
                         </td>
                     </tr>

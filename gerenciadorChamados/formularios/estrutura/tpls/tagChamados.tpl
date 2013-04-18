@@ -67,3 +67,12 @@
         mudaCorFundo('abaChamados','abasetor','abaCadastrarSetor','abaabrechamados','abaPrioridade');
     </script>
 {/if}
+
+{if $ABA_SELECIONADA}
+    {literal} 
+        <script type="text/javascript">
+        var aba='{/literal}{$ABA_SELECIONADA}{literal}';
+        mudaCorAba(aba);
+        </script>
+    {/literal} 
+{/if}

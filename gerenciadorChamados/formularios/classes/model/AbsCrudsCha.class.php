@@ -45,6 +45,7 @@ abstract class AbsCrudsCha {
     private $objDocUsuario;
     private $objDocGrupo;
     private $objCtrlReports;
+    private $idForm;
 
     public function __construct() {
         
@@ -72,6 +73,14 @@ abstract class AbsCrudsCha {
         header("Content-Disposition: attachment; filename=\"" . $strNomePdf . ".pdf\"");
         readfile(URL_SERVIDOR . "report.php?xml=" . self::getXmlReport() . "&id=" . $idCrud);
     }
+
+    public function setIdForm($x) {
+        $this->idForm = $x;
+    }
+    public function getIdForm() {
+        return $this->idForm;
+    }
+
     public function getWireFrame() {
         return $this->strWireFrame;
     }
