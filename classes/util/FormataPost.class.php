@@ -95,7 +95,7 @@ class FormataPost {
         }
         return $result;
     }
-    
+
     //organiza o array com os resultados vindos do banco em sequência.
     //impedindo que fique array dentro de array
     //serve apenas para quando houver um segundo array dentro do primeiro.
@@ -108,12 +108,27 @@ class FormataPost {
         }
         return $arrResult;
     }
+
     public static function anti_injection($sql) {
         $sql = preg_replace(sql_regcase("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"), "", $sql);
-        $sql = trim($sql); 
+        $sql = trim($sql);
         $sql = strip_tags($sql);
         $sql = addslashes($sql);
         return $sql;
+    }
+
+    //removendo duplicação de um array por determinado campo
+    public static function eliminaDuplicacaoArrayPorCampo($array, $strCampo) {
+        if ($array) {
+            $arrayAux = Array();
+            foreach ($array as $rs) {
+                if (!in_array($rs[$strCampo], $arrayAux)) {
+                    $arrayNovo[] = $rs;
+                }
+                $arrayAux[] = $rs[$strCampo];
+            }
+        }
+        return $arrayNovo;
     }
 
 }
