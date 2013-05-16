@@ -194,7 +194,7 @@ class FormataString {
     }
 
     public static function getPastaDoCaminho($request_uri) {
-        $request_uri = explode("/",$request_uri);
+        $request_uri = explode("/", $request_uri);
         $arrTratado = array();
         foreach ($request_uri as $strValor) {
             if (!empty($strValor)) {
@@ -202,6 +202,19 @@ class FormataString {
             }
         }
         return $arrTratado[count($arrTratado) - 1];
+    }
+
+    /**
+     * Função para contar quantidade de caracteres de uma string.
+     * @author Fernando Braga <fernando.braga@tcit.com.br>
+     * @since 3.0 14/05/2013 
+     * @param string $string //uma string para ser contada.
+     * @return Integer $numCaracteres //quantidade de caracteres da string.
+     */
+    public static function contaCaracteresString($string) {
+        $aString = str_split($string);
+        $numCaracteres = count($aString);
+        return $numCaracteres;
     }
 
 }

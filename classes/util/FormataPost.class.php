@@ -96,9 +96,13 @@ class FormataPost {
         return $result;
     }
 
-    //organiza o array com os resultados vindos do banco em sequência.
-    //impedindo que fique array dentro de array
-    //serve apenas para quando houver um segundo array dentro do primeiro.
+    /**
+     * Função para organizar array em sequência com posicão crescente(não funciona com array dentro de array).
+     * @author Fernando Braga <fernando.braga@tcit.com.br>
+     * @since 3.0 04/02/2013 
+     * @param array $array //um array com os dados desorganizados.
+     * @return array $arrResult //array organizado na sequência numérica.
+     */
     public static function colocaValoresEmSequenciaAposUmSelect($array = null) {
         $arrResult = Array();
         if (!empty($array)) {
