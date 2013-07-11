@@ -19,6 +19,7 @@ class AddBlocoCampos extends AbsCompHtml {
 	private function regTagsCustomComp(){
 		self::getObjSmarty()->assign("WIDTH",(string)self::getObjXmlCompDados()->width);
 		self::getObjSmarty()->assign("IDCOMPONENTE",(string)self::getObjXmlCompDados()->id);
+		self::getObjSmarty()->assign("SCRIPT_ADD_BLOCO",(string)self::getObjXmlCompDados()->sobreporScriptAddBloco);
 		self::getObjSmarty()->assign("INICIA",((integer)self::getObjXmlCompDados()->inicio)-1);
 		self::getObjSmarty()->assign("CLASS",(string)self::getObjXmlCompDados()->class);
 		self::getObjSmarty()->assign("CSSAREA",(string)self::getObjXmlCompDados()->cssArea);
@@ -83,7 +84,7 @@ class AddBlocoCampos extends AbsCompHtml {
                                         $optionsSelect=Utf8Parsers::matrizUtf8Encode($optionsSelect);
                                         //FormataString::debuga($opcao);
 					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => strtolower((string)$opcao->tipo),
-					'id' => (string)$opcao->id,'obrigatorio' => $strObrig, 'contadorClass'=>(string)$opcao->contadorClass,'option' => $optionsSelect, 'query' => $query,'class' => (string)$opcao->class, 'keypress' => $keypress,
+					'id' => (string)$opcao->id,'obrigatorio' => $strObrig, 'contadorClass'=>(string)$opcao->contadorClass,'contadorId'=>(string)$opcao->contadorId,'contadorOnChange'=>(string)$opcao->contadorOnChange,'option' => $optionsSelect, 'query' => $query,'class' => (string)$opcao->class, 'keypress' => $keypress,
 					'onchange' => "onchange=\"".(string)$opcao->onchange."\"");
 				}elseif($type == 'textarea'){
 					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => strtolower((string)$opcao->tipo),

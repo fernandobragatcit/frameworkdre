@@ -134,6 +134,10 @@ class FormataPost {
         }
         return $arrayNovo;
     }
+    //removendo ultimo valor de um array
+    public static function eliminaUltimoValorArray($array) {
+        unset($array[count($array)-1]);
+    }
 
 }
 

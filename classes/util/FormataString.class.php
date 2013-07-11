@@ -217,6 +217,33 @@ class FormataString {
         return $numCaracteres;
     }
 
+    /**
+     * Função para converter um array XML em uma string.
+     * @author Fernando Braga <fernando.braga@tcit.com.br>
+     * @since 3.0 01/07/2013 
+     * @param array $arrayXml //um array de um xml.
+     * @return String $strXml //uma string xml.
+     */
+    public static function parseArrayXmlToStringAkna($arrayXml) {
+        $strXml = htmlspecialchars($arrayXml[3]);
+        $strXml = substr(htmlspecialchars_decode($strXml, ENT_QUOTES), 12, 7);
+        $strXml = explode("=", preg_replace('/(\'|")/', "", $strXml));
+        $valor = $strXml[1];
+        return $valor;
+    }
+
+    /**
+     * Função para gerar um código único que nunca vai se repetir.
+     * @author Fernando Braga <fernando.braga@tcit.com.br>
+     * @since 3.0 09/07/2013 
+     * @return String //um código único.
+     */
+    public static function gerarCodigoUnico() {
+        usleep(100);
+        $codigo = str_replace(" ", "", str_replace(".", "", date("dmYHis") . microtime()));
+        return md5($codigo);
+    }
+
 }
 
 ?>
