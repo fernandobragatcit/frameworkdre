@@ -255,6 +255,24 @@ class FormataString {
         $strHtml = ereg_replace('[[:space:]]+', ' ', $strHtml);
         return $strHtml;
     }
+    
+    public static function comparaStringSensitive($str1, $str2) {
+        //comparacao case sensitive
+        if (strcmp($str1, $str2) != 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static function comparaStringInsensitive($str1, $str2) {
+        //comparacao case insensitive
+        if (strcasecmp($str1, $str2) == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }
 
