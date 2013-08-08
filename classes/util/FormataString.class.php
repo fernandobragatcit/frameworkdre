@@ -244,6 +244,18 @@ class FormataString {
         return md5($codigo);
     }
 
+    /**
+     * Função para limpar espaços e compactar uma string de código html.
+     * @author Fernando Braga <fernando.braga@tcit.com.br>
+     * @since 3.0 09/07/2013 
+     * @return String //um html em formato string.
+     */
+    public static function compactarLimparStringHtml($strHtml) {
+        $strHtml = str_replace("\n", ' ', $strHtml);
+        $strHtml = ereg_replace('[[:space:]]+', ' ', $strHtml);
+        return $strHtml;
+    }
+
 }
 
 ?>

@@ -126,10 +126,8 @@ class GrupoUsuarioDAO extends AbsModelDao {
     }
 
     public function getTodosIdsItemMenu() {
-
         $strQuery = "SELECT id_item_menu FROM fwk_item_menu";
-
-        return ControlDb::getAll($strQuery, 1);
+        return ControlDb::getCol($strQuery);
     }
 
     public function getNomeGrupoById($id) {

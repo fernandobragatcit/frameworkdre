@@ -61,7 +61,7 @@ class CrudSubDireitosUsuario extends AbsCruds {
     private function formAddPermissoes($get = null, $post = null) {
         $direito = self::getObjDireito()->getNomeDireito($get["id"]);
         $nomeUser = self::getObjUsuario()->getNomeUsuarioById($get["idUser"]);
-        $arrIdPermissoes = FormataPost::colocaValoresEmSequenciaAposUmSelect(self::getObjDireito()->getPermissoes($get["id"], $get["idUser"]));
+        $arrIdPermissoes = self::getObjDireito()->getPermissoes($get["id"], $get["idUser"]);
         //self::debuga($arrIdPermissoes);
         foreach ($arrIdPermissoes as $valor) {
             if ((int)$valor == 1) {

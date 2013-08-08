@@ -125,5 +125,9 @@ class ControlDB{
     	self::getBanco()->SetFetchMode($fetchMode==0?2:$fetchMode);
 		return self::getBanco()->GetAll(utf8_decode($strQuery));
     }
+    public static function getCol($strQuery,$fetchMode = 1){
+    	self::getBanco()->SetFetchMode($fetchMode==0?2:$fetchMode);
+		return self::getBanco()->GetCol(utf8_decode($strQuery));
+    }
 }
 ?>

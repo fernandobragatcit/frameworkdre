@@ -89,14 +89,14 @@ class SubDireitosUsuarioDAO extends AbsModelDao {
         $strQuery = "SELECT id_sub_direito 
 					FROM fwk_sub_direitos_usuarios  
 					WHERE id_direito=" . $idDir . " AND id_usuario=" . $idUser . "";
-        return ControlDb::getAll($strQuery, 1);
+        return ControlDb::getCol($strQuery);
     }
 
     public function getUsuariosColaboradores() {
         $strQuery = "SELECT us.id_usuario FROM fwk_usuario us
             INNER JOIN fgv_colaborador col
             ON col.id_usuario=us.id_usuario order by us.id_usuario";
-        return ControlDb::getAll($strQuery, 1);
+        return ControlDb::getCol($strQuery);
     }
 
     public function getDireitosFormUsuarioByUsuario($idUser) {
@@ -115,7 +115,7 @@ class SubDireitosUsuarioDAO extends AbsModelDao {
             INNER JOIN fwk_item_menu it ON it.id_item_menu=dir.id_item_menu
             WHERE it.formulario=1 AND id_usuario=".$idUser." order by dir.id_direito)
 ";
-        return ControlDb::getAll($strQuery, 1);
+        return ControlDb::getCol($strQuery);
     }
 
 }

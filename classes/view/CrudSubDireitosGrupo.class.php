@@ -61,8 +61,7 @@ class CrudSubDireitosGrupo extends AbsCruds {
         $direito = self::getObjDireito()->getNomeDireito($get["id"]);
         $nomeGrupo = self::getObjDireito()->getNomeGrupoById($get["idGrupo"]);
         //tenho que pensar como vai ser essa parte no caso de ser por grupo
-        //self::debuga($direito,$nomeGrupo);
-        $arrIdPermissoes = FormataPost::colocaValoresEmSequenciaAposUmSelect(self::getObjDireito()->getPermissoes($get["id"], $get["idGrupo"]));
+        $arrIdPermissoes = self::getObjDireito()->getPermissoes($get["id"], $get["idGrupo"]);
         //self::debuga($arrIdPermissoes);
         foreach ($arrIdPermissoes as $valor) {
             if ((int)$valor == 1) {

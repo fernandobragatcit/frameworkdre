@@ -51,7 +51,8 @@ class FormataPost {
                 if ($valor1 != "")
                     $novoArray[strtolower($key1)] = $valor1;
             return $novoArray;
-        }else
+        }
+        else
             return $arrDados;
     }
 
@@ -96,23 +97,6 @@ class FormataPost {
         return $result;
     }
 
-    /**
-     * Função para organizar array em sequência com posicão crescente(não funciona com array dentro de array).
-     * @author Fernando Braga <fernando.braga@tcit.com.br>
-     * @since 3.0 04/02/2013 
-     * @param array $array //um array com os dados desorganizados.
-     * @return array $arrResult //array organizado na sequência numérica.
-     */
-    public static function colocaValoresEmSequenciaAposUmSelect($array = null) {
-        $arrResult = Array();
-        if (!empty($array)) {
-            foreach ($array as $i => $valor) {
-                $arrResult[] = $valor[0];
-            }
-        }
-        return $arrResult;
-    }
-
     public static function anti_injection($sql) {
         $sql = preg_replace(sql_regcase("/(from|select|insert|delete|where|drop table|show tables|#|\*|--|\\\\)/"), "", $sql);
         $sql = trim($sql);
@@ -134,9 +118,10 @@ class FormataPost {
         }
         return $arrayNovo;
     }
+
     //removendo ultimo valor de um array
     public static function eliminaUltimoValorArray($array) {
-        unset($array[count($array)-1]);
+        unset($array[count($array) - 1]);
     }
 
 }

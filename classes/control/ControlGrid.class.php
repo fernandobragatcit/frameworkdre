@@ -397,8 +397,8 @@ class ControlGrid {
             $total = count($arrConsulta);
         } else {
             if (trim((string) self::getObjXml()->query->groupBy) != "") {
-                $arrConsulta = self::getObjBanco()->GetAll(self::getQuery(true));
-                $total = count(FormataPost::colocaValoresEmSequenciaAposUmSelect($arrConsulta));
+                $arrConsulta = self::getObjBanco()->GetCol(self::getQuery(true));
+                $total = count($arrConsulta);
             } else {
                 $arrConsulta = self::getObjBanco()->GetRow(self::getQuery(true));
                 $total = $arrConsulta[0];
@@ -1656,7 +1656,6 @@ class ControlGrid {
     private function verificaPermissoesCadastrar($idUser = null) {
         $status = false;
         $subDireitos = self::getPermissoesUsuario($idUser, self::getObjXml()->attributes()->direito);
-        //$subDireitos = FormataPost::colocaValoresEmSequenciaAposUmSelect($subDireitos);
         if (!empty($subDireitos)) {
             if (in_array(CADASTRAR, $subDireitos)) {
                 $status = true;

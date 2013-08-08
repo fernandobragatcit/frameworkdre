@@ -97,13 +97,13 @@ class SubDireitosGrupoDAO extends AbsModelDao {
         $strQuery = "SELECT id_sub_direito 
 					FROM fwk_sub_direitos_grupo  
 					WHERE id_direito=" . $idDir . " AND id_grupo=" . $idGrupo . "";
-        return ControlDb::getAll($strQuery, 1);
+        return ControlDb::getCol($strQuery);
     }
 
     public function getTodosGrupos() {
         $strQuery = "SELECT id_grupo 
 					FROM fwk_grupo";
-        return ControlDb::getAll($strQuery, 1);
+        return ControlDb::getCol($strQuery);
     }
 
     public function getDireitosByGrupo($gp) {
@@ -114,7 +114,7 @@ class SubDireitosGrupoDAO extends AbsModelDao {
             INNER JOIN fwk_direitos dir ON dir.id_direitos=dg.id_direitos
             INNER JOIN fwk_item_menu it ON it.id_item_menu=dir.id_item_menu
            WHERE it.formulario=1 AND id_grupo=" . $gp;
-        return ControlDb::getAll($strQuery, 1);
+        return ControlDb::getCol($strQuery);
     }
 
 }

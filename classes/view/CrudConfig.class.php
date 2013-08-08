@@ -24,7 +24,7 @@ class CrudConfig extends AbsModelForms {
         $arrCols = self::getArrayColaboradores();
         foreach ($arrCols as $usu) {
             $direitos = array();
-            $direitos = FormataPost::colocaValoresEmSequenciaAposUmSelect(self::getObjSubDirUsuarios()->getDireitosFormUsuarioByUsuario($usu));
+            $direitos = self::getObjSubDirUsuarios()->getDireitosFormUsuarioByUsuario($usu);
             foreach ($direitos as $dir) {
                 self::getObjSubDirUsuarios()->limpaTabelaPermissoesUsuarios($dir, $usu);
             }
@@ -35,7 +35,7 @@ class CrudConfig extends AbsModelForms {
         $arrCols = self::getArrayColaboradores();
         foreach ($arrCols as $usu) {
             $direitos = array();
-            $direitos = FormataPost::colocaValoresEmSequenciaAposUmSelect(self::getObjSubDirUsuarios()->getDireitosFormUsuarioByUsuario($usu));
+            $direitos = self::getObjSubDirUsuarios()->getDireitosFormUsuarioByUsuario($usu);
             foreach ($direitos as $dir) {
                 self::getObjSubDirUsuarios()->limpaTabelaPermissoesUsuarios($dir, $usu);
                 self::getObjSubDirUsuarios()->inserirPermissoesUsuarios($dir, $usu, CADASTRAR);
@@ -49,7 +49,7 @@ class CrudConfig extends AbsModelForms {
         $arrGp = self::getArrayGrupos();
         foreach ($arrGp as $gp) {
             $direitos = array();
-            $direitos = FormataPost::colocaValoresEmSequenciaAposUmSelect(self::getObjSubDirGrupo()->getDireitosByGrupo($gp));
+            $direitos = self::getObjSubDirGrupo()->getDireitosByGrupo($gp);
             foreach ($direitos as $dir) {
                 self::getObjSubDirGrupo()->limpaTabelaPermissoesGrupo($dir, $gp);
             }
@@ -60,7 +60,7 @@ class CrudConfig extends AbsModelForms {
         $arrGp = self::getArrayGrupos();
         foreach ($arrGp as $gp) {
             $direitos = array();
-            $direitos = FormataPost::colocaValoresEmSequenciaAposUmSelect(self::getObjSubDirGrupo()->getDireitosByGrupo($gp));
+            $direitos = self::getObjSubDirGrupo()->getDireitosByGrupo($gp);
             foreach ($direitos as $dir) {
                 self::getObjSubDirGrupo()->limpaTabelaPermissoesGrupo($dir, $gp);
                 self::getObjSubDirGrupo()->inserirPermissoesGrupo($dir, $gp, CADASTRAR);
@@ -71,12 +71,12 @@ class CrudConfig extends AbsModelForms {
     }
 
     private function getArrayColaboradores() {
-        $arrCol = FormataPost::colocaValoresEmSequenciaAposUmSelect(self::getObjSubDirUsuarios()->getUsuariosColaboradores());
+        $arrCol = self::getObjSubDirUsuarios()->getUsuariosColaboradores();
         return $arrCol;
     }
 
     private function getArrayGrupos() {
-        $arrGp = FormataPost::colocaValoresEmSequenciaAposUmSelect(self::getObjSubDirGrupo()->getTodosGrupos());
+        $arrGp = self::getObjSubDirGrupo()->getTodosGrupos();
         return $arrGp;
     }
 

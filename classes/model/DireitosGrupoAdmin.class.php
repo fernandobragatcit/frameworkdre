@@ -52,8 +52,6 @@ class DireitosGrupoAdmin extends AbsModelCruds {
     private function pegaDireitosPai($arrValores) {
         //pego os direitos pai do direito selecionado.
         $arrIdsItensMenu = self::getObjGrupoUsuarioDAO()->getTodosIdsItemMenu();
-        $arrIdsItensMenu = FormataPost::colocaValoresEmSequenciaAposUmSelect($arrIdsItensMenu);
-        //self::debuga($arrValores);
         for ($i = 0; $i < count($arrValores); $i++) {
             $idMenu = self::getObjGrupoUsuarioDAO()->getIdMenu($arrValores[$i]);
             if (empty($idMenu)) {
