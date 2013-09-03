@@ -69,7 +69,7 @@ class FicheiroDAO extends AbsModelDao{
 	public function getFicheiroById($id){
 		$strQuery = "SELECT
 						id_foto, id_album, titulo_ficheiro, bigode_ficheiro, texto_ficheiro, 
-						identificador_ficheiro, id_ficheiro
+						identificador_ficheiro, id_ficheiro,nome_area_ficheiro
 					FROM 
 						fwk_ficheiro
 					WHERE 
@@ -81,7 +81,7 @@ class FicheiroDAO extends AbsModelDao{
 	public function getFicheiroByIdentificador($ident){
 		$strQuery = "SELECT
 						id_foto, id_album, titulo_ficheiro, bigode_ficheiro, texto_ficheiro, 
-						identificador_ficheiro, id_ficheiro
+						identificador_ficheiro, id_ficheiro,nome_area_ficheiro
 					FROM 
 						fwk_ficheiro
 					WHERE 

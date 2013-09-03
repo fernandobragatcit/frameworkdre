@@ -31,8 +31,8 @@ class ViewFicheiro extends AbsTagsFwk{
 		if(self::getVariavel()!=null &&self::getVariavel()!=""){
 			$variavel = self::getVariavel();
 		}
-	//	self::debuga($arrDados);
 		$arrDados = FormataString::colocaHtmlVetor($arrDados);
+		//self::debuga($arrDados);
 		
 		parent::getObjSmarty()->assign($variavel."_TITULO",$arrDados["titulo_ficheiro"]);
 		parent::getObjSmarty()->assign($variavel."_BIGODE",$arrDados["bigode_ficheiro"]);
@@ -40,6 +40,7 @@ class ViewFicheiro extends AbsTagsFwk{
 		parent::getObjSmarty()->assign($variavel."_TEXTO",$arrDados["texto_ficheiro"]);
 		parent::getObjSmarty()->assign($variavel."_ID",$arrDados["id_ficheiro"]);
 		parent::getObjSmarty()->assign($variavel."_IDALBUM",$arrDados["id_album"]);
+		parent::getObjSmarty()->assign($variavel."_AREA",$arrDados["nome_area_ficheiro"]);
 		
 	}
 
