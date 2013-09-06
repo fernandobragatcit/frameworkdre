@@ -440,6 +440,15 @@ class FormataDatas {
         return $hora;
     }
 
+    //* Converte formato do TIMESTAMP do MySQL para uma data BR
+    //2003-12-30 23:30:59 -> 30/12/2003*/
+    public static function parse_mysql_timestamp_BR($dt) {
+        $yr = substr($dt, 0, 4);
+        $mo = substr($dt, 5, 2);
+        $da = substr($dt, 8, 2);
+        return trim($da . "/" . $mo . "/" . $yr);
+    }
+
 }
 
 ?>
