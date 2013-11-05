@@ -449,6 +449,62 @@ class FormataDatas {
         return trim($da . "/" . $mo . "/" . $yr);
     }
 
+    public static function parse_minutos_horas($mins) {
+        // Se os minutos estiverem negativos
+        if ($mins < 0)
+            $min = abs($mins);
+        else
+            $min = $mins;
+
+        // Arredonda a hora
+        $h = floor($min / 60);
+        $m = ($min - ($h * 60)) / 100;
+        $horas = $h + $m;
+
+        // Matemática da quinta série
+        // Detalhe: Aqui também pode se usar o abs()
+        if ($mins < 0)
+            $horas *= -1;
+
+        // Separa a hora dos minutos
+        $sep = explode('.', $horas);
+        $h = $sep[0];
+        if (empty($sep[1]))
+            $sep[1] = 00;
+
+        $m = $sep[1];
+
+        // Aqui um pequeno artifício pra colocar um zero no final
+        if (strlen($m) < 2)
+            $m = $m . 0;
+
+        return sprintf('%02d:%02d', $h, $m);
+    }
+
+    /**
+     * Esta função retorna uma data escrita da seguinte maneira:
+     * Exemplo: Terça-feira, 17 de Abril de 2007
+     * @author Leandro Vieira Pinho [http://leandro.w3invent.com.br]
+     * @param string $strDate data a ser analizada; por exemplo: 2007-04-17 15:10:59
+     * @return string
+     */
+    function formata_data_extenso($strDate) {
+        // Array com os dia da semana em português;
+        $arrDaysOfWeek = array('Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado');
+        // Array com os meses do ano em português;
+        $arrMonthsOfYear = array(1 => 'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro');
+        // Descobre o dia da semana
+        $intDayOfWeek = date('w', strtotime($strDate));
+        // Descobre o dia do mês
+        $intDayOfMonth = date('d', strtotime($strDate));
+        // Descobre o mês
+        $intMonthOfYear = date('n', strtotime($strDate));
+        // Descobre o ano
+        $intYear = date('Y', strtotime($strDate));
+        // Formato a ser retornado
+        return $arrDaysOfWeek[$intDayOfWeek] . ', ' . $intDayOfMonth . ' de ' . $arrMonthsOfYear[$intMonthOfYear] . ' de ' . $intYear;
+    }
+
 }
 
 ?>
