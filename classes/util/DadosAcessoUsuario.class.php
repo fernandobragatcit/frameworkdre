@@ -1,71 +1,72 @@
 <?php
+
 require_once (BIB_ISMOBILE);
 
 class DadosAcessoUsuario {
 
-	public static function is_mobile(){
-		$ismobi = new IsMobile();
-		if($ismobi->CheckMobile())
-			return true;
-		else
-			return false;
-	}
-	
-	/**
+    public static function is_mobile() {
+        $ismobi = new IsMobile();
+        if ($ismobi->CheckMobile())
+            return true;
+        else
+            return false;
+    }
+
+    /**
      * Metodo utilizado para comparacao entre o navegador do usuario e os homologados pelo sistema.
      * @author Matheus Vieira <matheus.vieira@tcit.com.br>
      * @since 12/01/2012
      * @return seta na sessao se o navegador for autorizado;
      */
     public function validaNavegador() {
-    	if($_COOKIE["tarjaNavegador"] != "true"){
-	    	//seta na sessão o navegador e a sessão.
-	    	self::getBrowser();
-	    	
-	    	$htmlAviso = "
+        if ($_COOKIE["tarjaNavegador"] != "true") {
+            //seta na sessão o navegador e a sessão.
+            self::getBrowser();
+            //FormataString::debuga($_SESSION);
+            $htmlAviso = "
 	    		<div id=\"tarjaNavegador\">
 	    			<strong>Atenção!</strong>
 	    			<p>Este portal não está homologado para o seu navegador, portando, erros poderão ocorrer.<br /> 
 	    			Para evitar falhas utilize: ";
-	    		
-	        for($i = 0; $i<count($_SESSION["navegadores"]); $i++){
-	        	$navegadores[] = $_SESSION["navegadores"][$i]["navegador"];
-	            $versao[] = $_SESSION["navegadores"][$i]["menorVersao"];
-	            $htmlAviso .= $_SESSION["navegadores"][$i]["navegador"]." ";
-	            $htmlAviso .= $_SESSION["navegadores"][$i]["menorVersao"];
-	            if($i != count($_SESSION["navegadores"])-1)
-	            	$htmlAviso .= ", ";
-	            else
-	            	$htmlAviso .= " ou versões superiores. ";
-			}
-	    			
-	    	$htmlAviso .= "
+
+            for ($i = 0; $i < count($_SESSION["navegadores"]); $i++) {
+                $navegadores[] = $_SESSION["navegadores"][$i]["navegador"];
+                $versao[] = $_SESSION["navegadores"][$i]["menorVersao"];
+                $htmlAviso .= $_SESSION["navegadores"][$i]["navegador"] . " ";
+                $htmlAviso .= $_SESSION["navegadores"][$i]["menorVersao"];
+                if ($i != count($_SESSION["navegadores"]) - 1)
+                    $htmlAviso .= ", ";
+                else
+                    $htmlAviso .= " ou versões superiores. ";
+            }
+
+            $htmlAviso .= "
 	    			</p>
 	    			<a href=\"javascript:void(0);\" id=\"fechar\" onclick=\"fechaTarjaNavegador();\" title=\"Fechar\">X Fechar</a>
 	    		</div>
 	    	";
-	    	
-	        if (in_array($_SESSION['navegador'], $navegadores)) {
-	        	$aux = false;
-	            foreach ($navegadores as $key => $navegador){
-		        	if ($_SESSION['navegador'] == $navegador) {
-		            	if ($_SESSION['versao'] < $versao[$key]) {
-				        	$aux = true;
-						}
-		            }
-	           	}
-	           	if($aux){
-		        	return $htmlAviso;
-	           	}else{
-		        	return false;
-	           	}
-	        } else {
-	        	return $htmlAviso;
-			}
-    	}
+
+            if (in_array($_SESSION['navegador'], $navegadores)) {
+                $aux = false;
+                foreach ($navegadores as $key => $navegador) {
+                    if ($_SESSION['navegador'] == $navegador) {
+                        if ($_SESSION['versao'] < $versao[$key]) {
+                            $aux = true;
+                        }
+                    }
+                }
+                if ($aux) {
+                    return $htmlAviso;
+                } else {
+                    return false;
+                }
+            } else {
+                return $htmlAviso;
+            }
+        }
     }
-	
-	/**
+
+    /**
      * Metodo utilizado para retorno dos dados do navegador do usuario.
      * @author Matheus Vieira <matheus.vieira@tcit.com.br>
      * @since 12/01/2012
@@ -105,6 +106,9 @@ class DadosAcessoUsuario {
         } elseif (preg_match('/Netscape/i', $u_agent)) {
             $bname = 'Netscape';
             $ub = "Netscape";
+        } elseif (preg_match('/Trident/i', $u_agent)) {
+            $bname = 'Internet Explorer';
+            $ub = "MSIE";
         }
 
         // finally get the correct version number
@@ -131,12 +135,18 @@ class DadosAcessoUsuario {
 
         // check if we have a number
         if ($version == null || $version == "") {
-            $version = "?";
+            $novaVersao = self::versaoNovoNavegador($u_agent);
+            if ($novaVersao === false) {
+                $version = "?";
+            } else {
+                $version = $novaVersao;
+            }
         }
-		
+
+
         $_SESSION['navegador'] = $bname;
         $_SESSION['versao'] = $version;
-        
+
         return array(
             'userAgent' => $u_agent,
             'name' => $bname,
@@ -145,6 +155,17 @@ class DadosAcessoUsuario {
             'pattern' => $pattern
         );
     }
-	
+
+    private function versaoNovoNavegador($u_agent) {
+        $pos = strpos($u_agent, "rv");
+        if ($pos === false) {
+            return false;
+        } else {
+            $resultVersion = trim(str_replace("rv:", "", substr($u_agent, $pos, 7)));
+            return $resultVersion;
+        }
+    }
+
 }
+
 ?>
