@@ -844,15 +844,20 @@ class ControlGrid {
                             $auxOrEnd = ($campo->attributes()->OR) ? ") " : "";
                             $orAnd = ($campo->attributes()->OR) ? " OR " : " AND ";
                             if ((string) $campo->attributes()->type == "select") {
-                                $strQuery .= " AND " . $auxOr . (string) $campo->attributes()->campoQuery . " = '" . $valor . "'";
-                                if ($campo->attributes()->campoQuery2 || $campo->attributes()->campoQuery2 != "") {
-                                    $strQuery .= $orAnd . (string) $campo->attributes()->campoQuery2 . " = '" . $valor . "'";
-                                }
-                                if ($campo->attributes()->campoQuery3 || $campo->attributes()->campoQuery3 != "") {
-                                    $strQuery .= $orAnd . (string) $campo->attributes()->campoQuery3 . " = '" . $valor . "'";
-                                }
-                                if ($campo->attributes()->campoQuery4 || $campo->attributes()->campoQuery4 != "") {
-                                    $strQuery .= $orAnd . (string) $campo->attributes()->campoQuery4 . " = '" . $valor . "'";
+                                //se eu escolhir passar a condição inteira
+                                if (!empty($campo->attributes()->condicaoInteira)) {
+                                    $strQuery .= " AND " . $auxOr . (string) $campo->attributes()->condicaoInteira;
+                                } else {
+                                    $strQuery .= " AND " . $auxOr . (string) $campo->attributes()->campoQuery . " = '" . $valor . "'";
+                                    if ($campo->attributes()->campoQuery2 || $campo->attributes()->campoQuery2 != "") {
+                                        $strQuery .= $orAnd . (string) $campo->attributes()->campoQuery2 . " = '" . $valor . "'";
+                                    }
+                                    if ($campo->attributes()->campoQuery3 || $campo->attributes()->campoQuery3 != "") {
+                                        $strQuery .= $orAnd . (string) $campo->attributes()->campoQuery3 . " = '" . $valor . "'";
+                                    }
+                                    if ($campo->attributes()->campoQuery4 || $campo->attributes()->campoQuery4 != "") {
+                                        $strQuery .= $orAnd . (string) $campo->attributes()->campoQuery4 . " = '" . $valor . "'";
+                                    }
                                 }
                                 $strQuery .= ($campo->attributes()->OR) ? ") " : "";
                             } else if ((string) $campo->attributes()->type == "data") {
@@ -1554,9 +1559,10 @@ class ControlGrid {
             foreach (self::getObjXml()->filtro->campos as $campo) {
                 if ($campo->attributes()->type != "text" && $campo->attributes()->type != "select" && $campo->attributes()->type != "data")
                     throw new GridException("O atributo type=\"" . $campo->attributes()->type . "\" no campo " . (string) $campo->attributes()->label . " não é válido para filtro. No filtro é permitido apenas campos \"text\" e \"select\".");
-
-                if (!$campo->attributes()->campoQuery || $campo->attributes()->campoQuery == "")
-                    throw new GridException("Não foi passado o atributo \"campoQuery\" no campo " . (string) $campo->attributes()->label . " do filtro.");
+                if ($campo->attributes()->campoQuery != "false") {
+                    if (!$campo->attributes()->campoQuery || $campo->attributes()->campoQuery == "")
+                        throw new GridException("Não foi passado o atributo \"campoQuery\" no campo " . (string) $campo->attributes()->label . " do filtro.");
+                }
 
                 $objFactoryCompsHtml->setClasseAtual(self::getObjXml()->attributes()->classe);
                 $objFactoryCompsHtml->buildComp($campo, utf8_decode($this->post[(string) $campo->attributes()->name]));
