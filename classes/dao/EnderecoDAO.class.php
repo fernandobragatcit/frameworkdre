@@ -68,13 +68,15 @@ class EnderecoDAO extends AbsModelDao {
 						sigla = '" . $sigla . "'";
         return end(ControlDB::getRow($strQuery, 0));
     }
-    public function getCidadeByCidade($cidade,$sigla) {
+
+    public function getCidadeByCidade($cidade, $sigla) {
         $strQuery = "SELECT nome_cidade  
 					FROM 
 						fwk_cidades 
 					WHERE
 						nome_cidade = '" . $cidade . "' AND uf_estado ='" . $sigla . "'";
-        return end(ControlDB::getRow($strQuery, 0));
+        $result = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0));
+        return $result["nome_cidade"];
     }
 
 }
