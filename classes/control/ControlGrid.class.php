@@ -845,8 +845,15 @@ class ControlGrid {
                             $orAnd = ($campo->attributes()->OR) ? " OR " : " AND ";
                             if ((string) $campo->attributes()->type == "select") {
                                 //se eu escolhir passar a condição inteira
-                                if (!empty($campo->attributes()->condicaoInteira)) {
-                                    $strQuery .= " AND " . $auxOr . (string) $campo->attributes()->condicaoInteira;
+                                if (!empty($campo->attributes()->condicaoInteiraValor1)) {
+                                    $qtdVals = (int) $campo->attributes()->quantValores;
+                                    for ($i = 1; $i <= $qtdVals; $i++) {
+                                        $vlComp = "valorComparacao" . (string) $i;
+                                        if ((string) $campo->attributes()->$vlComp == $valor) {
+                                            $cond = "condicaoInteiraValor" . (string) $i;
+                                            $strQuery .= " AND " . $auxOr . (string) $campo->attributes()->$cond;
+                                        }
+                                    }
                                 } else {
                                     $strQuery .= " AND " . $auxOr . (string) $campo->attributes()->campoQuery . " = '" . $valor . "'";
                                     if ($campo->attributes()->campoQuery2 || $campo->attributes()->campoQuery2 != "") {
