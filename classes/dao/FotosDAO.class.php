@@ -132,7 +132,9 @@ class FotosDAO extends AbsModelDao {
 	
 	public function deletaFoto($id){
 		try {
+                    if(file_exists(PASTA_UPLOADS_FOTOS.$this->strNomeCampo)){
 			self::apagaArquivoFisico($id, $this->strNomeCampo, PASTA_UPLOADS_FOTOS);
+                    }
 			self::deletar($id);
 		} catch (CrudException $e) {
 			throw new CrudException($e->getMensagem());

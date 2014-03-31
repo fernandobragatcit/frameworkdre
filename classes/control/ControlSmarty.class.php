@@ -59,6 +59,10 @@ class ControlSmarty{
 		self::$_objSmarty->register_function("DOCUMENTO","getDocumento");
 		self::$_objSmarty->register_function("GALERIA","getGaleria");
 		self::$_objSmarty->register_function("FACEBOOK","getFacebook");
+                /**
+                 * @author Fernando Braga <Fernando.braga@tcit.com.br>
+                 **/
+                self::$_objSmarty->register_function("RECORTE_IMAGEM","getRecorteImagem");
 
     }
 
