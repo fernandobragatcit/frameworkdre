@@ -3,6 +3,7 @@
 require_once(FWK_MODEL . "AbsCruds.class.php");
 require_once(FWK_MODEL . "DireitosUsuarioAdmin.class.php");
 require_once(FWK_DAO . "UsuariosDAO.class.php");
+require_once(FWK_DAO . "LogDAO.class.php");
 
 /**
  * Classe CRUD de cadastro de direitos para um usuário específico.
@@ -22,12 +23,25 @@ class CrudDireitosUsuario extends AbsCruds {
                 self::formAltera($get['id']);
                 break;
             case "altera":
-                self::postAltera($get['id'], $post, $file);
+                self::postAlteraDireito($get['id'], $post, $file);
                 break;
             case "lista":
             default:
                 self::listDados($get, $post);
                 break;
+        }
+    }
+
+    private function postAlteraDireito($id, $post, $file) {
+        try {
+            $direitosAnteriores = self::getObjUsuario()->getDireitosUsuarioById($id);
+            $dadosUser = Utf8Parsers::arrayUtf8Encode(self::getObjUsuario()->getDadosUsuariosById($id));
+            self::getClassModel()->alterar($id, self::getXmlForm(), $post, $file);
+            $direitosAtualizados = self::getObjUsuario()->getDireitosUsuarioById($id);
+            self::logDireitos(LOG_ALTERACAO_DIREITO_USER, $id, $direitosAnteriores, $direitosAtualizados, $dadosUser);
+            self::vaiPara(self::getStringClass() . "&msg=Item alterado com sucesso!");
+        } catch (CrudException $e) {
+            self::vaiPara(self::getStringClass() . "&msg=" . $e->getMensagem());
         }
     }
 
@@ -45,10 +59,26 @@ class CrudDireitosUsuario extends AbsCruds {
         self::getClassModel()->preencheForm(self::getXmlForm(), $id, self::getStringClass());
     }
 
+    public function logDireitos($descricao, $id, $dadosAnteriores, $dadosNovos, $dadosUser) {
+        $arrTextoLog = FormataString::raw_json_encode(array('dados_anteriores' => $dadosAnteriores, 'dados_novos' => $dadosNovos));
+        $nome = $dadosUser["nome_usuario"];
+        $email = $dadosUser["email_usuario"];
+        //SALVAR LOG
+        $valores = FormataPost::montaArrayLogDireitosUser($descricao, self::getObjUsrSessao()->getIdUsuario(), self::getObjUsrSessao()->getNomeUsuario(), self::getObjUsrSessao()->getEmailUser(), $id, $nome, $email, $arrTextoLog);
+        self::getObjLog()->registraLog("fwk_log_direitos", $valores);
+    }
+
     private function getObjUsuario() {
         if ($this->objUsuario == null)
             $this->objUsuario = new UsuariosDAO();
         return $this->objUsuario;
+    }
+
+    private function getObjLog() {
+        if ($this->getObjLog == null) {
+            $this->getObjLog = new LogDAO();
+        }
+        return $this->getObjLog;
     }
 
 }
