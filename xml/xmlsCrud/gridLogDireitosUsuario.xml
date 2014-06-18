@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid titulo="Log de Direitos de Usuário" classe="CrudLogDireitosUsuario">
+    <header>
+        <titulo type="STRING" ordena="l.id_log_direitos">Código</titulo>
+        <titulo type="STRING" ordena="l.descricao">Descrição</titulo>
+        <titulo type="STRING" ordena="l.nome_usuario_alt">Usuário responsável</titulo>
+        <titulo type="STRING" ordena="l.email_usuario_alt">Email Usuário responsável</titulo>
+        <titulo type="STRING" ordena="l.nome_usuario">Direitos atualizados do Usuário</titulo>
+        <titulo type="STRING" ordena="l.email_usuario">Email do Usuário</titulo>
+        <titulo type="STRING" ordena="data_log">Data Log</titulo>
+        <titulo type="none" actionSelect="a=exibeLog">Ações</titulo>
+       
+    </header>
+    <query>
+        <campos>
+            l.id_log_direitos, l.descricao, l.nome_usuario_alt, l.email_usuario_alt, l.nome_usuario,l.email_usuario,DATE_FORMAT(l.data_log,'%d/%m/%Y - %H:%i')as data_log,l.id_log_direitos
+        </campos>
+        <from>
+            fwk_log_direitos l
+        </from>
+        <whereBusca>
+            (l.descricao LIKE '%#BUSCA#%' OR l.nome_usuario_alt LIKE '%#BUSCA#%' OR l.nome_usuario LIKE '%#BUSCA#%'  
+            OR l.email_usuario_alt LIKE '%#BUSCA#%' OR l.email_usuario LIKE '%#BUSCA#%' OR data_log LIKE '%#BUSCA#%') 
+        </whereBusca>
+        <orderBy>l.data_log DESC</orderBy>
+    </query>
+    <buttons>
+		
+        <campos name="Cancelar" value="Cancelar" type="button" goto="?"
+                class="btnGrid" semId="true" />
+    </buttons>
+    <filtro>
+        <campos type="text" name="descricao" id="descricao" label="Descrição"
+                title="Descrição" class="larguraFormMeia" campoQuery="l.descricao" />
+                
+        <campos type="text" name="nome_usuario_alt" id="nome_usuario_alt" label="Nome usuário responsável"
+                title="Nome usuário responsável" class="larguraFormMeia" campoQuery="l.nome_usuario_alt" />
+        
+        <campos type="text" name="email_usuario_alt" id="email_usuario_alt" label="Email usuário responsável"
+                title="Email usuário responsável" class="larguraFormMeia" campoQuery="l.email_usuario_alt" />
+        
+        <campos type="text" name="nome_usuario" id="nome_usuario" label="Nome usuário"
+                title="Nome usuário" class="larguraFormMeia" campoQuery="l.nome_usuario" />
+        
+        <campos type="text" name="email_usuario" id="email_usuario" label="Email usuário"
+                title="Email usuário" class="larguraFormMeia" campoQuery="l.email_usuario" />
+                
+        <campos type="data" name="data_ini" id="data_ini" label="Data Inicial"
+                title="Data Inicial" maxlength="10" mask="99/99/9999"  class="larguraData" campoQuery="l.data_log" />
+		
+        <campos type="data" name="data_fim" id="data_fim" label="Data_final"
+                title="Data final" maxlength="10" mask="99/99/9999" class="larguraData" campoQuery="l.data_log" />		
+    </filtro>
+</grid>

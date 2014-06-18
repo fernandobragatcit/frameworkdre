@@ -260,7 +260,7 @@ class UsuariosDAO extends AbsModelDao {
     }
     public function getDireitosUsuarioById($id) {
         $strQuery = "SELECT id_direitos FROM fwk_direitos_usuario WHERE id_usuario=" . $id;
-        return ControlDb::getAll($strQuery, 0);
+        return ControlDb::getCol($strQuery, 0);
     }
 
     private function getObjUsrProv() {

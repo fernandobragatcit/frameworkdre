@@ -136,7 +136,7 @@ class GrupoUsuarioDAO extends AbsModelDao {
     }
     public function getDireitosGrupoById($id) {
         $strQuery = "SELECT id_direitos FROM fwk_direitos_grupo WHERE id_grupo=" . $id;
-        return ControlDb::getAll($strQuery, 0);
+        return ControlDb::getCol($strQuery, 0);
     }
 
 }

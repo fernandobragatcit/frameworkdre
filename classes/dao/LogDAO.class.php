@@ -61,6 +61,20 @@ class LogDAO extends AbsModelDao {
         $arrDados = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0));
         return end($arrDados);
     }
+    public function getDadosLogDireitosUsuario($id) {
+        $strQuery = "SELECT * FROM fwk_log_direitos WHERE id_log_direitos=".$id;
+        $arrDados = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0));
+        return $arrDados;
+    }
+    public function getDadosLogDireitosGrupo($id) {
+        $strQuery = "SELECT * FROM fwk_log_direitos_grupo WHERE id_log_direitos_grupo=".$id;
+        $arrDados = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0));
+        return $arrDados;
+    }
+    public function getNomeDireitoById($id) {
+        $strQuery = "SELECT nome_direito FROM fwk_direitos WHERE id_direitos=" . $id;
+        return End(Utf8Parsers::arrayUtf8Encode(ControlDb::getRow($strQuery, 0)));
+    }
 
 }
 
