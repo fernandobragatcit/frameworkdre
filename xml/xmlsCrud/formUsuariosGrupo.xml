@@ -3,11 +3,15 @@
 	css="formatForm" tipo="FWK" tpl="formUsuariosGrupo.tpl" direito="167">
 
 	<campos type="listBox" name="usuariosGrupo" id="usuariosGrupo" title="Usuários" label="Usuários"
-		querySource="SELECT id_usuario, nome_usuario FROM fwk_usuario "
+		querySource="SELECT fu.id_usuario, nome_usuario 
+					FROM fgv_colaborador fc 
+					INNER JOIN fwk_usuario fu ON fu.id_usuario = fc.id_usuario "
 		queryAlt="SELECT fgu.id_usuario 
 				FROM fwk_grupo_usuario fgu 
-				WHERE fgu.id_grupo"
-		values="id_usuario" texts="nome_usuario"
+				WHERE (fgu.id_usuario IN (SELECT fu.id_usuario 
+					FROM fgv_colaborador fc 
+					INNER JOIN fwk_usuario fu ON fu.id_usuario = fc.id_usuario)) AND fgu.id_grupo"
+		values="fu.id_usuario" texts="nome_usuario"
 		orderby="nome_usuario" class="listBoxCompDre" />
 
 	<buttons>
