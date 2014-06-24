@@ -3,6 +3,7 @@
 require_once(FWK_MODEL . "AbsCruds.class.php");
 require_once(FWK_MODEL . "GruposUsuario.class.php");
 require_once(FWK_DAO . "UsuariosDAO.class.php");
+require_once(FWK_DAO . "LogDAO.class.php");
 
 class CrudGruposUsuario extends AbsCruds {
 
@@ -22,7 +23,7 @@ class CrudGruposUsuario extends AbsCruds {
                 self::formAltera($get['id']);
                 break;
             case "altera":
-                self::postAltera($get['id'], $post, $file);
+                self::postAlteraGrupos($get['id'], $post, $file);
                 break;
             case "deleta":
                 self::deleta($get['id']);
@@ -32,6 +33,28 @@ class CrudGruposUsuario extends AbsCruds {
                 self::listDados($get, $post);
                 break;
         }
+    }
+
+    protected function postAlteraGrupos($id, $post, $file) {
+        try {
+            $direitosAnteriores = self::getObjUsuario()->getGruposUsuarioById($id);
+            $dadosUser = Utf8Parsers::arrayUtf8Encode(self::getObjUsuario()->getDadosUsuariosById($id));
+            self::getClassModel()->alterar($id, self::getXmlForm(), $post, $file);
+            $direitosAtualizados = self::getObjUsuario()->getGruposUsuarioById($id);
+            self::logGruposPorUsuario(LOG_ALTERACAO_GRUPO_USER, $id, $direitosAnteriores, $direitosAtualizados, $dadosUser);
+            self::vaiPara(self::getStringClass() . "&msg=Item alterado com sucesso!");
+        } catch (CrudException $e) {
+            self::vaiPara(self::getStringClass() . "&msg=" . $e->getMensagem());
+        }
+    }
+
+    public function logGruposPorUsuario($descricao, $id, $dadosAnteriores, $dadosNovos, $dadosUser) {
+        $arrTextoLog = FormataString::raw_json_encode(array('dados_anteriores' => $dadosAnteriores, 'dados_novos' => $dadosNovos));
+        $nome = $dadosUser["nome_usuario"];
+        $email = $dadosUser["email_usuario"];
+        //SALVAR LOG
+        $valores = FormataPost::montaArrayLogDireitosUser($descricao, self::getObjUsrSessao()->getIdUsuario(), self::getObjUsrSessao()->getNomeUsuario(), self::getObjUsrSessao()->getEmailUser(), $id, utf8_decode($nome), $email, $arrTextoLog);
+        self::getObjLog()->registraLog("fwk_log_grupo_usuario", $valores);
     }
 
     protected function formAltera($id) {
@@ -48,12 +71,19 @@ class CrudGruposUsuario extends AbsCruds {
         self::getClassModel()->setTipoForm(self::getTipoForm());
         self::getClassModel()->preencheForm(self::getXmlForm(), $id, self::getStringClass());
     }
-private function getObjUsuario() {
+
+    private function getObjUsuario() {
         if ($this->objUsuario == null)
             $this->objUsuario = new UsuariosDAO();
         return $this->objUsuario;
     }
-    
+
+    private function getObjLog() {
+        if ($this->getObjLog == null) {
+            $this->getObjLog = new LogDAO();
+        }
+        return $this->getObjLog;
+    }
 
 }
 

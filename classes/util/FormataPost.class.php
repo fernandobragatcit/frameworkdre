@@ -121,7 +121,7 @@ class FormataPost {
     }
 
     /**
-     * Método para montar uma estrutura de array com dados de log específico para log de direitos de usuário
+     * Método para montar uma estrutura de array com dados de log específico para log de direitos de usuário ou log de grupos de usuário.
      *
      * @author Fernando Braga
      * @since 1.0 - 13/06/2012
