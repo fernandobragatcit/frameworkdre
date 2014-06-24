@@ -102,7 +102,8 @@ class FormataPost {
             "texto_log" => utf8_decode($texto_log));
         return $valores;
     }
-     /**
+
+    /**
      * Método para montar uma estrutura de array com dados de log específico para log de colaborador
      *
      * @author Fernando Braga
@@ -118,13 +119,14 @@ class FormataPost {
             "texto_log" => utf8_decode($texto_log));
         return $valores;
     }
-      /**
+
+    /**
      * Método para montar uma estrutura de array com dados de log específico para log de direitos de usuário
      *
      * @author Fernando Braga
      * @since 1.0 - 13/06/2012
      */
-    public static function montaArrayLogDireitosUser($desc, $id_usuario_alt, $nome_usuario_alt, $email_usuario_alt, $id_usuario, $nome_usuario,$email_usuario, $texto_log) {
+    public static function montaArrayLogDireitosUser($desc, $id_usuario_alt, $nome_usuario_alt, $email_usuario_alt, $id_usuario, $nome_usuario, $email_usuario, $texto_log) {
         $valores = array("descricao" => utf8_decode($desc),
             "id_usuario_alt" => $id_usuario_alt,
             "nome_usuario_alt" => utf8_decode($nome_usuario_alt),
@@ -135,19 +137,36 @@ class FormataPost {
             "texto_log" => utf8_decode($texto_log));
         return $valores;
     }
-      /**
+
+    /**
      * Método para montar uma estrutura de array com dados de log específico para log de direitos de grupo
      *
      * @author Fernando Braga
      * @since 1.0 - 13/06/2012
      */
-    public static function montaArrayLogDireitosGrupo($desc, $id_usuario_alt, $nome_usuario_alt, $email_usuario_alt, $id_grupo, $nome_grupo,$texto_log) {
+    public static function montaArrayLogDireitosGrupo($desc, $id_usuario_alt, $nome_usuario_alt, $email_usuario_alt, $id_grupo, $nome_grupo, $texto_log) {
         $valores = array("descricao" => utf8_decode($desc),
             "id_usuario_alt" => $id_usuario_alt,
             "nome_usuario_alt" => utf8_decode($nome_usuario_alt),
             "email_usuario_alt" => $email_usuario_alt,
             "id_grupo" => $id_grupo,
             "nome_grupo" => $nome_grupo,
+            "texto_log" => utf8_decode($texto_log));
+        return $valores;
+    }
+
+    /**
+     * Método para montar uma estrutura de array com dados de log padrao
+     *
+     * @author Fernando Braga
+     * @since 1.0 - 20/06/2012
+     */
+    public static function montaArrayLogPadrao($desc, $id_usuario_alt, $nome_usuario_alt, $email_usuario_alt, $id, $texto_log) {
+        $valores = array("descricao" => utf8_decode($desc),
+            "id_usuario_alt" => $id_usuario_alt,
+            "nome_usuario_alt" => utf8_decode($nome_usuario_alt),
+            "email_usuario_alt" => $email_usuario_alt,
+            "id" => $id,
             "texto_log" => utf8_decode($texto_log));
         return $valores;
     }
