@@ -10,6 +10,7 @@ class ViewFotos extends AbsTags {
     private $strTitle;
     private $strTextoLink;
     private $strCssFoto;
+    private $strStyleFoto;
     private $altura;
     private $largura;
     private $marca;
@@ -104,6 +105,8 @@ class ViewFotos extends AbsTags {
         parent::getObjSmarty()->assign("TITLE_FOTO", self::getTitle());
 
         parent::getObjSmarty()->assign("CSS_FOTO", self::getCssFoto());
+        
+        parent::getObjSmarty()->assign("STYLE_FOTO", self::getStyleFoto());
 
         parent::getObjSmarty()->assign("TITULO", $arrFoto["titulo_foto"]);
 
@@ -355,6 +358,13 @@ class ViewFotos extends AbsTags {
 
     public function getCssFoto() {
         return $this->strCssFoto;
+    }
+    public function setStyleFoto($styleFoto) {
+        $this->strStyleFoto = $styleFoto;
+    }
+
+    public function getStyleFoto() {
+        return $this->strStyleFoto;
     }
 
     public function setAltura($strAltura) {

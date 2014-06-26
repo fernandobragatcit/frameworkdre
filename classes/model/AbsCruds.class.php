@@ -21,6 +21,7 @@ require_once(FWK_EXCEPTION . "CrudException.class.php");
 require_once (FWK_DAO . "DocUsuario.class.php");
 require_once (FWK_DAO . "DocGrupo.class.php");
 require_once (FWK_DAO . "GrupoUsuarioDAO.class.php");
+require_once (FWK_DAO . "FotosCropDAO.class.php");
 
 abstract class AbsCruds {
 
@@ -420,6 +421,13 @@ abstract class AbsCruds {
         if ($this->objDocGrupo == null)
             $this->objDocGrupo = new DocGrupo();
         return $this->objDocGrupo;
+    }
+    
+    protected function getObjFotoCrop() {
+        if ($this->obFotoCrop == null) {
+            $this->obFotoCrop = new FotosCropDAO();
+        }
+        return $this->obFotoCrop;
     }
 
     /**

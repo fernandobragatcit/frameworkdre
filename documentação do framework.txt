@@ -1,2 +1,37 @@
 1)configurar um novo portal:
 -modifique valores no configs.php e confs_servidor.php.
+______________________________________________________________________________________________________________
+2) Miniaturas de imagens com recorte dinâmico feito pelo usuário no formulário(CROP):
+
+CRUD Exemplo:
+parent::getObjFotoCrop()->cadastrarCrop(parent::getXmlForm(), $post, $file);
+
+FORMULÁRIO (TPL)  Exemplo:
+{RECORTE_IMAGEM metodo="getRecorteImagem" miniatura="exibicao-imagem-evento" txt_link="Miniatura exibição do evento" css="linkRecorteMiniatura" ordem_recorte="1" idImgRecorte="$ID_FOTO" largura_miniatura="469" altura_miniatura="271"}
+
+VIEW (TPL) Exemplo:
+{FOTO metodo="getThumbImg" idObj="$id_foto" title="titulo da imagem" cropX="0" cropY="0" miniatura="exibicao-imagem-evento"  largura="469" altura="271" styleFoto="" cssFoto=""}
+
+PARÂMETROS
+miniatura: 
+identificador, tem que ser igual no formulário e na visão.
+
+largura e altura ou largura_miniatura e altura_miniatura:
+Esses valores devem ser iguais tanto no formulário quanto na visão de acordo com o tamanho da miniatura escolhida.
+
+cropX e cropY:
+deixe zerados já que o crop será dinâmico.
+
+metodo e idObj (VIEW):
+são parâmetros importantes para exibição da imagem na visão, respectivamente exibição e identificador da imagem na base de dados.
+
+metodo, txt_link, css:
+São parâmetros de exibição do link de miniatura no formulário, respectivamente exibição, texto e estilo do link da ferramenta de recorte.
+
+ordem_recorte:
+É importante ordenar pois existe a chance de ter várias miniaturas da mesma imagem em diferentes lugares do portal, 
+sendo possível fazer um recorte para cada miniatura existente.
+
+idImgRecorte:
+É o identificador da imagem na base de dados.
+_______________________________________________________________________________________________________________

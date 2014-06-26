@@ -112,6 +112,7 @@ function getFotosTag($params) {
     $param5 = "";
     $param6 = "";
     $cssFoto = "";
+    $styleFoto = "";
     $title = "";
     $tipoObj = "";
     $idObj = "";
@@ -134,6 +135,7 @@ function getFotosTag($params) {
     $objFotos->setParam6($param6);
     $objFotos->setTitle($title);
     $objFotos->setCssFoto($cssFoto);
+    $objFotos->setStyleFoto($styleFoto);
     $objFotos->setTipoObj($tipoObj);
     $objFotos->setIdObj($idObj);
      $objFotos->setTagRecorteView($miniatura);
