@@ -148,6 +148,7 @@
                         onSelect: {/literal}{'exibePreview'|cat:$ORDEM_RECORTE}{literal},
                         minSize: [{/literal}{$LARGURA}{literal}, {/literal}{$ALTURA}{literal}],
                         maxSize: [{/literal}{$LARGURA}{literal}, {/literal}{$ALTURA}{literal}],
+                        setSelect:   [ {/literal}{$CROPX}{literal}, {/literal}{$CROPY}{literal}, {/literal}{$CROPX2}{literal}, {/literal}{$CROPY2}{literal} ],
                         allowResize: false,
                         addClass: 'custom'
                     });
@@ -165,8 +166,8 @@
                     });
                     jQuery('{/literal}{'#cropX'|cat:$ORDEM_RECORTE}{literal}').val(c.x);
                     jQuery('{/literal}{'#cropY'|cat:$ORDEM_RECORTE}{literal}').val(c.y);
-                    jQuery('{/literal}{'#x2'|cat:$ORDEM_RECORTE}{literal}').val(c.x2);
-                    jQuery('{/literal}{'#y2'|cat:$ORDEM_RECORTE}{literal}').val(c.y2);
+                    jQuery('{/literal}{'#x2_'|cat:$ORDEM_RECORTE}{literal}').val(c.x2);
+                    jQuery('{/literal}{'#y2_'|cat:$ORDEM_RECORTE}{literal}').val(c.y2);
                     jQuery('{/literal}{'#w'|cat:$ORDEM_RECORTE}{literal}').val(c.w);
                     jQuery('{/literal}{'#h'|cat:$ORDEM_RECORTE}{literal}').val(c.h);
                 }
@@ -183,8 +184,8 @@
                         {$PREVIEW}
                     </div>
                     <div id="debug">
-                        <p><strong>X</strong> <input type="text" name="cropX{$ORDEM_RECORTE}" id="cropX{$ORDEM_RECORTE}" value="{$CROPX}" size="5" readonly="false" /> x <input type="text" id="x2{$ORDEM_RECORTE}" size="5" disabled /> </p>
-                        <p><strong>Y</strong> <input type="text" name="cropY{$ORDEM_RECORTE}" id="cropY{$ORDEM_RECORTE}" value="{$CROPY}" size="5" readonly="false" /> x <input type="text" id="y2{$ORDEM_RECORTE}" size="5" disabled /> </p>
+                        <p><strong>X</strong> <input type="text" name="cropX{$ORDEM_RECORTE}" id="cropX{$ORDEM_RECORTE}" value="{$CROPX}" size="5" readonly="false" /> x2 <input type="text" id="x2_{$ORDEM_RECORTE}" name="x2_{$ORDEM_RECORTE}" value="{$CROPX2}" size="5" readonly="false" /> </p>
+                        <p><strong>Y</strong> <input type="text" name="cropY{$ORDEM_RECORTE}" id="cropY{$ORDEM_RECORTE}" value="{$CROPY}" size="5" readonly="false" /> y2 <input type="text" id="y2_{$ORDEM_RECORTE}" name="y2_{$ORDEM_RECORTE}" value="{$CROPY2}" size="5" readonly="false" /> </p>
                         <p><strong>Dimensões</strong> <input type="text" id="h{$ORDEM_RECORTE}" size="5" disabled /> x <input type="text" id="w{$ORDEM_RECORTE}" size="5" disabled /></p>
                     </div>
                 </div>

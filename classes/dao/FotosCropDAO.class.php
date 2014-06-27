@@ -29,15 +29,19 @@ class FotosCropDAO extends AbsModelDao {
             if (!empty($post["id_foto"]) && !empty($post["tag_recorte" . $i])) {
                 $strIdX = "cropX" . $i;
                 $strIdY = "cropY" . $i;
+                $strIdX2 = "x2_" . $i;
+                $strIdY2 = "y2_" . $i;
                 $strIdTag = "tag_recorte" . $i;
                 $post["cropX"] = $post[$strIdX];
                 $post["cropY"] = $post[$strIdY];
+                $post["cropX2"] = $post[$strIdX2];
+                $post["cropY2"] = $post[$strIdY2];
                 $post["tag_recorte"] = $post[$strIdTag];
                 $dados_crop = self::buscaDadosCropByTagEfoto($post["tag_recorte"], $post['id_foto']);
                 if ($dados_crop["id_crop"] <= 0) {
-                    $strQuery = "INSERT INTO " . $this->_table . " (id_foto, cropX, cropY, tag_recorte)VALUES('" . $post['id_foto'] . "','" . $post["cropX"] . "','" . $post["cropY"] . "','" . $post["tag_recorte"] . "')";
+                    $strQuery = "INSERT INTO " . $this->_table . " (id_foto, cropX, cropY, cropX2, cropY2, tag_recorte)VALUES('" . $post['id_foto'] . "','" . $post["cropX"] . "','" . $post["cropY"] . "', '" . $post["cropX2"] . "','" . $post["cropY2"] . "','" . $post["tag_recorte"] . "')";
                 } else {
-                    $strQuery = "UPDATE " . $this->_table . " SET id_foto='" . $post['id_foto'] . "', cropX='" . $post["cropX"] . "', cropY='" . $post["cropY"] . "', tag_recorte='" . $post["tag_recorte"] . "' WHERE id_crop='" . $dados_crop["id_crop"] . "'";
+                    $strQuery = "UPDATE " . $this->_table . " SET id_foto='" . $post['id_foto'] . "', cropX='" . $post["cropX"] . "', cropY='" . $post["cropY"] . "',cropX2='" . $post["cropX2"] . "', cropY2='" . $post["cropY2"] . "', tag_recorte='" . $post["tag_recorte"] . "' WHERE id_crop='" . $dados_crop["id_crop"] . "'";
                 }
                 ControlDb::getBanco()->Execute($strQuery);
             }

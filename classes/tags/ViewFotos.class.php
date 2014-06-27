@@ -17,6 +17,8 @@ class ViewFotos extends AbsTags {
     private $strPreLoading;
     private $cropX;
     private $cropY;
+    private $cropX2;
+    private $cropY2;
     private $miniatura;
     private $tagRecorteView;
     private $cssRecorte;
@@ -105,7 +107,7 @@ class ViewFotos extends AbsTags {
         parent::getObjSmarty()->assign("TITLE_FOTO", self::getTitle());
 
         parent::getObjSmarty()->assign("CSS_FOTO", self::getCssFoto());
-        
+
         parent::getObjSmarty()->assign("STYLE_FOTO", self::getStyleFoto());
 
         parent::getObjSmarty()->assign("TITULO", $arrFoto["titulo_foto"]);
@@ -285,6 +287,8 @@ class ViewFotos extends AbsTags {
         //self::debuga($dados);
         parent::getObjSmarty()->assign("CROPX", $dados['cropX']);
         parent::getObjSmarty()->assign("CROPY", $dados['cropY']);
+        parent::getObjSmarty()->assign("CROPX2", $dados['cropX2']);
+        parent::getObjSmarty()->assign("CROPY2", $dados['cropY2']);
         parent::getObjSmarty()->assign("TXT_LINK", self::getStrTextoLink());
         parent::getObjSmarty()->assign("TAG", self::getMiniatura());
         parent::getObjSmarty()->assign("CSS", self::getCssRecorte());
@@ -316,8 +320,8 @@ class ViewFotos extends AbsTags {
         }
         $idImg = "jcrop" . self::getOrdemRecorte();
         $idPreview = "preview" . self::getOrdemRecorte();
-        $img = '<img src="' . $imagem . '" id="'.$idImg.'" ' . $imagesize[3] . ' />';
-        $preview = '<img src="' . $imagem . '" id="'.$idPreview.'" />';
+        $img = '<img src="' . $imagem . '" id="' . $idImg . '" ' . $imagesize[3] . ' />';
+        $preview = '<img src="' . $imagem . '" id="' . $idPreview . '" />';
         parent::getObjSmarty()->assign("PREVIEW", $preview);
         parent::getObjSmarty()->assign("IMG", $img);
         parent::getObjSmarty()->assign("IMAGEM", $imagem);
@@ -359,6 +363,7 @@ class ViewFotos extends AbsTags {
     public function getCssFoto() {
         return $this->strCssFoto;
     }
+
     public function setStyleFoto($styleFoto) {
         $this->strStyleFoto = $styleFoto;
     }
@@ -413,6 +418,22 @@ class ViewFotos extends AbsTags {
 
     public function getCropY() {
         return $this->cropY;
+    }
+
+    public function getCropX2() {
+        return $this->cropX2;
+    }
+
+    public function getCropY2() {
+        return $this->cropY2;
+    }
+
+    public function setCropX2($cropX2) {
+        $this->cropX2 = $cropX2;
+    }
+
+    public function setCropY2($cropY2) {
+        $this->cropY2 = $cropY2;
     }
 
     public function executeTag() {
