@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid titulo="Configurações do sistema" classe="CrudConfiguracoesGerais" direito="239">
+	<header>
+		<titulo type="STRING" ordena="id_config">#Id</titulo>
+		<titulo type="STRING" ordena="memory_limit">Memory_limit</titulo>
+                <titulo type="none" actionEdit="a=formAlt">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			 id_config, memory_limit, id_config
+		</campos>
+		<from>
+			fwk_config_sistema 
+		</from>
+		<whereBusca>
+			(id_config LIKE '%#BUSCA#%' OR memory_limit LIKE '%#BUSCA#%') 
+		</whereBusca>
+		<orderBy>id_config</orderBy>
+	</query>
+        <buttons>
+		
+	</buttons>
+	<filtro>
+		<campos type="text" name="id_config" id="id_config" label="#Id"
+		title="#Id" class="larguraFormMeia" campoQuery="id_config" />
+
+		<campos type="text" name="memory_limit" id="memory_limit" label="Título"
+		title="Título" class="larguraFormMeia" campoQuery="memory_limit" />
+	</filtro>
+</grid>

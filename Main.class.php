@@ -201,6 +201,7 @@ class Main {
         try {
 //			self::registraLogs(); //- com problemas
             //habilitar PopUp
+            self::setLimitMemory();
             self::getPopUp();
             self::setTituloPag(self::getTituloPagina());
             $objFormatParam = new FormataParametros();
@@ -501,7 +502,7 @@ class Main {
     }
 
     private function registraTagsBasicas($get, $post) {
-        $_SESSION["ACAO_FORM"]=$get["a"];
+        $_SESSION["ACAO_FORM"] = $get["a"];
         $nParams = array();
         //define o tema do usuário logado
         self::getTemasUsuario();
@@ -535,6 +536,13 @@ class Main {
         //FormataString::debuga($_COOKIE);
         if ($_COOKIE["popup"] != "false") {
             self::regTplEm("POPUP", PASTA_TPLS . "popup.tpl");
+        }
+    }
+
+    private function setLimitMemory() {
+        $memory_limit_sistema = end(ControlDb::getCol("SELECT memory_limit FROM fwk_config_sistema WHERE id_config=1"));
+        if (!empty($memory_limit_sistema)) {
+            ini_set("memory_limit", $memory_limit_sistema);
         }
     }
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Configuracoes Gerais" classe="CrudConfiguracoesGerais" css="formatForm"
+	tipo="FWK" tpl="formConfiguracoesGerais.tpl" direito="239">
+
+	<campos type="text" name="memory_limit" id="memory_limit"
+		label="Título" title="Título" obrigatorio="true" maxlength="100"
+		class="medium" />
+
+	<buttons>
+		<button name="Cadastrar" value="Salvar" type="submit" direito="152" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=lista" mens="Deseja realmente sair deste formulario?" />
+	</buttons>
+
+</form>
