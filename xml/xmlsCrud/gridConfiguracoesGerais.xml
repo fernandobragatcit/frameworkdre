@@ -2,7 +2,7 @@
 <grid titulo="Configurações do sistema" classe="CrudConfiguracoesGerais" direito="239">
 	<header>
 		<titulo type="STRING" ordena="id_config">#Id</titulo>
-		<titulo type="STRING" ordena="memory_limit">Memory_limit</titulo>
+		<titulo type="STRING" ordena="memory_limit">Limite de memória do php</titulo>
                 <titulo type="none" actionEdit="a=formAlt">Ações</titulo>
 	</header>
 	<query>
