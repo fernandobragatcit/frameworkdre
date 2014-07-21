@@ -533,9 +533,11 @@ class Main {
     }
 
     private function getPopUp() {
-        //FormataString::debuga($_COOKIE);
-        if ($_COOKIE["popup"] != "false") {
-            self::regTplEm("POPUP", PASTA_TPLS . "popup.tpl");
+        $popUp = end(ControlDb::getCol("SELECT exibir_popup FROM fwk_config_sistema WHERE id_config=1"));
+        if ($popUp == "S") {
+            if ($_COOKIE["popup"] != "false") {
+                self::regTplEm("POPUP", PASTA_TPLS . "popup.tpl");
+            }
         }
     }
 
