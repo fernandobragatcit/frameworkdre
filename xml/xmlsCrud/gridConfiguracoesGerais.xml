@@ -3,11 +3,12 @@
 	<header>
 		<titulo type="STRING" ordena="id_config">#Id</titulo>
 		<titulo type="STRING" ordena="memory_limit">Limite de memória do php</titulo>
+		<titulo type="STRING" ordena="exibir_popup">Exibir PopUp</titulo>
                 <titulo type="none" actionEdit="a=formAlt">Ações</titulo>
 	</header>
 	<query>
 		<campos>
-			 id_config, memory_limit, id_config
+			 id_config, memory_limit,if(exibir_popup = 'S', 'Popup Ativo', 'Popup inativo'), id_config
 		</campos>
 		<from>
 			fwk_config_sistema 

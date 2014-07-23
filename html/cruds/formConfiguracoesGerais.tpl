@@ -7,6 +7,10 @@
 	    <span class="small" id="memory_limit_erro">{$memory_limit_error}</span>
 	</label> {$memory_limit_campo}
 </div>
+<div class="formMeiaTela">
+    <label>{$exibir_popup_label} :  <span class="mensErroForms" id="exibir_popup_erro">{$exibir_popup_error}</span></label>
+        {$exibir_popup_campo}
+</div>
 
 
 

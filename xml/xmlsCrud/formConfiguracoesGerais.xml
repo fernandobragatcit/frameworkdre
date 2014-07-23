@@ -5,6 +5,9 @@
 	<campos type="text" name="memory_limit" id="memory_limit"
 		label="Limite de memória do php" title="Limite de memória do php" obrigatorio="true" maxlength="100"
 		class="medium" />
+        
+	<campos type="checkbox" name="exibir_popup" id="exibir_popup" title="Exibir PopUp"
+            label="Exibir PopUp" class="larguraCheck" valor="S" />
 
 	<buttons>
 		<button name="Cadastrar" value="Salvar" type="submit" direito="152" />
