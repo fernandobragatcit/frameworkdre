@@ -203,6 +203,21 @@ class FormataPost {
         return $arrayNovo;
     }
 
+    //removendo duplicação de um array por determinado campo
+    public static function verificaDuplicacaoArrayPorCampo($array, $strCampo) {
+        if ($array) {
+            $duplicacao = false;
+            $arrayAux = Array();
+            foreach ($array as $rs) {
+                if (in_array($rs[$strCampo], $arrayAux)) {
+                    $duplicacao = true;
+                }
+                $arrayAux[] = $rs[$strCampo];
+            }
+        }
+        return $duplicacao;
+    }
+
     //removendo ultimo valor de um array
     public static function eliminaUltimoValorArray($array) {
         unset($array[count($array) - 1]);
