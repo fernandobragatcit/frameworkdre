@@ -102,6 +102,27 @@ class FormataActions {
         return $strLink;
     }
 
+    /**
+     * @author Fernando Braga <fernando.braga@tcit.com.br>
+     * @since 3.0 - 02/09/2014
+     * @return altera memória limite do php para o padrão do sistema informado no arquivo configs.php
+     */
+    public static function setLimitMemory() {
+        $memory_limit_sistema = ControlDb::getCol("SELECT memory_limit FROM fwk_config_sistema WHERE id_config=1");
+        if (!empty($memory_limit_sistema["memory_limit"])) {
+            ini_set("memory_limit", $memory_limit_sistema);
+        }
+    }
+
+    /**
+     * @author Fernando Braga <fernando.braga@tcit.com.br>
+     * @since 3.0 - 02/09/2014
+     * @param valor limite de memória do PHP a ser alterado.
+     */
+    public static function setValueLimitMemory($memory) {
+        ini_set("memory_limit", $memory);
+    }
+
 }
 
 ?>

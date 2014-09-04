@@ -1,5 +1,5 @@
 1)configurar um novo portal:
--modifique valores no configs.php e confs_servidor.php.
+-modifique valores no configs.php, confs_servidor.php, conf_banco.php e config/config.xml dentro da pasta portal.
 ______________________________________________________________________________________________________________
 2) Miniaturas de imagens com recorte dinâmico feito pelo usuário no formulário(CROP):
 
