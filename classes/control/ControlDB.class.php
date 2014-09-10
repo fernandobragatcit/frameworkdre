@@ -136,6 +136,10 @@ class ControlDB {
         return self::getBanco()->GetCol(utf8_decode($strQuery));
     }
 
+    public static function executaQuery($query) {
+        return self::getBanco()->Execute($query);
+    }
+
 }
 
 ?>

@@ -200,7 +200,7 @@ class Main {
     public function makeScreen(&$arrGet, &$arrPost, $srcClass = "", &$arrFile = array()) {
         try {
 //			self::registraLogs(); //- com problemas
-            //habilitar PopUp
+            self::getLarguraPortal();
             self::setLimitMemory();
             self::getPopUp();
             self::setTituloPag(self::getTituloPagina());
@@ -329,8 +329,8 @@ class Main {
         $objMenu->setCssMenu(self::getCssMenuGlobal());
         $objMenu->setTplMenu(self::getTplMenuGlobal());
         $objUsuario = self::getObjSessao();
-        self::getObjSmarty()->assign("LINK_LOGIN", "?c=" . self::getObjCrypt()->cryptData("login"));
-        self::getObjSmarty()->assign("CAD_USUARIO", "?c=" . self::getObjCrypt()->cryptData("ViewCadUsuarios"));
+        self::getObjSmarty()->assign("LINK_LOGIN", "?m=" . self::getObjCrypt()->cryptData("tags&f=ViewFormAcesso&a=formLogin"));
+        self::getObjSmarty()->assign("CAD_USUARIO", "?m=" . self::getObjCrypt()->cryptData("tags&f=ViewCadUsuarios"));
         if ($objUsuario->getNomeUsuario() != "Visitante") {
             self::getObjSmarty()->assign("MENU_GLOBAL", $objMenu->geraMenu($objUsuario->getGrupoUsuario(), $objUsuario->getIdUsuario()));
             self::getObjSmarty()->assign("ARR_MENU", $objMenu->pegaMenu($objUsuario->getGrupoUsuario(), $objUsuario->getIdUsuario()));
@@ -533,7 +533,7 @@ class Main {
     }
 
     private function getPopUp() {
-        $popUp = end(ControlDb::getCol("SELECT exibir_popup FROM fwk_config_sistema WHERE id_config=1"));
+        $popUp = End(ControlDb::getCol("SELECT exibir_popup FROM fwk_config_sistema WHERE id_config=1"));
         if ($popUp == "S") {
             if ($_COOKIE["popup"] != "false") {
                 self::regTplEm("POPUP", PASTA_TPLS . "popup.tpl");
@@ -542,10 +542,15 @@ class Main {
     }
 
     private function setLimitMemory() {
-        $memory_limit_sistema = end(ControlDb::getCol("SELECT memory_limit FROM fwk_config_sistema WHERE id_config=1"));
+        $memory_limit_sistema =  End(ControlDb::getCol("SELECT memory_limit FROM fwk_config_sistema WHERE id_config=1"));
         if (!empty($memory_limit_sistema)) {
             ini_set("memory_limit", $memory_limit_sistema);
         }
+    }
+
+    private function getLarguraPortal() {
+        $largura_portal = End(ControlDb::getCol("SELECT largura_portal FROM fwk_config_sistema WHERE id_config=1"));
+        self::getObjSmarty()->assign("LARGURA_PORTAL", $largura_portal);
     }
 
 }
