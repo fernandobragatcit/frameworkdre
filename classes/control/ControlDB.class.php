@@ -28,7 +28,7 @@ class ControlDB {
         if (!@self::$_objBanco->Connect(SERVER, USUARIO, SENHA, BANCO)) {
             throw new DBException(ERRO_CONEXAO_DB);
         }
-        self::$_objBanco->EXECUTE("set names 'utf8'");
+        //self::$_objBanco->EXECUTE("set names 'utf8'");
     }
 
     public function getBanco() {
