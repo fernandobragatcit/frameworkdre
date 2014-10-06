@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grid titulo="Área" classe="CrudArea" direito="66">
+	<header>
+		<titulo type="STRING" ordena="descricao">Área</titulo>
+		<titulo type="STRING" ordena="area">Pasta</titulo>
+		<titulo type="STRING" ordena="area">Status</titulo>
+		<titulo type="none" actionEdit="a=formAlt" actionStatus="a=status" actionDelete="a=deleta">Ações</titulo>
+	</header>
+	<query>
+		<campos>
+			descricao,area,if(status='S','Ativo','Inativo'),id_area
+		</campos>
+		<from>
+			fwk_area
+		</from>
+		<where/>
+		<whereBusca>
+			(descricao LIKE '%#BUSCA#%' OR area LIKE '%#BUSCA#%') 
+		</whereBusca>
+		<campoPortal>id_portal</campoPortal>
+		<orderBy>ordem</orderBy>
+	</query>
+	<buttons>
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+	</buttons>
+	<filtro>
+		<campos type="text" name="descricao" id="descricao" label="Area"
+		title="Area" class="larguraFormMeia" campoQuery="descricao" />
+		
+		<campos type="text" name="area" id="area" label="Link"
+		title="Link" class="larguraFormMeia" campoQuery="area" />
+	</filtro>
+</grid>

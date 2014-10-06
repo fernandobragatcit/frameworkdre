@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="Area" classe="CrudArea"
+	css="formatForm" tipo="FWK" tpl="formArea.tpl" direito="66">
+
+	<campos type="text" name="descricao" id="descricao"
+		label="Nome do Area" title="Nome do Area" obrigatorio="true"
+		maxlength="100" class="small" />
+
+	<campos type="text" name="area" id="area"
+		label="Nome Pasta" title="Nome Pasta" obrigatorio="true"
+		maxlength="100" class="small" />
+	
+
+	<campos type="text" name="ordem" id="ordem"
+		label="Ordem do Area" title="Ordem do Area" obrigatorio="true"
+		maxlength="5" class="small" />
+	<buttons>
+
+		<button name="Cadastrar" value="Salvar" type="submit" direito="66" />
+		<button name="Cancelar" value="Cancelar" type="button"
+			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
+
+	</buttons>
+
+</form>

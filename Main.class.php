@@ -332,6 +332,7 @@ class Main {
         self::getObjSmarty()->assign("LINK_LOGIN", "?m=" . self::getObjCrypt()->cryptData("tags&f=ViewFormAcesso&a=formLogin"));
         self::getObjSmarty()->assign("CAD_USUARIO", "?m=" . self::getObjCrypt()->cryptData("tags&f=ViewCadUsuarios"));
         if ($objUsuario->getNomeUsuario() != "Visitante") {
+            self::getObjSmarty()->assign("NOME_USUARIO", $objUsuario->getNomeUsuario());
             self::getObjSmarty()->assign("MENU_GLOBAL", $objMenu->geraMenu($objUsuario->getGrupoUsuario(), $objUsuario->getIdUsuario()));
             self::getObjSmarty()->assign("ARR_MENU", $objMenu->pegaMenu($objUsuario->getGrupoUsuario(), $objUsuario->getIdUsuario()));
         }

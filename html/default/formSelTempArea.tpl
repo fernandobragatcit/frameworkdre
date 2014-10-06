@@ -1,4 +1,4 @@
-<div id="content_sis">
+<div id="content_sis" class="container">
 	<h2>Template de Área</h2>
 	<form action="{$ACTION_FORM}" name="dreFormWires" method="POST" id="dreFormWires" >
 		<fieldset>

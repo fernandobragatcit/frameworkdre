@@ -14,7 +14,7 @@
 		</from>
 		<where/>
 		<whereBusca>
-			(nome_menu LIKE '%#BUSCA#% OR link_menu LIKE '%#BUSCA#%) 
+			(nome_menu LIKE '%#BUSCA#%' OR link_menu LIKE '%#BUSCA#%') 
 		</whereBusca>
 		<campoPortal>id_portal</campoPortal>
 		<orderBy>ordem_menu</orderBy>

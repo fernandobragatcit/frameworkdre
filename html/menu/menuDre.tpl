@@ -1,5 +1,5 @@
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
+<div class="navbar navbar_menu_admin">
+    <div class="navbar-inner menu_admin">
         <div id="container">
             {section name=cont loop=$ARR_MENU}
                 {if $smarty.section.cont.first}
@@ -56,6 +56,15 @@
                     </ul>
                 {/if}
             {/section}
+            <ul class="nav pull-right">
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#" title="Perfil">Olá {$NOME_USUARIO} <i class="icon-user"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="?m=Zm9ybXVsYXJpb3MmZj1DcnVkY29uZmlndXJhY29lcyZhPXBlcmZpbA==" title="Meu Perfil">Meu Perfil</a></li>
+                        <li><a href="?m=Zm9ybXVsYXJpb3MmZj1DcnVkQ29uZmlndXJhY29lcyZhPWZvcm1BbHRTZW5oYQ==" title="Alterar Senha">Alterar Senha</a></li>               
+                        <li><a href="?c=TG9naW4mYT1Mb2dvdXQ=" title="Sair">Sair</a></li>        
+                    </ul>
+                </li>          
+            </ul>
         </div>
     </div>
 </div>

@@ -76,7 +76,7 @@ class CrudSubDireitosUsuario extends AbsCruds {
         self::getObjSmarty()->assign("MARCADOR_GRID",self::getObjSmarty()->fetch(FWK_HTML_GRID . "marcadorGrid.tpl"));
         $salvar = "?c=" . self::getObjCrypt()->cryptData("CrudSubDireitosUsuario&a=salvarPermissoes&idDir=" . $get["id"] . "&idUser=" . $get["idUser"]);
         $voltar = "?c=" . self::getObjCrypt()->cryptData("CrudSubDireitosUsuario&a=formPerms&id=".$get["idUser"]);
-        self::getObjSmarty()->assign("NOME_USUARIO", $nomeUser);
+        self::getObjSmarty()->assign("NOME_USUARIO_DIR", $nomeUser);
         self::getObjSmarty()->assign("DIREITO", $direito);
         self::getObjSmarty()->assign("FORM", "Permissões Por Direito De Usuário");
         self::getObjSmarty()->assign("SALVAR", $salvar);

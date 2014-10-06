@@ -2,7 +2,7 @@
 <form method="post" nome="Conteúdo Cabeçalho" css="formatForm"
 	tipo="FWK_VIEW" tpl="formConteudoAreas.tpl">
 
-	<campos type="select" name="idioma" id="idioma" class="medium"
+	<campos type="select" name="idioma" id="idioma" class="span6"
 		label="Idioma: " title="Idioma"
 		onchange="javascript:alteraIdiomaPag(this.value)">
 		<query>SELECT sigla_idioma,nome_idioma FROM fwk_idioma</query>
@@ -12,7 +12,7 @@
 
 	<campos type="textarea"
 		name="conteudo_area" id="conteudo_area" title="Conteúdo"
-		label="Conteúdo" />
+		label="Conteúdo" class="span10 height300" />
 
 	<buttons>
 		<button name="Cadastrar" value="Salvar" type="submit" />
