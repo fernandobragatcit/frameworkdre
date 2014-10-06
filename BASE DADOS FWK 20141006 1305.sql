@@ -1,7 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
--- Server version	5.1.45-community
+-- Server version	5.6.12
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -15,11 +15,36 @@
 
 
 --
--- Create schema novabase
+-- Create schema mattosaguiar
 --
 
-CREATE DATABASE IF NOT EXISTS novabase;
-USE novabase;
+CREATE DATABASE IF NOT EXISTS mattosaguiar;
+USE mattosaguiar;
+
+--
+-- Definition of table `fwk_area`
+--
+
+DROP TABLE IF EXISTS `fwk_area`;
+CREATE TABLE `fwk_area` (
+  `id_area` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(200) DEFAULT NULL,
+  `area` varchar(45) DEFAULT NULL,
+  `status` char(1) DEFAULT 'N',
+  `ordem` int(10) DEFAULT '0',
+  PRIMARY KEY (`id_area`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COMMENT='tabela do fwk';
+
+--
+-- Dumping data for table `fwk_area`
+--
+
+/*!40000 ALTER TABLE `fwk_area` DISABLE KEYS */;
+INSERT INTO `fwk_area` (`id_area`,`descricao`,`area`,`status`,`ordem`) VALUES 
+ (1,'Inicio','inicio','S',1),
+ (3,'Contato','contato','S',3);
+/*!40000 ALTER TABLE `fwk_area` ENABLE KEYS */;
+
 
 --
 -- Definition of table `fwk_arquivo`
@@ -70,6 +95,12 @@ CREATE TABLE `fwk_banner` (
 --
 
 /*!40000 ALTER TABLE `fwk_banner` DISABLE KEYS */;
+INSERT INTO `fwk_banner` (`id_banner`,`id_foto`,`id_categoria_banner`,`nome_imagem`,`title_banner`,`link_banner`,`status_banner`,`id_portal`) VALUES 
+ (2,1,17,'Veja fotos do nosso espaço','O Espaço','http://localhost/nomedabase/portal/espaco/',NULL,2),
+ (3,4,19,'O Buffet  teste teste','O Buffet','http://localhost/nomedabase/portal/buffet/',NULL,2),
+ (6,5,19,'Dê um depoimento','Depoimentos','http://localhost/nomedabase/portal/depoimentos/',NULL,2),
+ (64,63,19,'banner teste','O teste','#',NULL,2),
+ (82,81,17,'Teste 3','Teste 3','#',NULL,2);
 /*!40000 ALTER TABLE `fwk_banner` ENABLE KEYS */;
 
 
@@ -10020,6 +10051,29 @@ CREATE TABLE `fwk_comentario` (
 
 
 --
+-- Definition of table `fwk_config_sistema`
+--
+
+DROP TABLE IF EXISTS `fwk_config_sistema`;
+CREATE TABLE `fwk_config_sistema` (
+  `id_config` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `memory_limit` varchar(45) NOT NULL,
+  `exibir_popup` char(1) NOT NULL DEFAULT 'S',
+  `largura_portal` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_config`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `fwk_config_sistema`
+--
+
+/*!40000 ALTER TABLE `fwk_config_sistema` DISABLE KEYS */;
+INSERT INTO `fwk_config_sistema` (`id_config`,`memory_limit`,`exibir_popup`,`largura_portal`) VALUES 
+ (1,'256M','N','940px');
+/*!40000 ALTER TABLE `fwk_config_sistema` ENABLE KEYS */;
+
+
+--
 -- Definition of table `fwk_configuracoes`
 --
 
@@ -10055,7 +10109,7 @@ CREATE TABLE `fwk_contato` (
   `cel2_contato` varchar(15) DEFAULT NULL,
   `fax_contato` varchar(15) DEFAULT NULL,
   PRIMARY KEY (`id_contato`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `fwk_contato`
@@ -10063,7 +10117,7 @@ CREATE TABLE `fwk_contato` (
 
 /*!40000 ALTER TABLE `fwk_contato` DISABLE KEYS */;
 INSERT INTO `fwk_contato` (`id_contato`,`email_contato`,`tel1_contato`,`tel2_contato`,`telcom_contato`,`ramal_contato`,`cel1_contato`,`cel2_contato`,`fax_contato`) VALUES 
- (1,NULL,'(31) 9968-2531','','','','',NULL,'');
+ (1,NULL,'(31) 9968-2535',NULL,NULL,NULL,'(13) 6666-6666',NULL,NULL);
 /*!40000 ALTER TABLE `fwk_contato` ENABLE KEYS */;
 
 
@@ -10125,7 +10179,7 @@ CREATE TABLE `fwk_direitos` (
   `nome_direito` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_direitos`),
   KEY `FK_direitos` (`id_item_menu`)
-) ENGINE=InnoDB AUTO_INCREMENT=213 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `fwk_direitos`
@@ -10158,6 +10212,7 @@ INSERT INTO `fwk_direitos` (`id_direitos`,`id_menu`,`id_item_menu`,`nome_direito
  (62,NULL,63,'2.3.1 CSS'),
  (63,NULL,64,'2.3.2 Imagens'),
  (64,NULL,65,'2.3.3 Template de Área'),
+ (66,NULL,66,'2.5 Areas'),
  (139,9,NULL,'3. Menu Formulários'),
  (149,NULL,127,'2.4 Banners >'),
  (150,NULL,128,'2.4.1 Categoria Banner'),
@@ -10170,7 +10225,8 @@ INSERT INTO `fwk_direitos` (`id_direitos`,`id_menu`,`id_item_menu`,`nome_direito
  (185,NULL,155,'Url Canonical'),
  (207,NULL,168,'1.4 SubPermissões >'),
  (208,NULL,169,'1.4.1 Por Direito de Grupo'),
- (209,NULL,170,'1.4.2 Por Direito de Usuário');
+ (209,NULL,170,'1.4.2 Por Direito de Usuário'),
+ (210,NULL,171,'3.1 Sobre');
 /*!40000 ALTER TABLE `fwk_direitos` ENABLE KEYS */;
 
 
@@ -10231,7 +10287,9 @@ INSERT INTO `fwk_direitos_grupo` (`id_direitos`,`id_grupo`) VALUES
  (184,1),
  (185,1),
  (167,1),
- (139,1);
+ (139,1),
+ (210,1),
+ (66,1);
 /*!40000 ALTER TABLE `fwk_direitos_grupo` ENABLE KEYS */;
 
 
@@ -10272,13 +10330,95 @@ CREATE TABLE `fwk_documento` (
   PRIMARY KEY (`id_documento`),
   KEY `FK_fwk_documento` (`id_tipo_documento`),
   CONSTRAINT `FK_fwk_documento` FOREIGN KEY (`id_tipo_documento`) REFERENCES `fwk_tipo_documento` (`id_tipo_documento`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `fwk_documento`
 --
 
 /*!40000 ALTER TABLE `fwk_documento` DISABLE KEYS */;
+INSERT INTO `fwk_documento` (`id_documento`,`id_tipo_documento`,`data_cadastro`,`data_alteracao`,`id_usuario_cad`,`id_usuario_alt`) VALUES 
+ (1,7,'2013-08-28','2013-11-27',1,1),
+ (2,999,'2013-08-28','2013-11-27',1,1),
+ (3,999,'2013-08-28','2013-08-28',1,1),
+ (4,7,'2013-08-28',NULL,1,NULL),
+ (5,7,'2013-08-28','2013-11-27',1,1),
+ (6,999,'2013-08-28','2013-11-27',1,1),
+ (7,998,'2013-08-28','2013-08-28',1,1),
+ (8,998,'2013-08-28','2013-11-26',1,1),
+ (9,997,'2013-08-28','2013-08-28',1,1),
+ (10,7,'2013-08-28','2013-08-28',1,1),
+ (11,7,'2013-08-28','2013-08-28',1,1),
+ (12,7,'2013-08-28','2013-08-28',1,1),
+ (13,7,'2013-08-28','2013-08-28',1,1),
+ (14,7,'2013-08-28','2013-08-28',1,1),
+ (15,7,'2013-08-28','2013-08-28',1,1),
+ (16,7,'2013-08-28','2013-08-28',1,1),
+ (17,998,'2013-08-28',NULL,1,NULL),
+ (18,7,'2013-08-28',NULL,1,NULL),
+ (19,7,'2013-08-28',NULL,1,NULL),
+ (20,7,'2013-08-29',NULL,1,NULL),
+ (21,7,'2013-08-29',NULL,1,NULL),
+ (22,998,'2013-08-29','2013-08-29',1,1),
+ (23,998,'2013-08-29','2013-11-26',1,1),
+ (24,997,'2013-08-29','2013-11-26',1,1),
+ (25,7,'2013-08-29','2013-11-26',1,1),
+ (26,7,'2013-08-29','2013-11-26',1,1),
+ (27,7,'2013-08-29','2013-11-26',1,1),
+ (28,7,'2013-08-29','2013-11-26',1,1),
+ (29,7,'2013-08-29','2013-11-26',1,1),
+ (30,7,'2013-08-29','2013-11-26',1,1),
+ (31,7,'2013-08-29','2013-11-26',1,1),
+ (32,997,'2013-08-30','2013-08-30',1,1),
+ (33,7,'2013-08-30',NULL,1,NULL),
+ (34,7,'2013-08-30',NULL,1,NULL),
+ (35,7,'2013-08-30',NULL,1,NULL),
+ (36,7,'2013-08-30','2013-08-30',1,1),
+ (37,7,'2013-08-30',NULL,1,NULL),
+ (38,997,'2013-08-30','2013-08-30',1,1),
+ (39,7,'2013-08-30',NULL,1,NULL),
+ (40,997,'2013-08-30','2013-08-30',1,1),
+ (41,7,'2013-08-30',NULL,1,NULL),
+ (42,997,'2013-08-30',NULL,1,NULL),
+ (43,997,'2013-08-30',NULL,1,NULL),
+ (44,997,'2013-08-30',NULL,1,NULL),
+ (45,7,'2013-08-30',NULL,1,NULL),
+ (46,7,'2013-08-30','2013-08-30',1,1),
+ (47,7,'2013-08-30','2013-08-30',1,1),
+ (48,7,'2013-08-30','2013-08-30',1,1),
+ (49,7,'2013-08-30','2013-08-30',1,1),
+ (50,7,'2013-08-30','2013-08-30',1,1),
+ (51,7,'2013-08-30','2013-08-30',1,1),
+ (52,7,'2013-08-30','2013-08-30',1,1),
+ (53,7,'2013-08-30',NULL,1,NULL),
+ (54,998,'2013-09-02','2013-11-26',1,1),
+ (55,7,'2013-09-02',NULL,1,NULL),
+ (56,7,'2013-09-02',NULL,1,NULL),
+ (57,7,'2013-09-02',NULL,1,NULL),
+ (58,7,'2013-09-02',NULL,1,NULL),
+ (59,7,'2013-09-02',NULL,1,NULL),
+ (60,7,'2013-09-02',NULL,1,NULL),
+ (61,7,'2013-09-02',NULL,1,NULL),
+ (62,998,'2013-11-26',NULL,1,NULL),
+ (63,7,'2013-11-26','2013-11-27',1,1),
+ (64,999,'2013-11-26','2013-11-27',1,1),
+ (65,7,'2013-11-26',NULL,1,NULL),
+ (66,7,'2013-11-26',NULL,1,NULL),
+ (67,7,'2013-11-26',NULL,1,NULL),
+ (68,7,'2013-11-26',NULL,3,NULL),
+ (69,7,'2013-11-26',NULL,4,NULL),
+ (70,7,'2013-11-26',NULL,1,NULL),
+ (71,7,'2013-11-26',NULL,1,NULL),
+ (72,7,'2013-11-27',NULL,1,NULL),
+ (73,7,'2013-11-27',NULL,1,NULL),
+ (74,7,'2013-11-27',NULL,1,NULL),
+ (75,7,'2013-11-27',NULL,1,NULL),
+ (76,7,'2013-11-27',NULL,1,NULL),
+ (77,7,'2013-11-27',NULL,1,NULL),
+ (79,7,'2013-11-27',NULL,1,NULL),
+ (80,7,'2013-11-27',NULL,1,NULL),
+ (81,7,'2013-11-27',NULL,1,NULL),
+ (82,999,'2013-11-27',NULL,1,NULL);
 /*!40000 ALTER TABLE `fwk_documento` ENABLE KEYS */;
 
 
@@ -10455,6 +10595,13 @@ CREATE TABLE `fwk_ficheiro` (
 --
 
 /*!40000 ALTER TABLE `fwk_ficheiro` DISABLE KEYS */;
+INSERT INTO `fwk_ficheiro` (`id_ficheiro`,`id_portal`,`id_foto`,`id_album`,`id_pdf`,`titulo_ficheiro`,`bigode_ficheiro`,`texto_ficheiro`,`identificador_ficheiro`,`nome_area_ficheiro`) VALUES 
+ (7,2,NULL,NULL,NULL,'O Buffet','O Buffet','&lt;p&gt;Neste tutorial mostrarei como estilizar uma tabela de modo a aplicar-lhe um visual do tipo linhas em cores alternadas, tamb&amp;eacute;m conhecido como &quot;efeito zebra&quot;, t&amp;atilde;o comum em tabelas de apresenta&amp;ccedil;&amp;atilde;o de dados.&lt;/p&gt;\r\n&lt;p&gt;Usei na codifica&amp;ccedil;&amp;atilde;o da tabela que serviu de exemplo para esse tutorial apenas os elementos&amp;nbsp;&lt;abbr title=&quot;Hyper Text Markup Language&quot;&gt;HTML&lt;/abbr&gt;&amp;nbsp;&lt;code&gt;table&lt;/code&gt;,&amp;nbsp;&lt;code&gt;tr&lt;/code&gt;&amp;nbsp;e&amp;nbsp;&lt;code&gt;td&lt;/code&gt;mas&amp;nbsp;ressalvo&amp;nbsp;que a n&amp;atilde;o utiliza&amp;ccedil;&amp;atilde;o dos demais elementos de constru&amp;ccedil;&amp;atilde;o de tabelas conforme as Recomenda&amp;ccedil;&amp;otilde;es do W3C conforme links citados no item anterior visam a simplificar o c&amp;oacute;digo j&amp;aacute; que nosso objetivo &amp;eacute; mostrar como estilizar linhas de tabelas em cores alternadas.&lt;/p&gt;\r\n&lt;p&gt;Ao construir suas tabelas n&amp;atilde;o se limite aos tr&amp;ecirc;s elementos citados.&amp;nbsp;&lt;br /&gt;Siga as recomenda&amp;ccedil;&amp;otilde;es do W3C! :-)&lt;/p&gt;','obuffet','http://localhost/nomedabase/portal/buffet/'),
+ (8,2,NULL,NULL,NULL,'Texto de chamada para orçamento da área principal','Orçamento','&lt;p&gt;Fa&amp;ccedil;a seu or&amp;ccedil;amento j&amp;aacute;, ap&amp;oacute;s o envio entraremos em contato o mais r&amp;aacute;pido poss&amp;iacute;vel.&lt;/p&gt;','orcamento','http://localhost/nomedabase/portal/orcamentos/'),
+ (17,2,NULL,NULL,NULL,'Sofia Dimitri','- bufeet e recepções -',NULL,'subtituloportal','#'),
+ (22,2,NULL,NULL,NULL,'Nosso Cardápio','Nosso Cardápio','&lt;p&gt;ssssss Eu particularmente gosto de usar esta tag para colocar &amp;ldquo;linhas&amp;rdquo; entre os  conte&amp;uacute;dos dos meus sites. Muita gente n&amp;atilde;o adere ao HR, preferindo  colocar bordas nas DIV&amp;rsquo;s. Mas &amp;eacute; quest&amp;atilde;o de gosto.                     Neste post vou ensinar voc&amp;ecirc;s a estilizarem a tag HR  atrav&amp;eacute;s de CSS.                     A tag HR &amp;eacute; definida do seguinte modo uuuuuuu&lt;/p&gt;','nossocardapio','#'),
+ (23,2,NULL,NULL,NULL,'Texto sobre o espaço','Texto sobre o espaço','&lt;p&gt;Eu particularmente gosto de usar esta tag para colocar &amp;ldquo;linhas&amp;rdquo; entre os  conte&amp;uacute;dos dos meus sites. Muita gente n&amp;atilde;o adere ao HR, preferindo  colocar bordas nas DIV&amp;rsquo;s. Mas &amp;eacute; quest&amp;atilde;o de gosto.                     Neste post vou ensinar voc&amp;ecirc;s a estilizarem a tag HR  atrav&amp;eacute;s de CSS.                     A tag HR &amp;eacute; definida do seguinte modo.&lt;/p&gt;','oespaco','#'),
+ (54,2,NULL,NULL,NULL,'Texto Depoimento','Texto Depoimento','&lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.cccccc&lt;/p&gt;','txtdepoimento','#');
 /*!40000 ALTER TABLE `fwk_ficheiro` ENABLE KEYS */;
 
 
@@ -10480,7 +10627,88 @@ CREATE TABLE `fwk_fotos` (
 --
 
 /*!40000 ALTER TABLE `fwk_fotos` DISABLE KEYS */;
+INSERT INTO `fwk_fotos` (`id_foto`,`titulo_foto`,`legenda_foto`,`autor_foto`,`nome_arquivo`,`tipo_foto`,`descricao_foto`) VALUES 
+ (1,NULL,NULL,NULL,'FOT0342294001385559549.png','png',NULL),
+ (4,NULL,NULL,NULL,'FOT0840098001377703027.png','png',NULL),
+ (5,NULL,NULL,NULL,'FOT0661086001385559476.jpg','jpg',NULL),
+ (10,'Foto 01','Esse é um foto teste',NULL,'FOT0154502001377708266.png',NULL,NULL),
+ (11,'Foto 02','Esse é um foto teste 2',NULL,'FOT0791089001377708314.png',NULL,NULL),
+ (12,'Foto 03','Esse é um foto teste 3',NULL,'FOT0839890001377708696.png',NULL,NULL),
+ (13,'Foto 04','Esse é um foto teste 4',NULL,'FOT0906101001377708696.png',NULL,NULL),
+ (14,'Foto 05','Esse é um foto teste 5',NULL,'FOT0972956001377708696.png',NULL,NULL),
+ (15,'Foto 06','Esse é um foto teste 6',NULL,'FOT0128183001377708697.png',NULL,NULL),
+ (16,'Foto 07','Esse é um foto teste 7',NULL,'FOT0247519001377709599.png',NULL,NULL),
+ (19,NULL,NULL,NULL,'FOT0139986001377721929.png','png',NULL),
+ (25,'salão 01','foto 01',NULL,'FOT0618032001377802839.jpg',NULL,NULL),
+ (26,'salão 02','foto 02',NULL,'FOT0793055001377802839.jpg',NULL,NULL),
+ (27,'foto 03','foto 03',NULL,'FOT0161920001377802840.jpg',NULL,NULL),
+ (28,'foto 04','foto 04',NULL,'FOT0502941001377802840.jpg',NULL,NULL),
+ (29,'foto 05','foto 05',NULL,'FOT0572437001377802840.jpg',NULL,NULL),
+ (30,'foto 06','foto 06',NULL,'FOT0650039001377802840.jpg',NULL,NULL),
+ (31,'foto 07','foto 07',NULL,'FOT0725583001377802840.jpg',NULL,NULL),
+ (33,'Foto 01','foto 01',NULL,'FOT0264961001377877472.jpg','jpg',NULL),
+ (34,'Foto 01','foto 01',NULL,'FOT0295131001377877577.jpg','jpg',NULL),
+ (35,'Foto 01','foto 01',NULL,'FOT0532526001377877652.jpg','jpg',NULL),
+ (36,'Foto 01','foto 01',NULL,'FOT0353414001377877755.jpg',NULL,NULL),
+ (37,'Foto 02','foto 02',NULL,'FOT0711497001377877773.jpg','jpg',NULL),
+ (39,'salão 01','foto 01',NULL,'FOT0529196001377878098.jpg','jpg',NULL),
+ (41,'Foto 01','foto 01',NULL,'FOT0685885001377880484.jpg','jpg',NULL),
+ (45,'Foto 01','foto 01',NULL,'FOT0385619001377881184.jpg','jpg',NULL),
+ (46,'Foto 01','foto 01',NULL,'FOT0624071001377887474.png',NULL,NULL),
+ (47,'Foto 02','foto 02',NULL,'FOT0656653001377887520.png',NULL,NULL),
+ (48,'Foto 03','Esse é um foto teste 3',NULL,'FOT0752917001377887520.png',NULL,NULL),
+ (49,'Foto 04','foto 04',NULL,'FOT0402049001377887521.png',NULL,NULL),
+ (50,'Foto 05','Esse é um foto teste 5',NULL,'FOT0387960001377887603.png',NULL,NULL),
+ (51,'Foto 06','Esse é um foto teste 6',NULL,'FOT0470613001377887603.jpg',NULL,NULL),
+ (52,'Foto 07','Esse é um foto teste 7',NULL,'FOT0348274001377887633.png',NULL,NULL),
+ (53,'foto08','foto08',NULL,'FOT0352838001377887669.jpg','jpg',NULL),
+ (55,NULL,NULL,NULL,'FOT0843150001378149546.jpg','jpg',NULL),
+ (56,NULL,NULL,NULL,'FOT0976643001378149760.jpg','jpg',NULL),
+ (57,NULL,NULL,NULL,'FOT0867672001378149941.jpg','jpg',NULL),
+ (58,NULL,NULL,NULL,'FOT0037791001378150005.jpg','jpg',NULL),
+ (59,NULL,NULL,NULL,'FOT0357663001378150046.jpg','jpg',NULL),
+ (60,NULL,NULL,NULL,'FOT0832068001378150096.jpg','jpg',NULL),
+ (61,NULL,NULL,NULL,'FOT0460963001378150119.jpg','jpg',NULL),
+ (63,NULL,NULL,NULL,'FOT0729906001385559752.jpg','jpg',NULL),
+ (65,NULL,NULL,NULL,'FOT0163151001385471345.jpg','jpg',NULL),
+ (66,'teste','teste aaaa',NULL,'FOT0108590001385476619.jpg','jpg',NULL),
+ (67,NULL,NULL,NULL,'FOT0408204001385480922.jpg','jpg',NULL),
+ (68,NULL,NULL,NULL,'FOT0115290001385489018.jpg','jpg',NULL),
+ (69,NULL,NULL,NULL,'FOT0650211001385489086.jpg','jpg',NULL),
+ (70,NULL,NULL,NULL,'FOT0251290001385491229.jpg','jpg',NULL),
+ (71,NULL,NULL,NULL,'FOT0658548001385492260.jpg','jpg',NULL),
+ (74,NULL,NULL,NULL,'FOT0517979001385553875.jpg','jpg',NULL),
+ (75,NULL,NULL,NULL,'FOT0643280001385553936.jpg','jpg',NULL),
+ (76,NULL,NULL,NULL,'FOT0252534001385555225.jpg','jpg',NULL),
+ (77,NULL,NULL,NULL,'FOT0447588001385555508.jpg','jpg',NULL),
+ (81,NULL,NULL,NULL,'FOT0764285001385559595.jpg','jpg',NULL);
 /*!40000 ALTER TABLE `fwk_fotos` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fwk_fotos_crop`
+--
+
+DROP TABLE IF EXISTS `fwk_fotos_crop`;
+CREATE TABLE `fwk_fotos_crop` (
+  `id_crop` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `id_foto` int(10) NOT NULL,
+  `cropX` int(10) unsigned DEFAULT NULL,
+  `cropY` int(10) unsigned DEFAULT NULL,
+  `tag_recorte` varchar(145) DEFAULT NULL,
+  `cropX2` int(10) unsigned DEFAULT NULL,
+  `cropY2` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id_crop`),
+  KEY `FK_fwk_fotos_crop_1` (`id_foto`),
+  CONSTRAINT `FK_fwk_fotos_crop_1` FOREIGN KEY (`id_foto`) REFERENCES `fwk_fotos` (`id_foto`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `fwk_fotos_crop`
+--
+
+/*!40000 ALTER TABLE `fwk_fotos_crop` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fwk_fotos_crop` ENABLE KEYS */;
 
 
 --
@@ -10502,6 +10730,34 @@ CREATE TABLE `fwk_fotos_galeria` (
 --
 
 /*!40000 ALTER TABLE `fwk_fotos_galeria` DISABLE KEYS */;
+INSERT INTO `fwk_fotos_galeria` (`id_galeria`,`id_foto`) VALUES 
+ (9,10),
+ (9,11),
+ (9,12),
+ (9,13),
+ (9,14),
+ (9,15),
+ (9,16),
+ (32,36),
+ (32,37),
+ (38,39),
+ (44,45),
+ (40,46),
+ (40,47),
+ (40,48),
+ (40,49),
+ (40,50),
+ (40,51),
+ (40,52),
+ (40,53),
+ (24,25),
+ (24,26),
+ (24,27),
+ (24,28),
+ (24,29),
+ (24,30),
+ (24,31),
+ (24,66);
 /*!40000 ALTER TABLE `fwk_fotos_galeria` ENABLE KEYS */;
 
 
@@ -10526,6 +10782,15 @@ CREATE TABLE `fwk_galeria` (
 --
 
 /*!40000 ALTER TABLE `fwk_galeria` DISABLE KEYS */;
+INSERT INTO `fwk_galeria` (`id_galeria`,`titulo_galeria`,`bigode_galeria`,`texto_galeria`,`identificador_galeria`,`id_portal`) VALUES 
+ (9,'Casamentos','Casamentos',NULL,'casamentos','2'),
+ (24,'Salão Principal','Salão Principal',NULL,'fotossalaoprincipal','2'),
+ (32,'Pista de Dança','Pista de Dança',NULL,'fotospista','2'),
+ (38,'Cozinha','Cozinha',NULL,'fotoscozinha','2'),
+ (40,'15 Anos','15 Anos',NULL,'15anos','2'),
+ (42,'Infantil','Infantil',NULL,'infantil','2'),
+ (43,'Formaturas','Formaturas',NULL,'formaturas','2'),
+ (44,'Outras Ocasiões','Outras Ocasiões',NULL,'outrasocasioes','2');
 /*!40000 ALTER TABLE `fwk_galeria` ENABLE KEYS */;
 
 
@@ -10566,7 +10831,7 @@ CREATE TABLE `fwk_grupo_usuario` (
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `FK_fwk_grupo_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `fwk_usuario` (`id_usuario`) ON DELETE CASCADE,
   CONSTRAINT `fwk_grupo_usuario_ibfk_1` FOREIGN KEY (`id_grupo`) REFERENCES `fwk_grupo` (`id_grupo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `fwk_grupo_usuario`
@@ -10682,7 +10947,7 @@ CREATE TABLE `fwk_item_menu` (
   KEY `FK_fwk_item_menu` (`id_portal`),
   CONSTRAINT `FK_fwk_item_menu` FOREIGN KEY (`id_portal`) REFERENCES `fwk_portal` (`id_portal`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_item_menu` FOREIGN KEY (`id_menu_pai`) REFERENCES `fwk_menu` (`id_menu`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `fwk_item_menu`
@@ -10713,18 +10978,20 @@ INSERT INTO `fwk_item_menu` (`id_item_menu`,`id_menu_pai`,`id_item_menu_pai`,`ti
  (63,NULL,62,'c','CSS','CrudCssPasta',7,1,0),
  (64,NULL,62,'c','Imagens','CrudImagensConteudo',6,1,0),
  (65,NULL,62,'c','Template de Área','SelTemplateArea',4,1,0),
+ (66,8,NULL,'c','Areas','CrudArea',5,1,1),
  (127,8,NULL,'c','Banners >','#',4,1,0),
  (128,NULL,127,'c','Categoria Banner','CrudCategoriaBanners',1,1,1),
  (129,NULL,127,'c','Banner','CrudBanners',2,1,1),
  (130,8,NULL,'c','Documentos','CrudFicheiros',5,1,1),
- (132,8,NULL,'c','Galerias','CrudFicheiros',6,1,1),
+ (132,8,NULL,'c','Galerias','CrudGalerias',6,1,1),
  (142,NULL,8,'c','Usuários por Grupo','CrudUsuariosGrupo',3,1,NULL),
  (153,NULL,62,'c','Descrição Área','DescricaoArea',2,1,1),
  (154,NULL,62,'c','Palavras Chaves Área','PalavrasChavesArea',3,1,1),
  (155,NULL,62,'c','Url Canonical','UrlCanonicalArea',4,1,1),
  (168,1,NULL,'c','SubPermissões >','#',4,1,NULL),
  (169,NULL,168,'c','Por Direito de Grupo','CrudSubDireitosGrupo',1,1,NULL),
- (170,NULL,168,'c','Por Direito de Usuário','CrudSubDireitosUsuario',2,1,NULL);
+ (170,NULL,168,'c','Por Direito de Usuário','CrudSubDireitosUsuario',2,1,NULL),
+ (171,9,NULL,'m','Sobre','formularios&f=CrudSobre',1,1,1);
 /*!40000 ALTER TABLE `fwk_item_menu` ENABLE KEYS */;
 
 
@@ -10760,7 +11027,7 @@ CREATE TABLE `fwk_link_encurtado` (
   `url_completa` text,
   `data_cadastro` date DEFAULT '2011-12-15',
   PRIMARY KEY (`id_link`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `fwk_link_encurtado`
@@ -10768,6 +11035,143 @@ CREATE TABLE `fwk_link_encurtado` (
 
 /*!40000 ALTER TABLE `fwk_link_encurtado` DISABLE KEYS */;
 /*!40000 ALTER TABLE `fwk_link_encurtado` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fwk_log_direitos`
+--
+
+DROP TABLE IF EXISTS `fwk_log_direitos`;
+CREATE TABLE `fwk_log_direitos` (
+  `id_log_direitos` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(80) DEFAULT NULL,
+  `id_usuario_alt` int(10) unsigned DEFAULT '0',
+  `nome_usuario_alt` varchar(50) DEFAULT NULL,
+  `email_usuario_alt` varchar(50) DEFAULT NULL,
+  `id_usuario` int(10) unsigned DEFAULT '0',
+  `nome_usuario` varchar(50) DEFAULT NULL,
+  `email_usuario` varchar(50) DEFAULT NULL,
+  `texto_log` text,
+  `data_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_log_direitos`) USING BTREE,
+  KEY `FK_fwk_log_direitos_2` (`id_usuario_alt`),
+  KEY `FK_fwk_log_direitos_1` (`id_usuario`),
+  CONSTRAINT `FK_fwk_log_direitos_1` FOREIGN KEY (`id_usuario`) REFERENCES `fwk_usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_fwk_log_direitos_2` FOREIGN KEY (`id_usuario_alt`) REFERENCES `fwk_usuario` (`id_usuario`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fwk_log_direitos`
+--
+
+/*!40000 ALTER TABLE `fwk_log_direitos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fwk_log_direitos` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fwk_log_direitos_grupo`
+--
+
+DROP TABLE IF EXISTS `fwk_log_direitos_grupo`;
+CREATE TABLE `fwk_log_direitos_grupo` (
+  `id_log_direitos_grupo` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(80) DEFAULT NULL,
+  `id_usuario_alt` int(10) unsigned DEFAULT '0',
+  `nome_usuario_alt` varchar(50) DEFAULT NULL,
+  `email_usuario_alt` varchar(50) DEFAULT NULL,
+  `id_grupo` int(10) unsigned DEFAULT '0',
+  `nome_grupo` varchar(50) DEFAULT NULL,
+  `texto_log` text,
+  `data_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_log_direitos_grupo`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fwk_log_direitos_grupo`
+--
+
+/*!40000 ALTER TABLE `fwk_log_direitos_grupo` DISABLE KEYS */;
+INSERT INTO `fwk_log_direitos_grupo` (`id_log_direitos_grupo`,`descricao`,`id_usuario_alt`,`nome_usuario_alt`,`email_usuario_alt`,`id_grupo`,`nome_grupo`,`texto_log`,`data_log`) VALUES 
+ (1,'LOG_ALTERACAO_DIREITO_GRUPO',1,'Fernando Braga','fernando.bs.dark@hotmail.com',1,'Administrador Geral','{\"dados_anteriores\":[\"10\",\"5\",\"15\",\"3\",\"4\",\"8\",\"43\",\"9\",\"11\",\"12\",\"13\",\"207\",\"208\",\"209\",\"57\",\"49\",\"61\",\"60\",\"50\",\"51\",\"52\",\"53\",\"54\",\"55\",\"56\",\"62\",\"63\",\"64\",\"149\",\"150\",\"151\",\"152\",\"154\",\"183\",\"184\",\"185\",\"167\",\"139\",\"210\",\"211\",\"212\",\"215\",\"216\",\"217\",\"218\",\"219\",\"220\",\"221\",\"222\",\"223\",\"224\"],\"dados_novos\":[\"10\",\"5\",\"15\",\"3\",\"4\",\"8\",\"43\",\"9\",\"11\",\"12\",\"13\",\"207\",\"208\",\"209\",\"57\",\"49\",\"61\",\"60\",\"50\",\"51\",\"52\",\"53\",\"54\",\"55\",\"56\",\"62\",\"63\",\"64\",\"149\",\"150\",\"151\",\"152\",\"154\",\"183\",\"184\",\"185\",\"167\",\"139\",\"210\",\"211\",\"212\",\"215\",\"216\",\"217\",\"218\",\"219\",\"220\",\"221\",\"222\",\"223\",\"224\",\"66\"]}','2014-10-03 11:06:58');
+/*!40000 ALTER TABLE `fwk_log_direitos_grupo` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fwk_log_grupo_usuario`
+--
+
+DROP TABLE IF EXISTS `fwk_log_grupo_usuario`;
+CREATE TABLE `fwk_log_grupo_usuario` (
+  `id_log_grupo_usuario` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(80) DEFAULT NULL,
+  `id_usuario_alt` int(10) unsigned DEFAULT '0',
+  `nome_usuario_alt` varchar(50) DEFAULT NULL,
+  `email_usuario_alt` varchar(50) DEFAULT NULL,
+  `id_usuario` int(10) unsigned DEFAULT '0',
+  `nome_usuario` varchar(50) DEFAULT NULL,
+  `texto_log` text,
+  `data_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `email_usuario` varchar(145) DEFAULT NULL,
+  PRIMARY KEY (`id_log_grupo_usuario`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fwk_log_grupo_usuario`
+--
+
+/*!40000 ALTER TABLE `fwk_log_grupo_usuario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fwk_log_grupo_usuario` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fwk_log_usuario_grupo`
+--
+
+DROP TABLE IF EXISTS `fwk_log_usuario_grupo`;
+CREATE TABLE `fwk_log_usuario_grupo` (
+  `id_log_usuario_grupo` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(80) DEFAULT NULL,
+  `id_usuario_alt` int(10) unsigned DEFAULT '0',
+  `nome_usuario_alt` varchar(50) DEFAULT NULL,
+  `email_usuario_alt` varchar(50) DEFAULT NULL,
+  `id_grupo` int(10) unsigned DEFAULT '0',
+  `nome_grupo` varchar(50) DEFAULT NULL,
+  `texto_log` text,
+  `data_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_log_usuario_grupo`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fwk_log_usuario_grupo`
+--
+
+/*!40000 ALTER TABLE `fwk_log_usuario_grupo` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fwk_log_usuario_grupo` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fwk_logs`
+--
+
+DROP TABLE IF EXISTS `fwk_logs`;
+CREATE TABLE `fwk_logs` (
+  `id_log_grupos` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(80) DEFAULT NULL,
+  `id_usuario_alt` int(10) unsigned DEFAULT '0',
+  `nome_usuario_alt` varchar(50) DEFAULT NULL,
+  `email_usuario_alt` varchar(50) DEFAULT NULL,
+  `id` int(10) unsigned DEFAULT '0',
+  `texto_log` text,
+  `data_log` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_log_grupos`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `fwk_logs`
+--
+
+/*!40000 ALTER TABLE `fwk_logs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fwk_logs` ENABLE KEYS */;
 
 
 --
@@ -10919,6 +11323,27 @@ INSERT INTO `fwk_portal` (`id_portal`,`nome_portal`) VALUES
 
 
 --
+-- Definition of table `fwk_sobre`
+--
+
+DROP TABLE IF EXISTS `fwk_sobre`;
+CREATE TABLE `fwk_sobre` (
+  `id_sobre` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `texto` text NOT NULL,
+  PRIMARY KEY (`id_sobre`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `fwk_sobre`
+--
+
+/*!40000 ALTER TABLE `fwk_sobre` DISABLE KEYS */;
+INSERT INTO `fwk_sobre` (`id_sobre`,`texto`) VALUES 
+ (1,'Teste');
+/*!40000 ALTER TABLE `fwk_sobre` ENABLE KEYS */;
+
+
+--
 -- Definition of table `fwk_sub_direitos`
 --
 
@@ -10952,7 +11377,7 @@ CREATE TABLE `fwk_sub_direitos_grupo` (
   `id_grupo` int(10) unsigned DEFAULT NULL,
   `id_sub_direito` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id_sub_direitos_grupo`)
-) ENGINE=InnoDB AUTO_INCREMENT=254 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=295 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `fwk_sub_direitos_grupo`
@@ -11013,7 +11438,46 @@ INSERT INTO `fwk_sub_direitos_grupo` (`id_sub_direitos_grupo`,`id_direito`,`id_g
  (250,184,1,3),
  (251,185,1,1),
  (252,185,1,2),
- (253,185,1,3);
+ (253,185,1,3),
+ (254,211,1,1),
+ (255,211,1,2),
+ (256,211,1,3),
+ (257,212,1,1),
+ (258,212,1,2),
+ (259,212,1,3),
+ (260,213,1,1),
+ (261,213,1,2),
+ (262,213,1,3),
+ (263,214,1,1),
+ (264,214,1,2),
+ (265,214,1,3),
+ (266,215,1,1),
+ (267,215,1,2),
+ (268,215,1,3),
+ (269,216,1,1),
+ (270,216,1,2),
+ (271,216,1,3),
+ (272,218,1,1),
+ (273,218,1,2),
+ (274,218,1,3),
+ (275,219,1,1),
+ (276,219,1,2),
+ (277,219,1,3),
+ (278,220,1,1),
+ (279,220,1,2),
+ (280,220,1,3),
+ (281,221,1,1),
+ (282,221,1,2),
+ (283,221,1,3),
+ (284,224,1,1),
+ (285,224,1,2),
+ (286,224,1,3),
+ (289,66,1,1),
+ (290,66,1,2),
+ (291,66,1,3),
+ (292,210,1,1),
+ (293,210,1,2),
+ (294,210,1,3);
 /*!40000 ALTER TABLE `fwk_sub_direitos_grupo` ENABLE KEYS */;
 
 
@@ -11140,7 +11604,7 @@ CREATE TABLE `fwk_tipo_basico` (
   PRIMARY KEY (`id_tipo_basico`),
   KEY `FK_fwk_tipo_basico` (`id_tipo_documento`),
   CONSTRAINT `FK_fwk_tipo_basico` FOREIGN KEY (`id_tipo_documento`) REFERENCES `fwk_tipo_documento` (`id_tipo_documento`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `fwk_tipo_basico`
@@ -11149,7 +11613,9 @@ CREATE TABLE `fwk_tipo_basico` (
 /*!40000 ALTER TABLE `fwk_tipo_basico` DISABLE KEYS */;
 INSERT INTO `fwk_tipo_basico` (`id_tipo_basico`,`id_tipo_documento`,`desc_tipo_basico`) VALUES 
  (15,996,'Provisório'),
- (16,996,'Ativo');
+ (16,996,'Ativo'),
+ (17,999,'bannerhomedir'),
+ (19,999,'bannerhomeesq');
 /*!40000 ALTER TABLE `fwk_tipo_basico` ENABLE KEYS */;
 
 
@@ -11162,7 +11628,7 @@ CREATE TABLE `fwk_tipo_documento` (
   `id_tipo_documento` int(11) NOT NULL AUTO_INCREMENT,
   `tipo_documento` varchar(100) NOT NULL,
   PRIMARY KEY (`id_tipo_documento`)
-) ENGINE=InnoDB AUTO_INCREMENT=997 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `fwk_tipo_documento`
@@ -11170,7 +11636,11 @@ CREATE TABLE `fwk_tipo_documento` (
 
 /*!40000 ALTER TABLE `fwk_tipo_documento` DISABLE KEYS */;
 INSERT INTO `fwk_tipo_documento` (`id_tipo_documento`,`tipo_documento`) VALUES 
- (996,'categoria_usuario');
+ (7,'fotos'),
+ (996,'categoria_usuario'),
+ (997,'galeria'),
+ (998,'ficheiro'),
+ (999,'banners');
 /*!40000 ALTER TABLE `fwk_tipo_documento` ENABLE KEYS */;
 
 
@@ -11193,20 +11663,21 @@ CREATE TABLE `fwk_usuario` (
   `id_usuario_cad` int(10) unsigned DEFAULT NULL,
   `data_alteracao` date DEFAULT NULL,
   `id_usuario_alt` int(10) unsigned DEFAULT NULL,
+  `id_foto` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id_usuario`),
   KEY `FK_fwk_usuario` (`id_contato`),
   KEY `FK_fwk_usuario_tipo` (`id_tipo_usuario`),
   CONSTRAINT `FK_fwk_usuario` FOREIGN KEY (`id_contato`) REFERENCES `fwk_contato` (`id_contato`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_fwk_usuario_tipo` FOREIGN KEY (`id_tipo_usuario`) REFERENCES `fwk_tipo_basico` (`id_tipo_basico`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `fwk_usuario`
 --
 
 /*!40000 ALTER TABLE `fwk_usuario` DISABLE KEYS */;
-INSERT INTO `fwk_usuario` (`id_usuario`,`nome_usuario`,`password_usuario`,`email_usuario`,`data_cadastro`,`idioma_usuario`,`id_tipo_usuario`,`id_contato`,`via_facebook`,`primeiro_acesso`,`id_usuario_cad`,`data_alteracao`,`id_usuario_alt`) VALUES 
- (1,'Fernando Braga','YmEwYjY5Y2EzZjQ2NzMwZWIwYjRjMWRiNzA5Yzk3OGY=','fernando.bs.dark@hotmail.com','2011-10-27','pt_br',16,1,NULL,'S',NULL,NULL,NULL);
+INSERT INTO `fwk_usuario` (`id_usuario`,`nome_usuario`,`password_usuario`,`email_usuario`,`data_cadastro`,`idioma_usuario`,`id_tipo_usuario`,`id_contato`,`via_facebook`,`primeiro_acesso`,`id_usuario_cad`,`data_alteracao`,`id_usuario_alt`,`id_foto`) VALUES 
+ (1,'Fernando Braga','YmEwYjY5Y2EzZjQ2NzMwZWIwYjRjMWRiNzA5Yzk3OGY=','fernando.bs.dark@hotmail.com','2011-10-27','pt_br',16,1,NULL,NULL,NULL,NULL,NULL,67);
 /*!40000 ALTER TABLE `fwk_usuario` ENABLE KEYS */;
 
 
@@ -11227,7 +11698,7 @@ CREATE TABLE `fwk_verificacao` (
 
 /*!40000 ALTER TABLE `fwk_verificacao` DISABLE KEYS */;
 INSERT INTO `fwk_verificacao` (`tabela_verificacao`,`data_verificacao`) VALUES 
- ('fwk_link_encurtado','2013-04-17');
+ ('fwk_link_encurtado','2014-10-06');
 /*!40000 ALTER TABLE `fwk_verificacao` ENABLE KEYS */;
 
 
