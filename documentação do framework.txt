@@ -1,5 +1,5 @@
-
 1) Configurar um novo portal:
+-Copie (confs_servidor - PADRÃO.php) e salve com o nome confs_servidor.php no mesmo lugar.
 - Modifique valores no configs.php, confs_servidor.php, conf_banco.php e config/config.xml dentro da pasta portal, de acordo com informações do novo portal.
 
 _________________________________________________________________________________________________________________________________________________
