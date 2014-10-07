@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuracoes>
+    <portal>
+        <tituloPortal>Nova Área</tituloPortal>
+        <titulo>Nova Área</titulo>
+        <idPortal>1</idPortal>
+        <stilos>
+        </stilos>
+        <javascripts>
+        </javascripts>
+        <customizacao>	
+        </customizacao>
+        <descricao>Nova área do portal.</descricao>
+        <palavrasChaves>Nova area, teste, testes</palavrasChaves>
+        <urlCanonical></urlCanonical>
+    </portal>
     <conteudo>
         <wireframe>wireBoots1.tpl</wireframe>
     </conteudo>
