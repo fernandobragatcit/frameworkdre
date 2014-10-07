@@ -16,8 +16,8 @@
 		<orderBy>ordem_menu</orderBy>
 	</query>
 	<buttons>
-		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
-		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport btn" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport btn" />
 	</buttons>
 	<filtro>
 		<campo alias="Menu">nome_menu</campo>

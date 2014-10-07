@@ -20,7 +20,7 @@
 		<orderBy>gr.nome_grupo</orderBy>
 	</query>
 	<buttons>
-		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport btn" />
 	</buttons>
 	<filtro>
 		<campos type="text" name="nome_grupo" id="nome_grupo" label="Grupo"

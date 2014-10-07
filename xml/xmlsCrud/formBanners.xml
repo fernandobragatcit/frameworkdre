@@ -28,8 +28,8 @@
 		label="Imagem" class="inputFile" obrigatorio="true" />
 
 	<buttons>
-		<button name="Cadastrar" value="Salvar" type="submit" direito="151" />
-		<button name="Cancelar" value="Cancelar" type="button"
+		<button class="btn" name="Cadastrar" value="Salvar" type="submit" direito="151" />
+		<button name="Cancelar" value="Cancelar" type="button" class="btn" 
 			confirme="a=lista" mens="Deseja realmente sair deste formulario?" />
 	</buttons>
 

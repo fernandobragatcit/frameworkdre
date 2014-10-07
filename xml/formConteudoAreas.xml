@@ -15,8 +15,8 @@
 		label="Conteúdo" class="span10 height300" />
 
 	<buttons>
-		<button name="Cadastrar" value="Salvar" type="submit" />
-		<button name="Cancelar" value="Cancelar" type="button"
+		<button class="btn" name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button" class="btn" 
 			confirme="?" mens="Deseja realmente sair deste formulario?" />
 	</buttons>
 

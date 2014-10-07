@@ -29,8 +29,8 @@
     </campos>
 		
     <buttons>
-        <button name="Salvar" value="Salvar" type="submit" class="btnForm" semId="true" direito="148" />
-        <button name="Cancelar" value="Cancelar" type="button" class="btnForm"
+        <button name="Salvar" value="Salvar" type="submit" class="btnForm btn" semId="true" direito="148" />
+        <button name="Cancelar" value="Cancelar" type="button" class="btnForm btn"
                         confirme="a=home" mens="Deseja realmente sair do formulario?" />
     </buttons>
 

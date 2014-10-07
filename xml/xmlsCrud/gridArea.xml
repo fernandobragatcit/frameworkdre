@@ -21,8 +21,8 @@
 		<orderBy>ordem</orderBy>
 	</query>
 	<buttons>
-		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
-		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport btn" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport btn" />
 	</buttons>
 	<filtro>
 		<campos type="text" name="descricao" id="descricao" label="Area"

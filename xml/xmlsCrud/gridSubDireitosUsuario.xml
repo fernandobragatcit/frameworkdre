@@ -36,7 +36,7 @@
         <orderBy>us.nome_usuario</orderBy>
     </query>
     <buttons>
-        <campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
+        <campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport btn" />
     </buttons>
     <filtro>
         <campos type="text" name="nome_usuario" id="nome_usuario" label="Nome Usuário"

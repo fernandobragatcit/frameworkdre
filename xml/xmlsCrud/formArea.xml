@@ -16,8 +16,8 @@
 		maxlength="5" class="small" />
 	<buttons>
 
-		<button name="Cadastrar" value="Salvar" type="submit" direito="66" />
-		<button name="Cancelar" value="Cancelar" type="button"
+		<button class="btn" name="Cadastrar" value="Salvar" type="submit" direito="66" />
+		<button name="Cancelar" value="Cancelar" type="button" class="btn" 
 			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
 
 	</buttons>

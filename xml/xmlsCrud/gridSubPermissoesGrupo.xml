@@ -49,6 +49,6 @@
    
     
     <buttons>
-        <campos name="Voltar" value="Voltar Para Etapa 1" type="button" goto="a=lista" class="btnReport" />
+        <campos name="Voltar" value="Voltar Para Etapa 1" type="button" goto="a=lista" class="btnReport btn" />
     </buttons>
 </grid>

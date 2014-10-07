@@ -6,8 +6,8 @@
 		label="Arquivo Javascript" title="Arquivo Javascript" class="inputFile" obrigatorio="true" />
 
 	<buttons>
-		<button name="Cadastrar" value="Salvar" type="submit" direito="64" />
-		<button name="Cancelar" value="Cancelar" type="button"
+		<button class="btn" name="Cadastrar" value="Salvar" type="submit" direito="64" />
+		<button name="Cancelar" value="Cancelar" type="button" class="btn" 
 			confirme="a=home" mens="Deseja realmente sair deste formulario?" />
 	</buttons>
 

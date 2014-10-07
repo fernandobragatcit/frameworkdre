@@ -194,7 +194,7 @@
 			    </tr>
 			    </table>
 			<div id="btnsForm">
-			    <button id="Cadastrar" name="Cadastrar" type="submit" >Salvar</button>
+			    <button id="Cadastrar" name="Cadastrar" type="submit" class="btn" >Salvar</button>
 			    <button id="Cancelar" name="Cancelar" onClick="return confirmIr('?','Deseja realmente sair deste formulario?')" type="button">Cancelar</button>
 			</div>
 		</fieldset>

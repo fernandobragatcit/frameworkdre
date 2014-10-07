@@ -48,7 +48,7 @@
 		</div>
 		{/if}
 		<div id="buttonsReport" style="text-align:center">
-			<button id="Cadastrar" name="Cadastrar" type="button" onClick="return vaiPara('?c={$VAI_PARA}')"  class="btnReport">Cadastrar</button>
-			<button id="Cancelar" name="Cancelar" type="button" onClick="return vaiPara('?')"  class="btnReport">Cancelar</button>
+			<button id="Cadastrar" name="Cadastrar" type="button" onClick="return vaiPara('?c={$VAI_PARA}')"  class="btnReport btn">Cadastrar</button>
+			<button id="Cancelar" name="Cancelar" type="button" onClick="return vaiPara('?')"  class="btnReport btn">Cancelar</button>
 		</div>
  </div>
