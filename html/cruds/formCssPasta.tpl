@@ -10,7 +10,7 @@ Os campos marcados com <span class="campoObrigatorio">*</span> são de preenchim
 
 <div class="formTelaFull">
 	<label>{$nome_estilo_css_label} :
-		<span class="small" id="nome_arquivo_erro">{$nome_arquivo_error}</span>
+		<span class="small error" id="nome_arquivo_erro">{$nome_arquivo_error}</span>
 	</label> {$nome_estilo_css_campo}
 </div>
 

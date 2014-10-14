@@ -9,7 +9,7 @@
 
 <div class="formTelaFull">
 	<label>{$nome_javascript_label} :
-	    <span class="small" id="nome_arquivo_erro">{$nome_arquivo_error}</span>
+	    <span class="small error" id="nome_arquivo_erro">{$nome_arquivo_error}</span>
 	</label> {$nome_javascript_campo}
 </div>
 

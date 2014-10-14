@@ -4,19 +4,19 @@
 
 <div class="formTelaFull">
 	<label>{$descricao_label} :
-	    <span class="small" id="descricao_erro">{$descricao_error}</span>
+	    <span class="small error" id="descricao_erro">{$descricao_error}</span>
 	</label> {$descricao_campo}
 </div>
 
 <div class="formTelaFull">
 	<label>{$area_label} :
-		<span class="small" id="area_erro">{$area_error}</span>
+		<span class="small error" id="area_erro">{$area_error}</span>
 	</label> {$area_campo}
 </div>
 
 <div class="formTelaFull">
 	<label>{$ordem_label} :
-		<span class="small" id="ordem_erro">{$ordem_error}</span>
+		<span class="small error" id="ordem_erro">{$ordem_error}</span>
 	</label> {$ordem_campo}
 </div>
 

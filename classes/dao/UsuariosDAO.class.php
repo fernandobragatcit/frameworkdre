@@ -266,6 +266,10 @@ class UsuariosDAO extends AbsModelDao {
         $strQuery = "SELECT id_grupo FROM fwk_grupo_usuario WHERE id_usuario=" . $id;
         return ControlDb::getCol($strQuery, 0);
     }
+     public function getDadosFwkContatos($id) {
+        $strQuery = "SELECT * FROM fwk_contato WHERE id_contato='" . $id . "'";
+        return ControlDB::getRow($strQuery, 0);
+    }
 
     private function getObjUsrProv() {
         if ($this->objUsrProv == null)

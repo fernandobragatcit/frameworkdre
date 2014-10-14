@@ -4,7 +4,7 @@
 
 <div class="formTelaFull">
 	<label>{$documentoUsuario_label} :
-	    <span class="small" id="documentoUsuario_erro">{$documentoUsuario_error}</span>
+	    <span class="small error" id="documentoUsuario_erro">{$documentoUsuario_error}</span>
 	</label> {$documentoUsuario_campo}
 </div>
 

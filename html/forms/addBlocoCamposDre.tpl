@@ -73,7 +73,7 @@
                                     <input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$file]}" />
 
                                 {elseif $ARR_LINHAS[per].tipo == 'text'}
-                                    <input {if $ARR_LINHAS[per].class != ""}class="medium {$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
+                                    <input {if $ARR_LINHAS[per].class != ""}class="medium {$ARR_LINHAS[per].class}"{else}class="small error"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
 
                                 {elseif $ARR_LINHAS[per].tipo == 'checkbox'}
                                     <input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{/if}  value="{$ARR_LINHAS[per].value}" type="{$ARR_LINHAS[per].tipo}"  name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
@@ -109,7 +109,7 @@
                                     <input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$file]}" />
 
                                 {elseif $ARR_LINHAS[per].tipo == 'text'}
-                                    <input {if $ARR_LINHAS[per].class != ""}class="medium {$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
+                                    <input {if $ARR_LINHAS[per].class != ""}class="medium {$ARR_LINHAS[per].class}"{else}class="small error"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
 
                                 {elseif $ARR_LINHAS[per].tipo == 'checkbox'}
                                     <input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{/if}  value="{$ARR_LINHAS[per].value}" type="{$ARR_LINHAS[per].tipo}"  name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
@@ -216,7 +216,7 @@
                                     <input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" />
 
                                 {elseif $ARR_LINHAS[per].tipo == 'text'}
-                                    <input {if $ARR_LINHAS[per].class != ""}class="small {$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
+                                    <input {if $ARR_LINHAS[per].class != ""}class="small {$ARR_LINHAS[per].class}"{else}class="small error"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
 
                                 {elseif $ARR_LINHAS[per].tipo == 'checkbox'}
                                     <input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{/if}  value="{$ARR_LINHAS[per].value}" type="{$ARR_LINHAS[per].tipo}"  name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
@@ -252,7 +252,7 @@
                                     <input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" />
 
                                 {elseif $ARR_LINHAS[per].tipo == 'text'}
-                                    <input {if $ARR_LINHAS[per].class != ""}class="small {$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
+                                    <input {if $ARR_LINHAS[per].class != ""}class="small {$ARR_LINHAS[per].class}"{else}class="small error"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
 
                                 {elseif $ARR_LINHAS[per].tipo == 'checkbox'}
                                     <input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{/if}  value="{$ARR_LINHAS[per].value}" type="{$ARR_LINHAS[per].tipo}"  name="{$IDCOMPONENTE}[{$id}][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
@@ -369,7 +369,7 @@
                                     <input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}">
 
                                 {elseif $ARR_LINHAS[per].tipo == 'text'}
-                                    <input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
+                                    <input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="small error"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
 
                                 {elseif $ARR_LINHAS[per].tipo == 'checkbox'}
                                     <input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{/if} value="{$ARR_LINHAS[per].value}" type="{$ARR_LINHAS[per].tipo}"  name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
@@ -405,7 +405,7 @@
                                     <input type="hidden" name="{$IDCOMPONENTE}[{$id}][id_{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" />
 
                                 {elseif $ARR_LINHAS[per].tipo == 'text'}
-                                    <input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="small"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
+                                    <input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{else}class="small error"{/if} type="{$ARR_LINHAS[per].tipo}" {$ARR_LINHAS[per].keypress} maxlength="{$ARR_LINHAS[per].maxlenght}" name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />
 
                                 {elseif $ARR_LINHAS[per].tipo == 'checkbox'}
                                     <input {if $ARR_LINHAS[per].class != ""}class="{$ARR_LINHAS[per].class}"{/if} value="{$ARR_LINHAS[per].value}" type="{$ARR_LINHAS[per].tipo}"  name="{$IDCOMPONENTE}[number][{$ARR_LINHAS[per].id}]" value="{$DADOS[da][$val]}" {$ARR_LINHAS[per].onchange} />

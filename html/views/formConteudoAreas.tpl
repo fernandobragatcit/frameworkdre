@@ -9,7 +9,7 @@
 
 <div class="formTelaFull span10">
 	<label>{$idioma_label}<span class="campoObrigatorio">*</span>
-		<span class="small" id="idioma_erro">{$idioma_error}</span>
+		<span class="small error" id="idioma_erro">{$idioma_error}</span>
 	</label> {$idioma_campo}
 </div>
 

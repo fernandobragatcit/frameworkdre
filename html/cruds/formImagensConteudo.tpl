@@ -9,13 +9,13 @@
 {/if}
 <div class="formTelaFull">
 	<label>{$nome_imagem_label} :
-	    <span class="small" id="nome_imagem_erro">{$nome_imagem_error}</span>
+	    <span class="small error" id="nome_imagem_erro">{$nome_imagem_error}</span>
 	</label> {$nome_imagem_campo}
 </div>
 
 <div class="formTelaFull">
 	<label>{$nome_imagem_zip_label} :
-	    <span class="small" id="nome_imagem_zip_erro">{$nome_imagem_zip_error}</span>
+	    <span class="small error" id="nome_imagem_zip_erro">{$nome_imagem_zip_error}</span>
 	</label> {$nome_imagem_zip_campo}
 </div>
 

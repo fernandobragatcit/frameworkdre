@@ -6,7 +6,7 @@
     font-weight: bold;
     margin: 30px 0;">NÃO FOI POSSÍVEL EXCLUIR ESTE REGISTRO, POIS ELE ESTÁ VINCULADO A OUTRAS TABELAS!</h1></div>
         <div style="margin-bottom: 20px;">{$MENS_EXCECAO}</div>
-        <a class="btnForm btnForm_ie7" style="padding: 5px 20px;
+        <a class="btnForm btnForm_ie7 btn" style="padding: 5px 20px;
     background-color: #386280;
     border: none;
     color: #C9E6F9 !important;

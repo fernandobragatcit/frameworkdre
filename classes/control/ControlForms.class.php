@@ -159,12 +159,12 @@ class ControlForm {
                     break;
                 case "email_confirme":
                     self::setJsComparaCampos($data->attributes()->id, $data->attributes()->comparaCom, $data->attributes()->label, $data->attributes()->mensErro);
-                    $data->attributes()->type = "Input";
+                    $data->attributes()->type = "text";
                     self::getFactoryCompHtml()->buildComp($data, $arrDados[(string) $data->attributes()->name]);
                     break;
                 /* case "email":
                   self::setJsCampoEspecial($data->attributes()->id,$data->attributes()->label,$data->attributes()->type,$data->attributes()->mensErro);
-                  $data->attributes()->type = "Input";
+                  $data->attributes()->type = "text";
                   self::getFactoryCompHtml()->buildComp($data,$arrDados[(string)$data->attributes()->name]);
                   break; */
                 case "data":
@@ -224,19 +224,19 @@ class ControlForm {
                     break;
                 case "email_confirme":
                     self::setJsComparaCampos($data->attributes()->id, $data->attributes()->comparaCom, $data->attributes()->label, $data->attributes()->mensErro);
-                    $data->attributes()->type = "Input";
+                    $data->attributes()->type = "text";
                     self::getFactoryCompHtml()->buildComp($data);
                     break;
                 case "email":
                     self::setJsCampoEspecial($data->attributes()->id, $data->attributes()->label, $data->attributes()->type, $data->attributes()->mensErro);
-                    $data->attributes()->type = "Input";
+                    $data->attributes()->type = "text";
                     self::getFactoryCompHtml()->buildComp($data);
                     break;
                 case "inteiro":
                 case "integer":
                     self::setJsCampoEspecial($data->attributes()->id, $data->attributes()->label, $data->attributes()->type, $data->attributes()->mensErro);
                     self::setJsMascaraCampos($data->attributes()->id, $data->attributes()->label, $data->attributes()->type, $data->attributes()->mask, $data->attributes()->mensErro);
-                    $data->attributes()->type = "Input";
+                    $data->attributes()->type = "text";
                     self::getFactoryCompHtml()->buildComp($data);
                     break;
                 case "captcha":
@@ -305,6 +305,7 @@ class ControlForm {
         $objCtrlJs->addJs(FWK_JS . "mascaras/jquery.alphanumeric.js");
 
 
+        $objCtrlJs->addJs(FWK_JS . "jquery-ui.min.js");
         $objCtrlJs->addJs(FWK_JS . "jquery.ui.datepicker-pt-BR.js");
         $objCtrlJs->addJs(FWK_JS . "jquery.maskedinput-1.2.2.min.js");
 

@@ -329,8 +329,10 @@ class Main {
         $objMenu->setCssMenu(self::getCssMenuGlobal());
         $objMenu->setTplMenu(self::getTplMenuGlobal());
         $objUsuario = self::getObjSessao();
-        self::getObjSmarty()->assign("LINK_LOGIN", "?m=" . self::getObjCrypt()->cryptData("tags&f=ViewFormAcesso&a=formLogin"));
-        self::getObjSmarty()->assign("CAD_USUARIO", "?m=" . self::getObjCrypt()->cryptData("tags&f=ViewCadUsuarios"));
+        if (!LOGIN_CADASTRO_MODAL) {
+            self::getObjSmarty()->assign("LINK_LOGIN", "?c=" . self::getObjCrypt()->cryptData("login"));
+            self::getObjSmarty()->assign("CAD_USUARIO", "?c=" . self::getObjCrypt()->cryptData("ViewCadUsuarios"));
+        }
         if ($objUsuario->getNomeUsuario() != "Visitante") {
             self::getObjSmarty()->assign("NOME_USUARIO", $objUsuario->getNomeUsuario());
             self::getObjSmarty()->assign("MENU_GLOBAL", $objMenu->geraMenu($objUsuario->getGrupoUsuario(), $objUsuario->getIdUsuario()));
@@ -543,7 +545,7 @@ class Main {
     }
 
     private function setLimitMemory() {
-        $memory_limit_sistema =  End(ControlDb::getCol("SELECT memory_limit FROM fwk_config_sistema WHERE id_config=1"));
+        $memory_limit_sistema = End(ControlDb::getCol("SELECT memory_limit FROM fwk_config_sistema WHERE id_config=1"));
         if (!empty($memory_limit_sistema)) {
             ini_set("memory_limit", $memory_limit_sistema);
         }
