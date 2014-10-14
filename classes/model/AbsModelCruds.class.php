@@ -33,7 +33,7 @@ abstract class AbsModelCruds extends ADOdb_Active_Record{
 	 */
 	protected function salvaPostAutoUtf8($post){
 		foreach ($post as $key => $data) {
-			$this->$key = utf8_decode($data);
+			$this->$key = $data;
 		}
     }
 
@@ -44,7 +44,7 @@ abstract class AbsModelCruds extends ADOdb_Active_Record{
 				$data = htmlspecialchars($data, ENT_QUOTES);
 			if($arrCampos[$key] != $data  && $data !="" && isset($data) ){
 				if($decode)
-					$this->$key = utf8_decode($data);
+					$this->$key = $data;
 				else
 					$this->$key = $data;
 			}else{
@@ -139,7 +139,7 @@ abstract class AbsModelCruds extends ADOdb_Active_Record{
 
 	protected function verifIntegridadeUTF8($campo, $valor){
 		$query = "SELECT COUNT(*) FROM ".$this->_table."
-				  WHERE LOWER(".$campo.") = '".strtolower(utf8_decode($valor))."'";
+				  WHERE LOWER(".$campo.") = '".strtolower($valor)."'";
 		$arrRet = ControlDb::getBanco()->GetRow($query);
 		if($arrRet[0]>0)
 			throw new CrudException("Ja existe este registro no sistema.");

@@ -66,7 +66,7 @@ class CheckBoxGroupByQuery extends AbsCompHtml {
 				}
 			}
 		}
-    	self::getObjSmarty()->assign("ARR_CHECKS",Utf8Parsers::matrizUtf8Encode($arrResults));
+    	self::getObjSmarty()->assign("ARR_CHECKS",$arrResults);
     }
 
 }

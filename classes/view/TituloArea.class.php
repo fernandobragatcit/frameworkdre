@@ -23,7 +23,7 @@ class TituloArea extends AbsCruds {
 		$objCtrlForm = new ControlForm(FWK_XML."formTituloArea.xml");
 		$objCtrlForm->setTplsFile(ADMIN_TPLS);
 		$objCtrlForm->setActionForm("".__CLASS__.""."&a=altera");
-		$arrDados = array("titulo_area" => utf8_decode(self::getObjCtrlConfigs()->getStrTituloArea()));
+		$arrDados = array("titulo_area" => self::getObjCtrlConfigs()->getStrTituloArea());
 		$objCtrlForm->registraFormValues($arrDados);
 	 }
 

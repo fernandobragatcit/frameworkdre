@@ -45,7 +45,7 @@ class ViewFotos extends AbsTags {
             $arrFoto = self::getObjFoto()->buscaCampos("1");
         }
 
-        $arrFoto = Utf8Parsers::arrayUtf8Encode($arrFoto);
+        $arrFoto = $arrFoto;
 
         //Busca o nome do arquivo.
         $arrLinkImg["img"] = $arrFoto["nome_arquivo"];
@@ -132,7 +132,7 @@ class ViewFotos extends AbsTags {
         if (!file_exists(PASTA_UPLOADS_FOTOS . $arrFoto["nome_arquivo"]) || $arrFoto["nome_arquivo"] == '' || $arrFoto["nome_arquivo"] == null) {
             $arrFoto = self::getObjFoto()->buscaCampos("1");
         }
-        $arrFoto = Utf8Parsers::arrayUtf8Encode($arrFoto);
+        $arrFoto = $arrFoto;
 
         //Busca o nome do arquivo.
         $arrLinkImg["img"] = $arrFoto["nome_arquivo"];
@@ -172,7 +172,7 @@ class ViewFotos extends AbsTags {
             $arrFoto = self::getObjFoto()->buscaCampos("1");
         }
 
-        $arrFoto = Utf8Parsers::arrayUtf8Encode($arrFoto);
+        $arrFoto = $arrFoto;
 
         //Busca o nome do arquivo.
         $arrLinkImg["img"] = $arrFoto["nome_arquivo"];
@@ -227,7 +227,7 @@ class ViewFotos extends AbsTags {
             $arrFoto = self::getObjFoto()->buscaCampos("1");
         }
 
-        $arrFoto = Utf8Parsers::arrayUtf8Encode($arrFoto);
+        $arrFoto = $arrFoto;
 
         //Busca o nome do arquivo.
         $arrLinkImg["img"] = $arrFoto["nome_arquivo"];

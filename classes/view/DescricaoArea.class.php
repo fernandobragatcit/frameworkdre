@@ -23,7 +23,7 @@ class DescricaoArea extends AbsCruds {
 		$objCtrlForm = new ControlForm(FWK_XML."formDescricaoArea.xml");
 		$objCtrlForm->setTplsFile(ADMIN_TPLS);
 		$objCtrlForm->setActionForm("".__CLASS__.""."&a=altera");
-		$arrDados = array("descricao_area" => utf8_decode(self::getObjCtrlConfigs()->getStrDescricaoArea()));
+		$arrDados = array("descricao_area" => self::getObjCtrlConfigs()->getStrDescricaoArea());
 		$objCtrlForm->registraFormValues($arrDados);
 	 }
 

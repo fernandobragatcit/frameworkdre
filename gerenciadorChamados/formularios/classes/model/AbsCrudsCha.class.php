@@ -374,7 +374,7 @@ abstract class AbsCrudsCha {
 
     protected function alteraStatus($id, $parametro = null) {
         if ($parametro) {
-            $arrDados = Utf8Parsers::arrayUtf8Encode(self::getObjCursosDao()->buscaCampos($id));
+            $arrDados = self::getObjCursosDao()->buscaCampos($id);
             $string = (strpos($arrDados["nome_curso"], '_Cópia') > 0) ? true : false;
         }
 

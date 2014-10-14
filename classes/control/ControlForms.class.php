@@ -134,7 +134,7 @@ class ControlForm {
         }
         if ($utf8) {
             foreach ($arrDados as $nomeCampo => $fieldData) {
-                $arrDados[$nomeCampo] = utf8_decode($fieldData);
+                $arrDados[$nomeCampo] = $fieldData;
             }
         }
         self::setJsForm();

@@ -28,7 +28,7 @@ class ConteudoAreas {
 			foreach ($objXml->conteudo as $conteudo) {
 				if((string)$conteudo->attributes()->ativo == "S"){
 					if((string)$conteudo->attributes()->idioma == $strIdioma)
-						return utf8_decode($conteudo);
+						return $conteudo;
 				}
 			}
 			return null;

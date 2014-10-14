@@ -23,7 +23,7 @@ class UrlCanonicalArea extends AbsCruds {
 		$objCtrlForm = new ControlForm(FWK_XML."formUrlCanonicalArea.xml");
 		$objCtrlForm->setTplsFile(ADMIN_TPLS);
 		$objCtrlForm->setActionForm("".__CLASS__.""."&a=altera");
-		$arrDados = array("url_canonical_area" => utf8_decode(self::getObjCtrlConfigs()->getStrUrlCanonical()));
+		$arrDados = array("url_canonical_area" => self::getObjCtrlConfigs()->getStrUrlCanonical());
 		$objCtrlForm->registraFormValues($arrDados);
 	 }
 

@@ -50,7 +50,7 @@ class GridErro{
 		$this->objMail->IsMail();
 		$this->objMail->IsHTML(true);
 		$this->objMail->From = self::getFromMail();
-		$this->objMail->FromName =  utf8_decode(self::getFromName());
+		$this->objMail->FromName =  self::getFromName();
 		$this->objMail->AddAddress(EMAIL_BUG);
 		$this->objMail->Subject = self::getSubjectMail();
 		$this->objMail->Body = self::getMensErro();

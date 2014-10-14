@@ -71,7 +71,7 @@ class SetorDAO extends AbsModelDao {
                      DATE_FORMAT(s.data_cadastro, '%d/%m/%Y') as data_cadastro,
                      u.nome_usuario as usu_cadastro FROM fwk_chamados_setor s
                      INNER JOIN fwk_usuario u ON u.id_usuario = s.id_usuario_cad";
-        return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
+        return ControlDb::getAll($strQuery, 0);
     }
 
     public function getSetorById($id) {
@@ -80,7 +80,7 @@ class SetorDAO extends AbsModelDao {
                      u.nome_usuario as usu_cadastro FROM fwk_chamados_setor s
                      INNER JOIN fwk_usuario u ON u.id_usuario = s.id_usuario_cad 
                      WHERE id_setor = " . $id;
-        return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
+        return ControlDb::getAll($strQuery, 0);
     }
 
 }

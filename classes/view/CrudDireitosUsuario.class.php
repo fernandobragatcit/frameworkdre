@@ -35,7 +35,7 @@ class CrudDireitosUsuario extends AbsCruds {
     private function postAlteraDireito($id, $post, $file) {
         try {
             $direitosAnteriores = self::getObjUsuario()->getDireitosUsuarioById($id);
-            $dadosUser = Utf8Parsers::arrayUtf8Encode(self::getObjUsuario()->getDadosUsuariosById($id));
+            $dadosUser = self::getObjUsuario()->getDadosUsuariosById($id);
             self::getClassModel()->alterar($id, self::getXmlForm(), $post, $file);
             $direitosAtualizados = self::getObjUsuario()->getDireitosUsuarioById($id);
             self::logDireitos(LOG_ALTERACAO_DIREITO_USER, $id, $direitosAnteriores, $direitosAtualizados, $dadosUser);
@@ -47,7 +47,7 @@ class CrudDireitosUsuario extends AbsCruds {
 
     protected function formAltera($id) {
         $nome = self::getObjUsuario()->getNomeUsuarioById($id);
-        self::getObjSmarty()->assign("NOME", utf8_encode($nome));
+        self::getObjSmarty()->assign("NOME", $nome);
         $arrDados = self::getClassModel()->buscaCampos($id);
         if (isset($arrDados["id_foto"]) || $arrDados["id_foto"] != "") {
             self::getObjSmarty()->assign("ID_FOTO", $arrDados["id_foto"]);

@@ -223,7 +223,7 @@ class ControlReport {
 				for ($i = 0; $i < count($arrDados); $i++) {
 					$arrRetorno[$i] = array ();
 					for ($j = 0; $j < count($arrDados[$i]); $j++) {
-						$arrRetorno[$i][$j] = utf8_encode($arrDados[$i][$j]);
+						$arrRetorno[$i][$j] = $arrDados[$i][$j];
 					}
 				}
 			}

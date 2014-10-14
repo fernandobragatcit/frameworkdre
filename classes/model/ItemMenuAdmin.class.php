@@ -77,7 +77,7 @@ class ItemMenuAdmin extends AbsModelCruds {
             //$idItemMenu = self::getIdItemMenu($post["nome_item_menu"]);
             //Salva-se a funcionalidade de menu automaticamente em direitos.
             self::getObjDireitosAdmin()->setIdItemMenu($this->id_item_menu);
-            self::getObjDireitosAdmin()->setNomeDireito($numeracaoNome . " " . utf8_decode($post["nome_item_menu"]));
+            self::getObjDireitosAdmin()->setNomeDireito($numeracaoNome . " " . $post["nome_item_menu"]);
             self::getObjDireitosAdmin()->setIdPortal($post["id_portal"]);
             self::getObjDireitosAdmin()->salvar();
             //atribui a funcionalidade criada pelo usuário ao grupo dele ou apenas ao usuário
@@ -120,7 +120,7 @@ class ItemMenuAdmin extends AbsModelCruds {
      */
     private function getIdItemMenu($strNomeItemMenu) {
         $strQuery = "SELECT MAX(id_item_menu) FROM " . $this->_table . "
-						WHERE  LOWER(nome_item_menu) = '" . strtolower(utf8_decode($strNomeItemMenu)) . "'";
+						WHERE  LOWER(nome_item_menu) = '" . strtolower($strNomeItemMenu) . "'";
         $arrDados = ControlDb::getBanco()->GetRow($strQuery);
 
         return $arrDados[0];
@@ -186,7 +186,7 @@ class ItemMenuAdmin extends AbsModelCruds {
             //
             //
             $idDireito = self::getObjItemMenuDAO()->getIdDireitoByIdItemMenu($this->id_item_menu);
-            self::getObjItemMenuDAO()->alterarNomeDireito(trim($numeracaoNome . " " . utf8_decode($post["nome_item_menu"])), $idDireito);
+            self::getObjItemMenuDAO()->alterarNomeDireito(trim($numeracaoNome . " " . $post["nome_item_menu"]), $idDireito);
         } catch (CrudException $e) {
             throw new CrudException($e->getMensagem());
         }

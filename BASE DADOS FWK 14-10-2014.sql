@@ -10117,7 +10117,7 @@ CREATE TABLE `fwk_contato` (
 
 /*!40000 ALTER TABLE `fwk_contato` DISABLE KEYS */;
 INSERT INTO `fwk_contato` (`id_contato`,`email_contato`,`tel1_contato`,`tel2_contato`,`telcom_contato`,`ramal_contato`,`cel1_contato`,`cel2_contato`,`fax_contato`) VALUES 
- (1,NULL,'(31) 9968-2535',NULL,NULL,NULL,'(13) 6666-6666',NULL,NULL);
+ (1,NULL,'(31) 9968-2535',NULL,NULL,NULL,'(13) 5555-5555',NULL,NULL);
 /*!40000 ALTER TABLE `fwk_contato` ENABLE KEYS */;
 
 
@@ -10658,13 +10658,15 @@ CREATE TABLE `fwk_grupo_usuario` (
   KEY `id_usuario` (`id_usuario`),
   CONSTRAINT `FK_fwk_grupo_usuario` FOREIGN KEY (`id_usuario`) REFERENCES `fwk_usuario` (`id_usuario`) ON DELETE CASCADE,
   CONSTRAINT `fwk_grupo_usuario_ibfk_1` FOREIGN KEY (`id_grupo`) REFERENCES `fwk_grupo` (`id_grupo`)
-) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `fwk_grupo_usuario`
 --
 
 /*!40000 ALTER TABLE `fwk_grupo_usuario` DISABLE KEYS */;
+INSERT INTO `fwk_grupo_usuario` (`id_grupo_usuario`,`id_usuario`,`id_grupo`) VALUES 
+ (1,1,1);
 /*!40000 ALTER TABLE `fwk_grupo_usuario` ENABLE KEYS */;
 
 
@@ -11500,6 +11502,8 @@ CREATE TABLE `fwk_usuario` (
 --
 
 /*!40000 ALTER TABLE `fwk_usuario` DISABLE KEYS */;
+INSERT INTO `fwk_usuario` (`id_usuario`,`nome_usuario`,`password_usuario`,`email_usuario`,`data_cadastro`,`idioma_usuario`,`id_tipo_usuario`,`id_contato`,`via_facebook`,`primeiro_acesso`,`id_usuario_cad`,`data_alteracao`,`id_usuario_alt`,`id_foto`) VALUES 
+ (1,'Fernando Braga','YmEwYjY5Y2EzZjQ2NzMwZWIwYjRjMWRiNzA5Yzk3OGY=','fernando.bs.dark@hotmail.com','2014-10-14','pt_br',16,1,NULL,NULL,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `fwk_usuario` ENABLE KEYS */;
 
 

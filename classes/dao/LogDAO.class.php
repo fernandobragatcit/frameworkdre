@@ -47,7 +47,7 @@ class LogDAO extends AbsModelDao {
     				WHERE log.descricao='Cliente se cadastrou' ORDER BY log.id_log_cliente DESC LIMIT " . $inicio . ", " . $numElementos;
 
         // self::debuga($strQuery);
-        return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
+        return ControlDb::getAll($strQuery, 0);
     }
 
     public function getCountDadosNovosCadastros() {
@@ -58,46 +58,46 @@ class LogDAO extends AbsModelDao {
                                         LEFT JOIN fwk_contato con ON con.id_contato=usu.id_contato 
                                         LEFT JOIN fwk_endereco end ON end.id_endereco=cli.id_endereco
     				WHERE log.descricao='Cliente se cadastrou' ";
-        $arrDados = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0));
+        $arrDados = ControlDB::getRow($strQuery, 0);
         return end($arrDados);
     }
 
     public function getDadosLogDireitosUsuario($id) {
         $strQuery = "SELECT * FROM fwk_log_direitos WHERE id_log_direitos=" . $id;
-        $arrDados = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0));
+        $arrDados = ControlDB::getRow($strQuery, 0);
         return $arrDados;
     }
 
     public function getDadosLogDireitosGrupo($id) {
         $strQuery = "SELECT * FROM fwk_log_direitos_grupo WHERE id_log_direitos_grupo=" . $id;
-        $arrDados = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0));
+        $arrDados = ControlDB::getRow($strQuery, 0);
         return $arrDados;
     }
 
     public function getNomeDireitoById($id) {
         $strQuery = "SELECT nome_direito FROM fwk_direitos WHERE id_direitos=" . $id;
-        return End(Utf8Parsers::arrayUtf8Encode(ControlDb::getRow($strQuery, 0)));
+        return End(ControlDb::getRow($strQuery, 0));
     }
 
     public function getNomeGrupoById($id) {
         $strQuery = "SELECT nome_grupo FROM fwk_grupo WHERE id_grupo=" . $id;
-        return End(Utf8Parsers::arrayUtf8Encode(ControlDb::getRow($strQuery, 0)));
+        return End(ControlDb::getRow($strQuery, 0));
     }
 
     public function getNomeUsuarioById($id) {
         $strQuery = "SELECT nome_usuario FROM fwk_usuario WHERE id_usuario=" . $id;
-        return End(Utf8Parsers::arrayUtf8Encode(ControlDb::getRow($strQuery, 0)));
+        return End(ControlDb::getRow($strQuery, 0));
     }
 
     public function getDadosLogGruposUsuario($id) {
         $strQuery = "SELECT * FROM fwk_log_grupo_usuario WHERE id_log_grupo_usuario=" . $id;
-        $arrDados = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0));
+        $arrDados = ControlDB::getRow($strQuery, 0);
         return $arrDados;
     }
 
     public function getDadosLogUsuariosGrupo($id) {
         $strQuery = "SELECT * FROM fwk_log_usuario_grupo WHERE id_log_usuario_grupo=" . $id;
-        $arrDados = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0));
+        $arrDados = ControlDB::getRow($strQuery, 0);
         return $arrDados;
     }
 

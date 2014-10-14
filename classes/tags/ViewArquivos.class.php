@@ -17,7 +17,7 @@ class ViewArquivos extends AbsTags{
 	 */
 	public function getLinkArquivo(){
 		$strClass = null;
-		$arrArquivo = Utf8Parsers::arrayUtf8Encode(self::getObjArquivo()->buscaCampos(self::getIdObj()));
+		$arrArquivo = self::getObjArquivo()->buscaCampos(self::getIdObj());
 		if(self::getCssLink() != ""){
 			$strClass = ' class="'.self::getCssLink().'"';
 		}
@@ -32,7 +32,7 @@ class ViewArquivos extends AbsTags{
 	 * @since 1.0 - 19/01/2012
 	 */
 	public function getUrlArquivo(){
-		$arrArquivo = Utf8Parsers::arrayUtf8Encode(self::getObjArquivo()->buscaCampos(self::getIdObj()));
+		$arrArquivo = self::getObjArquivo()->buscaCampos(self::getIdObj());
 		print(RET_SERVIDOR."arquivos/bancofiles/".$arrArquivo["file_arquivo"]);
 	}
 
@@ -44,7 +44,7 @@ class ViewArquivos extends AbsTags{
 	 * @since 1.0 - 19/01/2012
 	 */
 	public function getNomeArquivo(){
-		$arrArquivo = Utf8Parsers::arrayUtf8Encode(self::getObjArquivo()->buscaCampos(self::getIdObj()));
+		$arrArquivo = self::getObjArquivo()->buscaCampos(self::getIdObj());
 		print $arrArquivo["file_arquivo"];
 	}
 

@@ -70,7 +70,7 @@ class StatusDao extends AbsModelDao {
         $strQuery = "SELECT s.id_status, s.status, DATE_FORMAT(s.data_cadastro, '%d/%m/%Y') as data_cadastro,
                      u.nome_usuario as usu_cadastro FROM fwk_chamados_status s
                      INNER JOIN fwk_usuario u ON u.id_usuario = s.id_usuario_cad";
-        return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
+        return ControlDb::getAll($strQuery, 0);
     }
 
 }

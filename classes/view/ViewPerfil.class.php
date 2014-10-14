@@ -139,7 +139,7 @@ class ViewPerfil extends AbsViewClass {
 
 	private function registraTagsUsr() {
 		$arrDadosUsr = self::getObjDadosComp()->getDadosCompById(parent::getObjSessao()->getIdUsuario());
-		$arrDadosUsr = Utf8Parsers::arrayUtf8Encode($arrDadosUsr);
+		$arrDadosUsr = $arrDadosUsr;
 
 		//$arrLinkMin["img"] = $arrDadosUsr[foto_usr];
        // $arrLinkMin["w"] = 100;
@@ -162,7 +162,7 @@ class ViewPerfil extends AbsViewClass {
 		parent::getObjSmarty()->assign("IDIOMA_USUARIO", self::getObjIdioma()->getIdiomaBySigla(parent::getObjSessao()->getIdioma()));
 
 		$arrTema = self::getObjTemas()->getTemaById($arrDadosUsr["id_tema"]);
-		parent::getObjSmarty()->assign("TEMA_USUARIO", utf8_encode($arrTema["nome_tema"]));
+		parent::getObjSmarty()->assign("TEMA_USUARIO", $arrTema["nome_tema"]);
 
 		parent::getObjSmarty()->assign("LINK_EDIT_USUARIO", "?c=".self::getObjCrypt()->cryptData(__CLASS__."&a=formEditDadosUsr"));
 

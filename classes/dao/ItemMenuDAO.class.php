@@ -72,7 +72,7 @@ class ItemMenuDAO extends AbsModelDao {
 
     public function getDadosFormSelect($value = null, $name = null, $tabela = null, $condicao = null) {
         $strQuery = "SELECT " . $value . "," . $name . " FROM " . $tabela . " " . $condicao;
-        $arrDados = Utf8Parsers::matrizUtf8Encode(ControlDB::getAll($strQuery, 0));
+        $arrDados = ControlDB::getAll($strQuery, 0);
         return $arrDados;
     }
 

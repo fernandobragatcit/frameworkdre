@@ -119,7 +119,7 @@ class BannersDAO extends AbsModelDao{
 						UPPER(nome_imagem) = '".strtoupper($strBanner)."' AND
 						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().")";
 		$arrDados = ControlDb::getRow($strQuery,3);
-		return Utf8Parsers::arrayUtf8Encode($arrDados);
+		return $arrDados;
 	}
 
 	public function getBannerAleatorio($strBanner){
@@ -134,7 +134,7 @@ class BannersDAO extends AbsModelDao{
 					ORDER BY 
 						RAND()";
 		$arrDados = ControlDb::getRow($strQuery,3);
-		return Utf8Parsers::arrayUtf8Encode($arrDados);
+		return $arrDados;
 	}
 
 	public function getBannerAleatorioById($idCatBanner){
@@ -149,7 +149,7 @@ class BannersDAO extends AbsModelDao{
 					ORDER BY 
 						RAND()";
 		$arrDados = ControlDb::getRow($strQuery,3);
-		return Utf8Parsers::arrayUtf8Encode($arrDados);
+		return $arrDados;
 	}
 	
 	public function getBannersByStrCateg($strCateg){
@@ -164,7 +164,7 @@ class BannersDAO extends AbsModelDao{
 					ORDER BY 
 						nome_imagem";
 		$arrDados = ControlDb::getAll($strQuery,3);
-		return Utf8Parsers::matrizUtf8Encode($arrDados);
+		return $arrDados;
 	}
 
 }

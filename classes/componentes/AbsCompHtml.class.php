@@ -328,7 +328,7 @@ abstract class AbsCompHtml{
 		
 		if(self::getValue() != ""){
 			self::setValue(str_replace("\"", "&quot;", self::getValue()));
-    		self::getObjSmarty()->assign("VALUE_COMP",utf8_encode(self::getValue()));
+    		self::getObjSmarty()->assign("VALUE_COMP",self::getValue());
 		}
     }
 

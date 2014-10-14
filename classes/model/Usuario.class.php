@@ -45,7 +45,7 @@ class Usuario {
     }
 
     public function getNomeUsuario(){
-    	return utf8_encode($this->_strNomeUsr);
+    	return $this->_strNomeUsr;
     }
     public function setNomeUsuario($nomeUser){
     	$this->_strNomeUsr = $nomeUser;

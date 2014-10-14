@@ -70,7 +70,7 @@ class PrioridadeDAO extends AbsModelDao {
         $strQuery = "SELECT p.id_prioridade, p.prioridade, DATE_FORMAT(p.data_cadastro, '%d/%m/%Y') as data_cadastro,
                      u.nome_usuario as usu_cadastro FROM fwk_chamados_prioridade p
                      INNER JOIN fwk_usuario u ON u.id_usuario = p.id_usuario_cad";
-        return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
+        return ControlDb::getAll($strQuery, 0);
     }
 
 }

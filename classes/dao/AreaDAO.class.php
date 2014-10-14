@@ -77,7 +77,7 @@ class AreaDAO extends AbsModelDao {
 						fwk_area
 					WHERE 
 						id_area = '" . $id . "'";
-        return end(Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0)));
+        return end(ControlDB::getRow($strQuery, 0));
     }
 
 }
