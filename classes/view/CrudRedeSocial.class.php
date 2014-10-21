@@ -20,6 +20,9 @@ class CrudRedeSocial extends AbsCruds {
             case "altera":
                 self::postAlteraRedeSocial($get['id'], $post, $file);
                 break;
+            case "status" :
+                self::alteraStatus($get["id"]);
+                break;
             case "deleta":
                 self::deletaRedeSocial($get['id']);
                 break;

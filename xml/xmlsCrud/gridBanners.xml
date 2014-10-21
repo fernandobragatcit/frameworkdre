@@ -4,7 +4,7 @@
 		<titulo type="STRING" ordena="ba.nome_imagem">Nome Banner</titulo>
 		<titulo type="STRING" ordena="ba.title_banner">Title Banner</titulo>
 		<titulo type="STRING" ordena="tb.desc_tipo_basico">Categoria</titulo>
-		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
+		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta" actionStatus="a=status">Ações</titulo>
 	</header>
 	<query>
 		<campos>
