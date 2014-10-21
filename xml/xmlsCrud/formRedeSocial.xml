@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form method="post" nome="RedeSocial" classe="CrudRedeSocial" css="formatForm"
+      tipo="FWK" tpl="formRedeSocial.tpl" direito="186">
+
+    <campos type="text" name="descricao" id="descricao"
+            label="Descrição" title="Descrição" obrigatorio="true" maxlength="100"
+            class="medium" />
+
+    <campos type="text" name="link" id="link"
+            label="Link" title="Link" obrigatorio="false"
+            maxlength="200" class="medium" />
+		
+    <campos type="file" name="nome_arquivo" id="nome_arquivo" title="Imagem"
+            label="Imagem" class="inputFile" obrigatorio="true" colocaNull="true" />
+		
+
+    <buttons>
+        <button class="btn" name="Cadastrar" value="Salvar" type="submit" direito="186" />
+        <button name="Cancelar" value="Cancelar" type="button" class="btn" 
+                confirme="a=lista" mens="Deseja realmente sair deste formulario?" />
+    </buttons>
+
+</form>
