@@ -4,12 +4,13 @@
 		<titulo type="STRING" ordena="id_rede_social">#Id</titulo>
 		<titulo type="STRING" ordena="descricao">Título</titulo>
 		<titulo type="STRING" ordena="link">Link</titulo>
+		<titulo type="STRING" ordena="Ordem">Ordem</titulo>
 		<titulo type="STRING" ordena="status">status</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionStatus="a=status" actionDelete="a=deleta">Ações</titulo>
 	</header>
 	<query>
 		<campos>
-			 id_rede_social,descricao,link,if(status='S','Ativo','Inativo'), id_rede_social
+			 id_rede_social,descricao,link,ordem,if(status='S','Ativo','Inativo'), id_rede_social
 		</campos>
 		<from>
 			fwk_rede_social

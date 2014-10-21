@@ -13,6 +13,11 @@
 	    <span class="small error" id="link_erro">{$link_error}</span>
 	</label> {$link_campo}
 </div>
+<div class="formMeiaTela">
+	<label>{$ordem_label} :
+	    <span class="small error" id="link_erro">{$ordem_error}</span>
+	</label> {$ordem_campo}
+</div>
 <div class="formTelaFull">
 	<label>{$nome_arquivo_label} :
 	    <span class="small error" id="nome_arquivo_erro">{$nome_arquivo_error}</span>
