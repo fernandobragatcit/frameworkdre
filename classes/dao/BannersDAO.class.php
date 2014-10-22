@@ -166,6 +166,21 @@ class BannersDAO extends AbsModelDao{
 		$arrDados = ControlDb::getAll($strQuery,3);
 		return $arrDados;
 	}
+	public function getBannersComDescFotoByStrCateg($strCateg){
+		$strQuery = "SELECT
+						fb.id_foto, fb.title_banner, fb.link_banner,fb.nome_imagem,f.nome_arquivo
+					FROM 
+						fwk_banner fb 
+                                                INNER JOIN fwk_fotos f ON fb.id_foto=f.id_foto 
+						INNER JOIN fwk_tipo_basico ftb ON ftb.id_tipo_basico = fb.id_categoria_banner
+					WHERE
+						UPPER(ftb.desc_tipo_basico) = '".strtoupper($strCateg)."' AND
+						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().") 
+					ORDER BY 
+						nome_imagem";
+		$arrDados = ControlDb::getAll($strQuery,0);
+		return $arrDados;
+	}
 
 }
 ?>
