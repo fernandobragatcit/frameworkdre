@@ -3,7 +3,7 @@
 	<header>
 		<titulo type="STRING" ordena="descricao">Área</titulo>
 		<titulo type="STRING" ordena="area">Pasta</titulo>
-		<titulo type="STRING" ordena="area">Status</titulo>
+		<titulo type="STRING" ordena="Status">Status</titulo>
 		<titulo type="none" actionEdit="a=formAlt" actionStatus="a=status" actionDelete="a=deleta">Ações</titulo>
 	</header>
 	<query>
