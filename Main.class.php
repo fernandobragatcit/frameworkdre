@@ -209,7 +209,9 @@ class Main {
             self::registraTagsBasicas($objFormatParam->getParametros(), $arrPost);
             self::regsMenu();
             self::verificaShortUrl();
+            if(ATIVA_MSG_VALIDACAO_NAVEGADOR){
             self::getObjSmarty()->assign("AVISO_NAVEGADOR", DadosAcessoUsuario::validaNavegador());
+            }
             $this->getObjHttp()->escreEm(self::getAssinaturaMenu(), self::getTplEstruturaMenu());
             $objFactoryTela = new ControlFactory($srcClass);
             $objFactoryTela->setDirClassDefault(self::getPastaClassesView());
