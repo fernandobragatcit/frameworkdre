@@ -41,7 +41,7 @@ CREATE TABLE `fwk_area` (
 
 /*!40000 ALTER TABLE `fwk_area` DISABLE KEYS */;
 INSERT INTO `fwk_area` (`id_area`,`descricao`,`area`,`status`,`ordem`) VALUES 
- (1,'Inicio','inicio','S',1),
+ (1,'início','inicio','S',1),
  (3,'Contato','contato','S',3);
 /*!40000 ALTER TABLE `fwk_area` ENABLE KEYS */;
 
@@ -10179,7 +10179,7 @@ CREATE TABLE `fwk_direitos` (
   `nome_direito` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id_direitos`),
   KEY `FK_direitos` (`id_item_menu`)
-) ENGINE=InnoDB AUTO_INCREMENT=211 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=212 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `fwk_direitos`
@@ -10189,7 +10189,7 @@ CREATE TABLE `fwk_direitos` (
 INSERT INTO `fwk_direitos` (`id_direitos`,`id_menu`,`id_item_menu`,`nome_direito`) VALUES 
  (3,NULL,2,'1.1 Menu'),
  (4,NULL,4,'1.1.2 Ítens de Menu'),
- (5,1,NULL,'1. Menu Configurações'),
+ (5,1,NULL,'1 Configurações'),
  (8,NULL,5,'1.2.1 Direitos'),
  (9,NULL,6,'1.2.2 Direitos por Usuario'),
  (10,NULL,7,'1.2.3 Direitos de Grupo'),
@@ -10218,15 +10218,16 @@ INSERT INTO `fwk_direitos` (`id_direitos`,`id_menu`,`id_item_menu`,`nome_direito
  (150,NULL,128,'2.4.1 Categoria Banner'),
  (151,NULL,129,'2.4.2 Banner'),
  (152,NULL,130,'2.5 Documentos'),
- (154,NULL,132,'2.6 Galerias'),
+ (154,NULL,132,'2.5 Galerias'),
  (167,NULL,142,'1.3.3 Usuários por Grupo'),
  (183,NULL,153,'Descrição Área'),
  (184,NULL,154,'Palavras Chaves Área'),
  (185,NULL,155,'Url Canonical'),
+ (186,NULL,171,'2.6 Redes Sociais'),
  (207,NULL,168,'1.4 SubPermissões >'),
  (208,NULL,169,'1.4.1 Por Direito de Grupo'),
  (209,NULL,170,'1.4.2 Por Direito de Usuário'),
- (210,NULL,171,'3.1 Sobre');
+ (210,NULL,172,'3.1 Sobre');
 /*!40000 ALTER TABLE `fwk_direitos` ENABLE KEYS */;
 
 
@@ -10289,7 +10290,8 @@ INSERT INTO `fwk_direitos_grupo` (`id_direitos`,`id_grupo`) VALUES
  (167,1),
  (139,1),
  (210,1),
- (66,1);
+ (66,1),
+ (186,1);
 /*!40000 ALTER TABLE `fwk_direitos_grupo` ENABLE KEYS */;
 
 
@@ -10774,7 +10776,7 @@ CREATE TABLE `fwk_item_menu` (
   KEY `FK_fwk_item_menu` (`id_portal`),
   CONSTRAINT `FK_fwk_item_menu` FOREIGN KEY (`id_portal`) REFERENCES `fwk_portal` (`id_portal`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_item_menu` FOREIGN KEY (`id_menu_pai`) REFERENCES `fwk_menu` (`id_menu`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
+) ENGINE=InnoDB AUTO_INCREMENT=173 DEFAULT CHARSET=utf8 CHECKSUM=1 DELAY_KEY_WRITE=1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `fwk_item_menu`
@@ -10810,7 +10812,7 @@ INSERT INTO `fwk_item_menu` (`id_item_menu`,`id_menu_pai`,`id_item_menu_pai`,`ti
  (128,NULL,127,'c','Categoria Banner','CrudCategoriaBanners',1,1,1),
  (129,NULL,127,'c','Banner','CrudBanners',2,1,1),
  (130,8,NULL,'c','Documentos','CrudFicheiros',5,1,1),
- (132,8,NULL,'c','Galerias','CrudGalerias',6,1,1),
+ (132,8,NULL,'c','Galerias','CrudGalerias',5,1,1),
  (142,NULL,8,'c','Usuários por Grupo','CrudUsuariosGrupo',3,1,NULL),
  (153,NULL,62,'c','Descrição Área','DescricaoArea',2,1,1),
  (154,NULL,62,'c','Palavras Chaves Área','PalavrasChavesArea',3,1,1),
@@ -10818,7 +10820,8 @@ INSERT INTO `fwk_item_menu` (`id_item_menu`,`id_menu_pai`,`id_item_menu_pai`,`ti
  (168,1,NULL,'c','SubPermissões >','#',4,1,NULL),
  (169,NULL,168,'c','Por Direito de Grupo','CrudSubDireitosGrupo',1,1,NULL),
  (170,NULL,168,'c','Por Direito de Usuário','CrudSubDireitosUsuario',2,1,NULL),
- (171,9,NULL,'m','Sobre','formularios&f=CrudSobre',1,1,1);
+ (171,8,NULL,'c','Redes Sociais','CrudRedeSocial',6,1,1),
+ (172,9,NULL,'m','Sobre','formularios&f=CrudSobre',1,1,1);
 /*!40000 ALTER TABLE `fwk_item_menu` ENABLE KEYS */;
 
 
@@ -11024,7 +11027,7 @@ CREATE TABLE `fwk_menu` (
 
 /*!40000 ALTER TABLE `fwk_menu` DISABLE KEYS */;
 INSERT INTO `fwk_menu` (`id_menu`,`nome_menu`,`tipo_menu`,`link_menu`,`ordem_menu`,`id_portal`) VALUES 
- (1,'Configurações','','#',1,1),
+ (1,'Configurações',NULL,'#',1,1),
  (8,'Conteúdo','','#',2,1),
  (9,'Formulários','c','#',3,1),
  (10,'Faculdade IBS','c','#',4,1),
@@ -11147,6 +11150,28 @@ INSERT INTO `fwk_portal` (`id_portal`,`nome_portal`) VALUES
  (1,'Sistema'),
  (2,'Nome Portal');
 /*!40000 ALTER TABLE `fwk_portal` ENABLE KEYS */;
+
+
+--
+-- Definition of table `fwk_rede_social`
+--
+
+DROP TABLE IF EXISTS `fwk_rede_social`;
+CREATE TABLE `fwk_rede_social` (
+  `id_rede_social` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(245) DEFAULT NULL,
+  `link` varchar(245) DEFAULT NULL,
+  `id_foto` int(10) unsigned DEFAULT NULL,
+  `status` char(1) NOT NULL DEFAULT 'N',
+  PRIMARY KEY (`id_rede_social`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `fwk_rede_social`
+--
+
+/*!40000 ALTER TABLE `fwk_rede_social` DISABLE KEYS */;
+/*!40000 ALTER TABLE `fwk_rede_social` ENABLE KEYS */;
 
 
 --
@@ -11431,7 +11456,7 @@ CREATE TABLE `fwk_tipo_basico` (
   PRIMARY KEY (`id_tipo_basico`),
   KEY `FK_fwk_tipo_basico` (`id_tipo_documento`),
   CONSTRAINT `FK_fwk_tipo_basico` FOREIGN KEY (`id_tipo_documento`) REFERENCES `fwk_tipo_documento` (`id_tipo_documento`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `fwk_tipo_basico`
@@ -11524,7 +11549,7 @@ CREATE TABLE `fwk_verificacao` (
 
 /*!40000 ALTER TABLE `fwk_verificacao` DISABLE KEYS */;
 INSERT INTO `fwk_verificacao` (`tabela_verificacao`,`data_verificacao`) VALUES 
- ('fwk_link_encurtado','2014-10-14');
+ ('fwk_link_encurtado','2014-10-21');
 /*!40000 ALTER TABLE `fwk_verificacao` ENABLE KEYS */;
 
 
