@@ -20,8 +20,8 @@
 		<orderBy>titulo_galeria</orderBy>
 	</query>
 	<buttons>
-		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport btn" />
-		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport btn" />
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
 		<campos type="text" name="id_galeria" id="id_galeria" label="#Id"

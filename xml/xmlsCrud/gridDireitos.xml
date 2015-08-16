@@ -23,8 +23,8 @@
 		<orderBy>di.nome_direito</orderBy>
 	</query>
 	<buttons>
-		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport btn" />
-		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport btn" />
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
 		<campos type="text" name="nome_direito" id="nome_direito" label="Direito"

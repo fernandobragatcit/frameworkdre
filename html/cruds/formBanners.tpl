@@ -7,7 +7,7 @@
 </p>
 
 <div class="formTelaFull">
-	<label>{$nome_imagem_label} : <span class="small error" id="nome_imagem_erro" style="color:red">{$nome_imagem_error}</span></label> 
+	<label>{$nome_imagem_label} : <span class="small" id="nome_imagem_erro" style="color:red">{$nome_imagem_error}</span></label> 
 	{$nome_imagem_campo}
 </div>
 
@@ -16,22 +16,22 @@
 </p>
 
 <div class="formTelaFull">
-	<label>{$id_categoria_banner_label} : <span class="small error" id="id_categoria_banner_erro">{$id_categoria_banner_error}</span></label> 
+	<label>{$id_categoria_banner_label} : <span class="small" id="id_categoria_banner_erro">{$id_categoria_banner_error}</span></label> 
 	{$id_categoria_banner_campo}
 </div>
 
 <div class="formTelaFull">
-	<label>{$title_banner_label} : <span class="small error" id="title_banner_erro">{$title_banner_error}</span></label> 
+	<label>{$title_banner_label} : <span class="small" id="title_banner_erro">{$title_banner_error}</span></label> 
 	{$title_banner_campo}
 </div>
 
 <div class="formTelaFull">
-	<label>{$link_banner_label} : <span class="small error" id="link_banner_erro">{$link_banner_error}</span></label> 
+	<label>{$link_banner_label} : <span class="small" id="link_banner_erro">{$link_banner_error}</span></label> 
 	{$link_banner_campo}
 </div>
 
 <div class="formTelaFull">
-	<label>{$nome_arquivo_label} : <span class="small error" id="nome_arquivo_erro">{$nome_arquivo_error}</span></label> 
+	<label>{$nome_arquivo_label} : <span class="small" id="nome_arquivo_erro">{$nome_arquivo_error}</span></label> 
 	{$nome_arquivo_campo}
 </div>
 

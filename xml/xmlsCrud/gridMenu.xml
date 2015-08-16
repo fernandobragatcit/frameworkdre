@@ -14,14 +14,14 @@
 		</from>
 		<where/>
 		<whereBusca>
-			(nome_menu LIKE '%#BUSCA#%' OR link_menu LIKE '%#BUSCA#%') 
+			(nome_menu LIKE '%#BUSCA#% OR link_menu LIKE '%#BUSCA#%) 
 		</whereBusca>
 		<campoPortal>id_portal</campoPortal>
 		<orderBy>ordem_menu</orderBy>
 	</query>
 	<buttons>
-		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport btn" />
-		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport btn" />
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
 		<campos type="text" name="nome_menu" id="nome_menu" label="Menu"

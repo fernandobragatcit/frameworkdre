@@ -200,18 +200,16 @@ class Main {
     public function makeScreen(&$arrGet, &$arrPost, $srcClass = "", &$arrFile = array()) {
         try {
 //			self::registraLogs(); //- com problemas
-            self::getLarguraPortal();
-            self::setLimitMemory();
+            //habilitar PopUp
             self::getPopUp();
+	        self::setLimitMemory();
             self::setTituloPag(self::getTituloPagina());
             $objFormatParam = new FormataParametros();
             $objFormatParam->setParametros($arrGet);
             self::registraTagsBasicas($objFormatParam->getParametros(), $arrPost);
             self::regsMenu();
             self::verificaShortUrl();
-            if(ATIVA_MSG_VALIDACAO_NAVEGADOR){
             self::getObjSmarty()->assign("AVISO_NAVEGADOR", DadosAcessoUsuario::validaNavegador());
-            }
             $this->getObjHttp()->escreEm(self::getAssinaturaMenu(), self::getTplEstruturaMenu());
             $objFactoryTela = new ControlFactory($srcClass);
             $objFactoryTela->setDirClassDefault(self::getPastaClassesView());
@@ -331,12 +329,9 @@ class Main {
         $objMenu->setCssMenu(self::getCssMenuGlobal());
         $objMenu->setTplMenu(self::getTplMenuGlobal());
         $objUsuario = self::getObjSessao();
-        if (!LOGIN_CADASTRO_MODAL) {
-            self::getObjSmarty()->assign("LINK_LOGIN", "?c=" . self::getObjCrypt()->cryptData("login"));
-            self::getObjSmarty()->assign("CAD_USUARIO", "?c=" . self::getObjCrypt()->cryptData("ViewCadUsuarios"));
-        }
+        self::getObjSmarty()->assign("LINK_LOGIN", "?c=" . self::getObjCrypt()->cryptData("login"));
+        self::getObjSmarty()->assign("CAD_USUARIO", "?c=" . self::getObjCrypt()->cryptData("ViewCadUsuarios"));
         if ($objUsuario->getNomeUsuario() != "Visitante") {
-            self::getObjSmarty()->assign("NOME_USUARIO", $objUsuario->getNomeUsuario());
             self::getObjSmarty()->assign("MENU_GLOBAL", $objMenu->geraMenu($objUsuario->getGrupoUsuario(), $objUsuario->getIdUsuario()));
             self::getObjSmarty()->assign("ARR_MENU", $objMenu->pegaMenu($objUsuario->getGrupoUsuario(), $objUsuario->getIdUsuario()));
         }
@@ -547,15 +542,10 @@ class Main {
     }
 
     private function setLimitMemory() {
-        $memory_limit_sistema = End(ControlDb::getCol("SELECT memory_limit FROM fwk_config_sistema WHERE id_config=1"));
+        $memory_limit_sistema =  End(ControlDb::getCol("SELECT memory_limit FROM fwk_config_sistema WHERE id_config=1"));
         if (!empty($memory_limit_sistema)) {
             ini_set("memory_limit", $memory_limit_sistema);
         }
-    }
-
-    private function getLarguraPortal() {
-        $largura_portal = End(ControlDb::getCol("SELECT largura_portal FROM fwk_config_sistema WHERE id_config=1"));
-        self::getObjSmarty()->assign("LARGURA_PORTAL", $largura_portal);
     }
 
 }

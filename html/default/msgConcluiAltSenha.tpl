@@ -1,7 +1,7 @@
-<div id="content" class="grid_16 alpha omega container">
+<div id="content" class="grid_16 alpha omega">
   	<div class="grid_12 marginTop25 marginBottom25">
        <div class="grid_11">
-       	<form name="recuperaSenha"  id="loginValidaForm"  action="{$POST_ALT_SENHA}" method="post" class="grid_6 padding10 form loginCom">
+       	<form name="recuperaSenha"  id="loginValidaForm"  action="{$POST_ALT_SENHA}" method="post" class="grid_6 padding10 right form loginCom">
             <h2 class="font30 marginTop">Alterado</h2>
             <br />
 			<p>Sua senha foi alterada com sucesso. <br /> <br />

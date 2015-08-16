@@ -4,7 +4,7 @@
 
 <div class="formTelaFull">
 	<label>{$url_canonical_area_label} :
-	    <span class="small error" id="url_canonical_area_erro">{$url_canonical_area_error}</span>
+	    <span class="small" id="url_canonical_area_erro">{$url_canonical_area_error}</span>
 	</label> {$url_canonical_area_campo}
 </div>
 

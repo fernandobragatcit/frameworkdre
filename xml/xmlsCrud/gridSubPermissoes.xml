@@ -2,7 +2,7 @@
 
 <grid titulo="Permissões por Direitos de Usuário" classe="CrudSubDireitosUsuario" direito="64">
     <header>
-        <titulo type="STRING" >Nome Usuário</titulo>
+        <titulo type="STRING" >Direito</titulo>
         <titulo type="STRING" >Permissões</titulo>
         <titulo type="none" actionEdit="a=formAddPermissoes">Ações</titulo>
     </header>
@@ -75,6 +75,6 @@
         </whereBusca>
     </query2>
     <buttons>
-        <campos name="Voltar" value="Voltar Para Etapa 1" type="button" goto="a=lista" class="btnReport btn" />
+        <campos name="Voltar" value="Voltar Para Etapa 1" type="button" goto="a=lista" class="btnReport" />
     </buttons>
 </grid>

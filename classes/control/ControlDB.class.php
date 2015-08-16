@@ -28,8 +28,7 @@ class ControlDB {
         if (!@self::$_objBanco->Connect(SERVER, USUARIO, SENHA, BANCO)) {
             throw new DBException(ERRO_CONEXAO_DB);
         }
-
-        ControlDB::setBdUtf8();
+        //self::$_objBanco->EXECUTE("set names 'utf8'");
     }
 
     public function getBanco() {
@@ -124,25 +123,17 @@ class ControlDB {
 
     public static function getRow($strQuery, $fetchMode = 1) {
         self::getBanco()->SetFetchMode($fetchMode == 0 ? 2 : $fetchMode);
-        return self::getBanco()->GetRow($strQuery);
+        return self::getBanco()->GetRow(utf8_decode($strQuery));
     }
 
     public static function getAll($strQuery, $fetchMode = 1) {
         self::getBanco()->SetFetchMode($fetchMode == 0 ? 2 : $fetchMode);
-        return self::getBanco()->GetAll($strQuery);
+        return self::getBanco()->GetAll(utf8_decode($strQuery));
     }
 
     public static function getCol($strQuery, $fetchMode = 1) {
         self::getBanco()->SetFetchMode($fetchMode == 0 ? 2 : $fetchMode);
-        return self::getBanco()->GetCol($strQuery);
-    }
-
-    public static function executaQuery($query) {
-        return self::getBanco()->Execute($query);
-    }
-
-    public static function setBdUtf8() {
-        self::$_objBanco->EXECUTE("set names 'utf8'");
+        return self::getBanco()->GetCol(utf8_decode($strQuery));
     }
 
 }

@@ -4,7 +4,7 @@
 
 <div class="formTelaFull">
 	<label>{$nome_grupo_label} :
-	    <span class="small error" id="nome_grupo_erro">{$nome_grupo_error}</span>
+	    <span class="small" id="nome_grupo_erro">{$nome_grupo_error}</span>
 	</label> {$nome_grupo_campo}
 </div>
 

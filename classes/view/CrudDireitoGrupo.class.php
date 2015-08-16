@@ -29,7 +29,7 @@ class CrudDireitoGrupo extends AbsCruds {
     private function postAlteraDireitoGrupo($id, $post, $file) {
         try {
             $direitosAnteriores = self::getObjGrupos()->getDireitosGrupoById($id);
-            $nomeGrupo = self::getObjGrupos()->getNomeGrupoById($id);
+            $nomeGrupo = utf8_encode(self::getObjGrupos()->getNomeGrupoById($id));
             self::getClassModel()->alterar($id, self::getXmlForm(), $post, $file);
             $direitosAtualizados = self::getObjGrupos()->getDireitosGrupoById($id);
             self::logDireitosGrupo(LOG_ALTERACAO_DIREITO_GRUPO, $id, $direitosAnteriores, $direitosAtualizados, $nomeGrupo);
@@ -41,7 +41,7 @@ class CrudDireitoGrupo extends AbsCruds {
 
     protected function formAltera($id) {
         $grupo = self::getObjGrupos()->getNomeGrupoById($id);
-        self::getObjSmarty()->assign("GRUPO", $grupo);
+        self::getObjSmarty()->assign("GRUPO", utf8_encode($grupo));
         $arrDados = self::getClassModel()->buscaCampos($id);
         if (isset($arrDados["id_foto"]) || $arrDados["id_foto"] != "") {
             self::getObjSmarty()->assign("ID_FOTO", $arrDados["id_foto"]);
@@ -56,7 +56,7 @@ class CrudDireitoGrupo extends AbsCruds {
     public function logDireitosGrupo($descricao, $id, $dadosAnteriores, $dadosNovos, $nomeGrupo) {
         $arrTextoLog = FormataString::raw_json_encode(array('dados_anteriores' => $dadosAnteriores, 'dados_novos' => $dadosNovos));
         //SALVAR LOG
-        $valores = FormataPost::montaArrayLogDireitosGrupo($descricao, self::getObjUsrSessao()->getIdUsuario(), self::getObjUsrSessao()->getNomeUsuario(), self::getObjUsrSessao()->getEmailUser(), $id, $nomeGrupo,$arrTextoLog);
+        $valores = FormataPost::montaArrayLogDireitosGrupo($descricao, self::getObjUsrSessao()->getIdUsuario(), self::getObjUsrSessao()->getNomeUsuario(), self::getObjUsrSessao()->getEmailUser(), $id, utf8_decode($nomeGrupo),$arrTextoLog);
         self::getObjLog()->registraLog("fwk_log_direitos_grupo", $valores);
     }
     private function getObjLog() {

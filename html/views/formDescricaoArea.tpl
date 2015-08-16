@@ -4,7 +4,7 @@
 
 <div class="formTelaFull">
 	<label>{$descricao_area_label} :
-	    <span class="small error" id="descricao_area_erro">{$descricao_area_error}</span>
+	    <span class="small" id="descricao_area_erro">{$descricao_area_error}</span>
 	</label> {$descricao_area_campo}
 </div>
 

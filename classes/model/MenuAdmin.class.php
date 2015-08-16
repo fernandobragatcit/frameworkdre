@@ -78,7 +78,7 @@ class MenuAdmin extends AbsModelCruds {
             self::replace();
 
             $idDireito = self::getObjItemMenuDAO()->getIdDireitoByIdMenu($this->id_menu);
-            self::getObjItemMenuDAO()->alterarNomeDireito(trim($post["ordem_menu"] . " " . $post["nome_menu"]), $idDireito);
+            self::getObjItemMenuDAO()->alterarNomeDireito(trim($post["ordem_menu"] . " " . utf8_decode($post["nome_menu"])), $idDireito);
         } catch (CrudException $e) {
             throw new CrudException($e->getMensagem());
         }

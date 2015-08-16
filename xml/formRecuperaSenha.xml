@@ -7,7 +7,7 @@
 		obrigatorio="true" />
 
 	<buttons>
-		<button class="btn" name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cadastrar" value="Salvar" type="submit" />
 	</buttons>
 
 </form>

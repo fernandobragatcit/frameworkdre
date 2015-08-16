@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <grid titulo="Permissões por Direitos de Grupo" classe="CrudSubDireitosGrupo" direito="64">
     <header>
-        <titulo type="STRING" ordena="dir.nome_direito">Nome Usuário</titulo>
+        <titulo type="STRING" ordena="dir.nome_direito">Direito</titulo>
         <titulo type="STRING" >Permissões</titulo>
         <titulo type="none" actionEdit="a=formAddPermissoes">Ações</titulo>
     </header>
@@ -49,6 +49,6 @@
    
     
     <buttons>
-        <campos name="Voltar" value="Voltar Para Etapa 1" type="button" goto="a=lista" class="btnReport btn" />
+        <campos name="Voltar" value="Voltar Para Etapa 1" type="button" goto="a=lista" class="btnReport" />
     </buttons>
 </grid>

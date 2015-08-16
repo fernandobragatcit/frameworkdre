@@ -9,7 +9,7 @@
 	</select>
 	<div id="camposMultUpload">
 		<label>Arquivo 1 :
-	    	<span class="small error" id="{$NOME_COMP}_0_erro"></span>
+	    	<span class="small" id="{$NOME_COMP}_0_erro"></span>
 	    </label>
 	    <input type="file" name="{$NOME_COMP}_0" id="{$NOME_COMP}_0" />
 	</div>

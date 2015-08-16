@@ -4,7 +4,7 @@
 
 <div class="formTelaFull">
 	<label>{$palavras_chaves_area_label}
-	    <span class="small error" id="palavras_chaves_area_erro">{$palavras_chaves_area_error}</span>
+	    <span class="small" id="palavras_chaves_area_erro">{$palavras_chaves_area_error}</span>
 	</label> {$palavras_chaves_area_campo}
 </div>
 

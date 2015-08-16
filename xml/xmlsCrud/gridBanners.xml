@@ -4,12 +4,11 @@
 		<titulo type="STRING" ordena="ba.nome_imagem">Nome Banner</titulo>
 		<titulo type="STRING" ordena="ba.title_banner">Title Banner</titulo>
 		<titulo type="STRING" ordena="tb.desc_tipo_basico">Categoria</titulo>
-                <titulo type="STRING" ordena="ba.status_banner">Status</titulo>
-		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta" actionStatus="a=status">Ações</titulo>
+		<titulo type="none" actionEdit="a=formAlt" actionDelete="a=deleta">Ações</titulo>
 	</header>
 	<query>
 		<campos>
-			ba.nome_imagem, ba.title_banner, tb.desc_tipo_basico,if(ba.status_banner='S','Ativo','Inativo'), ba.id_banner
+			ba.nome_imagem, ba.title_banner, tb.desc_tipo_basico, ba.id_banner
 		</campos>
 		<from>
 			fwk_banner ba
@@ -19,8 +18,8 @@
 		<orderBy>tb.desc_tipo_basico, ba.nome_imagem</orderBy>
 	</query>
 	<buttons>
-		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport btn" />
-		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport btn" />
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
 		<campos type="text" name="nome_imagem" id="nome_imagem" label="Nome Banner"

@@ -71,18 +71,53 @@ class FormataPost {
      * @author Fernando Braga
      * @since 1.0 - 22/06/2012
      */
-    public static function montaArrayLog($desc, $id_usuario_cad, $nome_usuario_cad, $email_usuario_cad, $data_cadastro, $id_usuario_alt, $nome_usuario_alt, $email_usuario_alt, $data_alteracao, $texto_log, $nome_registro) {
-        $valores = array("descricao" => $desc,
+    public static function montaArrayLog($desc, $id_usuario_cad, $nome_usuario_cad, $email_usuario_cad, $data_cadastro, $id_usuario_alt, $nome_usuario_alt, $email_usuario_alt, $data_alteracao, $texto_log, $nome_registro,$id_registro=0) {
+        $valores = array("descricao" => utf8_decode($desc),
             "id_usuario_cad" => $id_usuario_cad,
-            "nome_usuario_cad" => $nome_usuario_cad,
+            "nome_usuario_cad" => utf8_decode($nome_usuario_cad),
             "email_usuario_cad" => $email_usuario_cad,
             "data_cadastro" => $data_cadastro,
             "id_usuario_alt" => $id_usuario_alt,
-            "nome_usuario_alt" => $nome_usuario_alt,
+            "nome_usuario_alt" => utf8_decode($nome_usuario_alt),
             "email_usuario_alt" => $email_usuario_alt,
             "data_alteracao" => $data_alteracao,
             "texto_log" => $texto_log,
-            "nome_registro" => $nome_registro);
+            "nome_registro" => utf8_decode($nome_registro),
+            "id_registro" => $id_registro);
+        return $valores;
+    }
+
+    /**
+     * Método para montar uma estrutura de array com dados de log específico para log de célula
+     *
+     * @author Fernando Braga
+     * @since 1.0 - 22/05/2012
+     */
+    public static function montaArrayLogCelula($desc, $id_usuario, $nome_usuario, $email_usuario, $id_celula, $nome_celula, $texto_log) {
+        $valores = array("descricao" => utf8_decode($desc),
+            "id_usuario" => $id_usuario,
+            "nome_usuario" => utf8_decode($nome_usuario),
+            "email_usuario" => $email_usuario,
+            "id_celula" => $id_celula,
+            "nome_celula" => $nome_celula,
+            "texto_log" => utf8_decode($texto_log));
+        return $valores;
+    }
+
+    /**
+     * Método para montar uma estrutura de array com dados de log específico para log de colaborador
+     *
+     * @author Fernando Braga
+     * @since 1.0 - 22/05/2012
+     */
+    public static function montaArrayLogColaborador($desc, $id_usuario, $nome_usuario, $email_usuario, $id_colaborador, $nome_colaborador, $texto_log) {
+        $valores = array("descricao" => utf8_decode($desc),
+            "id_usuario" => $id_usuario,
+            "nome_usuario" => utf8_decode($nome_usuario),
+            "email_usuario" => $email_usuario,
+            "id_colaborador" => $id_colaborador,
+            "nome_colaborador" => $nome_colaborador,
+            "texto_log" => utf8_decode($texto_log));
         return $valores;
     }
 
@@ -93,14 +128,14 @@ class FormataPost {
      * @since 1.0 - 13/06/2012
      */
     public static function montaArrayLogDireitosUser($desc, $id_usuario_alt, $nome_usuario_alt, $email_usuario_alt, $id_usuario, $nome_usuario, $email_usuario, $texto_log) {
-        $valores = array("descricao" => $desc,
+        $valores = array("descricao" => utf8_decode($desc),
             "id_usuario_alt" => $id_usuario_alt,
-            "nome_usuario_alt" => $nome_usuario_alt,
+            "nome_usuario_alt" => utf8_decode($nome_usuario_alt),
             "email_usuario_alt" => $email_usuario_alt,
             "id_usuario" => $id_usuario,
             "nome_usuario" => $nome_usuario,
             "email_usuario" => $email_usuario,
-            "texto_log" => $texto_log);
+            "texto_log" => utf8_decode($texto_log));
         return $valores;
     }
 
@@ -111,13 +146,13 @@ class FormataPost {
      * @since 1.0 - 13/06/2012
      */
     public static function montaArrayLogDireitosGrupo($desc, $id_usuario_alt, $nome_usuario_alt, $email_usuario_alt, $id_grupo, $nome_grupo, $texto_log) {
-        $valores = array("descricao" => $desc,
+        $valores = array("descricao" => utf8_decode($desc),
             "id_usuario_alt" => $id_usuario_alt,
-            "nome_usuario_alt" => $nome_usuario_alt,
+            "nome_usuario_alt" => utf8_decode($nome_usuario_alt),
             "email_usuario_alt" => $email_usuario_alt,
             "id_grupo" => $id_grupo,
             "nome_grupo" => $nome_grupo,
-            "texto_log" => $texto_log);
+            "texto_log" => utf8_decode($texto_log));
         return $valores;
     }
 
@@ -128,12 +163,12 @@ class FormataPost {
      * @since 1.0 - 20/06/2012
      */
     public static function montaArrayLogPadrao($desc, $id_usuario_alt, $nome_usuario_alt, $email_usuario_alt, $id, $texto_log) {
-        $valores = array("descricao" => $desc,
+        $valores = array("descricao" => utf8_decode($desc),
             "id_usuario_alt" => $id_usuario_alt,
-            "nome_usuario_alt" => $nome_usuario_alt,
+            "nome_usuario_alt" => utf8_decode($nome_usuario_alt),
             "email_usuario_alt" => $email_usuario_alt,
             "id" => $id,
-            "texto_log" => $texto_log);
+            "texto_log" => utf8_decode($texto_log));
         return $valores;
     }
 

@@ -75,7 +75,7 @@ class GaleriasDAO extends AbsModelDao {
 					WHERE 
 						" . $this->_id . " = '" . $id . "' AND
 						(id_portal = " . PORTAL_SISTEMA . " OR id_portal = " . parent::getCtrlConfiguracoes()->getIdPortal() . ")";
-        $arrDados = ControlDB::getRow($strQuery, 3);
+        $arrDados = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 3));
         return $arrDados;
     }
 
@@ -88,7 +88,7 @@ class GaleriasDAO extends AbsModelDao {
 					WHERE 
 						UPPER(identificador_ficheiro) ='" . strtoupper($ident) . "' AND
 						(id_portal = " . PORTAL_SISTEMA . " OR id_portal = " . parent::getCtrlConfiguracoes()->getIdPortal() . ")";
-        $arrDados = ControlDB::getRow($strQuery, 3);
+        $arrDados = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 3));
         return $arrDados;
     }
 
@@ -99,14 +99,14 @@ class GaleriasDAO extends AbsModelDao {
 //					INNER JOIN fwk_fotos ff ON ffg.id_foto = ff.id_foto
 //    				WHERE id_galeria = '".$idGaleria."' AND
 //						(id_portal = ".PORTAL_SISTEMA." OR id_portal = ".parent::getCtrlConfiguracoes()->getIdPortal().")";
-//    	return ControlDb::getAll($strQuery,0);
+//    	return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery,0));
 //	}
     public function buscaFotosGaleria($idGaleria = null) {
         $strQuery = "SELECT titulo_foto, legenda_foto, ffg.id_foto, ff.id_foto AS 'id_nome_arquivo'
 					FROM fwk_fotos_galeria ffg
 					INNER JOIN fwk_fotos ff ON ffg.id_foto = ff.id_foto
     				WHERE id_galeria = '" . $idGaleria . "'";
-        return ControlDb::getAll($strQuery, 0);
+        return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
     }
 
     public function getGaleriasByIdPortal($idPortal, $limit) {
@@ -118,20 +118,20 @@ class GaleriasDAO extends AbsModelDao {
     				WHERE id_portal = '" . $idPortal . "' 
     				ORDER BY id_galeria DESC 
     				LIMIT " . $inicio . ", " . NUM_ELEMENTOS_LISTAGEM;
-        return ControlDb::getAll($strQuery, 0);
+        return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery, 0));
     }
 
     public function getTotalGaleriasByIdPortal($idPortal) {
         $strQuery = "SELECT COUNT(*)
 					FROM fwk_galeria
     				WHERE id_portal = '" . $idPortal . "'";
-        $arrDados = ControlDB::getRow($strQuery, 0);
+        $arrDados = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0));
         return end($arrDados);
     }
 
     public function getTituloGaleriaByIdGaleria($idGaleria) {
         $strQuery = "SELECT titulo_galeria FROM fwk_galeria	WHERE id_galeria = '" . $idGaleria . "'";
-        $arrDados = ControlDB::getRow($strQuery, 0);
+        $arrDados = Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery, 0));
         return end($arrDados);
     }
 

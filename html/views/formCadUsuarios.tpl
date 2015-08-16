@@ -4,31 +4,31 @@
 
 <div class="formTelaFull">
 	<label>{$nome_usuario_label} :
-	    <span class="small error" id="nome_usuario_erro">{$nome_usuario_error}</span>
+	    <span class="small" id="nome_usuario_erro">{$nome_usuario_error}</span>
 	</label> {$nome_usuario_campo}
 </div>
 
 <div class="formTelaFull">
 	<label>{$email_usuario_label} :
-		<span class="small error" id="email_usuario_erro">{$email_usuario_error}</span>
+		<span class="small" id="email_usuario_erro">{$email_usuario_error}</span>
 	</label> {$email_usuario_campo}
 </div>
 
 <div class="formTelaFull">
 	<label>{$email_usuario_conf_label} :
-		<span class="small error" id="email_usuario_conf_erro">{$email_usuario_conf_error}</span>
+		<span class="small" id="email_usuario_conf_erro">{$email_usuario_conf_error}</span>
 	</label> {$email_usuario_conf_campo}
 </div>
 
 <div class="formTelaFull">
 	<label>{$password_usuario_label} :
-		<span class="small error" id="password_usuario_erro">{$password_usuario_error}</span>
+		<span class="small" id="password_usuario_erro">{$password_usuario_error}</span>
 	</label> {$password_usuario_campo}
 </div>
 
 <div class="formTelaFull">
 	<label>{$password_usuario_conf_label} :
-		<span class="small error" id="password_usuario_conf_erro">{$password_usuario_conf_error}</span>
+		<span class="small" id="password_usuario_conf_erro">{$password_usuario_conf_error}</span>
 	</label> {$password_usuario_conf_campo}
 </div>
 

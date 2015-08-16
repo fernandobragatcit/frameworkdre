@@ -24,8 +24,8 @@
 		<orderBy>im.nome_item_menu</orderBy>
 	</query>
 	<buttons>
-		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport btn" />
-		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport btn" />
+		<campos name="Cadastrar" value="Cadastrar" type="button" goto="a=formCad" class="btnReport" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
 		<campos type="text" name="nome_item_menu" id="nome_item_menu" label="Ítem Menu"

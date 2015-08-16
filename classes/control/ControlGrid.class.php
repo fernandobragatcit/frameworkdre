@@ -233,7 +233,7 @@ class ControlGrid {
         }
         self::regLegendas();
         self::getObjSmarty()->assign("NUM_DADOS_INI", count($arrDadosGrid) > 0 ? "TRUE" : "FALSE");
-        self::getObjSmarty()->assign("ARR_DADOS", self::doFieldFormat($arrDadosGrid));
+        self::getObjSmarty()->assign("ARR_DADOS", self::verTipoDados(self::doFieldFormat($arrDadosGrid)));
         self::getObjSmarty()->assign("LINK_BUSCAR", self::makeLinkPag("", true));
         self::getObjSmarty()->assign("VALOR_BUSCA", stripslashes($this->busca));
         self::getObjSmarty()->assign("URL_MOMENTO", self::makeLinkPag(""));
@@ -305,7 +305,7 @@ class ControlGrid {
                 for ($i = 0; $i < count($arrDados); $i++) {
                     $arrRetorno[$i] = array();
                     for ($j = 0; $j < count($arrDados[$i]); $j++) {
-                        $arrRetorno[$i][$j] = $arrDados[$i][$j];
+                        $arrRetorno[$i][$j] = utf8_encode($arrDados[$i][$j]);
                     }
                 }
             }
@@ -646,7 +646,7 @@ class ControlGrid {
                                 foreach ($aux as $pos) {
                                     $auxPos = explode("=", $pos);
                                     if ($auxPos[0] != "idsPerm")
-                                        $parametros[$auxPos[0]] = ($auxPos[0] != "title") ? $auxPos[1] : $auxPos[1];
+                                        $parametros[$auxPos[0]] = ($auxPos[0] != "title") ? $auxPos[1] : utf8_decode($auxPos[1]);
                                     else {
                                         $parametros[$auxPos[0]] = explode(",", $auxPos[1]);
                                     }
@@ -674,7 +674,7 @@ class ControlGrid {
                                 }
 
                                 if ($index == $cont && $permissao == true) {
-                                    $this->arrLegenda["personal"] = array("label" => $parametros["title"], "icone" => "<img width='12' title='" . $parametros["title"] . "' alt='Icone " . $parametros["title"] . "' src='" . URL_IMAGENS . "icons/" . $parametros["icone"] . "' />");
+                                    $this->arrLegenda["personal"] = array("label" => utf8_encode($parametros["title"]), "icone" => "<img width='12' title='" . utf8_encode($parametros["title"]) . "' alt='Icone " . utf8_encode($parametros["title"]) . "' src='" . URL_IMAGENS . "icons/" . $parametros["icone"] . "' />");
                                     $newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='" . $parametros["title"] . "' alt='" . $parametros["title"] . "' src='" . URL_IMAGENS . "icons/" . $parametros["icone"] . "' />", $tipo, $categoria, $strParam, $strValParam, $strParam2, $strValParam2, "", $pag, $filtros, $mantemBusca);
                                 }
                                 break;
@@ -705,7 +705,7 @@ class ControlGrid {
                                 foreach ($aux as $pos) {
                                     $auxPos = explode("=", $pos);
                                     if ($auxPos[0] != "idsPerm")
-                                        $parametros[$auxPos[0]] = ($auxPos[0] != "title") ? $auxPos[1] : $auxPos[1];
+                                        $parametros[$auxPos[0]] = ($auxPos[0] != "title") ? $auxPos[1] : utf8_decode($auxPos[1]);
                                     else {
                                         $parametros[$auxPos[0]] = explode(",", $auxPos[1]);
                                     }
@@ -726,7 +726,7 @@ class ControlGrid {
                                 //self::debuga($value, $parametros);
 
                                 if ($index == $cont && $permissao == true) {
-                                    $this->arrLegenda["personal2"] = array("label" => $parametros["title"], "icone" => "<img width='12' title='" . $parametros["title"] . "' alt='Icone " . $parametros["title"] . "' src='" . URL_IMAGENS . "icons/" . $parametros["icone"] . "' />");
+                                    $this->arrLegenda["personal2"] = array("label" => utf8_encode($parametros["title"]), "icone" => "<img width='12' title='" . utf8_encode($parametros["title"]) . "' alt='Icone " . utf8_encode($parametros["title"]) . "' src='" . URL_IMAGENS . "icons/" . $parametros["icone"] . "' />");
                                     $newData .= " " . $objForAction->gridAction($data, $value, self::getClassGrid(), "<img width='14' title='" . $parametros["title"] . "' alt='" . $parametros["title"] . "' src='" . URL_IMAGENS . "icons/" . $parametros["icone"] . "' />", $tipo, $categoria, $strParam, $strValParam, $strParam2, $strValParam2);
                                 }
                                 break;
@@ -919,7 +919,7 @@ class ControlGrid {
                     for ($i = 0; $i < count($arrBusca); $i++) {
                         $strQuery .= ($i == 0) ? "(" : "";
 
-                        $strQuery .= str_replace("#BUSCA#", $arrBusca[$i], trim((string) self::getObjXml()->query->whereBusca));
+                        $strQuery .= str_replace("#BUSCA#", utf8_decode($arrBusca[$i]), trim((string) self::getObjXml()->query->whereBusca));
 
                         $strQuery .= ($i != count($arrBusca) - 1) ? " OR " : "";
                         $strQuery .= ($i == count($arrBusca) - 1) ? ")" : "";
@@ -1069,7 +1069,7 @@ class ControlGrid {
                     for ($i = 0; $i < count($arrBusca); $i++) {
                         $strQuery .= ($i == 0) ? "(" : "";
 
-                        $strQuery .= str_replace("#BUSCA#", $arrBusca[$i], trim((string) self::getObjXml()->query1->whereBusca));
+                        $strQuery .= str_replace("#BUSCA#", utf8_decode($arrBusca[$i]), trim((string) self::getObjXml()->query1->whereBusca));
 
                         $strQuery .= ($i != count($arrBusca) - 1) ? " OR " : "";
                         $strQuery .= ($i == count($arrBusca) - 1) ? ")" : "";
@@ -1200,7 +1200,7 @@ class ControlGrid {
                     for ($i = 0; $i < count($arrBusca); $i++) {
                         $strQuery .= ($i == 0) ? "(" : "";
 
-                        $strQuery .= str_replace("#BUSCA#", $arrBusca[$i], trim((string) self::getObjXml()->query2->whereBusca));
+                        $strQuery .= str_replace("#BUSCA#", utf8_decode($arrBusca[$i]), trim((string) self::getObjXml()->query2->whereBusca));
 
                         $strQuery .= ($i != count($arrBusca) - 1) ? " OR " : "";
                         $strQuery .= ($i == count($arrBusca) - 1) ? ")" : "";
@@ -1572,7 +1572,7 @@ class ControlGrid {
                 }
 
                 $objFactoryCompsHtml->setClasseAtual(self::getObjXml()->attributes()->classe);
-                $objFactoryCompsHtml->buildComp($campo, $this->post[(string) $campo->attributes()->name]);
+                $objFactoryCompsHtml->buildComp($campo, utf8_decode($this->post[(string) $campo->attributes()->name]));
                 $arrCampos[$cont]["label"] = (string) $campo->attributes()->label;
                 $arrCampos[$cont]["campo"] = $objFactoryCompsHtml->getObjFactored()->getHtmlComp();
                 $cont++;

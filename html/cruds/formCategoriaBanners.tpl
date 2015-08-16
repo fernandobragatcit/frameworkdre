@@ -4,7 +4,7 @@
 </p>
 	
 <div class="formTelaFull">
-	<label>{$desc_tipo_basico_label} : <span class="small error" id="desc_tipo_basico_erro">{$desc_tipo_basico_error}</span></label> 
+	<label>{$desc_tipo_basico_label} : <span class="small" id="desc_tipo_basico_erro">{$desc_tipo_basico_error}</span></label> 
 	{$desc_tipo_basico_campo}
 </div>
 

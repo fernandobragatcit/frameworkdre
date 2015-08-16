@@ -7,8 +7,8 @@
 		maxlength="180" class="medium" />
 
 	<buttons>
-		<button class="btn" name="Cadastrar" value="Salvar" type="submit" />
-		<button name="Cancelar" value="Cancelar" type="button" class="btn" 
+		<button name="Cadastrar" value="Salvar" type="submit" />
+		<button name="Cancelar" value="Cancelar" type="button"
 			confirme="?" mens="Deseja realmente sair deste formulario?" />
 	</buttons>
 

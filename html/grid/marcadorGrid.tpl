@@ -1,7 +1,3 @@
 {if $TITULO_MARCADOR}
-    <div class="span12 marginLeft0 marcador_subdireitos">
-        <ul class="breadcrumb">
-            <li class="active">{$TITULO_MARCADOR}</li>
-        </ul>
-    </div>
+<div class="marginTop10 marginBottom10 paddingRight15 width930 font16 negritoImportant branco background8B9FA7  padding10 left">{$TITULO_MARCADOR}</div>
 {/if}

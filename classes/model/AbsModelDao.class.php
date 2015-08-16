@@ -38,7 +38,7 @@ class AbsModelDao extends ADOdb_Active_Record{
 	protected function salvaPostAutoUtf8($post){
 		foreach ($post as $key => $data) {
 			$key = strtolower($key);
-			$this->$key = $data;
+			$this->$key = utf8_decode($data);
 		}
 	}
 
@@ -74,13 +74,13 @@ class AbsModelDao extends ADOdb_Active_Record{
 			if($arrCampos[$key] != $data){
 				if($byPostForced){
 					if($decode)
-						$this->$key = $data;
+						$this->$key = utf8_decode($data);
 					else
 						$this->$key = $data;
 				}else{
 					if($data !="" && isset($data)){
 						if($decode)
-							$this->$key = $data;
+							$this->$key = utf8_decode($data);
 						else
 							$this->$key = $data;
 					}else{
@@ -203,15 +203,15 @@ class AbsModelDao extends ADOdb_Active_Record{
 
 	public function buscaCampos2wheres($campo1, $valor1,$campo2, $valor2, $fetchMode = ADODB_FETCH_ASSOC){
 		$query = "SELECT * FROM ".$this->_table."
-				  WHERE LOWER(".$campo1.") = '".strtolower($valor1)."'
-				  AND LOWER(".$campo2.") = '".strtolower($valor2)."'";
+				  WHERE LOWER(".$campo1.") = '".strtolower(utf8_decode($valor1))."'
+				  AND LOWER(".$campo2.") = '".strtolower(utf8_decode($valor2))."'";
 		ControlDb::getBanco()->SetFetchMode($fetchMode);
 		return ControlDb::getBanco()->GetRow($query);
 	}
 
 	protected function verifIntegridadeUTF8($campo, $valor){
 		$query = "SELECT COUNT(*) FROM ".$this->_table."
-				  WHERE LOWER(".$campo.") = '".strtolower($valor)."'";
+				  WHERE LOWER(".$campo.") = '".strtolower(utf8_decode($valor))."'";
 		$arrRet = ControlDb::getBanco()->GetRow($query);
 		if($arrRet[0]>0)
 		throw new DaoException("Ja existe este registro no sistema.");

@@ -81,7 +81,7 @@ class AddBlocoCampos extends AbsCompHtml {
 						$optionsSelect = $optionPassados;
 						$query = "N";
 					}
-                                        $optionsSelect=$optionsSelect;
+                                        $optionsSelect=Utf8Parsers::matrizUtf8Encode($optionsSelect);
                                         //FormataString::debuga($opcao);
 					$arrOptions[]=array('linha' => (integer)$opcao->linha, 'label' => (string)$opcao->label,'tipo' => strtolower((string)$opcao->tipo),
 					'id' => (string)$opcao->id,'obrigatorio' => $strObrig, 'contadorClass'=>(string)$opcao->contadorClass,'contadorId'=>(string)$opcao->contadorId,'contadorOnChange'=>(string)$opcao->contadorOnChange,'option' => $optionsSelect, 'query' => $query,'class' => (string)$opcao->class, 'keypress' => $keypress,

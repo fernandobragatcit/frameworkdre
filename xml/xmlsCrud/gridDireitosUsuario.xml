@@ -2,12 +2,13 @@
 <grid titulo="Direitos por Usuário" classe="CrudDireitosUsuario" direito="9">
     <header>
         <titulo type="STRING" ordena="us.nome_usuario">Nome Usuário</titulo>
+        <titulo type="STRING" ordena="us.email_usuario">E-mail Usuário</titulo>
         <titulo type="STRING" ordena="qtdDir">Qtde de funcionalidades</titulo>
         <titulo type="none" actionEdit="a=formAlt">Ações</titulo>
     </header>
     <query>
         <campos>
-            us.nome_usuario, (select COUNT(id_direitos) FROM fwk_direitos_usuario where id_usuario=us.id_usuario) as total,us.id_usuario	
+            us.nome_usuario,us.email_usuario, (select COUNT(id_direitos) FROM fwk_direitos_usuario where id_usuario=us.id_usuario) as total,us.id_usuario	
         </campos>
         <from>
             fwk_usuario us 
@@ -17,11 +18,11 @@
         <whereBusca>
             (us.nome_usuario LIKE '%#BUSCA#%') 
         </whereBusca>
-        <groupBy>us.nome_usuario</groupBy>
+        <groupBy>us.id_usuario</groupBy>
         <orderBy>us.nome_usuario</orderBy>
     </query>
     <buttons>
-        <campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport btn" />
+        <campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
     </buttons>
     <filtro>
         <campos type="text" name="nome_usuario" id="nome_usuario" label="Nome Usuário"

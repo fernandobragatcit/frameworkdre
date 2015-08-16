@@ -52,7 +52,7 @@ class FotosGaleriaDAO extends AbsModelDao{
 					INNER JOIN fwk_galeria fg ON ffg.id_galeria = fg.id_galeria
 					INNER JOIN fwk_fotos ff ON ffg.id_foto = ff.id_foto
     				WHERE fg.identificador_galeria = '".$strGaleria."'";
-    	return ControlDb::getAll($strQuery,0);
+    	return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery,0));
     }
     
     public function getFotosGaleriabyId($idGaleria){
@@ -61,7 +61,7 @@ class FotosGaleriaDAO extends AbsModelDao{
 					INNER JOIN fwk_galeria fg ON ffg.id_galeria = fg.id_galeria
 					INNER JOIN fwk_fotos ff ON ffg.id_foto = ff.id_foto
     				WHERE fg.id_galeria = '".$idGaleria."'";
-    	return ControlDb::getAll($strQuery,0);
+    	return Utf8Parsers::matrizUtf8Encode(ControlDb::getAll($strQuery,0));
     }
 
 }

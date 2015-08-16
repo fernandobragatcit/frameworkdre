@@ -20,7 +20,7 @@ class MetodosBuscaGridDAO extends AbsModelDao {
 					FROM fwk_direitos 
 					WHERE id_direitos = '" . $id . "'";
 
-        return end(ControlDb::getRow($strQuery, 0));
+        return end(Utf8Parsers::arrayUtf8Encode(ControlDb::getRow($strQuery, 0)));
     }
     public function getNomeGrupoById($id = null) {
         $strQuery = "SELECT

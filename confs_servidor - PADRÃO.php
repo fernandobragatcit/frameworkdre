@@ -27,8 +27,7 @@ require_once ("classes/util/CaminhoRaiz.class.php");
 
 $caminhoServerRaiz = CaminhoRaiz :: getCaminhoRaiz();
 //Mudar de acordo com o projeto
-define("PASTA_CONTEUDO", "portal");
-define("CAMINHO_PASTA_PRINCIPAL", "novoportal/");
+define("CAMINHO_PASTA_PRINCIPAL", "Nome_da_Pasta/");
 define("SERVIDOR_FISICO", $caminhoServerRaiz);
 //define("SERVIDOR_FISICO","E:/www/dotmg3/");
 
@@ -48,14 +47,13 @@ else
             $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"]);
 
 //Endereço Virtual
-define("URL_VIRTUAL", "http://localhost/" . CAMINHO_PASTA_PRINCIPAL . PASTA_CONTEUDO."/");
-define("URL_CAMINHO_ATUAL", "http://" . $_SERVER["HTTP_HOST"] . str_replace('index.php', '', $_SERVER['SCRIPT_NAME']));
+define("URL_VIRTUAL", "http://localhost/".CAMINHO_PASTA_PRINCIPAL."PORTAL/");
 
 //se SMTP_ISSMTP for true utiliza estas informacoes.
-define("SMTP_ISSMTP", true);
-define("SMTP_SERV_HOST", "mail.exemplo.com.br");
-define("SMTP_SERV_PORTA", 25);
+define("SMTP_ISSMTP", false);
+define("SMTP_SERV_HOST", "");
+define("SMTP_SERV_PORTA", 55);
 define("SMTP_SERV_USER", "exemplo@exemplo.com.br");
-define("SMTP_SERV_PASS", "exemplo");
-define("SMTP_AUTH", false);
+define("SMTP_SERV_PASS", "");
+define("SMTP_AUTH", true);
 ?>

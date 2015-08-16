@@ -22,7 +22,7 @@
 		<groupBy>us.email_usuario</groupBy>
 	</query>
 	<buttons>
-		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport btn" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
 		<campos type="text" name="nome_usuario" id="nome_usuario" label="Usuário"

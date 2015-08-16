@@ -3,7 +3,7 @@
 
 <div class="formTelaFull">
 	<label>{$usuariosGrupo_label} :
-	    <span class="small error" id="usuariosGrupo_erro">{$usuariosGrupo_error}</span>
+	    <span class="small" id="usuariosGrupo_erro">{$usuariosGrupo_error}</span>
 	</label> {$usuariosGrupo_campo}
 </div>
 

@@ -2,7 +2,7 @@
 <h2 class="bold font16">{$NOME}</h2>
 <div class="formTelaFull">
 	<label>{$gruposUsuario_label} :
-	    <span class="small error" id="gruposUsuario_erro">{$gruposUsuario_error}</span>
+	    <span class="small" id="gruposUsuario_erro">{$gruposUsuario_error}</span>
 	</label> {$gruposUsuario_campo}
 </div>
 

@@ -1,23 +1,7 @@
-1) Configurar um novo portal:
--Copie (confs_servidor - PADRÃO.php) e salve com o nome confs_servidor.php no mesmo lugar.
-- Modifique valores no configs.php, confs_servidor.php, conf_banco.php e config/config.xml dentro da pasta portal, de acordo com informações do novo portal.
-
-_________________________________________________________________________________________________________________________________________________
-
-2) Crie as areas através do menu conteudo > Areas
-ESTRUTURA:
--------------------------------------------------------------
--PASTA(nome da area criada)             |                      Padrão
-         -Config
-               - cabecalho.xml                     {REGISTRA_TAG classe="ViewPortal" metodo="getCabecalho"}
-               - central.xml                          {REGISTRA_TAG classe="ViewPortal" metodo="getConteudo"}
-               - config.xml
-               - rodape.xml                         {REGISTRA_TAG classe="ViewPortal" metodo="getRodape"}
--------------------------------------------------------------
-
-_________________________________________________________________________________________________________________________________________________
-
-3) Miniaturas de imagens com recorte dinâmico feito pelo usuário no formulário(CROP):
+1)configurar um novo portal:
+-modifique valores no configs.php, confs_servidor.php, conf_banco.php e config/config.xml dentro da pasta portal.
+______________________________________________________________________________________________________________
+2) Miniaturas de imagens com recorte dinâmico feito pelo usuário no formulário(CROP):
 
 CRUD Exemplo:
 parent::getObjFotoCrop()->cadastrarCrop(parent::getXmlForm(), $post, $file);
@@ -50,6 +34,4 @@ sendo possível fazer um recorte para cada miniatura existente.
 
 idImgRecorte:
 É o identificador da imagem na base de dados.
-
-
 _______________________________________________________________________________________________________________

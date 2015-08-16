@@ -74,7 +74,7 @@ class FicheiroDAO extends AbsModelDao{
 						fwk_ficheiro
 					WHERE 
 						id_ficheiro ='".$id."'";
-		$arrDados = ControlDB::getRow($strQuery,3);
+		$arrDados =  Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,3));
 		return $arrDados;
 	}
 	
@@ -86,7 +86,7 @@ class FicheiroDAO extends AbsModelDao{
 						fwk_ficheiro
 					WHERE 
 						UPPER(identificador_ficheiro) ='".strtoupper($ident)."'";
-		$arrDados = ControlDB::getRow($strQuery,3);
+		$arrDados =  Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,3));
 		return $arrDados;
 	}
 	
@@ -97,7 +97,7 @@ class FicheiroDAO extends AbsModelDao{
 						fwk_ficheiro
 					WHERE 
 						id_ficheiro = '".$idDoc."'";
-		return ControlDB::getRow($strQuery,0);
+		return Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,0));
     }
 	
 	public function getIdPdfById($idDoc){
@@ -107,7 +107,7 @@ class FicheiroDAO extends AbsModelDao{
 						fwk_ficheiro
 					WHERE 
 						id_ficheiro = '".$idDoc."'";
-		return end(ControlDB::getRow($strQuery,0));
+		return end(Utf8Parsers::arrayUtf8Encode(ControlDB::getRow($strQuery,0)));
     }
 
 }

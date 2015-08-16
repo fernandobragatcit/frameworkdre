@@ -70,7 +70,7 @@ class SubDireitosGrupoDAO extends AbsModelDao {
 					FROM fwk_direitos 
 					WHERE id_direitos = '" . $id . "'";
 
-        return end(ControlDb::getRow($strQuery, 0));
+        return end(Utf8Parsers::arrayUtf8Encode(ControlDb::getRow($strQuery, 0)));
     }
 
     public function getNomeGrupoById($id) {
@@ -78,7 +78,7 @@ class SubDireitosGrupoDAO extends AbsModelDao {
 					FROM fwk_grupo 
 					WHERE id_grupo = '" . $id . "'";
 
-        return end(ControlDb::getRow($strQuery, 0));
+        return end(Utf8Parsers::arrayUtf8Encode(ControlDb::getRow($strQuery, 0)));
     }
 
     public function inserirPermissoesGrupo($idDir, $idGrupo, $idPerm) {

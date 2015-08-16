@@ -57,7 +57,7 @@ class IdiomaDAO extends AbsModelDao{
 						sigla_idioma = '".$strSigla."'";
 		$arrResult = ControlDB::getRow($strQuery);
 		if($utf8)
-			return $arrResult[0];
+			return utf8_encode($arrResult[0]);
 		return $arrResult[0];
     }
 }

@@ -23,12 +23,12 @@ class PalavrasChavesArea extends AbsCruds {
 		$objCtrlForm = new ControlForm(FWK_XML."formPalavrasChavesArea.xml");
 		$objCtrlForm->setTplsFile(ADMIN_TPLS);
 		$objCtrlForm->setActionForm("".__CLASS__.""."&a=altera");
-		$arrDados = array("palavras_chaves_area" => self::getObjCtrlConfigs()->getStrPalavrasChavesArea());
+		$arrDados = array("palavras_chaves_area" => utf8_decode(self::getObjCtrlConfigs()->getStrPalavrasChavesArea()));
 		$objCtrlForm->registraFormValues($arrDados);
 	 }
 	 
 	 public function getPalavrasAtual(){
-	 	$arrPalavras = self::getObjCtrlConfigs()->getStrPalavrasChavesArea();
+	 	$arrPalavras = utf8_decode(self::getObjCtrlConfigs()->getStrPalavrasChavesArea());
 	 	$arrPalavras = explode(", ", $arrPalavras);
 	 	foreach ($arrPalavras as $palavra){
 	 		$arrDados[]["palavra"] = $palavra;

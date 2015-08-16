@@ -146,7 +146,7 @@ class ViewMenu {
 		$arrMenu = $this->objDB->GetAll($strQuery);
 		for ($cont = 0; $cont < sizeof($arrMenu); $cont++){
 			if($arrMenu[$cont][0] != null && $arrMenu[$cont][0] !="" )
-				$arrMenu[$cont][0] =$arrMenu[$cont][0];
+				$arrMenu[$cont][0] =utf8_encode($arrMenu[$cont][0]);
 			if($arrMenu[$cont][1] != null && $arrMenu[$cont][1] !="" && $arrMenu[$cont][1] !="#"){
 				$arrMenu[$cont][1] ="?".$arrMenu[$cont][3]."=".$this->objCrypt->cryptData($arrMenu[$cont][1]);
 			}
@@ -233,7 +233,7 @@ class ViewMenu {
     	$arrMenu = $this->objDB->GetAll($strQuery);
     	for ($cont = 0; $cont < sizeof($arrMenu); $cont++){
 			if($arrMenu[$cont][0] != null && $arrMenu[$cont][0] !="" )
-				$arrMenu[$cont][0] =$arrMenu[$cont][0];
+				$arrMenu[$cont][0] =utf8_encode($arrMenu[$cont][0]);
 			if($arrMenu[$cont][1] != null && $arrMenu[$cont][1] !="" && $arrMenu[$cont][1] !="#")
 				$arrMenu[$cont][1] ="?".$arrMenu[$cont][4]."=".$this->objCrypt->cryptData($arrMenu[$cont][1]);
 		}
@@ -265,7 +265,7 @@ class ViewMenu {
     	$arrMenu = $this->objDB->GetAll($strQuery);
     	for ($cont = 0; $cont < sizeof($arrMenu); $cont++){
 			if($arrMenu[$cont][0] != null && $arrMenu[$cont][0] !="" )
-				$arrMenu[$cont][0] =$arrMenu[$cont][0];
+				$arrMenu[$cont][0] =utf8_encode($arrMenu[$cont][0]);
 			if($arrMenu[$cont][1] != null && $arrMenu[$cont][1] !="" && $arrMenu[$cont][1] !="#")
 				$arrMenu[$cont][1] ="?".$arrMenu[$cont][4]."=".$this->objCrypt->cryptData($arrMenu[$cont][1]);
 		}

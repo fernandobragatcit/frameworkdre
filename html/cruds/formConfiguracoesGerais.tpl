@@ -4,7 +4,7 @@
 
 <div class="formTelaFull">
 	<label>{$memory_limit_label} :
-	    <span class="small error" id="memory_limit_erro">{$memory_limit_error}</span>
+	    <span class="small" id="memory_limit_erro">{$memory_limit_error}</span>
 	</label> {$memory_limit_campo}
 </div>
 <div class="formMeiaTela">

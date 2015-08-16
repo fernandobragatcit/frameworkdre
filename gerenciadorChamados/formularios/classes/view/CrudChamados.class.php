@@ -416,7 +416,7 @@ class CrudChamados extends AbsCrudsCha {
         parent::setXmlForm(CHA_XML . "formCadastrarSetor.xml");
         parent::setClassModel(new SetorDAO());
         $arrDadosSetor = self::getClassModel()->buscaCampos($id);
-        $arrDadosSetor = $arrDadosSetor;
+        $arrDadosSetor = Utf8Parsers::arrayUtf8Encode($arrDadosSetor);
         self::getObjSmarty()->assign("setor", $arrDadosSetor["setor"]);
         self::getObjSmarty()->assign("email_setor", $arrDadosSetor["email_setor"]);
         $_GET["aba"] = "cadastrarsetor";
@@ -428,7 +428,7 @@ class CrudChamados extends AbsCrudsCha {
         parent::setXmlForm(CHA_XML . "formCadastrarPrioridade.xml");
         parent::setClassModel(new PrioridadeDAO());
         $arrDadosPrioridade = self::getClassModel()->buscaCampos($id);
-        $arrDadosPrioridade = $arrDadosPrioridade;
+        $arrDadosPrioridade = Utf8Parsers::arrayUtf8Encode($arrDadosPrioridade);
         self::getObjSmarty()->assign("prioridade", $arrDadosPrioridade["prioridade"]);
         $_GET["aba"] = "cadastrarprioridade";
         self::setIdForm($id);
@@ -439,7 +439,7 @@ class CrudChamados extends AbsCrudsCha {
         parent::setXmlForm(CHA_XML . "formCadastrarStatus.xml");
         parent::setClassModel(new StatusDao());
         $arrDadosStatus = self::getClassModel()->buscaCampos($id);
-        $arrDadosStatus = $arrDadosStatus;
+        $arrDadosStatus = Utf8Parsers::arrayUtf8Encode($arrDadosStatus);
         self::getObjSmarty()->assign("status", $arrDadosStatus["status"]);
         $_GET["aba"] = "cadastrarstatus";
         self::setIdForm($id);

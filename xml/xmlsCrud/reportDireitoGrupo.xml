@@ -19,7 +19,7 @@
 
 	</query>
 	<buttons>
-		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport btn" />
+		<campos name="Cancelar" value="Cancelar" type="button" goto="?" class="btnReport" />
 	</buttons>
 	<filtro>
 		<campo alias="Nome Grupo">nome_grupo</campo>

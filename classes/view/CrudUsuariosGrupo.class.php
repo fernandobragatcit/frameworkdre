@@ -39,7 +39,7 @@ class CrudUsuariosGrupo extends AbsCruds {
     protected function postAlteraUsuariosGrupo($id, $post, $file) {
         try {
             $direitosAnteriores = self::getObjGrupos()->getUsuariosPorGrupoById($id);
-            $nomeGrupo = self::getObjGrupos()->getNomeGrupoById($id);
+            $nomeGrupo = utf8_encode(self::getObjGrupos()->getNomeGrupoById($id));
             self::getClassModel()->alterar($id, self::getXmlForm(), $post, $file);
             $direitosAtualizados = self::getObjGrupos()->getUsuariosPorGrupoById($id);
             self::logUsuariosPorGrupo(LOG_ALTERACAO_USUARIOS_GRUPO, $id, $direitosAnteriores, $direitosAtualizados, $nomeGrupo);
@@ -52,13 +52,13 @@ class CrudUsuariosGrupo extends AbsCruds {
     public function logUsuariosPorGrupo($descricao, $id, $dadosAnteriores, $dadosNovos, $nomeGrupo) {
         $arrTextoLog = FormataString::raw_json_encode(array('dados_anteriores' => $dadosAnteriores, 'dados_novos' => $dadosNovos));
         //SALVAR LOG
-        $valores = FormataPost::montaArrayLogDireitosGrupo($descricao, self::getObjUsrSessao()->getIdUsuario(), self::getObjUsrSessao()->getNomeUsuario(), self::getObjUsrSessao()->getEmailUser(), $id, $nomeGrupo, $arrTextoLog);
+        $valores = FormataPost::montaArrayLogDireitosGrupo($descricao, self::getObjUsrSessao()->getIdUsuario(), self::getObjUsrSessao()->getNomeUsuario(), self::getObjUsrSessao()->getEmailUser(), $id, utf8_decode($nomeGrupo), $arrTextoLog);
         self::getObjLog()->registraLog("fwk_log_usuario_grupo", $valores);
     }
 
     protected function formAltera($id) {
         $grupo = self::getObjGrupos()->getNomeGrupoById($id);
-        self::getObjSmarty()->assign("GRUPO", $grupo);
+        self::getObjSmarty()->assign("GRUPO", utf8_encode($grupo));
         $arrDados = self::getClassModel()->buscaCampos($id);
         if (isset($arrDados["id_foto"]) || $arrDados["id_foto"] != "") {
             self::getObjSmarty()->assign("ID_FOTO", $arrDados["id_foto"]);
